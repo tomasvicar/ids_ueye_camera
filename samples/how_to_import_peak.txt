@@ -1,0 +1,4 @@
+add reference:
+
+
+"C:\Program Files\IDS\ids_peak\sdk\samples\bin\x86_64\ids_peak_dotnet.dll"

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ids_peak_dotnet">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\IDS\ids_peak\sdk\samples\bin\x86_64\ids_peak_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="ids_peak_ipl_dotnet">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\IDS\ids_peak\sdk\ipl\binding\dotnet\x86_64\ids_peak_ipl_dotnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

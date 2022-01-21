@@ -105,10 +105,5 @@ namespace Sandkasten_CSharp
         {
 
         }
-
-        private void SimpleSingleGrab_C_Sharp_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

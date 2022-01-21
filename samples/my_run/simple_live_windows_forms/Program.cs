@@ -42,6 +42,8 @@ namespace simple_live_windows_forms
         [STAThread]
         static void Main()
         {
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FormWindow formWindow = new FormWindow();

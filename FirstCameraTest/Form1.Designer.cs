@@ -95,7 +95,6 @@
             this.MinimumSize = new System.Drawing.Size(320, 240);
             this.Name = "SimpleSingleGrab_C_Sharp";
             this.Text = "SingleGrab";
-            this.Load += new System.EventHandler(this.SimpleSingleGrab_C_Sharp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DisplayWindow)).EndInit();
             this.ResumeLayout(false);
 

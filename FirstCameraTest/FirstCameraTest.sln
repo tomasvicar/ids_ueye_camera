@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "simple_live_windows_forms", "simple_live_windows_forms.csproj", "{7E3470EE-7856-4093-9CD1-C8A72C886577}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstCameraTest", "FirstCameraTest.csproj", "{E5A23AF4-FC82-4053-A988-397EE2FAA66F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E3470EE-7856-4093-9CD1-C8A72C886577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E3470EE-7856-4093-9CD1-C8A72C886577}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E3470EE-7856-4093-9CD1-C8A72C886577}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E3470EE-7856-4093-9CD1-C8A72C886577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A23AF4-FC82-4053-A988-397EE2FAA66F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A23AF4-FC82-4053-A988-397EE2FAA66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A23AF4-FC82-4053-A988-397EE2FAA66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A23AF4-FC82-4053-A988-397EE2FAA66F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D1BE9033-BEC9-4901-B180-1C576A610317}
+		SolutionGuid = {390A3538-7BC8-40D9-A65E-DEB8EDC696AF}
 	EndGlobalSection
 EndGlobal
