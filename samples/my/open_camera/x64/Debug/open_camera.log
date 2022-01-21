@@ -1,0 +1,2 @@
+﻿  open_camera.cpp
+LINK : fatal error LNK1104: cannot open file 'ids_peak.lib'
