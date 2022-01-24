@@ -1,0 +1,174 @@
+body, table, div, p, dl {
+	font-family: Arial,sans-serif;
+}
+
+#projectname
+{
+	font: 200% Arial,sans-serif;
+	margin: 4px 0px;
+	padding: 2px 0px;
+}
+    
+#projectbrief
+{
+	font: 120% Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+#projectnumber
+{
+	font: 50% Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+#projectalign
+{
+    vertical-align: bottom;
+}
+
+h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {
+	text-shadow: 2 2 8px #008a96;
+}
+
+div.qindex, div.navtab{
+	background-color: #ffffff;
+	border: 1px solid #008a96;
+	text-align: center;
+}
+
+.title {
+	font: 400 14px/28px Arial,sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	margin: 10px 2px;
+}
+
+div.ah, span.ah {
+	background-color: #FFFFFF;
+	font-weight: bold;
+	color: #000000;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	padding: 0.2em;
+	border: solid thin #008a96;
+	border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
+	box-shadow: 2px 2px 3px #FFFFFF;
+	-webkit-box-shadow: 2px 2px 3px #FFFFFF;
+	-moz-box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff),color-stop(0.3, #fff));
+	background-image: -moz-linear-gradient(center top, #fff 0%, #fff 40%, #fff 110%);
+}
+
+a {
+	color: #008a96;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.mdescLeft, .mdescRight,
+.memItemLeft, .memItemRight,
+.memTemplItemLeft, .memTemplItemRight, .memTemplParams {
+	background-color: #f4f5f7;
+	border: none;
+	margin: 4px;
+	padding: 1px 0 0 8px;
+}
+
+#nav-tree a {
+  text-decoration:none;
+  color: #000000;
+  padding:0px;
+  outline:none;
+  font-size:10pt;
+  font-family: Arial, sans-serif;
+}
+
+#nav-tree {
+  padding: 0px 0px;
+  background-color: #f4f5f7; 
+  font-size:14px;
+  overflow:auto;
+}
+
+#nav-tree li {
+  white-space:nowrap;
+  margin:4px 0px;
+  padding:0px;
+}
+
+#nav-tree .label {
+  margin:0px;
+  padding:0px;
+  font: 12px Arial,sans-serif;
+}
+.navpath li.navelem a
+{
+	height:32px;
+	display:block;
+	text-decoration: none;
+	outline: none;
+	color: #313131;
+	font-family: Arial,sans-serif;
+	text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
+	text-decoration: none;        
+}
+
+div.header
+{
+    background-image:url('nav_h.png');
+    background-repeat:repeat-x;
+	background-color: #f4f5f7;
+	margin:  0px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.sm-dox a
+{
+	font-family:Arial,sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	line-height:36px;
+	text-decoration:none;
+	text-shadow:0 1px 1px rgba(255,255,255,0.9);
+	color:#000000;
+	outline:0
+}
+
+.SelectItem {
+    font: 9pt Arial, sans-serif;
+    padding-left:  2px;
+    padding-right: 12px;
+    border: 0px;
+}
+
+span.SelectionMark {
+    margin-right: 4px;
+    font-family: Arial, sans-serif;
+    outline-style: none;
+    text-decoration: none;
+}
+
+#MSearchResultsWindow {
+    display: none;
+    position: absolute;
+    left: 0; top: 0;
+    border: 1px solid #000;
+    background-color: #f4f5f7;
+    z-index:10000;
+}
+
+span.SRScope {
+    padding-left: 4px;
+	font-family: Arial, sans-serif;
+}
+
+.SRPage .SRStatus {
+    padding: 2px 5px;
+    font-size: 9pt;
+	font-family: Arial, sans-serif;
+    font-style: italic;
+}

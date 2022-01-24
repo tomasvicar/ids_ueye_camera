@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\e42a0724ce223811fccc61b8a273c8d9\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{20D376DF-D8D7-30BF-97B0-22E1F94FE228}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

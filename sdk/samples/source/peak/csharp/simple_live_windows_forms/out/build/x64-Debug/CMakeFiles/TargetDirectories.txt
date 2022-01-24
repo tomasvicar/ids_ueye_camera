@@ -1,0 +1,3 @@
+C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/CMakeFiles/simple_live_windows_forms_csharp.dir
+C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/CMakeFiles/ALL_BUILD.dir
+C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/CMakeFiles/ZERO_CHECK.dir

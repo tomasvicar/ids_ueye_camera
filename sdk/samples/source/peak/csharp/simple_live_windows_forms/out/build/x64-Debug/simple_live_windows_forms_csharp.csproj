@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>simple_live_windows_forms_csharp</ProjectName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IntermediateOutputPath>C:\Users\vicar\AppData\Local\Temp\vsD8F4.tmp\x64\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <OutputPath>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\Debug\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <PlatformToolset>v142</PlatformToolset>
+    <AssemblyName>simple_live_windows_forms_csharp_debug</AssemblyName>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\Debug\simple_live_windows_forms_csharp_debug.exe</StartProgram>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.CSharp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.CSharp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemGroup>
+    <None Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\CMakeLists.txt">
+      <Link>CMakeLists.txt</Link>
+    </None>
+  </ItemGroup>
+  <Target Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Name="CustomCommand_Debug_05ac3bb2cf4fbc8de44a15d51e67bd85" Inputs="C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/CMakeLists.txt;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCCompiler.cmake.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCCompilerABI.c;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCSharpCompiler.cmake.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCSharpInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCSharpCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeDetermineSystem.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeFindBinUtils.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCCompiler.cmake.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystem.cmake.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeTestCCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeTestCSharpCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeTestRCCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CSharpUtilities.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.csproj.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Internal\FeatureTesting.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\Findids_peak.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\cmake_detect_architecture.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\Findids_peak_ipl.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\_cmake_scripts\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCSharpCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\arch.c" Outputs="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\generate.stamp">
+    <Exec Command="echo Building Custom Rule C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/CMakeLists.txt" />
+    <Exec Command="setlocal&#xA;&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe&quot; -SC:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms -BC:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug --check-stamp-file C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/CMakeFiles/generate.stamp&#xA;if %errorlevel% neq 0 goto :cmEnd&#xA;:cmEnd&#xA;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#xA;:cmErrorLevel&#xA;exit /b %1&#xA;:cmDone&#xA;if %errorlevel% neq 0 goto :VCEnd" />
+  </Target>
+  <ItemGroup>
+    <Compile Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\BackEnd.cs">
+      <Link>BackEnd.cs</Link>
+    </Compile>
+    <Compile Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\AcquisitionWorker.cs">
+      <Link>AcquisitionWorker.cs</Link>
+    </Compile>
+    <Compile Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\FormWindow.cs">
+      <Link>FormWindow.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\FormWindow.Designer.cs">
+      <Link>FormWindow.Designer.cs</Link>
+      <DependentUpon>FormWindow.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Core">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Include="ids_peak_dotnet">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <Private>True</Private>
+      <HintPath>C:\Program Files\IDS\ids_peak\sdk\api\binding\dotnet\x86_64\ids_peak_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Include="ids_peak_ipl_dotnet">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <Private>True</Private>
+      <HintPath>C:\Program Files\IDS\ids_peak\sdk\ipl\binding\dotnet\x86_64\ids_peak_ipl_dotnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\FormWindow.resx">
+      <Link>FormWindow.resx</Link>
+      <DependentUpon>FormWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <PostBuildEvent>echo Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of ids_peak_dotnet DLLs to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll to output dir.	Post build copy of ids_peak_ipl_dotnet DLLs to output dir.
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/binding/dotnet/x86_64/ids_peak_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/binding/dotnet/x86_64/ids_peak_ipl_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <BuildDependsOn>
+      CustomCommand_Debug_05ac3bb2cf4fbc8de44a15d51e67bd85;
+      $(BuildDependsOn)
+</BuildDependsOn>
+  </PropertyGroup>
+</Project>
