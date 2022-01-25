@@ -53,6 +53,15 @@ namespace simple_live_windows_forms
 
         private peak.core.DataStream dataStream;
         private peak.core.NodeMap nodeMapRemoteDevice;
+        private peak.core.Buffer buffer;
+        private peak.ipl.Image iplImg;
+        private Int32 width;
+        private Int32 height;
+        private Int32 stride;
+        private Bitmap image;
+        private Bitmap imageCopy;
+        private FormWindow formWindow;
+        private peak.ipl.ImageTransformer m_imageTransformerIPL;
 
         private bool running;
         private uint frameCounter;
@@ -87,33 +96,46 @@ namespace simple_live_windows_forms
 
             running = true;
 
+            m_imageTransformerIPL = new peak.ipl.ImageTransformer();
+
             while (running)
             {
                 try
                 {
                     // Get buffer from device's datastream
-                    var buffer = dataStream.WaitForFinishedBuffer(1000);
+                    buffer = dataStream.WaitForFinishedBuffer(1000);
 
                     // Create IDS peak IPL
-                    var iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(),
-                        buffer.Size(), buffer.Width(), buffer.Height());
+                    iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(), buffer.Size(), buffer.Width(), buffer.Height());
 
                     // Debayering and convert IDS peak IPL Image to RGB8 format
                     iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.BGR8);
 
-                    var width = Convert.ToInt32(iplImg.Width());
-                    var height = Convert.ToInt32(iplImg.Height());
-                    var stride = Convert.ToInt32(iplImg.PixelFormat().CalculateStorageSizeOfPixels(iplImg.Width()));
+      
+
+                    width = Convert.ToInt32(iplImg.Width());
+                    height = Convert.ToInt32(iplImg.Height());
+                    stride = Convert.ToInt32(iplImg.PixelFormat().CalculateStorageSizeOfPixels(iplImg.Width()));
 
                     // Queue buffer so that it can be used again 
                     dataStream.QueueBuffer(buffer);
 
-                    var image = new Bitmap(width, height, stride,
-                        System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
+                    if (formWindow.checkBox_rot180.Checked)
+                    {
+
+                        //m_imageTransformerIPL.MirrorUpDownLeftRightInPlace(iplImg);
+                        // Rotate by 180 degrees
+                        m_imageTransformerIPL.RotateInPlace(iplImg, peak.ipl.ImageTransformer.RotationAngle.Degree180);
+
+                        //Debug.WriteLine("--- [AcquisitionWorker] rotating");
+                    }
+
+
+                    image = new Bitmap(width, height, stride,System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
 
                     // Create a deep copy of the Bitmap, so it doesn't use memory of the IDS peak IPL Image.
                     // Warning: Don't use image.Clone(), because it only creates a shallow copy!
-                    var imageCopy = new Bitmap(image);
+                    imageCopy = new Bitmap(image);
 
                     // The other images are not needed anymore.
                     image.Dispose();
@@ -123,6 +145,10 @@ namespace simple_live_windows_forms
                     {
                         Debug.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
                         ImageReceived(this, imageCopy);
+                    }
+                    else 
+                    {
+                        Debug.WriteLine("--- [AcquisitionWorker] Imge is null");
                     }
 
                     frameCounter++;
@@ -144,6 +170,12 @@ namespace simple_live_windows_forms
 
 
         }
+
+        public void SetFormWindow(FormWindow formWindow)
+        {
+            this.formWindow = formWindow;
+        }
+
 
         public void SetDataStream(peak.core.DataStream dataStream)
         {

@@ -41,19 +41,19 @@ namespace simple_live_windows_forms
         private BackgroundWorker backgroundWorker1;
         private bool hasError;
 
-        public double gamma = 3;
+        //public double gamma = 1;
         public double blackLevel = 1;
         private decimal exposureSafeMargin = 0.5m;
+        private decimal frameRateHardMax = 36m;
+
+        private decimal x_sumMax = 2456m;
+        private decimal y_sumMax = 2054m;
+        private decimal w_min = 256m;
+        private decimal h_min = 2m;
 
 
-        private decimal exposureTimeOld;
-        private decimal frameRateOld;
-        private decimal exposureTimeMaxOld;
-        private decimal frameRateMaxOld;
-        private decimal exposureTimeMaxCurent;
-        private decimal frameRateMaxCurent;
         private decimal frameRateTmp;
-        private decimal exposureTimeTmp;
+
 
 
         public FormWindow()
@@ -63,37 +63,7 @@ namespace simple_live_windows_forms
             InitializeComponent();
             LoadMySetting();
 
-            try
-            {
-                backEnd = new BackEnd();
-
-                backEnd.SetWindowForm(this);
-
-                FormClosing += FormWindow_FormClosing;
-
-                backEnd.ImageReceived += backEnd_ImageReceived;
-                backEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
-
-                
-
-                if (backEnd.Start())
-                {
-                    hasError = false;
-                }
-                else
-                {
-                    hasError = true;
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("--- [FormWindow] Exception: " + e.Message);
-                backEnd_MessageBoxTrigger(this, "Exception", e.Message);
-            }
-
-
+            myStart();
 
 
         }
@@ -164,6 +134,20 @@ namespace simple_live_windows_forms
             this.checkBox_frameRateMax = new System.Windows.Forms.CheckBox();
             this.numericUpDown_frameRate = new System.Windows.Forms.NumericUpDown();
             this.label_frameRate = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label_ySumMax = new System.Windows.Forms.Label();
+            this.label_xSumMax = new System.Windows.Forms.Label();
+            this.numericUpDown_h = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_w = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_y = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_x = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label_w = new System.Windows.Forms.Label();
+            this.checkBox_rot180 = new System.Windows.Forms.CheckBox();
+            this.label_y = new System.Windows.Forms.Label();
+            this.label_x = new System.Windows.Forms.Label();
+            this.label_position = new System.Windows.Forms.Label();
+            this.label_sumMax = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -171,6 +155,11 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_exposureTime)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -185,7 +174,7 @@ namespace simple_live_windows_forms
             // 
             // textBox_dataname
             // 
-            this.textBox_dataname.Location = new System.Drawing.Point(553, 437);
+            this.textBox_dataname.Location = new System.Drawing.Point(640, 437);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
             this.textBox_dataname.TabIndex = 2;
@@ -194,7 +183,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(450, 439);
+            this.buttonStart.Location = new System.Drawing.Point(560, 439);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 8;
@@ -204,7 +193,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(450, 461);
+            this.buttonStop.Location = new System.Drawing.Point(560, 461);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 9;
@@ -251,9 +240,9 @@ namespace simple_live_windows_forms
             this.label_gainMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_gainMax.Location = new System.Drawing.Point(57, 41);
             this.label_gainMax.Name = "label_gainMax";
-            this.label_gainMax.Size = new System.Drawing.Size(15, 12);
+            this.label_gainMax.Size = new System.Drawing.Size(25, 12);
             this.label_gainMax.TabIndex = 15;
-            this.label_gainMax.Text = "xx";
+            this.label_gainMax.Text = "xxxx";
             // 
             // label_gainMin
             // 
@@ -261,13 +250,13 @@ namespace simple_live_windows_forms
             this.label_gainMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_gainMin.Location = new System.Drawing.Point(15, 41);
             this.label_gainMin.Name = "label_gainMin";
-            this.label_gainMin.Size = new System.Drawing.Size(15, 12);
+            this.label_gainMin.Size = new System.Drawing.Size(25, 12);
             this.label_gainMin.TabIndex = 14;
-            this.label_gainMin.Text = "xx";
+            this.label_gainMin.Text = "xxxx";
             // 
             // button_triger
             // 
-            this.button_triger.Location = new System.Drawing.Point(576, 460);
+            this.button_triger.Location = new System.Drawing.Point(663, 460);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(109, 23);
             this.button_triger.TabIndex = 10;
@@ -292,9 +281,9 @@ namespace simple_live_windows_forms
             this.label_exposureTimeMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_exposureTimeMax.Location = new System.Drawing.Point(49, 42);
             this.label_exposureTimeMax.Name = "label_exposureTimeMax";
-            this.label_exposureTimeMax.Size = new System.Drawing.Size(15, 12);
+            this.label_exposureTimeMax.Size = new System.Drawing.Size(25, 12);
             this.label_exposureTimeMax.TabIndex = 17;
-            this.label_exposureTimeMax.Text = "xx";
+            this.label_exposureTimeMax.Text = "xxxx";
             // 
             // label_exposureTimeMin
             // 
@@ -302,9 +291,9 @@ namespace simple_live_windows_forms
             this.label_exposureTimeMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_exposureTimeMin.Location = new System.Drawing.Point(7, 42);
             this.label_exposureTimeMin.Name = "label_exposureTimeMin";
-            this.label_exposureTimeMin.Size = new System.Drawing.Size(15, 12);
+            this.label_exposureTimeMin.Size = new System.Drawing.Size(25, 12);
             this.label_exposureTimeMin.TabIndex = 16;
-            this.label_exposureTimeMin.Text = "xx";
+            this.label_exposureTimeMin.Text = "xxxx";
             // 
             // checkBox_exposurTimeMax
             // 
@@ -355,9 +344,9 @@ namespace simple_live_windows_forms
             this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_frameRateMax.Location = new System.Drawing.Point(48, 42);
             this.label_frameRateMax.Name = "label_frameRateMax";
-            this.label_frameRateMax.Size = new System.Drawing.Size(15, 12);
+            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
             this.label_frameRateMax.TabIndex = 17;
-            this.label_frameRateMax.Text = "xx";
+            this.label_frameRateMax.Text = "xxxx";
             // 
             // label_frameRateMin
             // 
@@ -365,9 +354,9 @@ namespace simple_live_windows_forms
             this.label_frameRateMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_frameRateMin.Location = new System.Drawing.Point(6, 42);
             this.label_frameRateMin.Name = "label_frameRateMin";
-            this.label_frameRateMin.Size = new System.Drawing.Size(15, 12);
+            this.label_frameRateMin.Size = new System.Drawing.Size(25, 12);
             this.label_frameRateMin.TabIndex = 16;
-            this.label_frameRateMin.Text = "xx";
+            this.label_frameRateMin.Text = "xxxx";
             // 
             // checkBox_frameRateMax
             // 
@@ -402,9 +391,145 @@ namespace simple_live_windows_forms
             this.label_frameRate.TabIndex = 7;
             this.label_frameRate.Text = "Frame rate";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label_ySumMax);
+            this.panel3.Controls.Add(this.label_xSumMax);
+            this.panel3.Controls.Add(this.numericUpDown_h);
+            this.panel3.Controls.Add(this.numericUpDown_w);
+            this.panel3.Controls.Add(this.numericUpDown_y);
+            this.panel3.Controls.Add(this.numericUpDown_x);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.label_w);
+            this.panel3.Controls.Add(this.checkBox_rot180);
+            this.panel3.Controls.Add(this.label_y);
+            this.panel3.Controls.Add(this.label_x);
+            this.panel3.Controls.Add(this.label_position);
+            this.panel3.Controls.Add(this.label_sumMax);
+            this.panel3.Location = new System.Drawing.Point(338, 440);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(203, 57);
+            this.panel3.TabIndex = 13;
+            // 
+            // label_ySumMax
+            // 
+            this.label_ySumMax.AutoSize = true;
+            this.label_ySumMax.Location = new System.Drawing.Point(163, 39);
+            this.label_ySumMax.Name = "label_ySumMax";
+            this.label_ySumMax.Size = new System.Drawing.Size(27, 13);
+            this.label_ySumMax.TabIndex = 10;
+            this.label_ySumMax.Text = "xxxx";
+            // 
+            // label_xSumMax
+            // 
+            this.label_xSumMax.AutoSize = true;
+            this.label_xSumMax.Location = new System.Drawing.Point(163, 18);
+            this.label_xSumMax.Name = "label_xSumMax";
+            this.label_xSumMax.Size = new System.Drawing.Size(27, 13);
+            this.label_xSumMax.TabIndex = 9;
+            this.label_xSumMax.Text = "xxxx";
+            // 
+            // numericUpDown_h
+            // 
+            this.numericUpDown_h.Location = new System.Drawing.Point(104, 36);
+            this.numericUpDown_h.Name = "numericUpDown_h";
+            this.numericUpDown_h.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_h.TabIndex = 8;
+            this.numericUpDown_h.ValueChanged += new System.EventHandler(this.numericUpDown_h_ValueChanged);
+            // 
+            // numericUpDown_w
+            // 
+            this.numericUpDown_w.Location = new System.Drawing.Point(104, 17);
+            this.numericUpDown_w.Name = "numericUpDown_w";
+            this.numericUpDown_w.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_w.TabIndex = 7;
+            this.numericUpDown_w.ValueChanged += new System.EventHandler(this.numericUpDown_w_ValueChanged);
+            // 
+            // numericUpDown_y
+            // 
+            this.numericUpDown_y.Location = new System.Drawing.Point(23, 35);
+            this.numericUpDown_y.Name = "numericUpDown_y";
+            this.numericUpDown_y.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_y.TabIndex = 6;
+            this.numericUpDown_y.ValueChanged += new System.EventHandler(this.numericUpDown_y_ValueChanged);
+            // 
+            // numericUpDown_x
+            // 
+            this.numericUpDown_x.Location = new System.Drawing.Point(23, 16);
+            this.numericUpDown_x.Name = "numericUpDown_x";
+            this.numericUpDown_x.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_x.TabIndex = 5;
+            this.numericUpDown_x.ValueChanged += new System.EventHandler(this.numericUpDown_x_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(87, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "h";
+            // 
+            // label_w
+            // 
+            this.label_w.AutoSize = true;
+            this.label_w.Location = new System.Drawing.Point(85, 19);
+            this.label_w.Name = "label_w";
+            this.label_w.Size = new System.Drawing.Size(15, 13);
+            this.label_w.TabIndex = 3;
+            this.label_w.Text = "w";
+            // 
+            // checkBox_rot180
+            // 
+            this.checkBox_rot180.AutoSize = true;
+            this.checkBox_rot180.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox_rot180.Location = new System.Drawing.Point(82, 2);
+            this.checkBox_rot180.Name = "checkBox_rot180";
+            this.checkBox_rot180.Size = new System.Drawing.Size(50, 16);
+            this.checkBox_rot180.TabIndex = 13;
+            this.checkBox_rot180.Text = "rot180";
+            this.checkBox_rot180.UseVisualStyleBackColor = true;
+            // 
+            // label_y
+            // 
+            this.label_y.AutoSize = true;
+            this.label_y.Location = new System.Drawing.Point(3, 37);
+            this.label_y.Name = "label_y";
+            this.label_y.Size = new System.Drawing.Size(12, 13);
+            this.label_y.TabIndex = 2;
+            this.label_y.Text = "y";
+            // 
+            // label_x
+            // 
+            this.label_x.AutoSize = true;
+            this.label_x.Location = new System.Drawing.Point(3, 18);
+            this.label_x.Name = "label_x";
+            this.label_x.Size = new System.Drawing.Size(12, 13);
+            this.label_x.TabIndex = 1;
+            this.label_x.Text = "x";
+            // 
+            // label_position
+            // 
+            this.label_position.AutoSize = true;
+            this.label_position.Location = new System.Drawing.Point(6, 1);
+            this.label_position.Name = "label_position";
+            this.label_position.Size = new System.Drawing.Size(44, 13);
+            this.label_position.TabIndex = 11;
+            this.label_position.Text = "Position";
+            // 
+            // label_sumMax
+            // 
+            this.label_sumMax.AutoSize = true;
+            this.label_sumMax.Location = new System.Drawing.Point(153, 3);
+            this.label_sumMax.Name = "label_sumMax";
+            this.label_sumMax.Size = new System.Drawing.Size(48, 13);
+            this.label_sumMax.TabIndex = 12;
+            this.label_sumMax.Text = "sum max";
+            // 
             // FormWindow
             // 
-            this.ClientSize = new System.Drawing.Size(880, 503);
+            this.ClientSize = new System.Drawing.Size(880, 499);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button_triger);
@@ -425,6 +550,12 @@ namespace simple_live_windows_forms
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,20 +569,20 @@ namespace simple_live_windows_forms
             numericUpDown_gain.Increment = 0.1m;
 
             numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
-            numericUpDown_frameRate.Value = 25m;
             numericUpDown_frameRate.DecimalPlaces = 0;
-            numericUpDown_frameRate.Maximum = 100m;
+            numericUpDown_frameRate.Maximum = frameRateHardMax;
             numericUpDown_frameRate.Minimum = 1.0m;
             numericUpDown_frameRate.Increment = 1m;
+            numericUpDown_frameRate.Value = 5m;
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
 
             numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
-            numericUpDown_exposureTime.Value = Decimal.Round(1000 / numericUpDown_frameRate.Value - exposureSafeMargin,1);
             numericUpDown_exposureTime.DecimalPlaces = 1;
             numericUpDown_exposureTime.Maximum = Decimal.Round(1000 / numericUpDown_frameRate.Value - exposureSafeMargin,1);
             numericUpDown_exposureTime.Minimum = 0.1m;
             numericUpDown_exposureTime.Increment = 0.1m;
+            numericUpDown_exposureTime.Value = Decimal.Round(1000 / numericUpDown_frameRate.Value - exposureSafeMargin, 1);
             numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
 
 
@@ -464,8 +595,34 @@ namespace simple_live_windows_forms
             label_exposureTimeMin.Text = numericUpDown_exposureTime.Minimum.ToString();
             label_exposureTimeMax.Text = numericUpDown_exposureTime.Maximum.ToString();
 
-            exposureTimeOld = numericUpDown_exposureTime.Value;
-            frameRateOld = numericUpDown_frameRate.Value;
+
+
+            label_xSumMax.Text = x_sumMax.ToString();
+            label_ySumMax.Text = y_sumMax.ToString();
+
+            numericUpDown_x.Minimum = 0m;
+            numericUpDown_x.Maximum = x_sumMax;
+            numericUpDown_x.Value = 972m;
+            numericUpDown_x.Increment = 8m;
+
+            numericUpDown_w.Minimum = w_min;
+            numericUpDown_w.Maximum = x_sumMax;
+            numericUpDown_w.Value = 512m;
+            numericUpDown_w.Increment = 8m;
+
+            numericUpDown_y.Minimum = 0m;
+            numericUpDown_y.Maximum = y_sumMax;
+            numericUpDown_y.Value = 771m;
+            numericUpDown_y.Increment = 8m;
+
+            numericUpDown_h.Minimum = h_min;
+            numericUpDown_h.Maximum = y_sumMax;
+            numericUpDown_h.Value = 512m;
+            numericUpDown_h.Increment = 8m;
+
+
+
+
 
         }
 
@@ -497,10 +654,27 @@ namespace simple_live_windows_forms
         private void buttonStart_Click(object sender, EventArgs e)
         {
 
+            myStart();
+
+        }
+
+        private void myStart()
+        {
+
+            numericUpDown_x.Enabled = false;
+            numericUpDown_w.Enabled = false;
+            numericUpDown_y.Enabled = false;
+            numericUpDown_h.Enabled = false;
+            //checkBox_rot180.Enabled = false;
+
+            buttonStart.Enabled = false;
+            buttonStop.Enabled = true;
+
+
             try
             {
 
-
+                
                 backEnd = new BackEnd();
 
                 backEnd.SetWindowForm(this);
@@ -529,7 +703,16 @@ namespace simple_live_windows_forms
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            buttonStop.Enabled = false;
+
+            numericUpDown_x.Enabled = true;
+            numericUpDown_w.Enabled = true;
+            numericUpDown_y.Enabled = true;
+            numericUpDown_h.Enabled = true;
+            //checkBox_rot180.Enabled = true;
+
             backEnd.Stop();
+            buttonStart.Enabled = true;
 
 
         }
@@ -547,8 +730,13 @@ namespace simple_live_windows_forms
         private void numericUpDown_exposureTime_ValueChanged(object sender, EventArgs e)
         {
             numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
-            numericUpDown_frameRate.Maximum = Decimal.Round(1000 / (numericUpDown_exposureTime.Value + exposureSafeMargin));
+            numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
+            numericUpDown_frameRate.Maximum = Decimal.Round(1000 / (numericUpDown_exposureTime.Value + exposureSafeMargin));
+            if (numericUpDown_frameRate.Maximum > frameRateHardMax)
+            {
+                numericUpDown_frameRate.Maximum = frameRateHardMax;
+            }
             label_frameRateMax.Text = numericUpDown_frameRate.Maximum.ToString();
 
 
@@ -559,15 +747,24 @@ namespace simple_live_windows_forms
                 
 
             }
-            numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
-
-            backEnd.adjustParam("ExposureTime");
-            backEnd.adjustParam("AcquisitionFrameRate");
 
 
-            exposureTimeOld = numericUpDown_exposureTime.Value;
-            frameRateOld = numericUpDown_frameRate.Value;
-        }
+            if (backEnd.IsActive())
+            {
+
+                frameRateTmp = numericUpDown_frameRate.Value;
+                numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
+                backEnd.adjustParam("AcquisitionFrameRate");
+                numericUpDown_frameRate.Value = frameRateTmp;
+
+                numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+                numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+
+                backEnd.adjustParam("ExposureTime");
+                backEnd.adjustParam("AcquisitionFrameRate");
+
+            }
+         }
 
         private Panel panel2;
         public NumericUpDown numericUpDown_frameRate;
@@ -589,10 +786,17 @@ namespace simple_live_windows_forms
 
         private void numericUpDown_frameRate_ValueChanged(object sender, EventArgs e)
         {
+            numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
             numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+
+            if (numericUpDown_frameRate.Value > frameRateHardMax)
+            {
+                numericUpDown_frameRate.Value = frameRateHardMax;
+            }
 
             numericUpDown_exposureTime.Maximum = Decimal.Round(1000 / numericUpDown_frameRate.Value - exposureSafeMargin, 1);
             label_exposureTimeMax.Text = numericUpDown_exposureTime.Maximum.ToString();
+
 
             if (checkBox_exposurTimeMax.Checked)
             {
@@ -601,30 +805,24 @@ namespace simple_live_windows_forms
 
             }
 
-            numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
-
-
-            exposureTimeMaxOld = Decimal.Round(1000 / frameRateOld - exposureSafeMargin, 1);
-            frameRateMaxOld = Decimal.Round(1000 / (exposureTimeOld + exposureSafeMargin));
-            exposureTimeMaxCurent = Decimal.Round(1000 / numericUpDown_frameRate.Value - exposureSafeMargin, 1);
-            frameRateMaxCurent = Decimal.Round(1000 / (numericUpDown_exposureTime.Value + exposureSafeMargin));
-
-
-            if (frameRateMaxCurent > frameRateMaxOld)
+            if (backEnd.IsActive())
             {
                 frameRateTmp = numericUpDown_frameRate.Value;
-                numericUpDown_frameRate.Value = frameRateMaxCurent;
+                numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
                 backEnd.adjustParam("AcquisitionFrameRate");
-                numericUpDown_frameRate.Value = frameRateTmp
+                numericUpDown_frameRate.Value = frameRateTmp;
+
+
+                numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+                numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+
+
+                backEnd.adjustParam("ExposureTime");
+                backEnd.adjustParam("AcquisitionFrameRate");
+
             }
 
-
-            backEnd.adjustParam("ExposureTime");
-            backEnd.adjustParam("AcquisitionFrameRate");
-
-            exposureTimeOld = numericUpDown_exposureTime.Value;
-            frameRateOld = numericUpDown_frameRate.Value;
 
         }
 
@@ -664,5 +862,73 @@ namespace simple_live_windows_forms
 
             }
         }
+
+        private Panel panel3;
+        private Label label_x;
+        private Label label_ySumMax;
+        private Label label_xSumMax;
+        private Label label1;
+        private Label label_w;
+        private Label label_y;
+
+        private void numericUpDown_x_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_x.ValueChanged -= new System.EventHandler(this.numericUpDown_x_ValueChanged);
+            numericUpDown_x.Value = numericUpDown_x.Value - (numericUpDown_x.Value % 8);
+            numericUpDown_x.ValueChanged += new System.EventHandler(this.numericUpDown_x_ValueChanged);
+            positionCheck();
+        }
+
+        private void numericUpDown_y_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_y.ValueChanged -= new System.EventHandler(this.numericUpDown_y_ValueChanged);
+            numericUpDown_y.Value = numericUpDown_y.Value - (numericUpDown_y.Value % 8);
+            numericUpDown_y.ValueChanged += new System.EventHandler(this.numericUpDown_y_ValueChanged);
+            positionCheck();
+        }
+
+        private void numericUpDown_w_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_w.ValueChanged -= new System.EventHandler(this.numericUpDown_w_ValueChanged);
+            numericUpDown_w.Value = numericUpDown_w.Value - (numericUpDown_w.Value % 8);
+            numericUpDown_w.ValueChanged += new System.EventHandler(this.numericUpDown_w_ValueChanged);
+            positionCheck();
+        }
+
+        private void numericUpDown_h_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_h.ValueChanged -= new System.EventHandler(this.numericUpDown_h_ValueChanged);
+            //numericUpDown_h.Value = numericUpDown_h.Value - (numericUpDown_h.Value % 8);
+            numericUpDown_h.ValueChanged += new System.EventHandler(this.numericUpDown_h_ValueChanged);
+
+            positionCheck();
+        }
+
+        private void positionCheck()
+        {
+            buttonStart.Enabled = true;
+            label_xSumMax.Enabled = true;
+            label_ySumMax.Enabled = true;
+
+            if ((numericUpDown_x.Value + numericUpDown_w.Value) > x_sumMax)
+            {
+                buttonStart.Enabled = false;
+                label_xSumMax.Enabled = false;
+            }
+            if ((numericUpDown_y.Value + numericUpDown_h.Value) > y_sumMax)
+            {
+                buttonStart.Enabled = false;
+                label_ySumMax.Enabled = false;
+            }
+
+        }
+
+        private Label label_position;
+        private Label label_sumMax;
+        public NumericUpDown numericUpDown_h;
+        public NumericUpDown numericUpDown_w;
+        public NumericUpDown numericUpDown_y;
+        public NumericUpDown numericUpDown_x;
+        public CheckBox checkBox_rot180;
     }
 }
