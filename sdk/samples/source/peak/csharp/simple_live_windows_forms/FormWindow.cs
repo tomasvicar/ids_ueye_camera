@@ -31,6 +31,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
+
 
 namespace simple_live_windows_forms
 {
@@ -53,6 +55,8 @@ namespace simple_live_windows_forms
 
 
         private decimal frameRateTmp;
+        private Stopwatch sw = new Stopwatch();
+        private Image previousImage;
 
 
 
@@ -72,9 +76,29 @@ namespace simple_live_windows_forms
         {
             try
             {
-                var previousImage = pictureBox.Image;
+                previousImage = pictureBox.Image;
 
                 pictureBox.Image = image;
+
+
+                if (int.Parse(labelCounter.Text) == 1)
+                {
+                    sw.Start();
+                }
+                if (int.Parse(labelCounter.Text) == 100)
+                {
+                    sw.Stop();
+                    TimeSpan ts = sw.Elapsed;
+
+                    Debug.WriteLine("-----FPS----- " + (100.0 / ts.TotalSeconds).ToString());
+
+                    backEnd.Stop();
+                }
+
+                // Thread th = Thread.CurrentThread;
+                // Debug.WriteLine("This is " + th.Name);
+
+
 
                 // Manage memory usage by disposing the previous image
                 if (previousImage != null)
@@ -84,11 +108,17 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [FormWindow] Exception: " + e.Message);
-                backEnd_MessageBoxTrigger(this, "Exception", e.Message);
+                Debug.WriteLine("--- [FormWindow] Exception1: " + e.Message);
+                backEnd_MessageBoxTrigger(this, "Exception1", e.Message);
             }
         }
-
+        private void backEnd_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
+        {
+            if (labelCounter.InvokeRequired)
+            {
+                labelCounter.BeginInvoke((MethodInvoker)delegate { labelCounter.Text = frameCounter.ToString(); });
+            }
+        }
 
         private void backEnd_MessageBoxTrigger(object sender, String messageTitle, String messageText)
         {
@@ -148,6 +178,7 @@ namespace simple_live_windows_forms
             this.label_x = new System.Windows.Forms.Label();
             this.label_position = new System.Windows.Forms.Label();
             this.label_sumMax = new System.Windows.Forms.Label();
+            this.labelCounter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -262,6 +293,7 @@ namespace simple_live_windows_forms
             this.button_triger.TabIndex = 10;
             this.button_triger.Text = "Run triger";
             this.button_triger.UseVisualStyleBackColor = true;
+            this.button_triger.Click += new System.EventHandler(this.button_triger_Click);
             // 
             // panel1
             // 
@@ -526,9 +558,19 @@ namespace simple_live_windows_forms
             this.label_sumMax.TabIndex = 12;
             this.label_sumMax.Text = "sum max";
             // 
+            // labelCounter
+            // 
+            this.labelCounter.AutoSize = true;
+            this.labelCounter.Location = new System.Drawing.Point(594, 487);
+            this.labelCounter.Name = "labelCounter";
+            this.labelCounter.Size = new System.Drawing.Size(13, 13);
+            this.labelCounter.TabIndex = 14;
+            this.labelCounter.Text = "0";
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 499);
+            this.Controls.Add(this.labelCounter);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -573,7 +615,7 @@ namespace simple_live_windows_forms
             numericUpDown_frameRate.Maximum = frameRateHardMax;
             numericUpDown_frameRate.Minimum = 1.0m;
             numericUpDown_frameRate.Increment = 1m;
-            numericUpDown_frameRate.Value = 5m;
+            numericUpDown_frameRate.Value = 30m;
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
 
@@ -602,22 +644,30 @@ namespace simple_live_windows_forms
 
             numericUpDown_x.Minimum = 0m;
             numericUpDown_x.Maximum = x_sumMax;
-            numericUpDown_x.Value = 972m;
+            numericUpDown_x.Value = 732m;
+            //numericUpDown_x.Value = 972m;
+            //numericUpDown_x.Value = 0m;
             numericUpDown_x.Increment = 8m;
 
             numericUpDown_w.Minimum = w_min;
             numericUpDown_w.Maximum = x_sumMax;
-            numericUpDown_w.Value = 512m;
+            numericUpDown_w.Value = 1100;
+            //numericUpDown_w.Value = 512m;
+            //numericUpDown_w.Value = x_sumMax;
             numericUpDown_w.Increment = 8m;
 
             numericUpDown_y.Minimum = 0m;
             numericUpDown_y.Maximum = y_sumMax;
-            numericUpDown_y.Value = 771m;
+            numericUpDown_y.Value = 627m;
+            //numericUpDown_y.Value = 771m;
+            //numericUpDown_y.Value = 0m;
             numericUpDown_y.Increment = 8m;
 
             numericUpDown_h.Minimum = h_min;
             numericUpDown_h.Maximum = y_sumMax;
-            numericUpDown_h.Value = 512m;
+            numericUpDown_h.Value = 800;
+            //numericUpDown_h.Value = 512m;
+            //numericUpDown_h.Value = y_sumMax;
             numericUpDown_h.Increment = 8m;
 
 
@@ -682,6 +732,7 @@ namespace simple_live_windows_forms
                 FormClosing += FormWindow_FormClosing;
 
                 backEnd.ImageReceived += backEnd_ImageReceived;
+                backEnd.CountersUpdated += backEnd_CountersUpdated;
                 backEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
 
                 if (backEnd.Start())
@@ -695,8 +746,8 @@ namespace simple_live_windows_forms
             }
             catch (Exception ee)
             {
-                Debug.WriteLine("--- [FormWindow] Exception: " + ee.Message);
-                backEnd_MessageBoxTrigger(this, "Exception", ee.Message);
+                Debug.WriteLine("--- [FormWindow] Exception2: " + ee.Message);
+                backEnd_MessageBoxTrigger(this, "Exception2", ee.Message);
             }
 
         }
@@ -930,5 +981,11 @@ namespace simple_live_windows_forms
         public NumericUpDown numericUpDown_y;
         public NumericUpDown numericUpDown_x;
         public CheckBox checkBox_rot180;
+        private Label labelCounter;
+
+        private void button_triger_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

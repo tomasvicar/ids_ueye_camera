@@ -46,6 +46,7 @@ namespace simple_live_windows_forms
 
         // Event which is raised if the counters has changed
         public delegate void CountersUpdatedEventHandler(object sender, uint frameCounter, uint errorCounter);
+        public event CountersUpdatedEventHandler CountersUpdated;
 
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
@@ -124,10 +125,8 @@ namespace simple_live_windows_forms
                     {
 
                         //m_imageTransformerIPL.MirrorUpDownLeftRightInPlace(iplImg);
-                        // Rotate by 180 degrees
                         m_imageTransformerIPL.RotateInPlace(iplImg, peak.ipl.ImageTransformer.RotationAngle.Degree180);
 
-                        //Debug.WriteLine("--- [AcquisitionWorker] rotating");
                     }
 
 
@@ -159,6 +158,8 @@ namespace simple_live_windows_forms
                     Debug.WriteLine("--- [AcquisitionWorker] Exception: " + e.Message);
                     MessageBoxTrigger(this, "Exception", e.Message);
                 }
+
+                CountersUpdated(this, frameCounter, errorCounter);
 
             }
         }

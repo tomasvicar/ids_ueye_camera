@@ -1,22 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
-MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{30EDDD49-4CFB-3F2C-87C4-EBE286D9527F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CACD888B-AD16-32FE-8EA0-ED557DA38DF5} = {CACD888B-AD16-32FE-8EA0-ED557DA38DF5}
+		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE} = {0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{CACD888B-AD16-32FE-8EA0-ED557DA38DF5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "simple_live_windows_forms_csharp", "simple_live_windows_forms_csharp.csproj", "{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CACD888B-AD16-32FE-8EA0-ED557DA38DF5} = {CACD888B-AD16-32FE-8EA0-ED557DA38DF5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30EDDD49-4CFB-3F2C-87C4-EBE286D9527F}.Debug|x64.ActiveCfg = Debug|x64
+		{CACD888B-AD16-32FE-8EA0-ED557DA38DF5}.Debug|x64.ActiveCfg = Debug|x64
+		{CACD888B-AD16-32FE-8EA0-ED557DA38DF5}.Debug|x64.Build.0 = Debug|x64
 		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Debug|x64.ActiveCfg = Debug|x64
 		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58BEAC02-5A3C-3D09-AC7E-65EFFA7BD71A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
 	EndGlobalSection
 EndGlobal

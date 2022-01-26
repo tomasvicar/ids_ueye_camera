@@ -40,6 +40,7 @@ namespace simple_live_windows_forms
 
         // Event which is raised if the counters has changed
         public delegate void CountersUpdatedEventHandler(object sender, uint frameCounter, uint errorCounter);
+        public event CountersUpdatedEventHandler CountersUpdated;
 
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
@@ -79,8 +80,11 @@ namespace simple_live_windows_forms
                 acquisitionWorker = new AcquisitionWorker();
 
                 acquisitionThread = new Thread(new ThreadStart(acquisitionWorker.Start));
+                acquisitionThread.Name = "acquisitionThread";
+
 
                 acquisitionWorker.ImageReceived += acquisitionWorker_ImageReceived;
+                acquisitionWorker.CountersUpdated += acquisitionWorker_CountersUpdated;
                 acquisitionWorker.MessageBoxTrigger += acquisitionWorker_MessageBoxTrigger;
 
 
@@ -336,6 +340,11 @@ namespace simple_live_windows_forms
         private void acquisitionWorker_ImageReceived(object sender, System.Drawing.Bitmap image)
         {
             ImageReceived(sender, image);
+        }
+
+        private void acquisitionWorker_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
+        {
+            CountersUpdated(sender, frameCounter, errorCounter);
         }
 
 
