@@ -260,7 +260,11 @@ namespace simple_live_windows_forms
                     UInt32 payloadSize = Convert.ToUInt32(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
 
                     // Get the minimum number of buffers that must be announced
-                    var bufferCountMax = dataStream.NumBuffersAnnouncedMinRequired();
+                    //uint bufferCountMax = dataStream.NumBuffersAnnouncedMinRequired();
+
+                    UInt32 bufferCountMax = decimal.ToUInt32(windowForm.numericUpDown_bufferSize.Value);
+
+                    //Debug.WriteLine("--- [BackEnd] min req buffers " +  bufferCountMax.ToString());
 
                     // Allocate and announce image buffers and queue them
                     for (var bufferCount = 0; bufferCount < bufferCountMax; ++bufferCount)

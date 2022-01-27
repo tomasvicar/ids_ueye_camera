@@ -32,6 +32,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using Accord.Video.FFMPEG;
 
 
 namespace simple_live_windows_forms
@@ -58,6 +59,8 @@ namespace simple_live_windows_forms
         private Stopwatch sw = new Stopwatch();
         private Image previousImage;
 
+        private VideoFileWriter writer;
+        private Bitmap imageCopy;
 
 
         public FormWindow()
@@ -76,23 +79,37 @@ namespace simple_live_windows_forms
         {
             try
             {
-                previousImage = pictureBox.Image;
+                // writer.WriteVideoFrame(image);
 
+
+
+                previousImage = pictureBox.Image;
                 pictureBox.Image = image;
+
+
+
+
+
+                //imageCopy = new Bitmap(image);
+                // imageCopy = image.Clone();
+                //writer.WriteVideoFrame(imageCopy);
+
 
 
                 if (int.Parse(labelCounter.Text) == 1)
                 {
                     sw.Start();
                 }
-                if (int.Parse(labelCounter.Text) == 1000000)
+                if (int.Parse(labelCounter.Text) == 100)
                 {
                     sw.Stop();
                     TimeSpan ts = sw.Elapsed;
 
                     Debug.WriteLine("-----FPS----- " + (100.0 / ts.TotalSeconds).ToString());
 
-                    backEnd.Stop();
+
+                    buttonStop.BeginInvoke((MethodInvoker)delegate { buttonStop.PerformClick(); });
+
                 }
 
                 // Thread th = Thread.CurrentThread;
@@ -179,6 +196,8 @@ namespace simple_live_windows_forms
             this.label_position = new System.Windows.Forms.Label();
             this.label_sumMax = new System.Windows.Forms.Label();
             this.labelCounter = new System.Windows.Forms.Label();
+            this.numericUpDown_bufferSize = new System.Windows.Forms.NumericUpDown();
+            this.label_bufferSize = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -191,6 +210,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -287,7 +307,7 @@ namespace simple_live_windows_forms
             // 
             // button_triger
             // 
-            this.button_triger.Location = new System.Drawing.Point(663, 460);
+            this.button_triger.Location = new System.Drawing.Point(663, 456);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(109, 23);
             this.button_triger.TabIndex = 10;
@@ -567,9 +587,42 @@ namespace simple_live_windows_forms
             this.labelCounter.TabIndex = 14;
             this.labelCounter.Text = "0";
             // 
+            // numericUpDown_bufferSize
+            // 
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(725, 479);
+            this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_bufferSize.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_bufferSize.Name = "numericUpDown_bufferSize";
+            this.numericUpDown_bufferSize.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown_bufferSize.TabIndex = 15;
+            this.numericUpDown_bufferSize.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label_bufferSize
+            // 
+            this.label_bufferSize.AutoSize = true;
+            this.label_bufferSize.Location = new System.Drawing.Point(667, 482);
+            this.label_bufferSize.Name = "label_bufferSize";
+            this.label_bufferSize.Size = new System.Drawing.Size(56, 13);
+            this.label_bufferSize.TabIndex = 16;
+            this.label_bufferSize.Text = "Buffer size";
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 499);
+            this.Controls.Add(this.label_bufferSize);
+            this.Controls.Add(this.numericUpDown_bufferSize);
             this.Controls.Add(this.labelCounter);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -598,6 +651,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,7 +669,7 @@ namespace simple_live_windows_forms
             numericUpDown_frameRate.Maximum = frameRateHardMax;
             numericUpDown_frameRate.Minimum = 1.0m;
             numericUpDown_frameRate.Increment = 1m;
-            numericUpDown_frameRate.Value = 30m;
+            numericUpDown_frameRate.Value = 36m;
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
 
@@ -644,30 +698,30 @@ namespace simple_live_windows_forms
 
             numericUpDown_x.Minimum = 0m;
             numericUpDown_x.Maximum = x_sumMax;
-            numericUpDown_x.Value = 732m;
+            //numericUpDown_x.Value = 732m;
             //numericUpDown_x.Value = 972m;
-            //numericUpDown_x.Value = 0m;
+            numericUpDown_x.Value = 0m;
             numericUpDown_x.Increment = 8m;
 
             numericUpDown_w.Minimum = w_min;
             numericUpDown_w.Maximum = x_sumMax;
-            numericUpDown_w.Value = 1100;
+            //numericUpDown_w.Value = 1100;
             //numericUpDown_w.Value = 512m;
-            //numericUpDown_w.Value = x_sumMax;
+            numericUpDown_w.Value = x_sumMax;
             numericUpDown_w.Increment = 8m;
 
             numericUpDown_y.Minimum = 0m;
             numericUpDown_y.Maximum = y_sumMax;
-            numericUpDown_y.Value = 627m;
+            //numericUpDown_y.Value = 627m;
             //numericUpDown_y.Value = 771m;
-            //numericUpDown_y.Value = 0m;
+            numericUpDown_y.Value = 0m;
             numericUpDown_y.Increment = 8m;
 
             numericUpDown_h.Minimum = h_min;
             numericUpDown_h.Maximum = y_sumMax;
-            numericUpDown_h.Value = 800;
+            //numericUpDown_h.Value = 800;
             //numericUpDown_h.Value = 512m;
-            //numericUpDown_h.Value = y_sumMax;
+            numericUpDown_h.Value = y_sumMax;
             numericUpDown_h.Increment = 8m;
 
 
@@ -711,6 +765,8 @@ namespace simple_live_windows_forms
         private void myStart()
         {
 
+            writer = new VideoFileWriter();
+
             numericUpDown_x.Enabled = false;
             numericUpDown_w.Enabled = false;
             numericUpDown_y.Enabled = false;
@@ -719,6 +775,14 @@ namespace simple_live_windows_forms
 
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
+
+            
+
+
+            // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
+            //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 
+            writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
+            //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1); 
 
 
             try
@@ -765,7 +829,7 @@ namespace simple_live_windows_forms
             backEnd.Stop();
             buttonStart.Enabled = true;
 
-
+            writer.Close();
         }
 
         private Label label_gain;
@@ -987,5 +1051,7 @@ namespace simple_live_windows_forms
         {
 
         }
+        private Label label_bufferSize;
+        public NumericUpDown numericUpDown_bufferSize;
     }
 }
