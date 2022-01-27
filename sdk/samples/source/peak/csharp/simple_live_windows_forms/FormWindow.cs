@@ -85,7 +85,7 @@ namespace simple_live_windows_forms
                 {
                     sw.Start();
                 }
-                if (int.Parse(labelCounter.Text) == 100)
+                if (int.Parse(labelCounter.Text) == 1000000)
                 {
                     sw.Stop();
                     TimeSpan ts = sw.Elapsed;
