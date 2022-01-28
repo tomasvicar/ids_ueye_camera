@@ -67,6 +67,7 @@ namespace simple_live_windows_forms
         private bool running;
         private uint frameCounter;
         private uint errorCounter;
+        public ColorPalette colorPalette_grayscale = GetGrayScalePalette();
 
         public AcquisitionWorker()
         {
@@ -104,15 +105,15 @@ namespace simple_live_windows_forms
                 try
                 {
                     // Get buffer from device's datastream
-                    buffer = dataStream.WaitForFinishedBuffer(1000);
+                    buffer = dataStream.WaitForFinishedBuffer(5000);
 
                     // Create IDS peak IPL
                     iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(), buffer.Size(), buffer.Width(), buffer.Height());
 
                     // Debayering and convert IDS peak IPL Image to RGB8 format
                     iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.BGR8);
+                    //iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.Mono8);
 
-      
 
                     width = Convert.ToInt32(iplImg.Width());
                     height = Convert.ToInt32(iplImg.Height());
@@ -129,12 +130,14 @@ namespace simple_live_windows_forms
 
                     }
 
-
+                    //image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format8bppIndexed, iplImg.Data());
+                    //image.Palette = colorPalette_grayscale;
                     image = new Bitmap(width, height, stride,System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
 
                     // Create a deep copy of the Bitmap, so it doesn't use memory of the IDS peak IPL Image.
                     // Warning: Don't use image.Clone(), because it only creates a shallow copy!
                     imageCopy = new Bitmap(image);
+                    //imageCopy.Palette = colorPalette_grayscale;
 
                     // The other images are not needed anymore.
                     image.Dispose();
@@ -188,6 +191,24 @@ namespace simple_live_windows_forms
         {
             Debug.WriteLine("--- [AcquisitionWorker] Set nodeMap");
             nodeMapRemoteDevice = nodeMap;
+        }
+
+
+
+        public static ColorPalette GetGrayScalePalette()
+        {
+            Bitmap bmp = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+
+            ColorPalette monoPalette = bmp.Palette;
+
+            System.Drawing.Color[] entries = monoPalette.Entries;
+
+            for (int i = 0; i < 256; i++)
+            {
+                entries[i] = System.Drawing.Color.FromArgb(i, i, i);
+            }
+
+            return monoPalette;
         }
 
 

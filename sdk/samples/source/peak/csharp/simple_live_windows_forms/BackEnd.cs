@@ -218,7 +218,30 @@ namespace simple_live_windows_forms
 
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(windowForm.numericUpDown_exposureTime.Value) * 1000);
 
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value));
+
+                    if (windowForm.is_triger)
+                    {
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Maximum));
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSource").SetCurrentEntry("Line0");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("FallingEdge");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("TriggerDelay").SetValue(0.0);
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("TriggerDivider").SetValue(1);
+
+                    }
+                    else
+                    {
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value));
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
+                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("Off");
+                    }
+
+
+
+
 
                     //Debug.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
                     //Debug.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());

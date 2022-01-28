@@ -33,6 +33,9 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using Accord.Video.FFMPEG;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Globalization;
 
 
 namespace simple_live_windows_forms
@@ -40,9 +43,14 @@ namespace simple_live_windows_forms
     public partial class FormWindow : Form
     {
         private PictureBox pictureBox;
+        private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode;
+
         private BackEnd backEnd;
         private BackgroundWorker backgroundWorker1;
         private bool hasError;
+
+        public bool is_triger = false;
+        bool tmp_show = false;
 
         //public double gamma = 1;
         public double blackLevel = 1;
@@ -62,6 +70,10 @@ namespace simple_live_windows_forms
         private VideoFileWriter writer;
         private Bitmap imageCopy;
 
+        public string filename;
+        public string path;
+        public DateTime time;
+
 
         public FormWindow()
         {
@@ -70,7 +82,7 @@ namespace simple_live_windows_forms
             InitializeComponent();
             LoadMySetting();
 
-            myStart();
+            buttonStart.PerformClick();
 
 
         }
@@ -79,15 +91,29 @@ namespace simple_live_windows_forms
         {
             try
             {
-                // writer.WriteVideoFrame(image);
+
+                if (is_triger)
+                {
+                    writer.WriteVideoFrame(image);
+                }
+
+                if (is_triger)
+                {
+                    tmp_show = (int.Parse(labelCounter.Text) % numericUpDown_pictureBoxTimeDecimation.Value) == 0;
+                }
+                else
+                {
+                    tmp_show = true;
+                }
 
 
+                if (tmp_show)
+                {
+                    previousImage = pictureBoxWithInterpolationMode.Image;
+                    pictureBoxWithInterpolationMode.Image = image;
+                }
 
-                previousImage = pictureBox.Image;
-                pictureBox.Image = image;
-
-
-
+                //pictureBox.BeginInvoke((MethodInvoker)delegate { previousImage = pictureBox.Image; pictureBox.Image = image; if (previousImage != null) { previousImage.Dispose(); } });
 
 
                 //imageCopy = new Bitmap(image);
@@ -96,19 +122,27 @@ namespace simple_live_windows_forms
 
 
 
-                if (int.Parse(labelCounter.Text) == 1)
+                if ((int.Parse(labelCounter.Text) % 20) == 0)
                 {
-                    sw.Start();
-                }
-                if (int.Parse(labelCounter.Text) == 100)
-                {
-                    sw.Stop();
-                    TimeSpan ts = sw.Elapsed;
+                    if (sw.IsRunning)
+                    {
 
-                    Debug.WriteLine("-----FPS----- " + (100.0 / ts.TotalSeconds).ToString());
+                        TimeSpan ts = sw.Elapsed;
+                        sw.Restart();
 
 
-                    buttonStop.BeginInvoke((MethodInvoker)delegate { buttonStop.PerformClick(); });
+                        Debug.WriteLine("-----FPS----- " + (20.0 / ts.TotalSeconds).ToString());
+
+                        label_fps.BeginInvoke((MethodInvoker)delegate { label_fps.Text = Math.Round(20.0 / ts.TotalSeconds).ToString()  + "fps"; });
+                     }
+
+
+                    else
+                    {
+                        sw.Start();
+                    }
+
+                    //buttonStop.BeginInvoke((MethodInvoker)delegate { buttonStop.PerformClick(); });
 
                 }
 
@@ -198,6 +232,10 @@ namespace simple_live_windows_forms
             this.labelCounter = new System.Windows.Forms.Label();
             this.numericUpDown_bufferSize = new System.Windows.Forms.NumericUpDown();
             this.label_bufferSize = new System.Windows.Forms.Label();
+            this.numericUpDown_pictureBoxTimeDecimation = new System.Windows.Forms.NumericUpDown();
+            this.label_subsample = new System.Windows.Forms.Label();
+            this.button_stopTriger = new System.Windows.Forms.Button();
+            this.label_fps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -211,11 +249,11 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
             // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(880, 437);
@@ -225,7 +263,7 @@ namespace simple_live_windows_forms
             // 
             // textBox_dataname
             // 
-            this.textBox_dataname.Location = new System.Drawing.Point(640, 437);
+            this.textBox_dataname.Location = new System.Drawing.Point(628, 437);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
             this.textBox_dataname.TabIndex = 2;
@@ -234,7 +272,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(560, 439);
+            this.buttonStart.Location = new System.Drawing.Point(548, 439);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 8;
@@ -244,7 +282,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(560, 461);
+            this.buttonStop.Location = new System.Drawing.Point(548, 461);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 9;
@@ -307,9 +345,9 @@ namespace simple_live_windows_forms
             // 
             // button_triger
             // 
-            this.button_triger.Location = new System.Drawing.Point(663, 456);
+            this.button_triger.Location = new System.Drawing.Point(628, 457);
             this.button_triger.Name = "button_triger";
-            this.button_triger.Size = new System.Drawing.Size(109, 23);
+            this.button_triger.Size = new System.Drawing.Size(93, 23);
             this.button_triger.TabIndex = 10;
             this.button_triger.Text = "Run triger";
             this.button_triger.UseVisualStyleBackColor = true;
@@ -581,7 +619,7 @@ namespace simple_live_windows_forms
             // labelCounter
             // 
             this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(594, 487);
+            this.labelCounter.Location = new System.Drawing.Point(561, 485);
             this.labelCounter.Name = "labelCounter";
             this.labelCounter.Size = new System.Drawing.Size(13, 13);
             this.labelCounter.TabIndex = 14;
@@ -589,7 +627,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_bufferSize
             // 
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(725, 479);
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(727, 478);
             this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -612,15 +650,64 @@ namespace simple_live_windows_forms
             // label_bufferSize
             // 
             this.label_bufferSize.AutoSize = true;
-            this.label_bufferSize.Location = new System.Drawing.Point(667, 482);
+            this.label_bufferSize.Location = new System.Drawing.Point(726, 464);
             this.label_bufferSize.Name = "label_bufferSize";
             this.label_bufferSize.Size = new System.Drawing.Size(56, 13);
             this.label_bufferSize.TabIndex = 16;
             this.label_bufferSize.Text = "Buffer size";
             // 
+            // numericUpDown_pictureBoxTimeDecimation
+            // 
+            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(792, 452);
+            this.numericUpDown_pictureBoxTimeDecimation.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_pictureBoxTimeDecimation.Name = "numericUpDown_pictureBoxTimeDecimation";
+            this.numericUpDown_pictureBoxTimeDecimation.Size = new System.Drawing.Size(29, 20);
+            this.numericUpDown_pictureBoxTimeDecimation.TabIndex = 17;
+            this.numericUpDown_pictureBoxTimeDecimation.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // label_subsample
+            // 
+            this.label_subsample.AutoSize = true;
+            this.label_subsample.Location = new System.Drawing.Point(791, 439);
+            this.label_subsample.Name = "label_subsample";
+            this.label_subsample.Size = new System.Drawing.Size(33, 13);
+            this.label_subsample.TabIndex = 18;
+            this.label_subsample.Text = "t sub.";
+            // 
+            // button_stopTriger
+            // 
+            this.button_stopTriger.Location = new System.Drawing.Point(628, 479);
+            this.button_stopTriger.Name = "button_stopTriger";
+            this.button_stopTriger.Size = new System.Drawing.Size(93, 23);
+            this.button_stopTriger.TabIndex = 19;
+            this.button_stopTriger.Text = "Stop triger";
+            this.button_stopTriger.UseVisualStyleBackColor = true;
+            this.button_stopTriger.Click += new System.EventHandler(this.button_stopTriger_Click);
+            // 
+            // label_fps
+            // 
+            this.label_fps.AutoSize = true;
+            this.label_fps.Location = new System.Drawing.Point(592, 484);
+            this.label_fps.Name = "label_fps";
+            this.label_fps.Size = new System.Drawing.Size(31, 13);
+            this.label_fps.TabIndex = 20;
+            this.label_fps.Text = "xxfps";
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 499);
+            this.Controls.Add(this.label_fps);
+            this.Controls.Add(this.button_stopTriger);
+            this.Controls.Add(this.label_subsample);
+            this.Controls.Add(this.numericUpDown_pictureBoxTimeDecimation);
             this.Controls.Add(this.label_bufferSize);
             this.Controls.Add(this.numericUpDown_bufferSize);
             this.Controls.Add(this.labelCounter);
@@ -652,6 +739,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -698,35 +786,46 @@ namespace simple_live_windows_forms
 
             numericUpDown_x.Minimum = 0m;
             numericUpDown_x.Maximum = x_sumMax;
-            //numericUpDown_x.Value = 732m;
+            numericUpDown_x.Value = 732m;
             //numericUpDown_x.Value = 972m;
-            numericUpDown_x.Value = 0m;
+            //numericUpDown_x.Value = 0m;
             numericUpDown_x.Increment = 8m;
 
             numericUpDown_w.Minimum = w_min;
             numericUpDown_w.Maximum = x_sumMax;
-            //numericUpDown_w.Value = 1100;
+            numericUpDown_w.Value = 1100;
             //numericUpDown_w.Value = 512m;
-            numericUpDown_w.Value = x_sumMax;
+            //numericUpDown_w.Value = x_sumMax;
             numericUpDown_w.Increment = 8m;
 
             numericUpDown_y.Minimum = 0m;
             numericUpDown_y.Maximum = y_sumMax;
-            //numericUpDown_y.Value = 627m;
+            numericUpDown_y.Value = 627m;
             //numericUpDown_y.Value = 771m;
-            numericUpDown_y.Value = 0m;
+            //numericUpDown_y.Value = 0m;
             numericUpDown_y.Increment = 8m;
 
             numericUpDown_h.Minimum = h_min;
             numericUpDown_h.Maximum = y_sumMax;
-            //numericUpDown_h.Value = 800;
+            numericUpDown_h.Value = 800;
             //numericUpDown_h.Value = 512m;
-            numericUpDown_h.Value = y_sumMax;
+            //numericUpDown_h.Value = y_sumMax;
             numericUpDown_h.Increment = 8m;
 
 
+            this.pictureBox.Visible = false;
 
+            this.pictureBoxWithInterpolationMode = new PictureBoxWithInterpolationMode();
+            pictureBoxWithInterpolationMode.InterpolationMode = InterpolationMode.NearestNeighbor;
+            this.Controls.Add(this.pictureBoxWithInterpolationMode);
+            this.pictureBoxWithInterpolationMode.Location = this.pictureBox.Location;
+            this.pictureBoxWithInterpolationMode.Name = this.pictureBox.Name + "WithInterpolationMode";
+            this.pictureBoxWithInterpolationMode.Size = this.pictureBox.Size;
+            this.pictureBoxWithInterpolationMode.SizeMode = this.pictureBox.SizeMode;
+            this.pictureBoxWithInterpolationMode.TabIndex = this.pictureBox.TabIndex;
+            this.pictureBoxWithInterpolationMode.TabStop = this.pictureBox.TabStop;
 
+            
 
         }
 
@@ -757,15 +856,15 @@ namespace simple_live_windows_forms
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-
+            is_triger = false;
             myStart();
 
         }
 
         private void myStart()
         {
-
-            writer = new VideoFileWriter();
+            
+            
 
             numericUpDown_x.Enabled = false;
             numericUpDown_w.Enabled = false;
@@ -776,14 +875,32 @@ namespace simple_live_windows_forms
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
 
-            
 
+            if (is_triger)
+            {
 
-            // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
-            //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 
-            writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
-            //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1); 
+                
 
+                path = textBox_dataname.Text;
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                writer = new VideoFileWriter();
+
+                time = DateTime.Now;
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
+
+                filename = Path.Combine(path, time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".avi");
+
+                // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
+                //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 
+                //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
+                writer.Open(filename, Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
+
+            }
 
             try
             {
@@ -829,7 +946,10 @@ namespace simple_live_windows_forms
             backEnd.Stop();
             buttonStart.Enabled = true;
 
-            writer.Close();
+            if (is_triger)
+            {
+                writer.Close();
+            }
         }
 
         private Label label_gain;
@@ -1049,9 +1169,33 @@ namespace simple_live_windows_forms
 
         private void button_triger_Click(object sender, EventArgs e)
         {
-
+            is_triger = true;
+            myStart();
         }
         private Label label_bufferSize;
         public NumericUpDown numericUpDown_bufferSize;
+        private NumericUpDown numericUpDown_pictureBoxTimeDecimation;
+        private Label label_subsample;
+        private Button button_stopTriger;
+        private Label label_fps;
+
+        private void button_stopTriger_Click(object sender, EventArgs e)
+        {
+            buttonStop.PerformClick();
+        }
     }
 }
+
+
+
+public class PictureBoxWithInterpolationMode : PictureBox
+{
+    public InterpolationMode InterpolationMode { get; set; }
+
+    protected override void OnPaint(PaintEventArgs paintEventArgs)
+    {
+        paintEventArgs.Graphics.InterpolationMode = InterpolationMode;
+        base.OnPaint(paintEventArgs);
+    }
+}
+
