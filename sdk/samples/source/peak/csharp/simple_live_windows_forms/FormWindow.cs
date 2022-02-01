@@ -36,7 +36,7 @@ using Accord.Video.FFMPEG;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Globalization;
-
+using System.IO.Ports;
 
 namespace simple_live_windows_forms
 {
@@ -74,6 +74,9 @@ namespace simple_live_windows_forms
         public string path;
         public DateTime time;
 
+        string[] ArrayComPortsNames = null;
+        SerialPort comPort = null;
+
 
         public FormWindow()
         {
@@ -82,7 +85,7 @@ namespace simple_live_windows_forms
             InitializeComponent();
             LoadMySetting();
 
-            buttonStart.PerformClick();
+            label_comPortStatus_Click(null , EventArgs.Empty);
 
 
         }
@@ -183,6 +186,16 @@ namespace simple_live_windows_forms
             {
                 backEnd.Stop();
             }
+            if (!(comPort == null))
+            {
+                if (comPort.IsOpen)
+                {
+                    comPort.Close();
+                }
+
+            }
+
+
         }
 
         public bool HasError()
@@ -236,6 +249,10 @@ namespace simple_live_windows_forms
             this.label_subsample = new System.Windows.Forms.Label();
             this.button_stopTriger = new System.Windows.Forms.Button();
             this.label_fps = new System.Windows.Forms.Label();
+            this.label_comPortStatus = new System.Windows.Forms.Label();
+            this.label_recivedCommand = new System.Windows.Forms.Label();
+            this.numericUpDown_LED = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_LED = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -250,6 +267,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -263,7 +281,7 @@ namespace simple_live_windows_forms
             // 
             // textBox_dataname
             // 
-            this.textBox_dataname.Location = new System.Drawing.Point(628, 437);
+            this.textBox_dataname.Location = new System.Drawing.Point(565, 491);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
             this.textBox_dataname.TabIndex = 2;
@@ -272,7 +290,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(548, 439);
+            this.buttonStart.Location = new System.Drawing.Point(461, 439);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 8;
@@ -282,7 +300,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(548, 461);
+            this.buttonStop.Location = new System.Drawing.Point(461, 464);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 9;
@@ -293,7 +311,7 @@ namespace simple_live_windows_forms
             // label_gain
             // 
             this.label_gain.AutoSize = true;
-            this.label_gain.Location = new System.Drawing.Point(50, 2);
+            this.label_gain.Location = new System.Drawing.Point(3, 3);
             this.label_gain.Name = "label_gain";
             this.label_gain.Size = new System.Drawing.Size(29, 13);
             this.label_gain.TabIndex = 5;
@@ -301,9 +319,9 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_gain
             // 
-            this.numericUpDown_gain.Location = new System.Drawing.Point(13, 18);
+            this.numericUpDown_gain.Location = new System.Drawing.Point(3, 19);
             this.numericUpDown_gain.Name = "numericUpDown_gain";
-            this.numericUpDown_gain.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDown_gain.Size = new System.Drawing.Size(49, 20);
             this.numericUpDown_gain.TabIndex = 6;
             this.numericUpDown_gain.Value = new decimal(new int[] {
             1,
@@ -320,14 +338,14 @@ namespace simple_live_windows_forms
             this.panel_gain.Controls.Add(this.label_gain);
             this.panel_gain.Location = new System.Drawing.Point(0, 440);
             this.panel_gain.Name = "panel_gain";
-            this.panel_gain.Size = new System.Drawing.Size(103, 57);
+            this.panel_gain.Size = new System.Drawing.Size(63, 72);
             this.panel_gain.TabIndex = 6;
             // 
             // label_gainMax
             // 
             this.label_gainMax.AutoSize = true;
             this.label_gainMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_gainMax.Location = new System.Drawing.Point(57, 41);
+            this.label_gainMax.Location = new System.Drawing.Point(32, 40);
             this.label_gainMax.Name = "label_gainMax";
             this.label_gainMax.Size = new System.Drawing.Size(25, 12);
             this.label_gainMax.TabIndex = 15;
@@ -337,7 +355,7 @@ namespace simple_live_windows_forms
             // 
             this.label_gainMin.AutoSize = true;
             this.label_gainMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_gainMin.Location = new System.Drawing.Point(15, 41);
+            this.label_gainMin.Location = new System.Drawing.Point(1, 41);
             this.label_gainMin.Name = "label_gainMin";
             this.label_gainMin.Size = new System.Drawing.Size(25, 12);
             this.label_gainMin.TabIndex = 14;
@@ -345,7 +363,7 @@ namespace simple_live_windows_forms
             // 
             // button_triger
             // 
-            this.button_triger.Location = new System.Drawing.Point(628, 457);
+            this.button_triger.Location = new System.Drawing.Point(564, 439);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(93, 23);
             this.button_triger.TabIndex = 10;
@@ -360,16 +378,16 @@ namespace simple_live_windows_forms
             this.panel1.Controls.Add(this.checkBox_exposurTimeMax);
             this.panel1.Controls.Add(this.numericUpDown_exposureTime);
             this.panel1.Controls.Add(this.label_exposureTime);
-            this.panel1.Location = new System.Drawing.Point(219, 440);
+            this.panel1.Location = new System.Drawing.Point(133, 440);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(113, 57);
+            this.panel1.Size = new System.Drawing.Size(120, 72);
             this.panel1.TabIndex = 11;
             // 
             // label_exposureTimeMax
             // 
             this.label_exposureTimeMax.AutoSize = true;
             this.label_exposureTimeMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_exposureTimeMax.Location = new System.Drawing.Point(49, 42);
+            this.label_exposureTimeMax.Location = new System.Drawing.Point(40, 37);
             this.label_exposureTimeMax.Name = "label_exposureTimeMax";
             this.label_exposureTimeMax.Size = new System.Drawing.Size(25, 12);
             this.label_exposureTimeMax.TabIndex = 17;
@@ -379,7 +397,7 @@ namespace simple_live_windows_forms
             // 
             this.label_exposureTimeMin.AutoSize = true;
             this.label_exposureTimeMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_exposureTimeMin.Location = new System.Drawing.Point(7, 42);
+            this.label_exposureTimeMin.Location = new System.Drawing.Point(2, 37);
             this.label_exposureTimeMin.Name = "label_exposureTimeMin";
             this.label_exposureTimeMin.Size = new System.Drawing.Size(25, 12);
             this.label_exposureTimeMin.TabIndex = 16;
@@ -390,7 +408,7 @@ namespace simple_live_windows_forms
             this.checkBox_exposurTimeMax.AutoSize = true;
             this.checkBox_exposurTimeMax.Checked = true;
             this.checkBox_exposurTimeMax.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_exposurTimeMax.Location = new System.Drawing.Point(62, 22);
+            this.checkBox_exposurTimeMax.Location = new System.Drawing.Point(6, 52);
             this.checkBox_exposurTimeMax.Name = "checkBox_exposurTimeMax";
             this.checkBox_exposurTimeMax.Size = new System.Drawing.Size(45, 17);
             this.checkBox_exposurTimeMax.TabIndex = 10;
@@ -401,7 +419,7 @@ namespace simple_live_windows_forms
             // numericUpDown_exposureTime
             // 
             this.numericUpDown_exposureTime.Enabled = false;
-            this.numericUpDown_exposureTime.Location = new System.Drawing.Point(6, 20);
+            this.numericUpDown_exposureTime.Location = new System.Drawing.Point(6, 17);
             this.numericUpDown_exposureTime.Name = "numericUpDown_exposureTime";
             this.numericUpDown_exposureTime.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown_exposureTime.TabIndex = 8;
@@ -410,7 +428,7 @@ namespace simple_live_windows_forms
             // label_exposureTime
             // 
             this.label_exposureTime.AutoSize = true;
-            this.label_exposureTime.Location = new System.Drawing.Point(2, 5);
+            this.label_exposureTime.Location = new System.Drawing.Point(2, 2);
             this.label_exposureTime.Name = "label_exposureTime";
             this.label_exposureTime.Size = new System.Drawing.Size(96, 13);
             this.label_exposureTime.TabIndex = 7;
@@ -423,16 +441,16 @@ namespace simple_live_windows_forms
             this.panel2.Controls.Add(this.checkBox_frameRateMax);
             this.panel2.Controls.Add(this.numericUpDown_frameRate);
             this.panel2.Controls.Add(this.label_frameRate);
-            this.panel2.Location = new System.Drawing.Point(104, 440);
+            this.panel2.Location = new System.Drawing.Point(63, 440);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(113, 57);
+            this.panel2.Size = new System.Drawing.Size(71, 72);
             this.panel2.TabIndex = 12;
             // 
             // label_frameRateMax
             // 
             this.label_frameRateMax.AutoSize = true;
             this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateMax.Location = new System.Drawing.Point(48, 42);
+            this.label_frameRateMax.Location = new System.Drawing.Point(39, 35);
             this.label_frameRateMax.Name = "label_frameRateMax";
             this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
             this.label_frameRateMax.TabIndex = 17;
@@ -442,7 +460,7 @@ namespace simple_live_windows_forms
             // 
             this.label_frameRateMin.AutoSize = true;
             this.label_frameRateMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateMin.Location = new System.Drawing.Point(6, 42);
+            this.label_frameRateMin.Location = new System.Drawing.Point(0, 35);
             this.label_frameRateMin.Name = "label_frameRateMin";
             this.label_frameRateMin.Size = new System.Drawing.Size(25, 12);
             this.label_frameRateMin.TabIndex = 16;
@@ -451,7 +469,7 @@ namespace simple_live_windows_forms
             // checkBox_frameRateMax
             // 
             this.checkBox_frameRateMax.AutoSize = true;
-            this.checkBox_frameRateMax.Location = new System.Drawing.Point(65, 22);
+            this.checkBox_frameRateMax.Location = new System.Drawing.Point(3, 50);
             this.checkBox_frameRateMax.Name = "checkBox_frameRateMax";
             this.checkBox_frameRateMax.Size = new System.Drawing.Size(45, 17);
             this.checkBox_frameRateMax.TabIndex = 9;
@@ -461,7 +479,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_frameRate
             // 
-            this.numericUpDown_frameRate.Location = new System.Drawing.Point(5, 20);
+            this.numericUpDown_frameRate.Location = new System.Drawing.Point(5, 15);
             this.numericUpDown_frameRate.Name = "numericUpDown_frameRate";
             this.numericUpDown_frameRate.Size = new System.Drawing.Size(59, 20);
             this.numericUpDown_frameRate.TabIndex = 8;
@@ -475,7 +493,7 @@ namespace simple_live_windows_forms
             // label_frameRate
             // 
             this.label_frameRate.AutoSize = true;
-            this.label_frameRate.Location = new System.Drawing.Point(7, 5);
+            this.label_frameRate.Location = new System.Drawing.Point(7, 1);
             this.label_frameRate.Name = "label_frameRate";
             this.label_frameRate.Size = new System.Drawing.Size(57, 13);
             this.label_frameRate.TabIndex = 7;
@@ -496,9 +514,9 @@ namespace simple_live_windows_forms
             this.panel3.Controls.Add(this.label_x);
             this.panel3.Controls.Add(this.label_position);
             this.panel3.Controls.Add(this.label_sumMax);
-            this.panel3.Location = new System.Drawing.Point(338, 440);
+            this.panel3.Location = new System.Drawing.Point(254, 440);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(203, 57);
+            this.panel3.Size = new System.Drawing.Size(203, 72);
             this.panel3.TabIndex = 13;
             // 
             // label_ySumMax
@@ -573,7 +591,7 @@ namespace simple_live_windows_forms
             // 
             this.checkBox_rot180.AutoSize = true;
             this.checkBox_rot180.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox_rot180.Location = new System.Drawing.Point(82, 2);
+            this.checkBox_rot180.Location = new System.Drawing.Point(62, 55);
             this.checkBox_rot180.Name = "checkBox_rot180";
             this.checkBox_rot180.Size = new System.Drawing.Size(50, 16);
             this.checkBox_rot180.TabIndex = 13;
@@ -619,7 +637,7 @@ namespace simple_live_windows_forms
             // labelCounter
             // 
             this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(561, 485);
+            this.labelCounter.Location = new System.Drawing.Point(479, 496);
             this.labelCounter.Name = "labelCounter";
             this.labelCounter.Size = new System.Drawing.Size(13, 13);
             this.labelCounter.TabIndex = 14;
@@ -627,7 +645,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_bufferSize
             // 
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(727, 478);
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(663, 455);
             this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -650,7 +668,7 @@ namespace simple_live_windows_forms
             // label_bufferSize
             // 
             this.label_bufferSize.AutoSize = true;
-            this.label_bufferSize.Location = new System.Drawing.Point(726, 464);
+            this.label_bufferSize.Location = new System.Drawing.Point(663, 440);
             this.label_bufferSize.Name = "label_bufferSize";
             this.label_bufferSize.Size = new System.Drawing.Size(56, 13);
             this.label_bufferSize.TabIndex = 16;
@@ -658,7 +676,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_pictureBoxTimeDecimation
             // 
-            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(792, 452);
+            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(724, 455);
             this.numericUpDown_pictureBoxTimeDecimation.Minimum = new decimal(new int[] {
             1,
             0,
@@ -676,7 +694,7 @@ namespace simple_live_windows_forms
             // label_subsample
             // 
             this.label_subsample.AutoSize = true;
-            this.label_subsample.Location = new System.Drawing.Point(791, 439);
+            this.label_subsample.Location = new System.Drawing.Point(725, 440);
             this.label_subsample.Name = "label_subsample";
             this.label_subsample.Size = new System.Drawing.Size(33, 13);
             this.label_subsample.TabIndex = 18;
@@ -684,7 +702,7 @@ namespace simple_live_windows_forms
             // 
             // button_stopTriger
             // 
-            this.button_stopTriger.Location = new System.Drawing.Point(628, 479);
+            this.button_stopTriger.Location = new System.Drawing.Point(564, 462);
             this.button_stopTriger.Name = "button_stopTriger";
             this.button_stopTriger.Size = new System.Drawing.Size(93, 23);
             this.button_stopTriger.TabIndex = 19;
@@ -695,15 +713,62 @@ namespace simple_live_windows_forms
             // label_fps
             // 
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(592, 484);
+            this.label_fps.Location = new System.Drawing.Point(518, 495);
             this.label_fps.Name = "label_fps";
             this.label_fps.Size = new System.Drawing.Size(31, 13);
             this.label_fps.TabIndex = 20;
             this.label_fps.Text = "xxfps";
             // 
+            // label_comPortStatus
+            // 
+            this.label_comPortStatus.AutoSize = true;
+            this.label_comPortStatus.Location = new System.Drawing.Point(772, 444);
+            this.label_comPortStatus.Name = "label_comPortStatus";
+            this.label_comPortStatus.Size = new System.Drawing.Size(57, 13);
+            this.label_comPortStatus.TabIndex = 22;
+            this.label_comPortStatus.Text = "COM state";
+            this.label_comPortStatus.Click += new System.EventHandler(this.label_comPortStatus_Click);
+            // 
+            // label_recivedCommand
+            // 
+            this.label_recivedCommand.AutoSize = true;
+            this.label_recivedCommand.Location = new System.Drawing.Point(772, 464);
+            this.label_recivedCommand.Name = "label_recivedCommand";
+            this.label_recivedCommand.Size = new System.Drawing.Size(96, 13);
+            this.label_recivedCommand.TabIndex = 23;
+            this.label_recivedCommand.Text = "Recived command";
+            // 
+            // numericUpDown_LED
+            // 
+            this.numericUpDown_LED.Location = new System.Drawing.Point(782, 494);
+            this.numericUpDown_LED.Name = "numericUpDown_LED";
+            this.numericUpDown_LED.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown_LED.TabIndex = 24;
+            this.numericUpDown_LED.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDown_LED.ValueChanged += new System.EventHandler(this.numericUpDown_LED_ValueChanged);
+            // 
+            // checkBox_LED
+            // 
+            this.checkBox_LED.AutoSize = true;
+            this.checkBox_LED.Location = new System.Drawing.Point(734, 495);
+            this.checkBox_LED.Name = "checkBox_LED";
+            this.checkBox_LED.Size = new System.Drawing.Size(47, 17);
+            this.checkBox_LED.TabIndex = 25;
+            this.checkBox_LED.Text = "LED";
+            this.checkBox_LED.UseVisualStyleBackColor = true;
+            this.checkBox_LED.CheckedChanged += new System.EventHandler(this.checkBox_LED_CheckedChanged);
+            // 
             // FormWindow
             // 
-            this.ClientSize = new System.Drawing.Size(880, 499);
+            this.ClientSize = new System.Drawing.Size(880, 514);
+            this.Controls.Add(this.checkBox_LED);
+            this.Controls.Add(this.numericUpDown_LED);
+            this.Controls.Add(this.label_recivedCommand);
+            this.Controls.Add(this.label_comPortStatus);
             this.Controls.Add(this.label_fps);
             this.Controls.Add(this.button_stopTriger);
             this.Controls.Add(this.label_subsample);
@@ -740,6 +805,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1182,6 +1248,131 @@ namespace simple_live_windows_forms
         private void button_stopTriger_Click(object sender, EventArgs e)
         {
             buttonStop.PerformClick();
+        }
+
+
+
+        private Label label_comPortStatus;
+
+        private void label_comPortStatus_Click(object sender, EventArgs e)
+        {
+            label_comPortStatus.Text = "Connecting";
+
+            label_comPortStatus.ForeColor = System.Drawing.Color.Gray;
+
+            ArrayComPortsNames = SerialPort.GetPortNames();
+
+            if (!(comPort == null))
+            {
+                if (comPort.IsOpen)
+                {
+                    comPort.Close();
+                    Thread.Sleep(3000);
+                }
+
+            }
+
+
+            foreach (string port in ArrayComPortsNames)
+            {
+
+
+
+                Debug.WriteLine(port);
+                comPort = new SerialPort(port, 9600);
+
+                comPort.Open();
+
+                comPort.WriteTimeout = 500;
+                comPort.ReadTimeout = 2000;
+
+                comPort.WriteLine("ok?");
+
+
+
+                try
+                {
+                    string message = comPort.ReadLine();
+                    Debug.WriteLine(message);
+                    if (message.Trim() == "ok")
+                    {
+                        label_comPortStatus.Text = port;
+
+                        label_comPortStatus.ForeColor = System.Drawing.Color.Green;
+
+                        comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+
+
+                    }
+                    else
+                    {
+                        comPort.Close();
+                    }
+
+                }
+                catch (TimeoutException)
+                {
+                    Debug.WriteLine("time out");
+                    comPort.Close();
+                }
+
+
+
+
+            }
+
+            if (label_comPortStatus.Text == "Connecting")
+            {
+                label_comPortStatus.Text = "NA";
+
+                label_comPortStatus.ForeColor = System.Drawing.Color.Red;
+            }
+
+        }
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadExisting();
+
+            label_recivedCommand.BeginInvoke((MethodInvoker)delegate { label_recivedCommand.Text = indata; });
+        }
+
+        private Label label_recivedCommand;
+
+        public void ComTrigerOn()
+        {
+           
+        }
+
+        public void ComTrigerOff()
+        {
+
+        }
+
+        private NumericUpDown numericUpDown_LED;
+        private CheckBox checkBox_LED;
+
+        private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_LED.Checked)
+            {
+
+                comPort.WriteLine("l" + numericUpDown_LED.Value.ToString());
+            }
+            else
+            {
+                comPort.WriteLine("loff");
+            }
+        }
+
+        private void numericUpDown_LED_ValueChanged(object sender, EventArgs e)
+        {
+            if (checkBox_LED.Checked)
+            {
+
+                comPort.WriteLine("l" + numericUpDown_LED.Value.ToString());
+            }
         }
     }
 }
