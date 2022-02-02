@@ -39,6 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\CMakeLists.txt">
       <Link>CMakeLists.txt</Link>
     </None>
@@ -81,6 +82,9 @@
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -89,6 +93,7 @@
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Core">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -101,6 +106,8 @@
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -133,6 +140,7 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('packages\Accord.3.8.0\build\Accord.targets')" />
     <Import Project="packages\Accord.Video.FFMPEG.x64.3.8.0\build\Accord.Video.FFMPEG.x64.targets" Condition="Exists('packages\Accord.Video.FFMPEG.x64.3.8.0\build\Accord.Video.FFMPEG.x64.targets')" />
+    <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <PostBuildEvent>echo Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of ids_peak_dotnet DLLs to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll to output dir.	Post build copy of ids_peak_ipl_dotnet DLLs to output dir.
@@ -258,5 +266,6 @@ if %errorlevel% neq 0 goto :VCEnd
     </PropertyGroup>
     <Error Condition="!Exists('packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Accord.3.8.0\build\Accord.targets'))" />
     <Error Condition="!Exists('packages\Accord.Video.FFMPEG.x64.3.8.0\build\Accord.Video.FFMPEG.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Accord.Video.FFMPEG.x64.3.8.0\build\Accord.Video.FFMPEG.x64.targets'))" />
+    <Error Condition="!Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.1\build\System.Text.Json.targets'))" />
   </Target>
 </Project>

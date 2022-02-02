@@ -35,6 +35,7 @@ using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+using System.Threading;
 
 namespace simple_live_windows_forms
 {
@@ -47,6 +48,9 @@ namespace simple_live_windows_forms
         // Event which is raised if the counters has changed
         public delegate void CountersUpdatedEventHandler(object sender, uint frameCounter, uint errorCounter);
         public event CountersUpdatedEventHandler CountersUpdated;
+
+        public delegate void ComTrigerOnEventHandler(object sender, EventArgs args);
+        public event ComTrigerOnEventHandler ComTrigerOn;
 
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
@@ -68,6 +72,7 @@ namespace simple_live_windows_forms
         private uint frameCounter;
         private uint errorCounter;
         public ColorPalette colorPalette_grayscale = GetGrayScalePalette();
+        private bool triger_first_time;
 
         public AcquisitionWorker()
         {
@@ -89,6 +94,16 @@ namespace simple_live_windows_forms
                 dataStream.StartAcquisition();
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("AcquisitionStart").Execute();
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("AcquisitionStart").WaitUntilDone();
+
+                triger_first_time = false;
+
+                if (formWindow.is_triger)
+                {
+                    ComTrigerOn(this, EventArgs.Empty);
+                    Thread.Sleep(100);
+                    triger_first_time = true;
+                }
+
             }
             catch (Exception e)
             {
@@ -105,7 +120,16 @@ namespace simple_live_windows_forms
                 try
                 {
                     // Get buffer from device's datastream
-                    buffer = dataStream.WaitForFinishedBuffer(5000);
+                    if (triger_first_time)
+                    {
+                        buffer = dataStream.WaitForFinishedBuffer(5000);
+                        triger_first_time = false;
+                    }
+                    else
+                    {
+                        buffer = dataStream.WaitForFinishedBuffer(1200);
+                    }
+
 
                     // Create IDS peak IPL
                     iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(), buffer.Size(), buffer.Width(), buffer.Height());
@@ -132,7 +156,7 @@ namespace simple_live_windows_forms
 
                     //image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format8bppIndexed, iplImg.Data());
                     //image.Palette = colorPalette_grayscale;
-                    image = new Bitmap(width, height, stride,System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
+                    image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
 
                     // Create a deep copy of the Bitmap, so it doesn't use memory of the IDS peak IPL Image.
                     // Warning: Don't use image.Clone(), because it only creates a shallow copy!
@@ -148,7 +172,7 @@ namespace simple_live_windows_forms
                         Debug.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
                         ImageReceived(this, imageCopy);
                     }
-                    else 
+                    else
                     {
                         Debug.WriteLine("--- [AcquisitionWorker] Imge is null");
                     }

@@ -37,6 +37,10 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Globalization;
 using System.IO.Ports;
+using Newtonsoft.Json;
+
+
+
 
 namespace simple_live_windows_forms
 {
@@ -76,6 +80,7 @@ namespace simple_live_windows_forms
 
         string[] ArrayComPortsNames = null;
         SerialPort comPort = null;
+        private bool stopTrigerClicked = false;
 
 
         public FormWindow()
@@ -176,7 +181,27 @@ namespace simple_live_windows_forms
 
         private void backEnd_MessageBoxTrigger(object sender, String messageTitle, String messageText)
         {
-            MessageBox.Show(messageText, messageTitle);
+
+            if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout") & stopTrigerClicked)
+            {
+
+                buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
+                
+                stopTrigerClicked = false;
+            }
+            else 
+            {
+                if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout"))
+                {
+                    Debug.WriteLine(messageTitle + messageText);
+                }
+                else
+                {
+                    MessageBox.Show(messageText, messageTitle);
+                }
+
+                
+            }
         }
 
         private void FormWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -253,6 +278,8 @@ namespace simple_live_windows_forms
             this.label_recivedCommand = new System.Windows.Forms.Label();
             this.numericUpDown_LED = new System.Windows.Forms.NumericUpDown();
             this.checkBox_LED = new System.Windows.Forms.CheckBox();
+            this.button_save = new System.Windows.Forms.Button();
+            this.button_load = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -286,7 +313,6 @@ namespace simple_live_windows_forms
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
             this.textBox_dataname.TabIndex = 2;
             this.textBox_dataname.Text = "dataset_name";
-            this.textBox_dataname.TextChanged += new System.EventHandler(this.textBox_dataname_TextChanged);
             // 
             // buttonStart
             // 
@@ -300,6 +326,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
+            this.buttonStop.Enabled = false;
             this.buttonStop.Location = new System.Drawing.Point(461, 464);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
@@ -378,9 +405,9 @@ namespace simple_live_windows_forms
             this.panel1.Controls.Add(this.checkBox_exposurTimeMax);
             this.panel1.Controls.Add(this.numericUpDown_exposureTime);
             this.panel1.Controls.Add(this.label_exposureTime);
-            this.panel1.Location = new System.Drawing.Point(133, 440);
+            this.panel1.Location = new System.Drawing.Point(152, 440);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(120, 72);
+            this.panel1.Size = new System.Drawing.Size(101, 72);
             this.panel1.TabIndex = 11;
             // 
             // label_exposureTimeMax
@@ -443,7 +470,7 @@ namespace simple_live_windows_forms
             this.panel2.Controls.Add(this.label_frameRate);
             this.panel2.Location = new System.Drawing.Point(63, 440);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(71, 72);
+            this.panel2.Size = new System.Drawing.Size(89, 72);
             this.panel2.TabIndex = 12;
             // 
             // label_frameRateMax
@@ -702,6 +729,7 @@ namespace simple_live_windows_forms
             // 
             // button_stopTriger
             // 
+            this.button_stopTriger.Enabled = false;
             this.button_stopTriger.Location = new System.Drawing.Point(564, 462);
             this.button_stopTriger.Name = "button_stopTriger";
             this.button_stopTriger.Size = new System.Drawing.Size(93, 23);
@@ -762,9 +790,31 @@ namespace simple_live_windows_forms
             this.checkBox_LED.UseVisualStyleBackColor = true;
             this.checkBox_LED.CheckedChanged += new System.EventHandler(this.checkBox_LED_CheckedChanged);
             // 
+            // button_save
+            // 
+            this.button_save.Location = new System.Drawing.Point(836, 477);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(40, 21);
+            this.button_save.TabIndex = 26;
+            this.button_save.Text = "save";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // button_load
+            // 
+            this.button_load.Location = new System.Drawing.Point(836, 496);
+            this.button_load.Name = "button_load";
+            this.button_load.Size = new System.Drawing.Size(40, 19);
+            this.button_load.TabIndex = 27;
+            this.button_load.Text = "load";
+            this.button_load.UseVisualStyleBackColor = true;
+            this.button_load.Click += new System.EventHandler(this.button_load_Click);
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 514);
+            this.Controls.Add(this.button_load);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.checkBox_LED);
             this.Controls.Add(this.numericUpDown_LED);
             this.Controls.Add(this.label_recivedCommand);
@@ -823,7 +873,7 @@ namespace simple_live_windows_forms
             numericUpDown_frameRate.Maximum = frameRateHardMax;
             numericUpDown_frameRate.Minimum = 1.0m;
             numericUpDown_frameRate.Increment = 1m;
-            numericUpDown_frameRate.Value = 36m;
+            numericUpDown_frameRate.Value = 25m;
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
 
@@ -897,23 +947,8 @@ namespace simple_live_windows_forms
 
 
 
-        private void labelPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private TextBox textBox_dataname;
 
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_dataname_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
   
 
@@ -923,14 +958,21 @@ namespace simple_live_windows_forms
         private void buttonStart_Click(object sender, EventArgs e)
         {
             is_triger = false;
+            buttonStart.Enabled = false;
+            buttonStop.Enabled = true;
+            button_triger.Enabled = true;
+            button_stopTriger.Enabled = false;
+
+
             myStart();
+
 
         }
 
         private void myStart()
         {
-            
-            
+
+            stopTrigerClicked = false;
 
             numericUpDown_x.Enabled = false;
             numericUpDown_w.Enabled = false;
@@ -938,8 +980,6 @@ namespace simple_live_windows_forms
             numericUpDown_h.Enabled = false;
             //checkBox_rot180.Enabled = false;
 
-            buttonStart.Enabled = false;
-            buttonStop.Enabled = true;
 
 
             if (is_triger)
@@ -959,7 +999,7 @@ namespace simple_live_windows_forms
                 time = DateTime.Now;
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
 
-                filename = Path.Combine(path, time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".avi");
+                filename = Path.Combine(path, textBox_dataname.Text + '_' + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".avi");
 
                 // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 
@@ -981,6 +1021,7 @@ namespace simple_live_windows_forms
                 backEnd.ImageReceived += backEnd_ImageReceived;
                 backEnd.CountersUpdated += backEnd_CountersUpdated;
                 backEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
+                backEnd.ComTrigerOn += backEnd_ComTrigerOn;
 
                 if (backEnd.Start())
                 {
@@ -1002,7 +1043,15 @@ namespace simple_live_windows_forms
         private void buttonStop_Click(object sender, EventArgs e)
         {
             buttonStop.Enabled = false;
+            buttonStart.Enabled = true;
+            button_triger.Enabled = true;
+            button_stopTriger.Enabled = false;
 
+            myStop();
+        }
+
+        private void myStop()
+        {
             numericUpDown_x.Enabled = true;
             numericUpDown_w.Enabled = true;
             numericUpDown_y.Enabled = true;
@@ -1010,12 +1059,14 @@ namespace simple_live_windows_forms
             //checkBox_rot180.Enabled = true;
 
             backEnd.Stop();
-            buttonStart.Enabled = true;
+
 
             if (is_triger)
             {
                 writer.Close();
             }
+
+
         }
 
         private Label label_gain;
@@ -1050,19 +1101,22 @@ namespace simple_live_windows_forms
             }
 
 
-            if (backEnd.IsActive())
+            if (!(backEnd == null))
             {
+                if (backEnd.IsActive())
+                {
 
-                frameRateTmp = numericUpDown_frameRate.Value;
-                numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
-                backEnd.adjustParam("AcquisitionFrameRate");
-                numericUpDown_frameRate.Value = frameRateTmp;
+                    frameRateTmp = numericUpDown_frameRate.Value;
+                    numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
+                    backEnd.adjustParam("AcquisitionFrameRate");
+                    numericUpDown_frameRate.Value = frameRateTmp;
 
-                numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
-                numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+                    numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+                    numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
-                backEnd.adjustParam("ExposureTime");
-                backEnd.adjustParam("AcquisitionFrameRate");
+                    backEnd.adjustParam("ExposureTime");
+                    backEnd.adjustParam("AcquisitionFrameRate");
+                }
 
             }
          }
@@ -1075,7 +1129,14 @@ namespace simple_live_windows_forms
 
         private void numericUpDown_gain_ValueChanged(object sender, EventArgs e)
         {
-            backEnd.adjustParam("Gain");
+            if (!(backEnd == null))
+            {
+                if (backEnd.IsActive())
+                {
+                    backEnd.adjustParam("Gain");
+                }
+            }
+
         }
 
         private Label label_gainMax;
@@ -1106,22 +1167,24 @@ namespace simple_live_windows_forms
 
             }
 
-
-            if (backEnd.IsActive())
+            if (!(backEnd == null))
             {
-                frameRateTmp = numericUpDown_frameRate.Value;
-                numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
-                backEnd.adjustParam("AcquisitionFrameRate");
-                numericUpDown_frameRate.Value = frameRateTmp;
+                if (backEnd.IsActive())
+                {
+                    frameRateTmp = numericUpDown_frameRate.Value;
+                    numericUpDown_frameRate.Value = numericUpDown_frameRate.Minimum;
+                    backEnd.adjustParam("AcquisitionFrameRate");
+                    numericUpDown_frameRate.Value = frameRateTmp;
 
 
-                numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
-                numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+                    numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+                    numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
 
 
-                backEnd.adjustParam("ExposureTime");
-                backEnd.adjustParam("AcquisitionFrameRate");
+                    backEnd.adjustParam("ExposureTime");
+                    backEnd.adjustParam("AcquisitionFrameRate");
 
+                }
             }
 
 
@@ -1235,6 +1298,18 @@ namespace simple_live_windows_forms
 
         private void button_triger_Click(object sender, EventArgs e)
         {
+
+            if (buttonStart.Enabled == false)
+            {
+                myStop();
+            }
+
+
+            buttonStart.Enabled = false;
+            buttonStop.Enabled = false;
+            button_triger.Enabled = false;
+            button_stopTriger.Enabled = true;
+
             is_triger = true;
             myStart();
         }
@@ -1247,7 +1322,13 @@ namespace simple_live_windows_forms
 
         private void button_stopTriger_Click(object sender, EventArgs e)
         {
-            buttonStop.PerformClick();
+            buttonStart.Enabled = true;
+            buttonStop.Enabled = false;
+            button_triger.Enabled = true;
+            button_stopTriger.Enabled = false;
+
+            stopTrigerClicked = true;
+            ComTrigerOff();
         }
 
 
@@ -1302,7 +1383,7 @@ namespace simple_live_windows_forms
 
                         comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
-
+                        checkBox_LED_CheckedChanged(null, EventArgs.Empty);
                     }
                     else
                     {
@@ -1342,13 +1423,19 @@ namespace simple_live_windows_forms
 
         public void ComTrigerOn()
         {
-           
+            comPort.WriteLine("t" + numericUpDown_frameRate.Value.ToString());
         }
 
         public void ComTrigerOff()
         {
-
+            comPort.WriteLine("toff");
         }
+
+        public void backEnd_ComTrigerOn(object sender,EventArgs args)
+        {
+            ComTrigerOn();
+        }
+
 
         private NumericUpDown numericUpDown_LED;
         private CheckBox checkBox_LED;
@@ -1373,6 +1460,79 @@ namespace simple_live_windows_forms
 
                 comPort.WriteLine("l" + numericUpDown_LED.Value.ToString());
             }
+        }
+
+        private Button button_save;
+        private Button button_load;
+
+        public class JsonData
+        {
+            public decimal gain { get; set; }
+            public decimal frame_rate { get; set; }
+            public decimal exposure_time { get; set; }
+            public decimal x { get; set; }
+            public decimal y { get; set; }
+            public decimal w { get; set; }
+            public decimal h { get; set; }
+            public decimal led { get; set; }
+            public decimal time_decimation { get; set; }
+            public decimal buffer_size { get; set; }
+            public bool rot180 { get; set; }
+            
+        }
+
+
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            JsonData jsonData = new JsonData();
+
+            jsonData.gain = numericUpDown_gain.Value;
+            jsonData.frame_rate = numericUpDown_frameRate.Value;
+            jsonData.exposure_time = numericUpDown_exposureTime.Value;
+            jsonData.x = numericUpDown_x.Value;
+            jsonData.y = numericUpDown_y.Value;
+            jsonData.w = numericUpDown_w.Value;
+            jsonData.h = numericUpDown_h.Value;
+            jsonData.led = numericUpDown_LED.Value;
+            jsonData.time_decimation = numericUpDown_pictureBoxTimeDecimation.Value;
+            jsonData.buffer_size = numericUpDown_bufferSize.Value;
+            jsonData.rot180 = checkBox_rot180.Checked;
+
+            string json = JsonConvert.SerializeObject(jsonData);
+            File.WriteAllText("settings.json", json);
+
+            
+        }
+
+        private void button_load_Click(object sender, EventArgs e)
+        {
+            string json_loaded = File.ReadAllText("settings.json");
+
+            JsonData jsonData_loaded = JsonConvert.DeserializeObject<JsonData>(json_loaded);
+
+            numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+
+            numericUpDown_frameRate.Maximum = Decimal.Round(1000 / (jsonData_loaded.exposure_time + exposureSafeMargin));
+            numericUpDown_exposureTime.Maximum = Decimal.Round(1000 / jsonData_loaded.frame_rate - exposureSafeMargin, 1);
+
+
+            numericUpDown_exposureTime.Value = numericUpDown_exposureTime.Minimum;
+            numericUpDown_gain.Value = jsonData_loaded.gain;
+            numericUpDown_frameRate.Value = jsonData_loaded.frame_rate;
+            numericUpDown_exposureTime.Value = jsonData_loaded.exposure_time;
+            numericUpDown_x.Value = jsonData_loaded.x;
+            numericUpDown_y.Value = jsonData_loaded.y;
+            numericUpDown_w.Value = jsonData_loaded.w;
+            numericUpDown_h.Value = jsonData_loaded.h;
+            numericUpDown_LED.Value = jsonData_loaded.led;
+            numericUpDown_pictureBoxTimeDecimation.Value = jsonData_loaded.time_decimation;
+            numericUpDown_bufferSize.Value = jsonData_loaded.buffer_size;
+            checkBox_rot180.Checked = jsonData_loaded.rot180;
+
+            numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
         }
     }
 }

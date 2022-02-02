@@ -42,6 +42,10 @@ namespace simple_live_windows_forms
         public delegate void CountersUpdatedEventHandler(object sender, uint frameCounter, uint errorCounter);
         public event CountersUpdatedEventHandler CountersUpdated;
 
+        public delegate void ComTrigerOnEventHandler(object sender, EventArgs args);
+        public event ComTrigerOnEventHandler ComTrigerOn;
+
+
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
         public event MessageBoxTriggerEventHandler MessageBoxTrigger;
@@ -86,6 +90,7 @@ namespace simple_live_windows_forms
                 acquisitionWorker.ImageReceived += acquisitionWorker_ImageReceived;
                 acquisitionWorker.CountersUpdated += acquisitionWorker_CountersUpdated;
                 acquisitionWorker.MessageBoxTrigger += acquisitionWorker_MessageBoxTrigger;
+                acquisitionWorker.ComTrigerOn += acquisitionWorker_ComTrigerOn;
 
 
                 // Initialize peak library
@@ -374,6 +379,12 @@ namespace simple_live_windows_forms
             CountersUpdated(sender, frameCounter, errorCounter);
         }
 
+        private void acquisitionWorker_ComTrigerOn(object sender, EventArgs args)
+        {
+            ComTrigerOn(sender, args);
+        }
+
+        
 
         private void acquisitionWorker_MessageBoxTrigger(object sender, String messageTitle, String messageText)
         {
