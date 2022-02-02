@@ -109,9 +109,32 @@ namespace simple_live_windows_forms
 
             Console.WriteLine("--- [FormWindow] Init");
             InitializeComponent();
+
+
             LoadMySetting();
 
+            Thread.Sleep(1000);
+
             label_comPortStatus_Click(null , EventArgs.Empty);
+
+
+            
+
+            backEnd = new BackEnd();
+
+            backEnd.SetWindowForm(this);
+
+            FormClosing += FormWindow_FormClosing;
+
+            backEnd.ImageReceived += backEnd_ImageReceived;
+            backEnd.CountersUpdated += backEnd_CountersUpdated;
+            backEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
+            backEnd.ComTrigerOn += backEnd_ComTrigerOn;
+
+
+            backEnd.OpenDevice();
+
+
 
 
         }
@@ -232,6 +255,9 @@ namespace simple_live_windows_forms
             {
                 backEnd.Stop();
             }
+
+            backEnd.CloseDevice();
+
             if (!(comPort == null))
             {
                 if (comPort.IsOpen)
@@ -1034,16 +1060,7 @@ namespace simple_live_windows_forms
             {
 
                 
-                backEnd = new BackEnd();
 
-                backEnd.SetWindowForm(this);
-
-                FormClosing += FormWindow_FormClosing;
-
-                backEnd.ImageReceived += backEnd_ImageReceived;
-                backEnd.CountersUpdated += backEnd_CountersUpdated;
-                backEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
-                backEnd.ComTrigerOn += backEnd_ComTrigerOn;
 
                 if (backEnd.Start())
                 {
@@ -1441,7 +1458,7 @@ namespace simple_live_windows_forms
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadExisting();
 
-            label_recivedCommand.BeginInvoke((MethodInvoker)delegate { label_recivedCommand.Text = indata; });
+            // label_recivedCommand.BeginInvoke((MethodInvoker)delegate { label_recivedCommand.Text = indata; });
         }
 
         private Label label_recivedCommand;

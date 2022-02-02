@@ -80,18 +80,6 @@ namespace simple_live_windows_forms
 
             try
             {
-                // Create acquisition worker thread that waits for new images from the camera
-                acquisitionWorker = new AcquisitionWorker();
-
-                acquisitionThread = new Thread(new ThreadStart(acquisitionWorker.Start));
-                acquisitionThread.Name = "acquisitionThread";
-
-
-                acquisitionWorker.ImageReceived += acquisitionWorker_ImageReceived;
-                acquisitionWorker.CountersUpdated += acquisitionWorker_CountersUpdated;
-                acquisitionWorker.MessageBoxTrigger += acquisitionWorker_MessageBoxTrigger;
-                acquisitionWorker.ComTrigerOn += acquisitionWorker_ComTrigerOn;
-
 
                 // Initialize peak library
                 peak.Library.Initialize();
@@ -105,10 +93,153 @@ namespace simple_live_windows_forms
         public bool Start()
         {
             Console.WriteLine("--- [BackEnd] Start");
-            if (!OpenDevice())
+
+            acquisitionWorker = new AcquisitionWorker();
+
+            acquisitionThread = new Thread(new ThreadStart(acquisitionWorker.Start));
+            acquisitionThread.Name = "acquisitionThread";
+
+
+            acquisitionWorker.ImageReceived += acquisitionWorker_ImageReceived;
+            acquisitionWorker.CountersUpdated += acquisitionWorker_CountersUpdated;
+            acquisitionWorker.MessageBoxTrigger += acquisitionWorker_MessageBoxTrigger;
+            acquisitionWorker.ComTrigerOn += acquisitionWorker_ComTrigerOn;
+
+
+            if (device != null)
             {
-                return false;
+                // Check if any datastreams are available
+                var dataStreams = device.DataStreams();
+
+                if (!dataStreams.Any())
+                {
+                    Console.WriteLine("--- [BackEnd] Error: Device has no DataStream");
+                    MessageBoxTrigger(this, "Error", "Device has no DataStream");
+                    return false;
+                }
+
+                // Open standard data stream
+                dataStream = dataStreams[0].OpenDataStream();
+
+                // Get nodemap of remote device for all accesses to the genicam nodemap tree
+                nodeMapRemoteDevice = device.RemoteDevice().NodeMaps()[0];
+
+                // To prepare for untriggered continuous image acquisition, load the default user set if available
+                // and wait until execution is finished
+
+
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("GainSelector").SetCurrentEntry("All");
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").SetValue(decimal.ToDouble(windowForm.numericUpDown_gain.Value));
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("BlackLevel").SetValue(windowForm.blackLevel);
+
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Minimum));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Minimum));
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").SetValue(decimal.ToInt64(windowForm.numericUpDown_x.Value));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").SetValue(decimal.ToInt64(windowForm.numericUpDown_y.Value));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Value));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Value));
+
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Minimum));
+
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(windowForm.numericUpDown_exposureTime.Value) * 1000);
+
+
+                if (windowForm.is_triger)
+                {
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Maximum));
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSource").SetCurrentEntry("Line0");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("FallingEdge");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("TriggerDelay").SetValue(0.0);
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("TriggerDivider").SetValue(1);
+
+                }
+                else
+                {
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value));
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("Off");
+                }
+
+
+
+
+
+                //Console.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
+                //Console.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
+
+                //x_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum();
+                //y_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Minimum();
+                //w_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Minimum();
+                //h_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Minimum();
+
+                //Console.WriteLine("--- [BackEnd] x_min " + x_min.ToString());
+                //Console.WriteLine("--- [BackEnd] y_min " + y_min.ToString());
+                //Console.WriteLine("--- [BackEnd] w_min " + w_min.ToString());
+                //Console.WriteLine("--- [BackEnd] h_min " + h_min.ToString());
+
+                //x_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Maximum();
+                //y_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Maximum();
+                //w_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum();
+                //h_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum();
+
+                //Console.WriteLine("--- [BackEnd] x_max " + x_max.ToString());
+                //Console.WriteLine("--- [BackEnd] y_max " + y_max.ToString());
+                //Console.WriteLine("--- [BackEnd] w_max " + w_max.ToString());
+                //Console.WriteLine("--- [BackEnd] h_max " + h_max.ToString());
+
+
+                //Console.WriteLine("--- [BackEnd] x " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Value().ToString());
+                //Console.WriteLine("--- [BackEnd] y " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Value().ToString());
+                //Console.WriteLine("--- [BackEnd] w " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Value().ToString());
+                //Console.WriteLine("--- [BackEnd] h " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Value().ToString());
+
+
+
+
+                //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseX").SetValue(windowForm.checkBox_rot180.Checked);
+                //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseY").SetValue(windowForm.checkBox_rot180.Checked);
+
+                // Get the payload size for correct buffer allocation
+                UInt32 payloadSize = Convert.ToUInt32(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
+
+                // Get the minimum number of buffers that must be announced
+                //uint bufferCountMax = dataStream.NumBuffersAnnouncedMinRequired();
+
+                UInt32 bufferCountMax = decimal.ToUInt32(windowForm.numericUpDown_bufferSize.Value);
+
+                //Console.WriteLine("--- [BackEnd] min req buffers " +  bufferCountMax.ToString());
+
+
+                
+
+                // Allocate and announce image buffers and queue them
+                for (var bufferCount = 0; bufferCount < bufferCountMax; ++bufferCount)
+                {
+                    buffer = dataStream.AllocAndAnnounceBuffer(payloadSize, IntPtr.Zero);
+                    dataStream.QueueBuffer(buffer);
+                }
+
+                // Configure worker
+                acquisitionWorker.SetDataStream(dataStream);
+                acquisitionWorker.SetNodemapRemoteDevice(nodeMapRemoteDevice);
+                acquisitionWorker.SetFormWindow(windowForm);
             }
+
+
+
+
+
+
 
             // Start thread execution
             acquisitionThread.Start();
@@ -129,10 +260,65 @@ namespace simple_live_windows_forms
                 acquisitionThread.Join();
             }
 
-            CloseDevice();
 
-            // Close peak library
-            peak.Library.Close();
+
+
+            if (device != null)
+            {
+                try
+                {
+                    var remoteNodeMap = device.RemoteDevice().NodeMaps()[0];
+                    remoteNodeMap.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").Execute();
+                    remoteNodeMap.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").WaitUntilDone();
+                    remoteNodeMap.FindNode<peak.core.nodes.IntegerNode>("TLParamsLocked").SetValue(0);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                    MessageBoxTrigger(this, "Exception", e.Message);
+                }
+            }
+
+
+
+ 
+
+
+
+            if (dataStream != null)
+            {
+                try
+                {
+                    dataStream.KillWait();
+                    dataStream.StopAcquisition(peak.core.AcquisitionStopMode.Default);
+                    dataStream.Flush(peak.core.DataStreamFlushMode.DiscardAll);
+
+                    foreach (var buffer in dataStream.AnnouncedBuffers())
+                    {
+                        dataStream.RevokeBuffer(buffer);
+                    }
+
+                    dataStream.Dispose();
+                    acquisitionWorker.SetDataStream(null);
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                    MessageBoxTrigger(this, "Exception", e.Message);
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -178,134 +364,14 @@ namespace simple_live_windows_forms
                     }
                 }
 
-                if (device != null)
-                {
-                    // Check if any datastreams are available
-                    var dataStreams = device.DataStreams();
+                nodeMapRemoteDevice = device.RemoteDevice().NodeMaps()[0];
 
-                    if (!dataStreams.Any())
-                    {
-                        Console.WriteLine("--- [BackEnd] Error: Device has no DataStream");
-                        MessageBoxTrigger(this, "Error", "Device has no DataStream");
-                        return false;
-                    }
-
-                    // Open standard data stream
-                    dataStream = dataStreams[0].OpenDataStream();
-
-                    // Get nodemap of remote device for all accesses to the genicam nodemap tree
-                    nodeMapRemoteDevice = device.RemoteDevice().NodeMaps()[0];
-
-                    // To prepare for untriggered continuous image acquisition, load the default user set if available
-                    // and wait until execution is finished
-                    
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("UserSetSelector").SetCurrentEntry("Default");
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("UserSetLoad").Execute();
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("UserSetLoad").WaitUntilDone();
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("GainSelector").SetCurrentEntry("All");
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").SetValue(decimal.ToDouble(windowForm.numericUpDown_gain.Value));
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("BlackLevel").SetValue(windowForm.blackLevel);
-
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Minimum));
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Minimum));
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").SetValue(decimal.ToInt64(windowForm.numericUpDown_x.Value));
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").SetValue(decimal.ToInt64(windowForm.numericUpDown_y.Value));
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Value));
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Value));
-
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Minimum));
-
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(windowForm.numericUpDown_exposureTime.Value) * 1000);
-
-
-                    if (windowForm.is_triger)
-                    {
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Maximum));
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSource").SetCurrentEntry("Line0");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("FallingEdge");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("TriggerDelay").SetValue(0.0);
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("TriggerDivider").SetValue(1);
-
-                    }
-                    else
-                    {
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value));
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
-                        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("Off");
-                    }
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("UserSetSelector").SetCurrentEntry("Default");
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("UserSetLoad").Execute();
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("UserSetLoad").WaitUntilDone();
 
 
 
-
-
-                    //Console.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
-                    //Console.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
-
-                    //x_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum();
-                    //y_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Minimum();
-                    //w_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Minimum();
-                    //h_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Minimum();
-
-                    //Console.WriteLine("--- [BackEnd] x_min " + x_min.ToString());
-                    //Console.WriteLine("--- [BackEnd] y_min " + y_min.ToString());
-                    //Console.WriteLine("--- [BackEnd] w_min " + w_min.ToString());
-                    //Console.WriteLine("--- [BackEnd] h_min " + h_min.ToString());
-
-                    //x_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Maximum();
-                    //y_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Maximum();
-                    //w_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum();
-                    //h_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum();
-
-                    //Console.WriteLine("--- [BackEnd] x_max " + x_max.ToString());
-                    //Console.WriteLine("--- [BackEnd] y_max " + y_max.ToString());
-                    //Console.WriteLine("--- [BackEnd] w_max " + w_max.ToString());
-                    //Console.WriteLine("--- [BackEnd] h_max " + h_max.ToString());
-
-
-                    //Console.WriteLine("--- [BackEnd] x " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Value().ToString());
-                    //Console.WriteLine("--- [BackEnd] y " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Value().ToString());
-                    //Console.WriteLine("--- [BackEnd] w " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Value().ToString());
-                    //Console.WriteLine("--- [BackEnd] h " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Value().ToString());
-
-
-
-
-
-                    //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseX").SetValue(windowForm.checkBox_rot180.Checked);
-                    //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseY").SetValue(windowForm.checkBox_rot180.Checked);
-
-                    // Get the payload size for correct buffer allocation
-                    UInt32 payloadSize = Convert.ToUInt32(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
-
-                    // Get the minimum number of buffers that must be announced
-                    //uint bufferCountMax = dataStream.NumBuffersAnnouncedMinRequired();
-
-                    UInt32 bufferCountMax = decimal.ToUInt32(windowForm.numericUpDown_bufferSize.Value);
-
-                    //Console.WriteLine("--- [BackEnd] min req buffers " +  bufferCountMax.ToString());
-
-                    // Allocate and announce image buffers and queue them
-                    for (var bufferCount = 0; bufferCount < bufferCountMax; ++bufferCount)
-                    {
-                        buffer = dataStream.AllocAndAnnounceBuffer(payloadSize, IntPtr.Zero);
-                        dataStream.QueueBuffer(buffer);
-                    }
-
-                    // Configure worker
-                    acquisitionWorker.SetDataStream(dataStream);
-                    acquisitionWorker.SetNodemapRemoteDevice(nodeMapRemoteDevice);
-                    acquisitionWorker.SetFormWindow(windowForm);
-                }
             }
             catch (Exception e)
             {
@@ -321,52 +387,11 @@ namespace simple_live_windows_forms
         {
             Console.WriteLine("--- [BackEnd] Close device");
             // If device was opened, try to stop acquisition
-            if (device != null)
-            {
-                try
-                {
-                    var remoteNodeMap = device.RemoteDevice().NodeMaps()[0];
-                    remoteNodeMap.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").Execute();
-                    remoteNodeMap.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").WaitUntilDone();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
-                    MessageBoxTrigger(this, "Exception", e.Message);
-                }
-            }
+            
+          
 
-            // If data stream was opened, try to stop it and revoke its image buffers
-            if (dataStream != null)
-            {
-                try
-                {
-                    dataStream.KillWait();
-                    dataStream.StopAcquisition(peak.core.AcquisitionStopMode.Default);
-                    dataStream.Flush(peak.core.DataStreamFlushMode.DiscardAll);
+            peak.Library.Close();
 
-                    foreach (var buffer in dataStream.AnnouncedBuffers())
-                    {
-                        dataStream.RevokeBuffer(buffer);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
-                    MessageBoxTrigger(this, "Exception", e.Message);
-                }
-            }
-
-            try
-            {
-                // Unlock parameters after acquisition stop
-                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("TLParamsLocked").SetValue(0);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
-                MessageBoxTrigger(this, "Exception", e.Message);
-            }
         }
 
         private void acquisitionWorker_ImageReceived(object sender, System.Drawing.Bitmap image)
