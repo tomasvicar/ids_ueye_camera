@@ -65,12 +65,18 @@ target_link_libraries (${SAMPLE_TARGET_NAME}
 )
 
 # Set output directories for all configuration types (Debug, Release, etc.)
-if (NOT CMAKE_BUILD_TYPE)
-    set (CMAKE_BUILD_TYPE "Debug")
-endif()
-if (NOT CMAKE_CONFIGURATION_TYPES)
-    set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
-endif ()
+#if (NOT CMAKE_BUILD_TYPE)
+ #   set (CMAKE_BUILD_TYPE "Debug")
+# endif()
+#if (NOT CMAKE_CONFIGURATION_TYPES)
+#    set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
+#endif ()
+set (CMAKE_BUILD_TYPE "Debug")
+set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
+#set (CMAKE_BUILD_TYPE "Release")
+#set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
+
+
 if (CMAKE_CONFIGURATION_TYPES)
     foreach (CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
         string (TOUPPER ${CONFIGURATION_TYPE} CONFIGURATION_TYPE_UPPER)
@@ -93,9 +99,15 @@ endif ()
 set_target_properties(${SAMPLE_TARGET_NAME} PROPERTIES
     VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.6"  # .NET Framework version 4.6 corresponds to C# 6.0
     VS_DOTNET_REFERENCES
-        "Microsoft.CSharp;PresentationCore;System;System.Core;System.Data;System.Drawing;System.Windows.Forms;WindowsBase"
+        "Microsoft.CSharp;PresentationCore;System;System.Core;System.Data;System.Drawing;System.Windows.Forms;WindowsBase;Newtonsoft.Json"
     FOLDER "API/DotNet"
 )
+
+set_property(TARGET ${SAMPLE_TARGET_NAME}
+    PROPERTY VS_PACKAGE_REFERENCES "Accord.Video.FFMPEG.x64_3.8.0"
+)
+
+
 
 GET_PROPERTY(${LIBRARY_NAME_UPPER_VISION_API}_LIBRARIES_COPIED_LOCAL GLOBAL PROPERTY ${LIBRARY_NAME_UPPER_VISION_API}_LIBRARIES_COPIED)
 if(NOT ${LIBRARY_NAME_UPPER_VISION_API}_LIBRARIES_COPIED_LOCAL)

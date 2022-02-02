@@ -74,7 +74,7 @@ namespace simple_live_windows_forms
 
         public BackEnd()
         {
-            Debug.WriteLine("--- [BackEnd] Init");
+            Console.WriteLine("--- [BackEnd] Init");
 
             isActive = true;
 
@@ -98,13 +98,13 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
             }
         }
 
         public bool Start()
         {
-            Debug.WriteLine("--- [BackEnd] Start");
+            Console.WriteLine("--- [BackEnd] Start");
             if (!OpenDevice())
             {
                 return false;
@@ -120,7 +120,7 @@ namespace simple_live_windows_forms
 
         public void Stop()
         {
-            Debug.WriteLine("--- [BackEnd] Stop");
+            Console.WriteLine("--- [BackEnd] Stop");
             isActive = false;
             acquisitionWorker.Stop();
 
@@ -141,7 +141,7 @@ namespace simple_live_windows_forms
 
         public bool OpenDevice()
         {
-            Debug.WriteLine("--- [BackEnd] Open device");
+            Console.WriteLine("--- [BackEnd] Open device");
             try
             {
                 // Create instance of the device manager
@@ -153,7 +153,7 @@ namespace simple_live_windows_forms
                 // Return if no device was found
                 if (!deviceManager.Devices().Any())
                 {
-                    Debug.WriteLine("--- [BackEnd] Error: No device found");
+                    Console.WriteLine("--- [BackEnd] Error: No device found");
                     MessageBoxTrigger(this, "Error", "No device found");
                     return false;
                 }
@@ -172,7 +172,7 @@ namespace simple_live_windows_forms
                     }
                     else if (i == (deviceCount - 1))
                     {
-                        Debug.WriteLine("--- [BackEnd] Error: Device could not be openend");
+                        Console.WriteLine("--- [BackEnd] Error: Device could not be openend");
                         MessageBoxTrigger(this, "Error", "Device could not be openend");
                         return false;
                     }
@@ -185,7 +185,7 @@ namespace simple_live_windows_forms
 
                     if (!dataStreams.Any())
                     {
-                        Debug.WriteLine("--- [BackEnd] Error: Device has no DataStream");
+                        Console.WriteLine("--- [BackEnd] Error: Device has no DataStream");
                         MessageBoxTrigger(this, "Error", "Device has no DataStream");
                         return false;
                     }
@@ -248,34 +248,34 @@ namespace simple_live_windows_forms
 
 
 
-                    //Debug.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
-                    //Debug.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
 
                     //x_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum();
                     //y_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Minimum();
                     //w_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Minimum();
                     //h_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Minimum();
 
-                    //Debug.WriteLine("--- [BackEnd] x_min " + x_min.ToString());
-                    //Debug.WriteLine("--- [BackEnd] y_min " + y_min.ToString());
-                    //Debug.WriteLine("--- [BackEnd] w_min " + w_min.ToString());
-                    //Debug.WriteLine("--- [BackEnd] h_min " + h_min.ToString());
+                    //Console.WriteLine("--- [BackEnd] x_min " + x_min.ToString());
+                    //Console.WriteLine("--- [BackEnd] y_min " + y_min.ToString());
+                    //Console.WriteLine("--- [BackEnd] w_min " + w_min.ToString());
+                    //Console.WriteLine("--- [BackEnd] h_min " + h_min.ToString());
 
                     //x_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Maximum();
                     //y_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Maximum();
                     //w_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum();
                     //h_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum();
 
-                    //Debug.WriteLine("--- [BackEnd] x_max " + x_max.ToString());
-                    //Debug.WriteLine("--- [BackEnd] y_max " + y_max.ToString());
-                    //Debug.WriteLine("--- [BackEnd] w_max " + w_max.ToString());
-                    //Debug.WriteLine("--- [BackEnd] h_max " + h_max.ToString());
+                    //Console.WriteLine("--- [BackEnd] x_max " + x_max.ToString());
+                    //Console.WriteLine("--- [BackEnd] y_max " + y_max.ToString());
+                    //Console.WriteLine("--- [BackEnd] w_max " + w_max.ToString());
+                    //Console.WriteLine("--- [BackEnd] h_max " + h_max.ToString());
 
 
-                    //Debug.WriteLine("--- [BackEnd] x " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Value().ToString());
-                    //Debug.WriteLine("--- [BackEnd] y " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Value().ToString());
-                    //Debug.WriteLine("--- [BackEnd] w " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Value().ToString());
-                    //Debug.WriteLine("--- [BackEnd] h " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] x " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] y " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] w " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Value().ToString());
+                    //Console.WriteLine("--- [BackEnd] h " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Value().ToString());
 
 
 
@@ -292,7 +292,7 @@ namespace simple_live_windows_forms
 
                     UInt32 bufferCountMax = decimal.ToUInt32(windowForm.numericUpDown_bufferSize.Value);
 
-                    //Debug.WriteLine("--- [BackEnd] min req buffers " +  bufferCountMax.ToString());
+                    //Console.WriteLine("--- [BackEnd] min req buffers " +  bufferCountMax.ToString());
 
                     // Allocate and announce image buffers and queue them
                     for (var bufferCount = 0; bufferCount < bufferCountMax; ++bufferCount)
@@ -309,7 +309,7 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
                 MessageBoxTrigger(this, "Exception", e.Message);
                 return false;
             }
@@ -319,7 +319,7 @@ namespace simple_live_windows_forms
 
         public void CloseDevice()
         {
-            Debug.WriteLine("--- [BackEnd] Close device");
+            Console.WriteLine("--- [BackEnd] Close device");
             // If device was opened, try to stop acquisition
             if (device != null)
             {
@@ -331,7 +331,7 @@ namespace simple_live_windows_forms
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
                     MessageBoxTrigger(this, "Exception", e.Message);
                 }
             }
@@ -352,7 +352,7 @@ namespace simple_live_windows_forms
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                    Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
                     MessageBoxTrigger(this, "Exception", e.Message);
                 }
             }
@@ -364,7 +364,7 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [BackEnd] Exception: " + e.Message);
+                Console.WriteLine("--- [BackEnd] Exception: " + e.Message);
                 MessageBoxTrigger(this, "Exception", e.Message);
             }
         }
@@ -404,7 +404,7 @@ namespace simple_live_windows_forms
         {
             if (paramName=="Gain")
             {
-                Debug.WriteLine("changing gain");
+                Console.WriteLine("changing gain");
 
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("GainSelector").SetCurrentEntry("All");
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").SetValue(decimal.ToDouble(windowForm.numericUpDown_gain.Value));

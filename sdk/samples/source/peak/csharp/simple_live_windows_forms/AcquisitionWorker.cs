@@ -76,7 +76,7 @@ namespace simple_live_windows_forms
 
         public AcquisitionWorker()
         {
-            Debug.WriteLine("--- [AcquisitionWorker] Init");
+            Console.WriteLine("--- [AcquisitionWorker] Init");
             running = false;
             frameCounter = 0;
             errorCounter = 0;
@@ -84,7 +84,7 @@ namespace simple_live_windows_forms
 
         public void Start()
         {
-            Debug.WriteLine("--- [AcquisitionWorker] Start Acquisition");
+            Console.WriteLine("--- [AcquisitionWorker] Start Acquisition");
             try
             {
                 // Lock critical features to prevent them from changing during acquisition
@@ -107,7 +107,7 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [AcquisitionWorker] Exception: " + e.Message);
+                Console.WriteLine("--- [AcquisitionWorker] Exception: " + e.Message);
                 MessageBoxTrigger(this, "Exception", e.Message);
             }
 
@@ -169,12 +169,12 @@ namespace simple_live_windows_forms
 
                     if (ImageReceived != null)
                     {
-                        Debug.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
+                        Console.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
                         ImageReceived(this, imageCopy);
                     }
                     else
                     {
-                        Debug.WriteLine("--- [AcquisitionWorker] Imge is null");
+                        Console.WriteLine("--- [AcquisitionWorker] Imge is null");
                     }
 
                     frameCounter++;
@@ -182,7 +182,7 @@ namespace simple_live_windows_forms
                 catch (Exception e)
                 {
                     errorCounter++;
-                    Debug.WriteLine("--- [AcquisitionWorker] Exception: " + e.Message);
+                    Console.WriteLine("--- [AcquisitionWorker] Exception: " + e.Message);
                     MessageBoxTrigger(this, "Exception", e.Message);
                 }
 
@@ -193,7 +193,7 @@ namespace simple_live_windows_forms
 
         public void Stop()
         {
-            Debug.WriteLine("--- [AcquisitionWorker] Stop Acquisition");
+            Console.WriteLine("--- [AcquisitionWorker] Stop Acquisition");
             running = false;
 
 
@@ -207,13 +207,13 @@ namespace simple_live_windows_forms
 
         public void SetDataStream(peak.core.DataStream dataStream)
         {
-            Debug.WriteLine("--- [AcquisitionWorker] Set dataStream");
+            Console.WriteLine("--- [AcquisitionWorker] Set dataStream");
             this.dataStream = dataStream;
         }
 
         public void SetNodemapRemoteDevice(peak.core.NodeMap nodeMap)
         {
-            Debug.WriteLine("--- [AcquisitionWorker] Set nodeMap");
+            Console.WriteLine("--- [AcquisitionWorker] Set nodeMap");
             nodeMapRemoteDevice = nodeMap;
         }
 

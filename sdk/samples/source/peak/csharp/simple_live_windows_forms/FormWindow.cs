@@ -72,7 +72,7 @@ namespace simple_live_windows_forms
         private Image previousImage;
 
         private VideoFileWriter writer;
-        private Bitmap imageCopy;
+        // private Bitmap imageCopy;
 
         public string filename;
         public string path;
@@ -86,7 +86,28 @@ namespace simple_live_windows_forms
         public FormWindow()
         {
 
-            Debug.WriteLine("--- [FormWindow] Init");
+            #if (DEBUG == false)
+                path = "logs";
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                time = DateTime.Now;
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
+
+                filename = Path.Combine(path, "log" + "_" + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".txt");
+
+                FileStream filestream = new FileStream(filename, FileMode.Create);
+                var streamwriter = new StreamWriter(filestream);
+                streamwriter.AutoFlush = true;
+                Console.SetOut(streamwriter);
+                Console.SetError(streamwriter);
+            #endif
+
+
+            Console.WriteLine("--- [FormWindow] Init");
             InitializeComponent();
             LoadMySetting();
 
@@ -139,7 +160,7 @@ namespace simple_live_windows_forms
                         sw.Restart();
 
 
-                        Debug.WriteLine("-----FPS----- " + (20.0 / ts.TotalSeconds).ToString());
+                        Console.WriteLine("-----FPS----- " + (20.0 / ts.TotalSeconds).ToString());
 
                         label_fps.BeginInvoke((MethodInvoker)delegate { label_fps.Text = Math.Round(20.0 / ts.TotalSeconds).ToString()  + "fps"; });
                      }
@@ -155,7 +176,7 @@ namespace simple_live_windows_forms
                 }
 
                 // Thread th = Thread.CurrentThread;
-                // Debug.WriteLine("This is " + th.Name);
+                // Console.WriteLine("This is " + th.Name);
 
 
 
@@ -167,7 +188,7 @@ namespace simple_live_windows_forms
             }
             catch (Exception e)
             {
-                Debug.WriteLine("--- [FormWindow] Exception1: " + e.Message);
+                Console.WriteLine("--- [FormWindow] Exception1: " + e.Message);
                 backEnd_MessageBoxTrigger(this, "Exception1", e.Message);
             }
         }
@@ -193,7 +214,7 @@ namespace simple_live_windows_forms
             {
                 if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout"))
                 {
-                    Debug.WriteLine(messageTitle + messageText);
+                    Console.WriteLine(messageTitle + messageText);
                 }
                 else
                 {
@@ -206,7 +227,7 @@ namespace simple_live_windows_forms
 
         private void FormWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Debug.WriteLine("--- [FormWindow] Closing");
+            Console.WriteLine("--- [FormWindow] Closing");
             if (backEnd.IsActive())
             {
                 backEnd.Stop();
@@ -962,6 +983,7 @@ namespace simple_live_windows_forms
             buttonStop.Enabled = true;
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
+            button_load.Enabled = false;
 
 
             myStart();
@@ -1034,7 +1056,7 @@ namespace simple_live_windows_forms
             }
             catch (Exception ee)
             {
-                Debug.WriteLine("--- [FormWindow] Exception2: " + ee.Message);
+                Console.WriteLine("--- [FormWindow] Exception2: " + ee.Message);
                 backEnd_MessageBoxTrigger(this, "Exception2", ee.Message);
             }
 
@@ -1046,6 +1068,7 @@ namespace simple_live_windows_forms
             buttonStart.Enabled = true;
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
+            button_load.Enabled = true;
 
             myStop();
         }
@@ -1309,6 +1332,7 @@ namespace simple_live_windows_forms
             buttonStop.Enabled = false;
             button_triger.Enabled = false;
             button_stopTriger.Enabled = true;
+            button_load.Enabled = false;
 
             is_triger = true;
             myStart();
@@ -1326,6 +1350,7 @@ namespace simple_live_windows_forms
             buttonStop.Enabled = false;
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
+            button_load.Enabled = true;
 
             stopTrigerClicked = true;
             ComTrigerOff();
@@ -1359,7 +1384,7 @@ namespace simple_live_windows_forms
 
 
 
-                Debug.WriteLine(port);
+                Console.WriteLine(port);
                 comPort = new SerialPort(port, 9600);
 
                 comPort.Open();
@@ -1374,7 +1399,7 @@ namespace simple_live_windows_forms
                 try
                 {
                     string message = comPort.ReadLine();
-                    Debug.WriteLine(message);
+                    Console.WriteLine(message);
                     if (message.Trim() == "ok")
                     {
                         label_comPortStatus.Text = port;
@@ -1393,7 +1418,7 @@ namespace simple_live_windows_forms
                 }
                 catch (TimeoutException)
                 {
-                    Debug.WriteLine("time out");
+                    Console.WriteLine("time out");
                     comPort.Close();
                 }
 
