@@ -50,15 +50,7 @@ namespace simple_live_windows_forms
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
         public event MessageBoxTriggerEventHandler MessageBoxTrigger;
 
-        public long x_min;
-        public long y_min;
-        public long w_min;
-        public long h_min;
 
-        public long x_max;
-        public long y_max;
-        public long w_max;
-        public long h_max;
 
 
         private AcquisitionWorker acquisitionWorker;
@@ -71,12 +63,13 @@ namespace simple_live_windows_forms
         private FormWindow windowForm;
 
         private bool isActive;
+        private bool isOpen;
 
         public BackEnd()
         {
             Console.WriteLine("--- [BackEnd] Init");
 
-            isActive = true;
+            
 
             try
             {
@@ -136,8 +129,8 @@ namespace simple_live_windows_forms
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("BlackLevel").SetValue(windowForm.blackLevel);
 
 
-                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Minimum));
-                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Minimum));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(windowForm.numericUpDown_w.Minimum - (windowForm.numericUpDown_w.Value % windowForm.numericUpDown_w.Increment)));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Minimum - (windowForm.numericUpDown_h.Value % windowForm.numericUpDown_h.Increment)));
 
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").SetValue(decimal.ToInt64(windowForm.numericUpDown_x.Value));
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").SetValue(decimal.ToInt64(windowForm.numericUpDown_y.Value));
@@ -173,41 +166,7 @@ namespace simple_live_windows_forms
 
 
 
-
-                //Console.WriteLine("--- [BackEnd] Frame rate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
-                //Console.WriteLine("--- [BackEnd] Exposure time " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
-
-                //x_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum();
-                //y_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Minimum();
-                //w_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Minimum();
-                //h_min = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Minimum();
-
-                //Console.WriteLine("--- [BackEnd] x_min " + x_min.ToString());
-                //Console.WriteLine("--- [BackEnd] y_min " + y_min.ToString());
-                //Console.WriteLine("--- [BackEnd] w_min " + w_min.ToString());
-                //Console.WriteLine("--- [BackEnd] h_min " + h_min.ToString());
-
-                //x_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Maximum();
-                //y_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Maximum();
-                //w_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum();
-                //h_max = nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum();
-
-                //Console.WriteLine("--- [BackEnd] x_max " + x_max.ToString());
-                //Console.WriteLine("--- [BackEnd] y_max " + y_max.ToString());
-                //Console.WriteLine("--- [BackEnd] w_max " + w_max.ToString());
-                //Console.WriteLine("--- [BackEnd] h_max " + h_max.ToString());
-
-
-                //Console.WriteLine("--- [BackEnd] x " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Value().ToString());
-                //Console.WriteLine("--- [BackEnd] y " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Value().ToString());
-                //Console.WriteLine("--- [BackEnd] w " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Value().ToString());
-                //Console.WriteLine("--- [BackEnd] h " + nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Value().ToString());
-
-
-
-
-                //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseX").SetValue(windowForm.checkBox_rot180.Checked);
-                //nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseY").SetValue(windowForm.checkBox_rot180.Checked);
+                
 
                 // Get the payload size for correct buffer allocation
                 UInt32 payloadSize = Convert.ToUInt32(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
@@ -243,6 +202,8 @@ namespace simple_live_windows_forms
 
             // Start thread execution
             acquisitionThread.Start();
+
+            isActive = true;
 
             return true;
         }
@@ -371,7 +332,7 @@ namespace simple_live_windows_forms
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.CommandNode>("UserSetLoad").WaitUntilDone();
 
 
-
+                isOpen = true;
             }
             catch (Exception e)
             {
@@ -391,6 +352,9 @@ namespace simple_live_windows_forms
           
 
             peak.Library.Close();
+
+
+            isOpen = false;
 
         }
 
@@ -420,6 +384,12 @@ namespace simple_live_windows_forms
         {
             return isActive;
         }
+        public bool IsOpen()
+        {
+            return isOpen;
+        }
+
+
         public void SetWindowForm(FormWindow wf)
         {
             this.windowForm = wf;
@@ -448,7 +418,93 @@ namespace simple_live_windows_forms
 
         }
 
+        public void getParams()
+        {
+            windowForm.x_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum());
+            windowForm.y_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Minimum());
+            windowForm.w_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Minimum());
+            windowForm.h_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Minimum());
 
+            Console.WriteLine("--- [BackEnd] x_min " + windowForm.x_min.ToString());
+            Console.WriteLine("--- [BackEnd] y_min " + windowForm.y_min.ToString());
+            Console.WriteLine("--- [BackEnd] w_min " + windowForm.w_min.ToString());
+            Console.WriteLine("--- [BackEnd] h_min " + windowForm.h_min.ToString());
+
+            windowForm.x_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum()); ////////////////////
+            windowForm.y_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum()); //////////////////
+            windowForm.w_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Maximum());
+            windowForm.h_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Maximum());
+
+            Console.WriteLine("--- [BackEnd] x_max " + windowForm.x_max.ToString());
+            Console.WriteLine("--- [BackEnd] y_max " + windowForm.y_max.ToString());
+            Console.WriteLine("--- [BackEnd] w_max " + windowForm.w_max.ToString());
+            Console.WriteLine("--- [BackEnd] h_max " + windowForm.h_max.ToString());
+
+            windowForm.x_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Increment());
+            windowForm.y_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("OffsetY").Increment());
+            windowForm.w_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Width").Increment());
+            windowForm.h_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").Increment());
+
+            Console.WriteLine("--- [BackEnd] x_inc " + windowForm.x_inc.ToString());
+            Console.WriteLine("--- [BackEnd] y_inc  " + windowForm.y_inc.ToString());
+            Console.WriteLine("--- [BackEnd] w_inc  " + windowForm.w_inc.ToString());
+            Console.WriteLine("--- [BackEnd] h_inc  " + windowForm.h_inc.ToString());
+
+
+            windowForm.deviceClockFrequency_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Minimum());
+            windowForm.deviceClockFrequency_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Maximum());
+            windowForm.deviceClockFrequency_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Increment());
+
+            Console.WriteLine("--- [BackEnd] DeviceClockFrequency min " + windowForm.deviceClockFrequency_min.ToString());
+            Console.WriteLine("--- [BackEnd] DeviceClockFrequency max " + windowForm.deviceClockFrequency_max.ToString());
+            Console.WriteLine("--- [BackEnd] DeviceClockFrequency increment " + windowForm.deviceClockFrequency_inc.ToString());
+
+            nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(decimal.ToDouble(windowForm.deviceClockFrequency_max));
+            //Thread.Sleep(500);
+            //Console.WriteLine("--- [BackEnd] DeviceClockFrequency " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value().ToString());
+
+
+
+            windowForm.acquisitionFrameRate_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Minimum());
+            windowForm.acquisitionFrameRate_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Maximum());
+            windowForm.acquisitionFrameRate_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Increment());
+
+            Console.WriteLine("--- [BackEnd] AcquisitionFrameRate min " + windowForm.acquisitionFrameRate_min.ToString());
+            Console.WriteLine("--- [BackEnd] AcquisitionFrameRate max " + windowForm.acquisitionFrameRate_max.ToString());
+            Console.WriteLine("--- [BackEnd] AcquisitionFrameRate increment " + windowForm.acquisitionFrameRate_inc.ToString());
+
+
+            windowForm.exposureTime_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Minimum());
+            windowForm.exposureTime_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Maximum());
+            windowForm.exposureTime_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Increment());
+
+            Console.WriteLine("--- [BackEnd] ExposureTime min " + windowForm.exposureTime_min.ToString());
+            Console.WriteLine("--- [BackEnd] ExposureTime max " + windowForm.exposureTime_max.ToString());
+            Console.WriteLine("--- [BackEnd] ExposureTime increment " + windowForm.exposureTime_inc.ToString());
+
+
+
+
+            windowForm.gain_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Minimum());
+            windowForm.gain_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Maximum());
+            windowForm.gain_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Increment());
+
+            Console.WriteLine("--- [BackEnd] Gain min " + windowForm.gain_min.ToString());
+            Console.WriteLine("--- [BackEnd] Gain max " + windowForm.gain_max.ToString());
+            Console.WriteLine("--- [BackEnd] Gain increment " + windowForm.gain_inc.ToString());
+
+
+            // not exist? why? they are in documentation!
+            // Console.WriteLine("--- [BackEnd] LUTSelector " + nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("LUTSelector").CurrentEntry().SymbolicValue().ToString());
+            // Console.WriteLine("--- [BackEnd] Gamma " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gamma").Value().ToString());
+            // Console.WriteLine("--- [BackEnd] LUTEnable " + nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("LUTEnable").Value().ToString());
+            // Console.WriteLine("--- [BackEnd] ExposureTime increment " + nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseX").Value().ToString());
+
+
+
+        }
 
     }
+
+
 }
