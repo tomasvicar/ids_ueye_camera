@@ -339,8 +339,6 @@ namespace simple_live_windows_forms
             this.numericUpDown_exposureTime = new System.Windows.Forms.NumericUpDown();
             this.label_exposureTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label_frameRateHardMax = new System.Windows.Forms.Label();
-            this.label_frameRateMax = new System.Windows.Forms.Label();
             this.label_frameRateMin = new System.Windows.Forms.Label();
             this.numericUpDown_frameRate = new System.Windows.Forms.NumericUpDown();
             this.label_frameRate = new System.Windows.Forms.Label();
@@ -372,6 +370,7 @@ namespace simple_live_windows_forms
             this.button_save = new System.Windows.Forms.Button();
             this.button_load = new System.Windows.Forms.Button();
             this.label_pixelClock = new System.Windows.Forms.Label();
+            this.label_frameRateMax = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -391,6 +390,9 @@ namespace simple_live_windows_forms
             // 
             // pictureBox
             // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(880, 437);
@@ -400,6 +402,7 @@ namespace simple_live_windows_forms
             // 
             // textBox_dataname
             // 
+            this.textBox_dataname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_dataname.Location = new System.Drawing.Point(565, 491);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
@@ -408,6 +411,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
+            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStart.Location = new System.Drawing.Point(461, 438);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
@@ -418,6 +422,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStop.Enabled = false;
             this.buttonStop.Location = new System.Drawing.Point(461, 462);
             this.buttonStop.Name = "buttonStop";
@@ -451,6 +456,7 @@ namespace simple_live_windows_forms
             // 
             // panel_gain
             // 
+            this.panel_gain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_gain.Controls.Add(this.label_gainMax);
             this.panel_gain.Controls.Add(this.label_gainMin);
             this.panel_gain.Controls.Add(this.numericUpDown_gain);
@@ -482,6 +488,7 @@ namespace simple_live_windows_forms
             // 
             // button_triger
             // 
+            this.button_triger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_triger.Location = new System.Drawing.Point(564, 439);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(93, 23);
@@ -492,6 +499,7 @@ namespace simple_live_windows_forms
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label_exposureTimeMax);
             this.panel1.Controls.Add(this.label_exposureTimeMin);
             this.panel1.Controls.Add(this.checkBox_exposurTimeMax);
@@ -555,7 +563,7 @@ namespace simple_live_windows_forms
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label_frameRateHardMax);
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.label_frameRateMax);
             this.panel2.Controls.Add(this.label_frameRateMin);
             this.panel2.Controls.Add(this.numericUpDown_frameRate);
@@ -565,31 +573,11 @@ namespace simple_live_windows_forms
             this.panel2.Size = new System.Drawing.Size(89, 72);
             this.panel2.TabIndex = 12;
             // 
-            // label_frameRateHardMax
-            // 
-            this.label_frameRateHardMax.AutoSize = true;
-            this.label_frameRateHardMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateHardMax.Location = new System.Drawing.Point(39, 51);
-            this.label_frameRateHardMax.Name = "label_frameRateHardMax";
-            this.label_frameRateHardMax.Size = new System.Drawing.Size(25, 12);
-            this.label_frameRateHardMax.TabIndex = 18;
-            this.label_frameRateHardMax.Text = "xxxx";
-            // 
-            // label_frameRateMax
-            // 
-            this.label_frameRateMax.AutoSize = true;
-            this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateMax.Location = new System.Drawing.Point(39, 35);
-            this.label_frameRateMax.Name = "label_frameRateMax";
-            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
-            this.label_frameRateMax.TabIndex = 17;
-            this.label_frameRateMax.Text = "xxxx";
-            // 
             // label_frameRateMin
             // 
             this.label_frameRateMin.AutoSize = true;
             this.label_frameRateMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateMin.Location = new System.Drawing.Point(0, 35);
+            this.label_frameRateMin.Location = new System.Drawing.Point(3, 42);
             this.label_frameRateMin.Name = "label_frameRateMin";
             this.label_frameRateMin.Size = new System.Drawing.Size(25, 12);
             this.label_frameRateMin.TabIndex = 16;
@@ -597,7 +585,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_frameRate
             // 
-            this.numericUpDown_frameRate.Location = new System.Drawing.Point(5, 15);
+            this.numericUpDown_frameRate.Location = new System.Drawing.Point(8, 22);
             this.numericUpDown_frameRate.Name = "numericUpDown_frameRate";
             this.numericUpDown_frameRate.Size = new System.Drawing.Size(59, 20);
             this.numericUpDown_frameRate.TabIndex = 8;
@@ -611,7 +599,7 @@ namespace simple_live_windows_forms
             // label_frameRate
             // 
             this.label_frameRate.AutoSize = true;
-            this.label_frameRate.Location = new System.Drawing.Point(7, 1);
+            this.label_frameRate.Location = new System.Drawing.Point(10, 8);
             this.label_frameRate.Name = "label_frameRate";
             this.label_frameRate.Size = new System.Drawing.Size(57, 13);
             this.label_frameRate.TabIndex = 7;
@@ -619,6 +607,7 @@ namespace simple_live_windows_forms
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.label_ySumMax);
             this.panel3.Controls.Add(this.label_xSumMax);
             this.panel3.Controls.Add(this.numericUpDown_h);
@@ -754,6 +743,7 @@ namespace simple_live_windows_forms
             // 
             // labelCounter
             // 
+            this.labelCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCounter.AutoSize = true;
             this.labelCounter.Location = new System.Drawing.Point(463, 488);
             this.labelCounter.Name = "labelCounter";
@@ -763,6 +753,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_bufferSize
             // 
+            this.numericUpDown_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown_bufferSize.Location = new System.Drawing.Point(663, 455);
             this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
             1000,
@@ -785,6 +776,7 @@ namespace simple_live_windows_forms
             // 
             // label_bufferSize
             // 
+            this.label_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_bufferSize.AutoSize = true;
             this.label_bufferSize.Location = new System.Drawing.Point(663, 440);
             this.label_bufferSize.Name = "label_bufferSize";
@@ -794,6 +786,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_pictureBoxTimeDecimation
             // 
+            this.numericUpDown_pictureBoxTimeDecimation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(724, 455);
             this.numericUpDown_pictureBoxTimeDecimation.Minimum = new decimal(new int[] {
             1,
@@ -811,6 +804,7 @@ namespace simple_live_windows_forms
             // 
             // label_subsample
             // 
+            this.label_subsample.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_subsample.AutoSize = true;
             this.label_subsample.Location = new System.Drawing.Point(725, 440);
             this.label_subsample.Name = "label_subsample";
@@ -820,6 +814,7 @@ namespace simple_live_windows_forms
             // 
             // button_stopTriger
             // 
+            this.button_stopTriger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_stopTriger.Enabled = false;
             this.button_stopTriger.Location = new System.Drawing.Point(564, 462);
             this.button_stopTriger.Name = "button_stopTriger";
@@ -831,6 +826,7 @@ namespace simple_live_windows_forms
             // 
             // label_fps
             // 
+            this.label_fps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_fps.AutoSize = true;
             this.label_fps.Location = new System.Drawing.Point(518, 488);
             this.label_fps.Name = "label_fps";
@@ -840,6 +836,7 @@ namespace simple_live_windows_forms
             // 
             // label_comPortStatus
             // 
+            this.label_comPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_comPortStatus.AutoSize = true;
             this.label_comPortStatus.Location = new System.Drawing.Point(772, 444);
             this.label_comPortStatus.Name = "label_comPortStatus";
@@ -850,6 +847,7 @@ namespace simple_live_windows_forms
             // 
             // label_recivedCommand
             // 
+            this.label_recivedCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_recivedCommand.AutoSize = true;
             this.label_recivedCommand.Location = new System.Drawing.Point(772, 464);
             this.label_recivedCommand.Name = "label_recivedCommand";
@@ -859,6 +857,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_LED
             // 
+            this.numericUpDown_LED.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown_LED.Location = new System.Drawing.Point(782, 494);
             this.numericUpDown_LED.Name = "numericUpDown_LED";
             this.numericUpDown_LED.Size = new System.Drawing.Size(47, 20);
@@ -872,6 +871,7 @@ namespace simple_live_windows_forms
             // 
             // checkBox_LED
             // 
+            this.checkBox_LED.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_LED.AutoSize = true;
             this.checkBox_LED.Location = new System.Drawing.Point(734, 495);
             this.checkBox_LED.Name = "checkBox_LED";
@@ -883,6 +883,7 @@ namespace simple_live_windows_forms
             // 
             // button_save
             // 
+            this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_save.Location = new System.Drawing.Point(836, 477);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(40, 21);
@@ -893,6 +894,7 @@ namespace simple_live_windows_forms
             // 
             // button_load
             // 
+            this.button_load.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_load.Location = new System.Drawing.Point(836, 496);
             this.button_load.Name = "button_load";
             this.button_load.Size = new System.Drawing.Size(40, 19);
@@ -903,12 +905,23 @@ namespace simple_live_windows_forms
             // 
             // label_pixelClock
             // 
+            this.label_pixelClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_pixelClock.AutoSize = true;
             this.label_pixelClock.Location = new System.Drawing.Point(469, 502);
             this.label_pixelClock.Name = "label_pixelClock";
-            this.label_pixelClock.Size = new System.Drawing.Size(60, 13);
+            this.label_pixelClock.Size = new System.Drawing.Size(57, 13);
             this.label_pixelClock.TabIndex = 28;
-            this.label_pixelClock.Text = "xxxM clock";
+            this.label_pixelClock.Text = "xxxMclock";
+            // 
+            // label_frameRateMax
+            // 
+            this.label_frameRateMax.AutoSize = true;
+            this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_frameRateMax.Location = new System.Drawing.Point(42, 42);
+            this.label_frameRateMax.Name = "label_frameRateMax";
+            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
+            this.label_frameRateMax.TabIndex = 17;
+            this.label_frameRateMax.Text = "xxxx";
             // 
             // FormWindow
             // 
@@ -937,7 +950,7 @@ namespace simple_live_windows_forms
             this.Controls.Add(this.textBox_dataname);
             this.Controls.Add(this.pictureBox);
             this.Name = "FormWindow";
-            this.Text = "Projectname";
+            this.Text = "Video-ophthalmoscope controler";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).EndInit();
             this.panel_gain.ResumeLayout(false);
@@ -998,8 +1011,6 @@ namespace simple_live_windows_forms
             label_frameRateMin.Text = numericUpDown_frameRate.Minimum.ToString();
             label_frameRateMax.Text = numericUpDown_frameRate.Maximum.ToString();
 
-            label_frameRateHardMax.Text = frameRateHardMax.ToString();
-
             label_exposureTimeMin.Text = numericUpDown_exposureTime.Minimum.ToString();
             label_exposureTimeMax.Text = numericUpDown_exposureTime.Maximum.ToString();
 
@@ -1051,8 +1062,9 @@ namespace simple_live_windows_forms
             this.pictureBoxWithInterpolationMode.SizeMode = this.pictureBox.SizeMode;
             this.pictureBoxWithInterpolationMode.TabIndex = this.pictureBox.TabIndex;
             this.pictureBoxWithInterpolationMode.TabStop = this.pictureBox.TabStop;
+            this.pictureBoxWithInterpolationMode.Anchor = this.pictureBox.Anchor;
 
-            
+
 
         }
 
@@ -1209,7 +1221,6 @@ namespace simple_live_windows_forms
         private Label label_gainMin;
         private Label label_exposureTimeMax;
         private Label label_exposureTimeMin;
-        private Label label_frameRateMax;
         private Label label_frameRateMin;
 
         private void numericUpDown_frameRate_ValueChanged(object sender, EventArgs e)
@@ -1600,9 +1611,8 @@ namespace simple_live_windows_forms
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
             numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
         }
-
-        private Label label_frameRateHardMax;
         public Label label_pixelClock;
+        private Label label_frameRateMax;
     }
 }
 
