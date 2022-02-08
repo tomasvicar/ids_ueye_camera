@@ -15,20 +15,18 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <OutputPath>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\Debug\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <OutputPath>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\</OutputPath>
     <PlatformTarget>x64</PlatformTarget>
     <PlatformToolset>v142</PlatformToolset>
-    <AssemblyName>simple_live_windows_forms_csharp_debug</AssemblyName>
+    <AssemblyName>simple_live_windows_forms_csharp</AssemblyName>
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\Debug\simple_live_windows_forms_csharp_debug.exe</StartProgram>
-    <DebugType>full</DebugType>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <Optimize>false</Optimize>
-    <WarningLevel>3</WarningLevel>
+    <StartProgram>C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\output\bin\x86_64\simple_live_windows_forms_csharp.exe</StartProgram>
+    <DebugType>none</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>queue</ErrorReport>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -41,7 +39,7 @@
       <Link>CMakeLists.txt</Link>
     </None>
   </ItemGroup>
-  <Target Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Name="CustomCommand_Debug_05ac3bb2cf4fbc8de44a15d51e67bd85" Inputs="C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/CMakeLists.txt;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCSharpInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CSharpUtilities.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\Findids_peak.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\cmake_detect_architecture.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\Findids_peak_ipl.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\_cmake_scripts\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCSharpCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\arch.c" Outputs="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\generate.stamp">
+  <Target Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Name="CustomCommand_Release_05ac3bb2cf4fbc8de44a15d51e67bd85" Inputs="C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/CMakeLists.txt;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCSharpInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CSharpUtilities.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\Findids_peak.cmake;C:\Program Files\IDS\ids_peak\sdk\api\cmake_finder\cmake_detect_architecture.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\Findids_peak_ipl.cmake;C:\Program Files\IDS\ids_peak\sdk\ipl\cmake_finder\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\_cmake_scripts\cmake_detect_architecture.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeCSharpCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake;C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\arch.c" Outputs="C:\Users\vicar\Desktop\ids_ueye_camera\ids_ueye_camera\sdk\samples\source\peak\csharp\simple_live_windows_forms\out\build\x64-Debug\CMakeFiles\generate.stamp">
     <Exec Command="echo Building Custom Rule C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/CMakeLists.txt" />
     <Exec Command="setlocal&#xA;&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe&quot; -SC:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms -BC:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug --check-stamp-file C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/CMakeFiles/generate.stamp&#xA;if %errorlevel% neq 0 goto :cmEnd&#xA;:cmEnd&#xA;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#xA;:cmErrorLevel&#xA;exit /b %1&#xA;:cmDone&#xA;if %errorlevel% neq 0 goto :VCEnd" />
   </Target>
@@ -101,13 +99,13 @@
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
-    <Reference Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Include="ids_peak_dotnet">
+    <Reference Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Include="ids_peak_dotnet">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
       <Private>True</Private>
       <HintPath>C:\Program Files\IDS\ids_peak\sdk\api\binding\dotnet\x86_64\ids_peak_dotnet.dll</HintPath>
     </Reference>
-    <Reference Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Include="ids_peak_ipl_dotnet">
+    <Reference Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Include="ids_peak_ipl_dotnet">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
       <Private>True</Private>
@@ -127,10 +125,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <PostBuildEvent>echo Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll to output dir.	Post build copy of ids_peak_dotnet DLLs to output dir.	Post build copy of C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll to output dir.	Post build copy of ids_peak_ipl_dotnet DLLs to output dir.
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/FirmwareUpdate_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -139,7 +137,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GCBase_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -148,7 +146,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/GenApi_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -157,7 +155,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/Log_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -166,7 +164,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/MathParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -175,7 +173,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/NodeMapData_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -184,7 +182,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/XmlParser_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -193,7 +191,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/ids_peak.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -202,7 +200,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/lib/x86_64/log4cpp_MD_VC140_v3_2_IDS.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -211,7 +209,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/binding/dotnet/x86_64/ids_peak_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/api/binding/dotnet/x86_64/ids_peak_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -220,7 +218,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/lib/x86_64/ids_peak_ipl.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -229,7 +227,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/binding/dotnet/x86_64/ids_peak_ipl_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64/Debug
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different "C:/Program Files/IDS/ids_peak/sdk/ipl/binding/dotnet/x86_64/ids_peak_ipl_dotnet_interface.dll" C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug/output/bin/x86_64
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -241,7 +239,7 @@ if %errorlevel% neq 0 goto :VCEnd
   </PropertyGroup>
   <PropertyGroup>
     <BuildDependsOn>
-      CustomCommand_Debug_05ac3bb2cf4fbc8de44a15d51e67bd85;
+      CustomCommand_Release_05ac3bb2cf4fbc8de44a15d51e67bd85;
       $(BuildDependsOn)
 </BuildDependsOn>
   </PropertyGroup>

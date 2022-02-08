@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "output/bin/x86_64/Debug/simple_live_windows_forms_csharp_debug.exe"
+			"path" : "output/bin/x86_64/simple_live_windows_forms_csharp.exe"
 		},
 		{
-			"path" : "output/bin/x86_64/Debug/simple_live_windows_forms_csharp_debug.pdb"
+			"path" : "output/bin/x86_64/simple_live_windows_forms_csharp.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/platform:x64 /define:TRACE /debug:full /optimize- /warn:3 /errorreport:prompt /define:DEBUG"
+					"fragment" : "/platform:x64 /define:TRACE /debug:none /optimize  /warn:1  /errorreport:queue"
 				}
 			],
 			"includes" : 
@@ -97,7 +97,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/platform:x64 /define:TRACE /debug:full /optimize- /warn:3 /errorreport:prompt /define:DEBUG",
+				"fragment" : "/platform:x64 /define:TRACE /debug:none /optimize  /warn:1  /errorreport:queue",
 				"role" : "flags"
 			},
 			{
@@ -122,7 +122,7 @@
 		"language" : "CSharp"
 	},
 	"name" : "simple_live_windows_forms_csharp",
-	"nameOnDisk" : "simple_live_windows_forms_csharp_debug.exe",
+	"nameOnDisk" : "simple_live_windows_forms_csharp.exe",
 	"paths" : 
 	{
 		"build" : ".",

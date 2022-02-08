@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "simple_live_windows_forms_c
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Debug|x64.ActiveCfg = Debug|x64
-		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Debug|x64.Build.0 = Debug|x64
+		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Release|x64.ActiveCfg = Release|x64
+		{0C60FB34-2BF8-34DF-B8FA-1F4E835957FE}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

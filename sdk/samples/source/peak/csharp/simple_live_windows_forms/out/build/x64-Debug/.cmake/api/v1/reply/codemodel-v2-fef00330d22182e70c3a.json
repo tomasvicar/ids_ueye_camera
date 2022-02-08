@@ -20,7 +20,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -42,21 +42,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Debug-3793c94a294acded8cf0.json",
+					"jsonFile" : "target-ALL_BUILD-Release-cdfeb7fd288fca836f13.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-Debug-8428f6fb2742447736e2.json",
+					"jsonFile" : "target-ZERO_CHECK-Release-8428f6fb2742447736e2.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simple_live_windows_forms_csharp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simple_live_windows_forms_csharp-Debug-f3ab957afd10e094fbc7.json",
+					"jsonFile" : "target-simple_live_windows_forms_csharp-Release-199e731412ac55581455.json",
 					"name" : "simple_live_windows_forms_csharp",
 					"projectIndex" : 0
 				}
