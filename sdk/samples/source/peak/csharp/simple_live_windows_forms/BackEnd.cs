@@ -138,14 +138,17 @@ namespace simple_live_windows_forms
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(windowForm.numericUpDown_h.Value));
 
 
+
+
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Minimum));
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(Convert.ToDouble(windowForm.label_pixelClock.Text.Replace("Mclock", "")) * 1000000);
 
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(windowForm.numericUpDown_exposureTime.Value) * 1000);
 
 
                 if (windowForm.is_triger)
                 {
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Maximum));
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value * 1.10m));
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
@@ -163,10 +166,9 @@ namespace simple_live_windows_forms
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("Off");
                 }
 
-
-
-
-                
+                Console.WriteLine("--- [BackEnd]Run DeviceClockFrequency3 " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value().ToString());
+                Console.WriteLine("--- [BackEnd]Run AcquisitionFrameRate " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").Value().ToString());
+                Console.WriteLine("--- [BackEnd]Run ExposureTime " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Value().ToString());
 
                 // Get the payload size for correct buffer allocation
                 UInt32 payloadSize = Convert.ToUInt32(nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
@@ -399,7 +401,6 @@ namespace simple_live_windows_forms
         {
             if (paramName=="Gain")
             {
-                Console.WriteLine("changing gain");
 
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("GainSelector").SetCurrentEntry("All");
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").SetValue(decimal.ToDouble(windowForm.numericUpDown_gain.Value));
@@ -414,7 +415,17 @@ namespace simple_live_windows_forms
             if (paramName == "AcquisitionFrameRate")
             {
                 nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value));
+
             }
+            if (paramName == "DeviceClockFrequency")
+            {
+                    
+                nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(Convert.ToDouble(windowForm.label_pixelClock.Text.Replace("Mclock","")) * 1000000);
+                Console.WriteLine("--- [BackEnd] DeviceClockFrequency1 " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value().ToString());
+
+            }
+
+
 
         }
 
@@ -459,6 +470,8 @@ namespace simple_live_windows_forms
             Console.WriteLine("--- [BackEnd] DeviceClockFrequency max " + windowForm.deviceClockFrequency_max.ToString());
             Console.WriteLine("--- [BackEnd] DeviceClockFrequency increment " + windowForm.deviceClockFrequency_inc.ToString());
 
+
+
             nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(decimal.ToDouble(windowForm.deviceClockFrequency_max));
             //Thread.Sleep(500);
             //Console.WriteLine("--- [BackEnd] DeviceClockFrequency " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value().ToString());
@@ -484,7 +497,7 @@ namespace simple_live_windows_forms
 
 
 
-
+            
             windowForm.gain_min = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Minimum());
             windowForm.gain_max = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Maximum());
             windowForm.gain_inc = Convert.ToDecimal(nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gain").Increment());
@@ -494,11 +507,40 @@ namespace simple_live_windows_forms
             Console.WriteLine("--- [BackEnd] Gain increment " + windowForm.gain_inc.ToString());
 
 
+            windowForm.c = (windowForm.acquisitionFrameRate_max * windowForm.h_max) / windowForm.deviceClockFrequency_max;
+            Console.WriteLine("--- [BackEnd] for image 400px 29.33 fps - pixelClock= " + getPixelClock(29.33m, 400m));
+
             // not exist? why? they are in documentation!
             // Console.WriteLine("--- [BackEnd] LUTSelector " + nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("LUTSelector").CurrentEntry().SymbolicValue().ToString());
             // Console.WriteLine("--- [BackEnd] Gamma " + nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("Gamma").Value().ToString());
             // Console.WriteLine("--- [BackEnd] LUTEnable " + nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("LUTEnable").Value().ToString());
             // Console.WriteLine("--- [BackEnd] ExposureTime increment " + nodeMapRemoteDevice.FindNode<peak.core.nodes.BooleanNode>("ReverseX").Value().ToString());
+
+
+
+
+        }
+        public decimal getPixelClock(decimal fps, decimal heght)
+        {
+            decimal pc_orig = ((fps * heght) / windowForm.c) * 1.2m;
+
+            decimal[] allowed_values = {470m, 237m, 118m, 59m, 30m, 0m};
+            decimal maxValue = windowForm.deviceClockFrequency_max;
+            decimal previousValue = windowForm.deviceClockFrequency_max;
+
+            foreach (decimal value in allowed_values)
+            {
+                decimal value_m = value * 1000000m;
+
+                if (value_m < pc_orig) 
+                {
+                    return previousValue / 1000000m;
+                }
+
+                previousValue = value_m;
+            }
+            return maxValue / 1000000m;
+
 
 
 

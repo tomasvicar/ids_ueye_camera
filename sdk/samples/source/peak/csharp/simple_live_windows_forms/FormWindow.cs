@@ -99,7 +99,11 @@ namespace simple_live_windows_forms
         public decimal gain_max { get; set; }
         public decimal gain_inc { get; set; }
 
-        
+        public decimal c { get; set; }
+        // PixelClock =  (fps * height) / c
+        // c = (fps_max * height_max) / PixelClock_max 
+
+
 
 
         private decimal frameRateTmp;
@@ -335,6 +339,7 @@ namespace simple_live_windows_forms
             this.numericUpDown_exposureTime = new System.Windows.Forms.NumericUpDown();
             this.label_exposureTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label_frameRateHardMax = new System.Windows.Forms.Label();
             this.label_frameRateMax = new System.Windows.Forms.Label();
             this.label_frameRateMin = new System.Windows.Forms.Label();
             this.numericUpDown_frameRate = new System.Windows.Forms.NumericUpDown();
@@ -366,7 +371,7 @@ namespace simple_live_windows_forms
             this.checkBox_LED = new System.Windows.Forms.CheckBox();
             this.button_save = new System.Windows.Forms.Button();
             this.button_load = new System.Windows.Forms.Button();
-            this.label_frameRateHardMax = new System.Windows.Forms.Label();
+            this.label_pixelClock = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -403,7 +408,7 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(461, 439);
+            this.buttonStart.Location = new System.Drawing.Point(461, 438);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 8;
@@ -414,7 +419,7 @@ namespace simple_live_windows_forms
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(461, 464);
+            this.buttonStop.Location = new System.Drawing.Point(461, 462);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 9;
@@ -559,6 +564,16 @@ namespace simple_live_windows_forms
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(89, 72);
             this.panel2.TabIndex = 12;
+            // 
+            // label_frameRateHardMax
+            // 
+            this.label_frameRateHardMax.AutoSize = true;
+            this.label_frameRateHardMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_frameRateHardMax.Location = new System.Drawing.Point(39, 51);
+            this.label_frameRateHardMax.Name = "label_frameRateHardMax";
+            this.label_frameRateHardMax.Size = new System.Drawing.Size(25, 12);
+            this.label_frameRateHardMax.TabIndex = 18;
+            this.label_frameRateHardMax.Text = "xxxx";
             // 
             // label_frameRateMax
             // 
@@ -740,7 +755,7 @@ namespace simple_live_windows_forms
             // labelCounter
             // 
             this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(479, 496);
+            this.labelCounter.Location = new System.Drawing.Point(463, 488);
             this.labelCounter.Name = "labelCounter";
             this.labelCounter.Size = new System.Drawing.Size(13, 13);
             this.labelCounter.TabIndex = 14;
@@ -763,7 +778,7 @@ namespace simple_live_windows_forms
             this.numericUpDown_bufferSize.Size = new System.Drawing.Size(55, 20);
             this.numericUpDown_bufferSize.TabIndex = 15;
             this.numericUpDown_bufferSize.Value = new decimal(new int[] {
-            100,
+            200,
             0,
             0,
             0});
@@ -817,7 +832,7 @@ namespace simple_live_windows_forms
             // label_fps
             // 
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(518, 495);
+            this.label_fps.Location = new System.Drawing.Point(518, 488);
             this.label_fps.Name = "label_fps";
             this.label_fps.Size = new System.Drawing.Size(31, 13);
             this.label_fps.TabIndex = 20;
@@ -886,19 +901,19 @@ namespace simple_live_windows_forms
             this.button_load.UseVisualStyleBackColor = true;
             this.button_load.Click += new System.EventHandler(this.button_load_Click);
             // 
-            // label_frameRateHardMax
+            // label_pixelClock
             // 
-            this.label_frameRateHardMax.AutoSize = true;
-            this.label_frameRateHardMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateHardMax.Location = new System.Drawing.Point(39, 51);
-            this.label_frameRateHardMax.Name = "label_frameRateHardMax";
-            this.label_frameRateHardMax.Size = new System.Drawing.Size(25, 12);
-            this.label_frameRateHardMax.TabIndex = 18;
-            this.label_frameRateHardMax.Text = "xxxx";
+            this.label_pixelClock.AutoSize = true;
+            this.label_pixelClock.Location = new System.Drawing.Point(469, 502);
+            this.label_pixelClock.Name = "label_pixelClock";
+            this.label_pixelClock.Size = new System.Drawing.Size(60, 13);
+            this.label_pixelClock.TabIndex = 28;
+            this.label_pixelClock.Text = "xxxM clock";
             // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 514);
+            this.Controls.Add(this.label_pixelClock);
             this.Controls.Add(this.button_load);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.checkBox_LED);
@@ -1170,8 +1185,8 @@ namespace simple_live_windows_forms
 
         private void numericUpDown_exposureTime_ValueChanged(object sender, EventArgs e)
         {
-            
-         }
+            updateCameraParams();
+        }
 
         private Panel panel2;
         public NumericUpDown numericUpDown_frameRate;
@@ -1200,6 +1215,7 @@ namespace simple_live_windows_forms
         private void numericUpDown_frameRate_ValueChanged(object sender, EventArgs e)
         {
             numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
 
             if (numericUpDown_frameRate.Value > frameRateHardMax)
             {
@@ -1217,6 +1233,22 @@ namespace simple_live_windows_forms
 
             }
 
+            updatePixelClock();
+
+            updateCameraParams();
+
+
+            numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+
+
+        }
+        public void updatePixelClock()
+        {
+            label_pixelClock.Text = backEnd.getPixelClock(numericUpDown_frameRate.Value,numericUpDown_h.Value).ToString() + "Mclock";
+        }
+        public void updateCameraParams()
+        {
             if (!(backEnd == null))
             {
                 if (backEnd.IsActive())
@@ -1226,21 +1258,20 @@ namespace simple_live_windows_forms
                     backEnd.adjustParam("AcquisitionFrameRate");
                     numericUpDown_frameRate.Value = frameRateTmp;
 
-
-
                     backEnd.adjustParam("ExposureTime");
+                    backEnd.adjustParam("DeviceClockFrequency");
                     backEnd.adjustParam("AcquisitionFrameRate");
+                    
 
                 }
             }
 
 
-            numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
-
-
         }
 
-        
+
+
+
 
         private void checkBox_exposurTimeMax_CheckedChanged(object sender, EventArgs e)
         {
@@ -1298,6 +1329,7 @@ namespace simple_live_windows_forms
             numericUpDown_h.Value = numericUpDown_h.Value - (numericUpDown_h.Value % numericUpDown_h.Increment);
             numericUpDown_h.ValueChanged += new System.EventHandler(this.numericUpDown_h_ValueChanged);
             positionCheck();
+            updatePixelClock();
         }
 
         private void positionCheck()
@@ -1570,6 +1602,7 @@ namespace simple_live_windows_forms
         }
 
         private Label label_frameRateHardMax;
+        public Label label_pixelClock;
     }
 }
 
