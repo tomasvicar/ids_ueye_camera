@@ -42,7 +42,7 @@ namespace simple_live_windows_forms
     public class AcquisitionWorker
     {
         // Event which is raised if a new image was received
-        public delegate void ImageReceivedEventHandler(object sender, Bitmap image);
+        public delegate void ImageReceivedEventHandler(object sender, Bitmap image, uint counter);
         public event ImageReceivedEventHandler ImageReceived;
 
         // Event which is raised if the counters has changed
@@ -69,7 +69,7 @@ namespace simple_live_windows_forms
         private peak.ipl.ImageTransformer m_imageTransformerIPL;
 
         private bool running;
-        private uint frameCounter;
+        public uint frameCounter;
         private uint errorCounter;
         public ColorPalette colorPalette_grayscale = GetGrayScalePalette();
         private bool triger_first_time;
@@ -170,7 +170,7 @@ namespace simple_live_windows_forms
                     if (ImageReceived != null)
                     {
                         Console.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
-                        ImageReceived(this, imageCopy);
+                        ImageReceived(this, imageCopy, frameCounter);
                     }
                     else
                     {

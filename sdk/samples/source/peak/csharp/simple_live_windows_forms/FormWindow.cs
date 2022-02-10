@@ -61,6 +61,8 @@ namespace simple_live_windows_forms
         private decimal exposureSafeMargin = 0.5m;
         private decimal frameRateHardMax;
 
+        private bool stopTrigerClicked2;
+
 
 
         public decimal x_min { get; set; }
@@ -149,6 +151,7 @@ namespace simple_live_windows_forms
             Console.WriteLine("--- [FormWindow] Init");
             InitializeComponent();
 
+            this.Show();
             
 
             backEnd = new BackEnd();
@@ -175,16 +178,17 @@ namespace simple_live_windows_forms
 
             label_comPortStatus_Click(null, EventArgs.Empty);
 
-
+            Console.WriteLine("COM finished");
 
 
 
         }
 
-        private void backEnd_ImageReceived(object sender, Bitmap image)
+        private void backEnd_ImageReceived(object sender, Bitmap image, uint counter)
         {
             try
             {
+
 
                 if (is_triger)
                 {
@@ -194,6 +198,7 @@ namespace simple_live_windows_forms
                 if (is_triger)
                 {
                     tmp_show = (int.Parse(labelCounter.Text) % numericUpDown_pictureBoxTimeDecimation.Value) == 0;
+                    ///tmp_show = (counter % numericUpDown_pictureBoxTimeDecimation.Value) == 0;
                 }
                 else
                 {
@@ -216,7 +221,8 @@ namespace simple_live_windows_forms
 
 
 
-                if ((int.Parse(labelCounter.Text) % 20) == 0)
+                if (((int.Parse(labelCounter.Text) % 40) == 10)  & (int.Parse(labelCounter.Text) > 10))
+                // if ((counter % 20) == 0)
                 {
                     if (sw.IsRunning)
                     {
@@ -225,9 +231,23 @@ namespace simple_live_windows_forms
                         sw.Restart();
 
 
-                        Console.WriteLine("-----FPS----- " + (20.0 / ts.TotalSeconds).ToString());
+                        Console.WriteLine("-----FPS----- " + (40.0 / ts.TotalSeconds).ToString());
 
-                        label_fps.BeginInvoke((MethodInvoker)delegate { label_fps.Text = Math.Round(20.0 / ts.TotalSeconds).ToString()  + "fps"; });
+                        label_fps.BeginInvoke((MethodInvoker)delegate { 
+                            
+                            label_fps.Text = Math.Round(40.0 / ts.TotalSeconds).ToString()  + "fps";
+
+                            if  (Convert.ToDecimal(Math.Round(40.0 / ts.TotalSeconds)) != Math.Round(numericUpDown_frameRate.Value))
+                            {
+                                label_fps.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                label_fps.ForeColor = Color.Black;
+                            }
+
+
+                        });
                      }
 
 
@@ -263,6 +283,27 @@ namespace simple_live_windows_forms
             {
                 labelCounter.BeginInvoke((MethodInvoker)delegate { labelCounter.Text = frameCounter.ToString(); });
             }
+
+            if (labelCounter.InvokeRequired)
+            {
+                labelCounter.BeginInvoke((MethodInvoker)delegate {
+
+                    if (errorCounter == 0)
+                    {
+                        label_error.ForeColor = Color.Black;
+                    }
+
+                    if (!stopTrigerClicked2)
+                    {
+                        label_error.Text = errorCounter.ToString();
+                        if (errorCounter != 0)
+                        {
+                            label_error.ForeColor = Color.Red;
+                        }
+                    }
+                });
+            }
+
         }
 
         private void backEnd_MessageBoxTrigger(object sender, String messageTitle, String messageText)
@@ -339,6 +380,7 @@ namespace simple_live_windows_forms
             this.numericUpDown_exposureTime = new System.Windows.Forms.NumericUpDown();
             this.label_exposureTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label_frameRateMax = new System.Windows.Forms.Label();
             this.label_frameRateMin = new System.Windows.Forms.Label();
             this.numericUpDown_frameRate = new System.Windows.Forms.NumericUpDown();
             this.label_frameRate = new System.Windows.Forms.Label();
@@ -370,7 +412,7 @@ namespace simple_live_windows_forms
             this.button_save = new System.Windows.Forms.Button();
             this.button_load = new System.Windows.Forms.Button();
             this.label_pixelClock = new System.Windows.Forms.Label();
-            this.label_frameRateMax = new System.Windows.Forms.Label();
+            this.label_error = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -572,6 +614,16 @@ namespace simple_live_windows_forms
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(89, 72);
             this.panel2.TabIndex = 12;
+            // 
+            // label_frameRateMax
+            // 
+            this.label_frameRateMax.AutoSize = true;
+            this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_frameRateMax.Location = new System.Drawing.Point(42, 42);
+            this.label_frameRateMax.Name = "label_frameRateMax";
+            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
+            this.label_frameRateMax.TabIndex = 17;
+            this.label_frameRateMax.Text = "xxxx";
             // 
             // label_frameRateMin
             // 
@@ -828,7 +880,7 @@ namespace simple_live_windows_forms
             // 
             this.label_fps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(518, 488);
+            this.label_fps.Location = new System.Drawing.Point(527, 486);
             this.label_fps.Name = "label_fps";
             this.label_fps.Size = new System.Drawing.Size(31, 13);
             this.label_fps.TabIndex = 20;
@@ -913,19 +965,19 @@ namespace simple_live_windows_forms
             this.label_pixelClock.TabIndex = 28;
             this.label_pixelClock.Text = "xxxMclock";
             // 
-            // label_frameRateMax
+            // label_error
             // 
-            this.label_frameRateMax.AutoSize = true;
-            this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label_frameRateMax.Location = new System.Drawing.Point(42, 42);
-            this.label_frameRateMax.Name = "label_frameRateMax";
-            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
-            this.label_frameRateMax.TabIndex = 17;
-            this.label_frameRateMax.Text = "xxxx";
+            this.label_error.AutoSize = true;
+            this.label_error.Location = new System.Drawing.Point(535, 501);
+            this.label_error.Name = "label_error";
+            this.label_error.Size = new System.Drawing.Size(13, 13);
+            this.label_error.TabIndex = 29;
+            this.label_error.Text = "0";
             // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(880, 514);
+            this.Controls.Add(this.label_error);
             this.Controls.Add(this.label_pixelClock);
             this.Controls.Add(this.button_load);
             this.Controls.Add(this.button_save);
@@ -990,7 +1042,7 @@ namespace simple_live_windows_forms
             numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
             numericUpDown_frameRate.DecimalPlaces = 0;
             numericUpDown_frameRate.Maximum = frameRateHardMax;
-            numericUpDown_frameRate.Minimum = 1.0m;
+            numericUpDown_frameRate.Minimum = 5.0m;
             numericUpDown_frameRate.Increment = 1m;
             numericUpDown_frameRate.Value = 10m;
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
@@ -1080,6 +1132,8 @@ namespace simple_live_windows_forms
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            stopTrigerClicked2 = false;
+
             is_triger = false;
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
@@ -1373,7 +1427,7 @@ namespace simple_live_windows_forms
 
         private void button_triger_Click(object sender, EventArgs e)
         {
-
+            stopTrigerClicked2 = false;
             if (buttonStart.Enabled == false)
             {
                 myStop();
@@ -1398,6 +1452,7 @@ namespace simple_live_windows_forms
 
         private void button_stopTriger_Click(object sender, EventArgs e)
         {
+
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
             button_triger.Enabled = true;
@@ -1405,6 +1460,7 @@ namespace simple_live_windows_forms
             button_load.Enabled = true;
 
             stopTrigerClicked = true;
+            stopTrigerClicked2 = true;
             ComTrigerOff();
         }
 
@@ -1420,6 +1476,8 @@ namespace simple_live_windows_forms
 
             ArrayComPortsNames = SerialPort.GetPortNames();
 
+
+
             if (!(comPort == null))
             {
                 if (comPort.IsOpen)
@@ -1431,27 +1489,37 @@ namespace simple_live_windows_forms
             }
 
 
+
             foreach (string port in ArrayComPortsNames)
             {
 
 
-
-                Console.WriteLine(port);
-                comPort = new SerialPort(port, 9600);
-
-                comPort.Open();
-
-                comPort.WriteTimeout = 500;
-                comPort.ReadTimeout = 2000;
-
-                comPort.WriteLine("ok?");
-
+                
 
 
                 try
                 {
+
+
+
+                    Console.WriteLine(port);
+                    comPort = new SerialPort(port, 9600);
+
+
+
+                    comPort.Open();
+
+
+                    comPort.WriteTimeout = 500;
+                    comPort.ReadTimeout = 2000;
+
+                    comPort.WriteLine("ok?");
+
+
+
                     string message = comPort.ReadLine();
                     Console.WriteLine(message);
+
                     if (message.Trim() == "ok")
                     {
                         label_comPortStatus.Text = port;
@@ -1461,10 +1529,13 @@ namespace simple_live_windows_forms
                         comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
                         checkBox_LED_CheckedChanged(null, EventArgs.Empty);
+
+
                     }
                     else
                     {
                         comPort.Close();
+
                     }
 
                 }
@@ -1473,7 +1544,12 @@ namespace simple_live_windows_forms
                     Console.WriteLine("time out");
                     comPort.Close();
                 }
+                catch (Exception ex)
+                {
 
+                    Console.WriteLine(ex.ToString());
+                    comPort.Close();
+                }
 
 
 
@@ -1481,10 +1557,16 @@ namespace simple_live_windows_forms
 
             if (label_comPortStatus.Text == "Connecting")
             {
+                Console.WriteLine("COM step 10");
+
+
                 label_comPortStatus.Text = "NA";
 
                 label_comPortStatus.ForeColor = System.Drawing.Color.Red;
             }
+
+            Console.WriteLine("COM step 11");
+
 
         }
 
@@ -1613,6 +1695,7 @@ namespace simple_live_windows_forms
         }
         public Label label_pixelClock;
         private Label label_frameRateMax;
+        private Label label_error;
     }
 }
 

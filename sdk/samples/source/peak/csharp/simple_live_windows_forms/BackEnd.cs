@@ -35,7 +35,7 @@ namespace simple_live_windows_forms
     class BackEnd
     {
         // Event which is raised if a new image was received
-        public delegate void ImageReceivedEventHandler(object sender, Bitmap image);
+        public delegate void ImageReceivedEventHandler(object sender, Bitmap image, uint counter);
         public event ImageReceivedEventHandler ImageReceived;
 
         // Event which is raised if the counters has changed
@@ -148,7 +148,7 @@ namespace simple_live_windows_forms
 
                 if (windowForm.is_triger)
                 {
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value * 1.10m));
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(windowForm.numericUpDown_frameRate.Value * 1.15m));
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("AcquisitionMode").SetCurrentEntry("Continuous");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
@@ -360,9 +360,9 @@ namespace simple_live_windows_forms
 
         }
 
-        private void acquisitionWorker_ImageReceived(object sender, System.Drawing.Bitmap image)
+        private void acquisitionWorker_ImageReceived(object sender, System.Drawing.Bitmap image, uint counter)
         {
-            ImageReceived(sender, image);
+            ImageReceived(sender, image, counter);
         }
 
         private void acquisitionWorker_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
@@ -522,7 +522,7 @@ namespace simple_live_windows_forms
         }
         public decimal getPixelClock(decimal fps, decimal heght)
         {
-            decimal pc_orig = ((fps * heght) / windowForm.c) * 1.2m;
+            decimal pc_orig = ((fps * heght) / windowForm.c) * 1.3m;
 
             decimal[] allowed_values = {470m, 237m, 118m, 59m, 30m, 0m};
             decimal maxValue = windowForm.deviceClockFrequency_max;

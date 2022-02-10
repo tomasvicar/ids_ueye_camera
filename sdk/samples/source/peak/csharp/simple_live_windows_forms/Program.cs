@@ -45,10 +45,8 @@ namespace simple_live_windows_forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FormWindow formWindow = new FormWindow();
-            if (!formWindow.HasError())
-            {
-                Application.Run(formWindow);
-            }
+            Application.Run(formWindow);
+
         }
     }
 }
