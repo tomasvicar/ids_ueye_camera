@@ -38,6 +38,7 @@ using System.IO;
 using System.Globalization;
 using System.IO.Ports;
 using Newtonsoft.Json;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 
@@ -63,6 +64,10 @@ namespace simple_live_windows_forms
 
         private bool stopTrigerClicked2;
 
+        public MyDevice dev = null;
+        public string macAddr = "00:07:80:0F:30:1A";
+        public PluxWorker pluxWorker;
+        public List<PluxDotNet.Source> srcs;
 
 
         public decimal x_min { get; set; }
@@ -352,6 +357,8 @@ namespace simple_live_windows_forms
 
             }
 
+            closePlux();
+
 
         }
 
@@ -362,6 +369,21 @@ namespace simple_live_windows_forms
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.textBox_dataname = new System.Windows.Forms.TextBox();
@@ -413,6 +435,14 @@ namespace simple_live_windows_forms
             this.button_load = new System.Windows.Forms.Button();
             this.label_pixelClock = new System.Windows.Forms.Label();
             this.label_error = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button_pluxStart = new System.Windows.Forms.Button();
+            this.button_pluxStop = new System.Windows.Forms.Button();
+            this.label_pluxState = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -428,6 +458,11 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -437,15 +472,16 @@ namespace simple_live_windows_forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(880, 437);
+            this.pictureBox.Size = new System.Drawing.Size(862, 437);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
             // textBox_dataname
             // 
-            this.textBox_dataname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_dataname.Location = new System.Drawing.Point(565, 491);
+            this.textBox_dataname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_dataname.Location = new System.Drawing.Point(918, 465);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
             this.textBox_dataname.TabIndex = 2;
@@ -453,7 +489,8 @@ namespace simple_live_windows_forms
             // 
             // buttonStart
             // 
-            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStart.Location = new System.Drawing.Point(461, 438);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
@@ -464,7 +501,8 @@ namespace simple_live_windows_forms
             // 
             // buttonStop
             // 
-            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStop.Enabled = false;
             this.buttonStop.Location = new System.Drawing.Point(461, 462);
             this.buttonStop.Name = "buttonStop";
@@ -498,7 +536,8 @@ namespace simple_live_windows_forms
             // 
             // panel_gain
             // 
-            this.panel_gain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_gain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel_gain.Controls.Add(this.label_gainMax);
             this.panel_gain.Controls.Add(this.label_gainMin);
             this.panel_gain.Controls.Add(this.numericUpDown_gain);
@@ -530,8 +569,9 @@ namespace simple_live_windows_forms
             // 
             // button_triger
             // 
-            this.button_triger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_triger.Location = new System.Drawing.Point(564, 439);
+            this.button_triger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_triger.Location = new System.Drawing.Point(819, 449);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(93, 23);
             this.button_triger.TabIndex = 10;
@@ -541,7 +581,8 @@ namespace simple_live_windows_forms
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.Controls.Add(this.label_exposureTimeMax);
             this.panel1.Controls.Add(this.label_exposureTimeMin);
             this.panel1.Controls.Add(this.checkBox_exposurTimeMax);
@@ -605,7 +646,8 @@ namespace simple_live_windows_forms
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.Controls.Add(this.label_frameRateMax);
             this.panel2.Controls.Add(this.label_frameRateMin);
             this.panel2.Controls.Add(this.numericUpDown_frameRate);
@@ -659,7 +701,8 @@ namespace simple_live_windows_forms
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.Controls.Add(this.label_ySumMax);
             this.panel3.Controls.Add(this.label_xSumMax);
             this.panel3.Controls.Add(this.numericUpDown_h);
@@ -795,7 +838,8 @@ namespace simple_live_windows_forms
             // 
             // labelCounter
             // 
-            this.labelCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCounter.AutoSize = true;
             this.labelCounter.Location = new System.Drawing.Point(463, 488);
             this.labelCounter.Name = "labelCounter";
@@ -805,8 +849,9 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_bufferSize
             // 
-            this.numericUpDown_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(663, 455);
+            this.numericUpDown_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(546, 456);
             this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -828,9 +873,10 @@ namespace simple_live_windows_forms
             // 
             // label_bufferSize
             // 
-            this.label_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_bufferSize.AutoSize = true;
-            this.label_bufferSize.Location = new System.Drawing.Point(663, 440);
+            this.label_bufferSize.Location = new System.Drawing.Point(546, 441);
             this.label_bufferSize.Name = "label_bufferSize";
             this.label_bufferSize.Size = new System.Drawing.Size(56, 13);
             this.label_bufferSize.TabIndex = 16;
@@ -838,8 +884,9 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_pictureBoxTimeDecimation
             // 
-            this.numericUpDown_pictureBoxTimeDecimation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(724, 455);
+            this.numericUpDown_pictureBoxTimeDecimation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(607, 456);
             this.numericUpDown_pictureBoxTimeDecimation.Minimum = new decimal(new int[] {
             1,
             0,
@@ -856,9 +903,10 @@ namespace simple_live_windows_forms
             // 
             // label_subsample
             // 
-            this.label_subsample.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_subsample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_subsample.AutoSize = true;
-            this.label_subsample.Location = new System.Drawing.Point(725, 440);
+            this.label_subsample.Location = new System.Drawing.Point(608, 441);
             this.label_subsample.Name = "label_subsample";
             this.label_subsample.Size = new System.Drawing.Size(33, 13);
             this.label_subsample.TabIndex = 18;
@@ -866,9 +914,10 @@ namespace simple_live_windows_forms
             // 
             // button_stopTriger
             // 
-            this.button_stopTriger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_stopTriger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.button_stopTriger.Enabled = false;
-            this.button_stopTriger.Location = new System.Drawing.Point(564, 462);
+            this.button_stopTriger.Location = new System.Drawing.Point(819, 483);
             this.button_stopTriger.Name = "button_stopTriger";
             this.button_stopTriger.Size = new System.Drawing.Size(93, 23);
             this.button_stopTriger.TabIndex = 19;
@@ -878,7 +927,8 @@ namespace simple_live_windows_forms
             // 
             // label_fps
             // 
-            this.label_fps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_fps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_fps.AutoSize = true;
             this.label_fps.Location = new System.Drawing.Point(527, 486);
             this.label_fps.Name = "label_fps";
@@ -888,9 +938,10 @@ namespace simple_live_windows_forms
             // 
             // label_comPortStatus
             // 
-            this.label_comPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_comPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_comPortStatus.AutoSize = true;
-            this.label_comPortStatus.Location = new System.Drawing.Point(772, 444);
+            this.label_comPortStatus.Location = new System.Drawing.Point(662, 441);
             this.label_comPortStatus.Name = "label_comPortStatus";
             this.label_comPortStatus.Size = new System.Drawing.Size(57, 13);
             this.label_comPortStatus.TabIndex = 22;
@@ -899,9 +950,10 @@ namespace simple_live_windows_forms
             // 
             // label_recivedCommand
             // 
-            this.label_recivedCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_recivedCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_recivedCommand.AutoSize = true;
-            this.label_recivedCommand.Location = new System.Drawing.Point(772, 464);
+            this.label_recivedCommand.Location = new System.Drawing.Point(662, 461);
             this.label_recivedCommand.Name = "label_recivedCommand";
             this.label_recivedCommand.Size = new System.Drawing.Size(96, 13);
             this.label_recivedCommand.TabIndex = 23;
@@ -909,8 +961,9 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_LED
             // 
-            this.numericUpDown_LED.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_LED.Location = new System.Drawing.Point(782, 494);
+            this.numericUpDown_LED.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown_LED.Location = new System.Drawing.Point(672, 491);
             this.numericUpDown_LED.Name = "numericUpDown_LED";
             this.numericUpDown_LED.Size = new System.Drawing.Size(47, 20);
             this.numericUpDown_LED.TabIndex = 24;
@@ -923,9 +976,10 @@ namespace simple_live_windows_forms
             // 
             // checkBox_LED
             // 
-            this.checkBox_LED.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_LED.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox_LED.AutoSize = true;
-            this.checkBox_LED.Location = new System.Drawing.Point(734, 495);
+            this.checkBox_LED.Location = new System.Drawing.Point(624, 492);
             this.checkBox_LED.Name = "checkBox_LED";
             this.checkBox_LED.Size = new System.Drawing.Size(47, 17);
             this.checkBox_LED.TabIndex = 25;
@@ -935,8 +989,9 @@ namespace simple_live_windows_forms
             // 
             // button_save
             // 
-            this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_save.Location = new System.Drawing.Point(836, 477);
+            this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_save.Location = new System.Drawing.Point(726, 474);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(40, 21);
             this.button_save.TabIndex = 26;
@@ -946,8 +1001,9 @@ namespace simple_live_windows_forms
             // 
             // button_load
             // 
-            this.button_load.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_load.Location = new System.Drawing.Point(836, 496);
+            this.button_load.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_load.Location = new System.Drawing.Point(726, 493);
             this.button_load.Name = "button_load";
             this.button_load.Size = new System.Drawing.Size(40, 19);
             this.button_load.TabIndex = 27;
@@ -957,7 +1013,8 @@ namespace simple_live_windows_forms
             // 
             // label_pixelClock
             // 
-            this.label_pixelClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_pixelClock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_pixelClock.AutoSize = true;
             this.label_pixelClock.Location = new System.Drawing.Point(469, 502);
             this.label_pixelClock.Name = "label_pixelClock";
@@ -967,6 +1024,8 @@ namespace simple_live_windows_forms
             // 
             // label_error
             // 
+            this.label_error.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label_error.AutoSize = true;
             this.label_error.Location = new System.Drawing.Point(535, 501);
             this.label_error.Name = "label_error";
@@ -974,9 +1033,142 @@ namespace simple_live_windows_forms
             this.label_error.TabIndex = 29;
             this.label_error.Text = "0";
             // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
+            this.chart1.Location = new System.Drawing.Point(868, 2);
+            this.chart1.Name = "chart1";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
+            this.chart1.Size = new System.Drawing.Size(561, 80);
+            this.chart1.TabIndex = 30;
+            this.chart1.Text = "chart1";
+            // 
+            // chart2
+            // 
+            this.chart2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea7.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart2.Legends.Add(legend7);
+            this.chart2.Location = new System.Drawing.Point(868, 88);
+            this.chart2.Name = "chart2";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series7.IsVisibleInLegend = false;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chart2.Series.Add(series7);
+            this.chart2.Size = new System.Drawing.Size(561, 80);
+            this.chart2.TabIndex = 31;
+            this.chart2.Text = "chart2";
+            // 
+            // chart3
+            // 
+            this.chart3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea8.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart3.Legends.Add(legend8);
+            this.chart3.Location = new System.Drawing.Point(868, 161);
+            this.chart3.Name = "chart3";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series8.IsVisibleInLegend = false;
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chart3.Series.Add(series8);
+            this.chart3.Size = new System.Drawing.Size(561, 80);
+            this.chart3.TabIndex = 32;
+            this.chart3.Text = "chart3";
+            // 
+            // chart4
+            // 
+            this.chart4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea9.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.chart4.Legends.Add(legend9);
+            this.chart4.Location = new System.Drawing.Point(868, 247);
+            this.chart4.Name = "chart4";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series9.IsVisibleInLegend = false;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.chart4.Series.Add(series9);
+            this.chart4.Size = new System.Drawing.Size(561, 80);
+            this.chart4.TabIndex = 33;
+            this.chart4.Text = "chart4";
+            // 
+            // chart5
+            // 
+            this.chart5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea10.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            this.chart5.Legends.Add(legend10);
+            this.chart5.Location = new System.Drawing.Point(868, 333);
+            this.chart5.Name = "chart5";
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series10.IsVisibleInLegend = false;
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            this.chart5.Series.Add(series10);
+            this.chart5.Size = new System.Drawing.Size(561, 80);
+            this.chart5.TabIndex = 34;
+            this.chart5.Text = "chart5";
+            // 
+            // button_pluxStart
+            // 
+            this.button_pluxStart.Location = new System.Drawing.Point(1346, 443);
+            this.button_pluxStart.Name = "button_pluxStart";
+            this.button_pluxStart.Size = new System.Drawing.Size(75, 23);
+            this.button_pluxStart.TabIndex = 35;
+            this.button_pluxStart.Text = "Start";
+            this.button_pluxStart.UseVisualStyleBackColor = true;
+            this.button_pluxStart.Click += new System.EventHandler(this.button_pluxStart_Click);
+            // 
+            // button_pluxStop
+            // 
+            this.button_pluxStop.Location = new System.Drawing.Point(1346, 470);
+            this.button_pluxStop.Name = "button_pluxStop";
+            this.button_pluxStop.Size = new System.Drawing.Size(75, 23);
+            this.button_pluxStop.TabIndex = 36;
+            this.button_pluxStop.Text = "Stop";
+            this.button_pluxStop.UseVisualStyleBackColor = true;
+            this.button_pluxStop.Click += new System.EventHandler(this.button_pluxStop_Click);
+            // 
+            // label_pluxState
+            // 
+            this.label_pluxState.AutoSize = true;
+            this.label_pluxState.Location = new System.Drawing.Point(1288, 464);
+            this.label_pluxState.Name = "label_pluxState";
+            this.label_pluxState.Size = new System.Drawing.Size(52, 13);
+            this.label_pluxState.TabIndex = 37;
+            this.label_pluxState.Text = "plux state";
+            this.label_pluxState.Click += new System.EventHandler(this.label_pluxState_Click);
+            // 
             // FormWindow
             // 
-            this.ClientSize = new System.Drawing.Size(880, 514);
+            this.ClientSize = new System.Drawing.Size(1428, 514);
+            this.Controls.Add(this.label_pluxState);
+            this.Controls.Add(this.button_pluxStop);
+            this.Controls.Add(this.button_pluxStart);
+            this.Controls.Add(this.chart5);
+            this.Controls.Add(this.chart4);
+            this.Controls.Add(this.chart3);
+            this.Controls.Add(this.chart2);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label_error);
             this.Controls.Add(this.label_pixelClock);
             this.Controls.Add(this.button_load);
@@ -1022,6 +1214,11 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LED)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1118,6 +1315,11 @@ namespace simple_live_windows_forms
 
 
 
+            chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart2.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart3.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart4.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart5.ChartAreas[0].AxisY.IsStartedFromZero = false;
         }
 
 
@@ -1184,6 +1386,8 @@ namespace simple_live_windows_forms
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
                 writer.Open(filename, Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
 
+                startRecordPlux(filename.Replace(".avi",".txt"));
+
             }
 
             try
@@ -1234,6 +1438,8 @@ namespace simple_live_windows_forms
             if (is_triger)
             {
                 writer.Close();
+
+                button_pluxStop_Click(this, EventArgs.Empty);
             }
 
 
@@ -1696,6 +1902,132 @@ namespace simple_live_windows_forms
         public Label label_pixelClock;
         private Label label_frameRateMax;
         private Label label_error;
+        private Button button_pluxStart;
+        private Button button_pluxStop;
+        private Label label_pluxState;
+        public Chart chart1;
+        public Chart chart2;
+        public Chart chart3;
+        public Chart chart4;
+        public Chart chart5;
+
+
+        public bool openPlux()
+        {
+            try
+            {
+                Console.WriteLine("Connecting to {0}...", macAddr);
+
+                dev = new MyDevice(macAddr);
+                Dictionary<string, object> props = dev.GetProperties();
+                Console.WriteLine("Device description: {0} - {1}", props["description"], props["path"]);
+
+                dev.freq = 1000;  // acquisition base frequency of 1000 Hz
+                dev.form1 = this;
+
+                //dev.Start(dev.freq, 0xFF, 16);
+
+                PluxDotNet.Source src_ecg = new PluxDotNet.Source();
+                src_ecg.port = 1;
+
+                PluxDotNet.Source src_resp = new PluxDotNet.Source();
+                src_resp.port = 2;
+
+                PluxDotNet.Source src_triger = new PluxDotNet.Source();
+                src_triger.port = 3;
+
+                PluxDotNet.Source src_spo2_R_IR = new PluxDotNet.Source();
+                src_spo2_R_IR.port = 9;
+                src_spo2_R_IR.chMask = 0x03;
+
+                //PluxDotNet.Source src_spo2_oxi = new PluxDotNet.Source();
+                //src_spo2_oxi.port = 11;
+                //src_spo2_oxi.chMask = 0x0F;
+
+
+
+                srcs = new List<PluxDotNet.Source>() { src_ecg, src_resp, src_triger, src_spo2_R_IR };
+
+
+                dev.Start(dev.freq, srcs);
+
+
+                dev.Stop();
+
+                Console.WriteLine("Device opened");
+
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+
+
+        }
+        public void closePlux()
+        {
+            if (dev != null)
+            {
+                dev.Dispose();
+                Console.WriteLine("Plux device closed");
+            }
+
+        }
+        public void startRecordPlux(string filename)
+        {
+            if (pluxWorker.dev.running == false) 
+            {
+                button_pluxStart_Click(this, EventArgs.Empty);
+            }
+
+
+        }
+
+
+        private void label_pluxState_Click(object sender, EventArgs e)
+        {
+            if (openPlux())
+            {
+                label_pluxState.Text = "connected";
+                label_pluxState.ForeColor = Color.Green;
+            }
+            else 
+            {
+                label_pluxState.Text = "NA";
+                label_pluxState.ForeColor = Color.Red;
+            }
+        }
+
+        private void button_pluxStart_Click(object sender, EventArgs e)
+        {
+
+            chart1.Series[0].Points.Clear();
+            chart2.Series[0].Points.Clear();
+            chart3.Series[0].Points.Clear();
+            chart4.Series[0].Points.Clear();
+            chart5.Series[0].Points.Clear();
+
+
+            dev.Start(dev.freq, srcs);
+
+
+            pluxWorker = new PluxWorker();
+            pluxWorker.dev = dev;
+            Thread t = new Thread(new ThreadStart(pluxWorker.DoWork));
+
+            pluxWorker.dev.running = true;
+
+            t.Start();
+            Console.WriteLine("Acquisition started");
+        }
+
+        private void button_pluxStop_Click(object sender, EventArgs e)
+        {
+            
+            pluxWorker.dev.running = false;
+            Console.WriteLine("Acquisition stoped");
+        }
     }
 }
 

@@ -61,11 +61,16 @@
       <Link>FormWindow.Designer.cs</Link>
       <DependentUpon>FormWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyDevice.cs" />
+    <Compile Include="PluxWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="plux">
+      <HintPath>.\plux.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
@@ -91,6 +96,8 @@
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
