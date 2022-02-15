@@ -185,6 +185,8 @@ namespace simple_live_windows_forms
 
             Console.WriteLine("COM finished");
 
+            label_pluxState_Click(this, EventArgs.Empty);
+
 
 
         }
@@ -318,7 +320,9 @@ namespace simple_live_windows_forms
             {
 
                 buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
-                
+                //button_pluxStop.BeginInvoke((MethodInvoker)delegate { button_pluxStop.PerformClick(); });
+
+
                 stopTrigerClicked = false;
             }
             else 
@@ -443,6 +447,8 @@ namespace simple_live_windows_forms
             this.button_pluxStart = new System.Windows.Forms.Button();
             this.button_pluxStop = new System.Windows.Forms.Button();
             this.label_pluxState = new System.Windows.Forms.Label();
+            this.label_subsampling = new System.Windows.Forms.Label();
+            this.numericUpDown_subsampling = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -463,6 +469,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -1158,9 +1165,41 @@ namespace simple_live_windows_forms
             this.label_pluxState.Text = "plux state";
             this.label_pluxState.Click += new System.EventHandler(this.label_pluxState_Click);
             // 
+            // label_subsampling
+            // 
+            this.label_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_subsampling.AutoSize = true;
+            this.label_subsampling.Location = new System.Drawing.Point(1214, 466);
+            this.label_subsampling.Name = "label_subsampling";
+            this.label_subsampling.Size = new System.Drawing.Size(33, 13);
+            this.label_subsampling.TabIndex = 39;
+            this.label_subsampling.Text = "t sub.";
+            // 
+            // numericUpDown_subsampling
+            // 
+            this.numericUpDown_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1208, 482);
+            this.numericUpDown_subsampling.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_subsampling.Name = "numericUpDown_subsampling";
+            this.numericUpDown_subsampling.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_subsampling.TabIndex = 38;
+            this.numericUpDown_subsampling.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(1428, 514);
+            this.Controls.Add(this.label_subsampling);
+            this.Controls.Add(this.numericUpDown_subsampling);
             this.Controls.Add(this.label_pluxState);
             this.Controls.Add(this.button_pluxStop);
             this.Controls.Add(this.button_pluxStart);
@@ -1195,6 +1234,7 @@ namespace simple_live_windows_forms
             this.Controls.Add(this.pictureBox);
             this.Name = "FormWindow";
             this.Text = "Video-ophthalmoscope controler";
+            this.Load += new System.EventHandler(this.FormWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).EndInit();
             this.panel_gain.ResumeLayout(false);
@@ -1219,6 +1259,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1969,14 +2010,33 @@ namespace simple_live_windows_forms
         {
             if (dev != null)
             {
-                dev.Dispose();
-                Console.WriteLine("Plux device closed");
+                try
+                {
+                    dev.Dispose();
+                    Console.WriteLine("Plux device closed");
+                }
+                catch (Exception e) 
+                {
+                    Console.WriteLine(e);
+                }
             }
 
         }
         public void startRecordPlux(string filename)
         {
-            if (pluxWorker.dev.running == false) 
+            if (dev.running)
+            {
+                button_pluxStop_Click(this, EventArgs.Empty);
+            }
+
+            dev.textfile = new StreamWriter(filename);
+            dev.subsample_plot = Convert.ToInt32(numericUpDown_subsampling.Value);
+
+            Thread.Sleep(100);
+
+            dev.record = true;
+
+            if (dev.running == false) 
             {
                 button_pluxStart_Click(this, EventArgs.Empty);
             }
@@ -1987,6 +2047,7 @@ namespace simple_live_windows_forms
 
         private void label_pluxState_Click(object sender, EventArgs e)
         {
+            
             if (openPlux())
             {
                 label_pluxState.Text = "connected";
@@ -2008,7 +2069,7 @@ namespace simple_live_windows_forms
             chart4.Series[0].Points.Clear();
             chart5.Series[0].Points.Clear();
 
-
+            dev.subsample_plot = Convert.ToInt32(numericUpDown_subsampling.Value);
             dev.Start(dev.freq, srcs);
 
 
@@ -2026,7 +2087,16 @@ namespace simple_live_windows_forms
         {
             
             pluxWorker.dev.running = false;
+            dev.record = false;
             Console.WriteLine("Acquisition stoped");
+        }
+
+        private Label label_subsampling;
+        private NumericUpDown numericUpDown_subsampling;
+
+        private void FormWindow_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

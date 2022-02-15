@@ -12,10 +12,18 @@ namespace simple_live_windows_forms
 
         public void DoWork()
         {
-            dev.textfile = new StreamWriter("tmp.txt");
+
+            Console.WriteLine("Start loop");
             dev.Loop();
+            Console.WriteLine("Close loop");
             dev.Stop();
-            dev.textfile.Close();
+            if (dev.textfile != null)
+            {
+                if (dev.textfile.BaseStream != null)
+                {
+                    dev.textfile.Close();
+                }
+            }
         }
 
 
