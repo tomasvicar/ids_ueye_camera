@@ -373,21 +373,21 @@ namespace simple_live_windows_forms
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.textBox_dataname = new System.Windows.Forms.TextBox();
@@ -449,6 +449,10 @@ namespace simple_live_windows_forms
             this.label_pluxState = new System.Windows.Forms.Label();
             this.label_subsampling = new System.Windows.Forms.Label();
             this.numericUpDown_subsampling = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_red = new System.Windows.Forms.NumericUpDown();
+            this.label_red = new System.Windows.Forms.Label();
+            this.label_IR = new System.Windows.Forms.Label();
+            this.numericUpDown_IR = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -470,6 +474,8 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_red)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_IR)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -1043,18 +1049,18 @@ namespace simple_live_windows_forms
             // chart1
             // 
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea6.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart1.Legends.Add(legend6);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(868, 2);
             this.chart1.Name = "chart1";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chart1.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(561, 80);
             this.chart1.TabIndex = 30;
             this.chart1.Text = "chart1";
@@ -1062,18 +1068,18 @@ namespace simple_live_windows_forms
             // chart2
             // 
             this.chart2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea7.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chart2.Legends.Add(legend7);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(868, 88);
             this.chart2.Name = "chart2";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series7.IsVisibleInLegend = false;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chart2.Series.Add(series7);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
             this.chart2.Size = new System.Drawing.Size(561, 80);
             this.chart2.TabIndex = 31;
             this.chart2.Text = "chart2";
@@ -1081,18 +1087,18 @@ namespace simple_live_windows_forms
             // chart3
             // 
             this.chart3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea8.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chart3.Legends.Add(legend8);
+            chartArea3.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart3.Legends.Add(legend3);
             this.chart3.Location = new System.Drawing.Point(868, 161);
             this.chart3.Name = "chart3";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series8.IsVisibleInLegend = false;
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chart3.Series.Add(series8);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart3.Series.Add(series3);
             this.chart3.Size = new System.Drawing.Size(561, 80);
             this.chart3.TabIndex = 32;
             this.chart3.Text = "chart3";
@@ -1100,18 +1106,18 @@ namespace simple_live_windows_forms
             // chart4
             // 
             this.chart4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea9.Name = "ChartArea1";
-            this.chart4.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chart4.Legends.Add(legend9);
+            chartArea4.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart4.Legends.Add(legend4);
             this.chart4.Location = new System.Drawing.Point(868, 247);
             this.chart4.Name = "chart4";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series9.IsVisibleInLegend = false;
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chart4.Series.Add(series9);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart4.Series.Add(series4);
             this.chart4.Size = new System.Drawing.Size(561, 80);
             this.chart4.TabIndex = 33;
             this.chart4.Text = "chart4";
@@ -1119,18 +1125,18 @@ namespace simple_live_windows_forms
             // chart5
             // 
             this.chart5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea10.Name = "ChartArea1";
-            this.chart5.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            this.chart5.Legends.Add(legend10);
+            chartArea5.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart5.Legends.Add(legend5);
             this.chart5.Location = new System.Drawing.Point(868, 333);
             this.chart5.Name = "chart5";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series10.IsVisibleInLegend = false;
-            series10.Legend = "Legend1";
-            series10.Name = "Series1";
-            this.chart5.Series.Add(series10);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart5.Series.Add(series5);
             this.chart5.Size = new System.Drawing.Size(561, 80);
             this.chart5.TabIndex = 34;
             this.chart5.Text = "chart5";
@@ -1195,9 +1201,67 @@ namespace simple_live_windows_forms
             0,
             0});
             // 
+            // numericUpDown_red
+            // 
+            this.numericUpDown_red.Location = new System.Drawing.Point(1118, 439);
+            this.numericUpDown_red.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_red.Name = "numericUpDown_red";
+            this.numericUpDown_red.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_red.TabIndex = 40;
+            this.numericUpDown_red.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            this.numericUpDown_red.ValueChanged += new System.EventHandler(this.numericUpDown_red_ValueChanged);
+            // 
+            // label_red
+            // 
+            this.label_red.AutoSize = true;
+            this.label_red.Location = new System.Drawing.Point(1115, 423);
+            this.label_red.Name = "label_red";
+            this.label_red.Size = new System.Drawing.Size(27, 13);
+            this.label_red.TabIndex = 41;
+            this.label_red.Text = "Red";
+            // 
+            // label_IR
+            // 
+            this.label_IR.AutoSize = true;
+            this.label_IR.Location = new System.Drawing.Point(1171, 422);
+            this.label_IR.Name = "label_IR";
+            this.label_IR.Size = new System.Drawing.Size(18, 13);
+            this.label_IR.TabIndex = 43;
+            this.label_IR.Text = "IR";
+            // 
+            // numericUpDown_IR
+            // 
+            this.numericUpDown_IR.Location = new System.Drawing.Point(1174, 438);
+            this.numericUpDown_IR.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_IR.Name = "numericUpDown_IR";
+            this.numericUpDown_IR.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_IR.TabIndex = 42;
+            this.numericUpDown_IR.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.numericUpDown_IR.ValueChanged += new System.EventHandler(this.numericUpDown_IR_ValueChanged);
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(1428, 514);
+            this.Controls.Add(this.label_IR);
+            this.Controls.Add(this.numericUpDown_IR);
+            this.Controls.Add(this.label_red);
+            this.Controls.Add(this.numericUpDown_red);
             this.Controls.Add(this.label_subsampling);
             this.Controls.Add(this.numericUpDown_subsampling);
             this.Controls.Add(this.label_pluxState);
@@ -1260,6 +1324,8 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_red)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_IR)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1686,6 +1752,8 @@ namespace simple_live_windows_forms
             button_triger.Enabled = false;
             button_stopTriger.Enabled = true;
             button_load.Enabled = false;
+            button_pluxStart.Enabled = false; 
+            button_pluxStop.Enabled = false;
 
             is_triger = true;
             myStart();
@@ -1705,6 +1773,8 @@ namespace simple_live_windows_forms
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
             button_load.Enabled = true;
+            button_pluxStart.Enabled = true;
+            button_pluxStop.Enabled = false;
 
             stopTrigerClicked = true;
             stopTrigerClicked2 = true;
@@ -1884,7 +1954,11 @@ namespace simple_live_windows_forms
             public decimal time_decimation { get; set; }
             public decimal buffer_size { get; set; }
             public bool rot180 { get; set; }
+            public decimal red { get; set; }
+            public decimal IR { get; set; }
+            public decimal subsampling { get; set; }
             
+
         }
 
 
@@ -1904,6 +1978,9 @@ namespace simple_live_windows_forms
             jsonData.time_decimation = numericUpDown_pictureBoxTimeDecimation.Value;
             jsonData.buffer_size = numericUpDown_bufferSize.Value;
             jsonData.rot180 = checkBox_rot180.Checked;
+            jsonData.red = numericUpDown_red.Value;
+            jsonData.IR = numericUpDown_IR.Value;
+            jsonData.subsampling = numericUpDown_subsampling.Value;
 
             string json = JsonConvert.SerializeObject(jsonData);
             File.WriteAllText("settings.json", json);
@@ -1936,6 +2013,9 @@ namespace simple_live_windows_forms
             numericUpDown_pictureBoxTimeDecimation.Value = jsonData_loaded.time_decimation;
             numericUpDown_bufferSize.Value = jsonData_loaded.buffer_size;
             checkBox_rot180.Checked = jsonData_loaded.rot180;
+            numericUpDown_red.Value = jsonData_loaded.red;
+            numericUpDown_IR.Value = jsonData_loaded.IR;
+            numericUpDown_subsampling.Value = jsonData_loaded.subsampling;
 
             numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
             numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
@@ -1981,6 +2061,8 @@ namespace simple_live_windows_forms
                 src_spo2_R_IR.port = 9;
                 src_spo2_R_IR.chMask = 0x03;
 
+                
+
                 //PluxDotNet.Source src_spo2_oxi = new PluxDotNet.Source();
                 //src_spo2_oxi.port = 11;
                 //src_spo2_oxi.chMask = 0x0F;
@@ -1989,6 +2071,8 @@ namespace simple_live_windows_forms
 
                 srcs = new List<PluxDotNet.Source>() { src_ecg, src_resp, src_triger, src_spo2_R_IR };
 
+                int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
+                dev.SetParameter(0x05, 0x03, LED_param, 2);
 
                 dev.Start(dev.freq, srcs);
 
@@ -2062,6 +2146,8 @@ namespace simple_live_windows_forms
 
         private void button_pluxStart_Click(object sender, EventArgs e)
         {
+            button_pluxStart.Enabled = false;
+            button_pluxStop.Enabled = true;
 
             chart1.Series[0].Points.Clear();
             chart2.Series[0].Points.Clear();
@@ -2070,6 +2156,8 @@ namespace simple_live_windows_forms
             chart5.Series[0].Points.Clear();
 
             dev.subsample_plot = Convert.ToInt32(numericUpDown_subsampling.Value);
+            int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
+            dev.SetParameter(0x05, 0x03, LED_param, 2);
             dev.Start(dev.freq, srcs);
 
 
@@ -2085,7 +2173,9 @@ namespace simple_live_windows_forms
 
         private void button_pluxStop_Click(object sender, EventArgs e)
         {
-            
+            button_pluxStart.Enabled = true;
+            button_pluxStop.Enabled = false;
+
             pluxWorker.dev.running = false;
             dev.record = false;
             Console.WriteLine("Acquisition stoped");
@@ -2097,6 +2187,28 @@ namespace simple_live_windows_forms
         private void FormWindow_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private NumericUpDown numericUpDown_red;
+        private Label label_red;
+        private Label label_IR;
+        private NumericUpDown numericUpDown_IR;
+
+        private void numericUpDown_red_ValueChanged(object sender, EventArgs e)
+        {
+            update_plux_led();
+        }
+
+
+        private void update_plux_led()
+        {
+            int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value) };
+            dev.SetParameter(0x05, 0x03, LED_param, 2);
+        }
+
+        private void numericUpDown_IR_ValueChanged(object sender, EventArgs e)
+        {
+            update_plux_led();
         }
     }
 }

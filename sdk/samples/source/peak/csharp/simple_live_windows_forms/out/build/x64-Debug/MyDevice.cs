@@ -26,7 +26,7 @@ namespace simple_live_windows_forms
         public override bool OnRawFrame(int nSeq, int[] data)
         {
 
-            Console.WriteLine("OnFrame");
+            //Console.WriteLine("OnFrame");
 
             if (!running)
                 return true;
@@ -57,11 +57,12 @@ namespace simple_live_windows_forms
 
             if (nSeq % subsample_plot == 0)
             {
-                Console.WriteLine("Plot");
+                //Console.WriteLine("Plot");
 
+                float t = (float)nSeq / (float)freq;
 
                 float remove = ((float)show_time_range_s / (float)subsample_plot) * (float)freq;
-                Console.WriteLine(remove);
+                //Console.WriteLine(remove);
 
 
                 //System.Console.Write("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]");
@@ -71,12 +72,22 @@ namespace simple_live_windows_forms
                 //    System.Console.Write(" {0}", val);
 
 
+                double ecg = data[0];
+                double spiro = data[1];
+                double triger = data[2];
+                double red = data[3];
+                double ir = data[4];
 
+                ecg = (ecg / 65536.0 - 0.5) * 3.0;
+                spiro = (spiro / 65536.0 - 0.5) * 100;
+                triger = (triger / 65536.0) * 3 - 1.5;
+                red = (red / 65536.0) * 1.2;
+                ir = (ir / 65536.0) * 1.2;
 
 
                 form1.chart1.BeginInvoke((MethodInvoker)delegate {
-                    form1.chart1.Series[0].Points.AddXY(nSeq, data[0]);
-                    if (form1.chart1.Series[0].Points.Count > remove)//)((show_time_range_s/subsample_plot)* freq))
+                    form1.chart1.Series[0].Points.AddXY(t, ecg);
+                    if (form1.chart1.Series[0].Points.Count > remove)
                     {
                         form1.chart1.Series[0].Points.RemoveAt(0);
                         
@@ -85,7 +96,7 @@ namespace simple_live_windows_forms
                 });
 
                 form1.chart2.BeginInvoke((MethodInvoker)delegate {
-                    form1.chart2.Series[0].Points.AddXY(nSeq, data[1]);
+                    form1.chart2.Series[0].Points.AddXY(t, spiro);
                     if (form1.chart2.Series[0].Points.Count > remove)
                     {
                         form1.chart2.Series[0].Points.RemoveAt(0);
@@ -95,7 +106,7 @@ namespace simple_live_windows_forms
                 });
 
                 form1.chart3.BeginInvoke((MethodInvoker)delegate {
-                    form1.chart3.Series[0].Points.AddXY(nSeq, data[2]);
+                    form1.chart3.Series[0].Points.AddXY(t, triger);
                     if (form1.chart3.Series[0].Points.Count > remove)
                     {
                         form1.chart3.Series[0].Points.RemoveAt(0);
@@ -105,7 +116,7 @@ namespace simple_live_windows_forms
                 });
 
                 form1.chart4.BeginInvoke((MethodInvoker)delegate {
-                    form1.chart4.Series[0].Points.AddXY(nSeq, data[3]);
+                    form1.chart4.Series[0].Points.AddXY(t, red);
                     if (form1.chart4.Series[0].Points.Count > remove)
                     {
                         form1.chart4.Series[0].Points.RemoveAt(0);
@@ -115,7 +126,7 @@ namespace simple_live_windows_forms
                 });
 
                 form1.chart5.BeginInvoke((MethodInvoker)delegate {
-                    form1.chart5.Series[0].Points.AddXY(nSeq, data[4]);
+                    form1.chart5.Series[0].Points.AddXY(t, ir);
                     if (form1.chart5.Series[0].Points.Count > remove)
                     {
                         form1.chart5.Series[0].Points.RemoveAt(0);
