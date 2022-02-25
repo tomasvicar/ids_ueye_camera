@@ -9,7 +9,14 @@
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "CMAKE_SCRIPTS_PATH",
+          "value": "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/../../_cmake_scripts",
+          "type": "STRING"
+        }
+      ]
     }
   ]
 }

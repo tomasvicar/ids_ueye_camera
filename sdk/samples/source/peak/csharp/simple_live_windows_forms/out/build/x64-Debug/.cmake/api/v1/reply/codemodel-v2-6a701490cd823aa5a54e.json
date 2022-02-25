@@ -49,14 +49,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ZERO_CHECK-Release-8428f6fb2742447736e2.json",
+					"jsonFile" : "target-ZERO_CHECK-Release-78b92b91f02ee5601c8b.json",
 					"name" : "ZERO_CHECK",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simple_live_windows_forms_csharp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simple_live_windows_forms_csharp-Release-199e731412ac55581455.json",
+					"jsonFile" : "target-simple_live_windows_forms_csharp-Release-87685f97a82f2d5c39de.json",
 					"name" : "simple_live_windows_forms_csharp",
 					"projectIndex" : 0
 				}
@@ -66,8 +66,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug",
-		"source" : "C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms"
+		"build" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug",
+		"source" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms"
 	},
 	"version" : 
 	{

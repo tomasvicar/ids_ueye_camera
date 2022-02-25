@@ -49,7 +49,7 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/_cmake_scripts/cmake_detect_architecture.cmake"
+			"path" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/_cmake_scripts/cmake_detect_architecture.cmake"
 		},
 		{
 			"isGenerated" : true,
@@ -232,8 +232,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug",
-		"source" : "C:/Users/vicar/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms"
+		"build" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms/out/build/x64-Debug",
+		"source" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/csharp/simple_live_windows_forms"
 	},
 	"version" : 
 	{

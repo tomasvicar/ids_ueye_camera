@@ -187,6 +187,16 @@ namespace simple_live_windows_forms
 
             label_pluxState_Click(this, EventArgs.Empty);
 
+            try
+            {
+                button_load_Click(this, EventArgs.Empty);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.WriteLine("loading defaults");
+            }
+
 
 
         }
@@ -485,18 +495,19 @@ namespace simple_live_windows_forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(862, 437);
+            this.pictureBox.Size = new System.Drawing.Size(735, 613);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // textBox_dataname
             // 
             this.textBox_dataname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_dataname.Location = new System.Drawing.Point(918, 465);
+            this.textBox_dataname.Location = new System.Drawing.Point(922, 646);
             this.textBox_dataname.Name = "textBox_dataname";
-            this.textBox_dataname.Size = new System.Drawing.Size(161, 20);
+            this.textBox_dataname.Size = new System.Drawing.Size(161, 22);
             this.textBox_dataname.TabIndex = 2;
             this.textBox_dataname.Text = "dataset_name";
             // 
@@ -504,9 +515,9 @@ namespace simple_live_windows_forms
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStart.Location = new System.Drawing.Point(461, 438);
+            this.buttonStart.Location = new System.Drawing.Point(465, 619);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(75, 27);
             this.buttonStart.TabIndex = 8;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -517,9 +528,9 @@ namespace simple_live_windows_forms
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(461, 462);
+            this.buttonStop.Location = new System.Drawing.Point(465, 643);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.Size = new System.Drawing.Size(75, 30);
             this.buttonStop.TabIndex = 9;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -530,7 +541,7 @@ namespace simple_live_windows_forms
             this.label_gain.AutoSize = true;
             this.label_gain.Location = new System.Drawing.Point(3, 3);
             this.label_gain.Name = "label_gain";
-            this.label_gain.Size = new System.Drawing.Size(29, 13);
+            this.label_gain.Size = new System.Drawing.Size(38, 17);
             this.label_gain.TabIndex = 5;
             this.label_gain.Text = "Gain";
             // 
@@ -538,7 +549,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_gain.Location = new System.Drawing.Point(3, 19);
             this.numericUpDown_gain.Name = "numericUpDown_gain";
-            this.numericUpDown_gain.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown_gain.Size = new System.Drawing.Size(49, 22);
             this.numericUpDown_gain.TabIndex = 6;
             this.numericUpDown_gain.Value = new decimal(new int[] {
             1,
@@ -555,9 +566,9 @@ namespace simple_live_windows_forms
             this.panel_gain.Controls.Add(this.label_gainMin);
             this.panel_gain.Controls.Add(this.numericUpDown_gain);
             this.panel_gain.Controls.Add(this.label_gain);
-            this.panel_gain.Location = new System.Drawing.Point(0, 440);
+            this.panel_gain.Location = new System.Drawing.Point(4, 621);
             this.panel_gain.Name = "panel_gain";
-            this.panel_gain.Size = new System.Drawing.Size(63, 72);
+            this.panel_gain.Size = new System.Drawing.Size(63, 87);
             this.panel_gain.TabIndex = 6;
             // 
             // label_gainMax
@@ -566,7 +577,7 @@ namespace simple_live_windows_forms
             this.label_gainMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_gainMax.Location = new System.Drawing.Point(32, 40);
             this.label_gainMax.Name = "label_gainMax";
-            this.label_gainMax.Size = new System.Drawing.Size(25, 12);
+            this.label_gainMax.Size = new System.Drawing.Size(31, 15);
             this.label_gainMax.TabIndex = 15;
             this.label_gainMax.Text = "xxxx";
             // 
@@ -576,7 +587,7 @@ namespace simple_live_windows_forms
             this.label_gainMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_gainMin.Location = new System.Drawing.Point(1, 41);
             this.label_gainMin.Name = "label_gainMin";
-            this.label_gainMin.Size = new System.Drawing.Size(25, 12);
+            this.label_gainMin.Size = new System.Drawing.Size(31, 15);
             this.label_gainMin.TabIndex = 14;
             this.label_gainMin.Text = "xxxx";
             // 
@@ -584,9 +595,9 @@ namespace simple_live_windows_forms
             // 
             this.button_triger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_triger.Location = new System.Drawing.Point(819, 449);
+            this.button_triger.Location = new System.Drawing.Point(823, 630);
             this.button_triger.Name = "button_triger";
-            this.button_triger.Size = new System.Drawing.Size(93, 23);
+            this.button_triger.Size = new System.Drawing.Size(93, 34);
             this.button_triger.TabIndex = 10;
             this.button_triger.Text = "Run triger";
             this.button_triger.UseVisualStyleBackColor = true;
@@ -601,9 +612,9 @@ namespace simple_live_windows_forms
             this.panel1.Controls.Add(this.checkBox_exposurTimeMax);
             this.panel1.Controls.Add(this.numericUpDown_exposureTime);
             this.panel1.Controls.Add(this.label_exposureTime);
-            this.panel1.Location = new System.Drawing.Point(152, 440);
+            this.panel1.Location = new System.Drawing.Point(156, 621);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 72);
+            this.panel1.Size = new System.Drawing.Size(101, 87);
             this.panel1.TabIndex = 11;
             // 
             // label_exposureTimeMax
@@ -612,7 +623,7 @@ namespace simple_live_windows_forms
             this.label_exposureTimeMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_exposureTimeMax.Location = new System.Drawing.Point(40, 37);
             this.label_exposureTimeMax.Name = "label_exposureTimeMax";
-            this.label_exposureTimeMax.Size = new System.Drawing.Size(25, 12);
+            this.label_exposureTimeMax.Size = new System.Drawing.Size(31, 15);
             this.label_exposureTimeMax.TabIndex = 17;
             this.label_exposureTimeMax.Text = "xxxx";
             // 
@@ -622,7 +633,7 @@ namespace simple_live_windows_forms
             this.label_exposureTimeMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_exposureTimeMin.Location = new System.Drawing.Point(2, 37);
             this.label_exposureTimeMin.Name = "label_exposureTimeMin";
-            this.label_exposureTimeMin.Size = new System.Drawing.Size(25, 12);
+            this.label_exposureTimeMin.Size = new System.Drawing.Size(31, 15);
             this.label_exposureTimeMin.TabIndex = 16;
             this.label_exposureTimeMin.Text = "xxxx";
             // 
@@ -633,7 +644,7 @@ namespace simple_live_windows_forms
             this.checkBox_exposurTimeMax.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_exposurTimeMax.Location = new System.Drawing.Point(6, 52);
             this.checkBox_exposurTimeMax.Name = "checkBox_exposurTimeMax";
-            this.checkBox_exposurTimeMax.Size = new System.Drawing.Size(45, 17);
+            this.checkBox_exposurTimeMax.Size = new System.Drawing.Size(55, 21);
             this.checkBox_exposurTimeMax.TabIndex = 10;
             this.checkBox_exposurTimeMax.Text = "max";
             this.checkBox_exposurTimeMax.UseVisualStyleBackColor = true;
@@ -644,7 +655,7 @@ namespace simple_live_windows_forms
             this.numericUpDown_exposureTime.Enabled = false;
             this.numericUpDown_exposureTime.Location = new System.Drawing.Point(6, 17);
             this.numericUpDown_exposureTime.Name = "numericUpDown_exposureTime";
-            this.numericUpDown_exposureTime.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_exposureTime.Size = new System.Drawing.Size(50, 22);
             this.numericUpDown_exposureTime.TabIndex = 8;
             this.numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
             // 
@@ -653,7 +664,7 @@ namespace simple_live_windows_forms
             this.label_exposureTime.AutoSize = true;
             this.label_exposureTime.Location = new System.Drawing.Point(2, 2);
             this.label_exposureTime.Name = "label_exposureTime";
-            this.label_exposureTime.Size = new System.Drawing.Size(96, 13);
+            this.label_exposureTime.Size = new System.Drawing.Size(130, 17);
             this.label_exposureTime.TabIndex = 7;
             this.label_exposureTime.Text = "ExposureTime (ms)";
             // 
@@ -665,9 +676,9 @@ namespace simple_live_windows_forms
             this.panel2.Controls.Add(this.label_frameRateMin);
             this.panel2.Controls.Add(this.numericUpDown_frameRate);
             this.panel2.Controls.Add(this.label_frameRate);
-            this.panel2.Location = new System.Drawing.Point(63, 440);
+            this.panel2.Location = new System.Drawing.Point(67, 621);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(89, 72);
+            this.panel2.Size = new System.Drawing.Size(89, 87);
             this.panel2.TabIndex = 12;
             // 
             // label_frameRateMax
@@ -676,7 +687,7 @@ namespace simple_live_windows_forms
             this.label_frameRateMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_frameRateMax.Location = new System.Drawing.Point(42, 42);
             this.label_frameRateMax.Name = "label_frameRateMax";
-            this.label_frameRateMax.Size = new System.Drawing.Size(25, 12);
+            this.label_frameRateMax.Size = new System.Drawing.Size(31, 15);
             this.label_frameRateMax.TabIndex = 17;
             this.label_frameRateMax.Text = "xxxx";
             // 
@@ -686,7 +697,7 @@ namespace simple_live_windows_forms
             this.label_frameRateMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label_frameRateMin.Location = new System.Drawing.Point(3, 42);
             this.label_frameRateMin.Name = "label_frameRateMin";
-            this.label_frameRateMin.Size = new System.Drawing.Size(25, 12);
+            this.label_frameRateMin.Size = new System.Drawing.Size(31, 15);
             this.label_frameRateMin.TabIndex = 16;
             this.label_frameRateMin.Text = "xxxx";
             // 
@@ -694,7 +705,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_frameRate.Location = new System.Drawing.Point(8, 22);
             this.numericUpDown_frameRate.Name = "numericUpDown_frameRate";
-            this.numericUpDown_frameRate.Size = new System.Drawing.Size(59, 20);
+            this.numericUpDown_frameRate.Size = new System.Drawing.Size(59, 22);
             this.numericUpDown_frameRate.TabIndex = 8;
             this.numericUpDown_frameRate.Value = new decimal(new int[] {
             25,
@@ -708,7 +719,7 @@ namespace simple_live_windows_forms
             this.label_frameRate.AutoSize = true;
             this.label_frameRate.Location = new System.Drawing.Point(10, 8);
             this.label_frameRate.Name = "label_frameRate";
-            this.label_frameRate.Size = new System.Drawing.Size(57, 13);
+            this.label_frameRate.Size = new System.Drawing.Size(77, 17);
             this.label_frameRate.TabIndex = 7;
             this.label_frameRate.Text = "Frame rate";
             // 
@@ -729,9 +740,9 @@ namespace simple_live_windows_forms
             this.panel3.Controls.Add(this.label_x);
             this.panel3.Controls.Add(this.label_position);
             this.panel3.Controls.Add(this.label_sumMax);
-            this.panel3.Location = new System.Drawing.Point(254, 440);
+            this.panel3.Location = new System.Drawing.Point(258, 621);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(203, 72);
+            this.panel3.Size = new System.Drawing.Size(203, 87);
             this.panel3.TabIndex = 13;
             // 
             // label_ySumMax
@@ -739,7 +750,7 @@ namespace simple_live_windows_forms
             this.label_ySumMax.AutoSize = true;
             this.label_ySumMax.Location = new System.Drawing.Point(163, 39);
             this.label_ySumMax.Name = "label_ySumMax";
-            this.label_ySumMax.Size = new System.Drawing.Size(27, 13);
+            this.label_ySumMax.Size = new System.Drawing.Size(32, 17);
             this.label_ySumMax.TabIndex = 10;
             this.label_ySumMax.Text = "xxxx";
             // 
@@ -748,7 +759,7 @@ namespace simple_live_windows_forms
             this.label_xSumMax.AutoSize = true;
             this.label_xSumMax.Location = new System.Drawing.Point(163, 18);
             this.label_xSumMax.Name = "label_xSumMax";
-            this.label_xSumMax.Size = new System.Drawing.Size(27, 13);
+            this.label_xSumMax.Size = new System.Drawing.Size(32, 17);
             this.label_xSumMax.TabIndex = 9;
             this.label_xSumMax.Text = "xxxx";
             // 
@@ -756,7 +767,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_h.Location = new System.Drawing.Point(104, 36);
             this.numericUpDown_h.Name = "numericUpDown_h";
-            this.numericUpDown_h.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_h.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_h.TabIndex = 8;
             this.numericUpDown_h.ValueChanged += new System.EventHandler(this.numericUpDown_h_ValueChanged);
             // 
@@ -764,7 +775,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_w.Location = new System.Drawing.Point(104, 17);
             this.numericUpDown_w.Name = "numericUpDown_w";
-            this.numericUpDown_w.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_w.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_w.TabIndex = 7;
             this.numericUpDown_w.ValueChanged += new System.EventHandler(this.numericUpDown_w_ValueChanged);
             // 
@@ -772,7 +783,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_y.Location = new System.Drawing.Point(23, 35);
             this.numericUpDown_y.Name = "numericUpDown_y";
-            this.numericUpDown_y.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_y.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_y.TabIndex = 6;
             this.numericUpDown_y.ValueChanged += new System.EventHandler(this.numericUpDown_y_ValueChanged);
             // 
@@ -780,7 +791,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_x.Location = new System.Drawing.Point(23, 16);
             this.numericUpDown_x.Name = "numericUpDown_x";
-            this.numericUpDown_x.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown_x.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_x.TabIndex = 5;
             this.numericUpDown_x.ValueChanged += new System.EventHandler(this.numericUpDown_x_ValueChanged);
             // 
@@ -789,7 +800,7 @@ namespace simple_live_windows_forms
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(87, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.Size = new System.Drawing.Size(16, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "h";
             // 
@@ -798,7 +809,7 @@ namespace simple_live_windows_forms
             this.label_w.AutoSize = true;
             this.label_w.Location = new System.Drawing.Point(85, 19);
             this.label_w.Name = "label_w";
-            this.label_w.Size = new System.Drawing.Size(15, 13);
+            this.label_w.Size = new System.Drawing.Size(17, 17);
             this.label_w.TabIndex = 3;
             this.label_w.Text = "w";
             // 
@@ -808,7 +819,7 @@ namespace simple_live_windows_forms
             this.checkBox_rot180.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.checkBox_rot180.Location = new System.Drawing.Point(62, 55);
             this.checkBox_rot180.Name = "checkBox_rot180";
-            this.checkBox_rot180.Size = new System.Drawing.Size(50, 16);
+            this.checkBox_rot180.Size = new System.Drawing.Size(64, 19);
             this.checkBox_rot180.TabIndex = 13;
             this.checkBox_rot180.Text = "rot180";
             this.checkBox_rot180.UseVisualStyleBackColor = true;
@@ -818,7 +829,7 @@ namespace simple_live_windows_forms
             this.label_y.AutoSize = true;
             this.label_y.Location = new System.Drawing.Point(3, 37);
             this.label_y.Name = "label_y";
-            this.label_y.Size = new System.Drawing.Size(12, 13);
+            this.label_y.Size = new System.Drawing.Size(15, 17);
             this.label_y.TabIndex = 2;
             this.label_y.Text = "y";
             // 
@@ -827,7 +838,7 @@ namespace simple_live_windows_forms
             this.label_x.AutoSize = true;
             this.label_x.Location = new System.Drawing.Point(3, 18);
             this.label_x.Name = "label_x";
-            this.label_x.Size = new System.Drawing.Size(12, 13);
+            this.label_x.Size = new System.Drawing.Size(14, 17);
             this.label_x.TabIndex = 1;
             this.label_x.Text = "x";
             // 
@@ -836,7 +847,7 @@ namespace simple_live_windows_forms
             this.label_position.AutoSize = true;
             this.label_position.Location = new System.Drawing.Point(6, 1);
             this.label_position.Name = "label_position";
-            this.label_position.Size = new System.Drawing.Size(44, 13);
+            this.label_position.Size = new System.Drawing.Size(58, 17);
             this.label_position.TabIndex = 11;
             this.label_position.Text = "Position";
             // 
@@ -845,7 +856,7 @@ namespace simple_live_windows_forms
             this.label_sumMax.AutoSize = true;
             this.label_sumMax.Location = new System.Drawing.Point(153, 3);
             this.label_sumMax.Name = "label_sumMax";
-            this.label_sumMax.Size = new System.Drawing.Size(48, 13);
+            this.label_sumMax.Size = new System.Drawing.Size(63, 17);
             this.label_sumMax.TabIndex = 12;
             this.label_sumMax.Text = "sum max";
             // 
@@ -854,9 +865,9 @@ namespace simple_live_windows_forms
             this.labelCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(463, 488);
+            this.labelCounter.Location = new System.Drawing.Point(467, 673);
             this.labelCounter.Name = "labelCounter";
-            this.labelCounter.Size = new System.Drawing.Size(13, 13);
+            this.labelCounter.Size = new System.Drawing.Size(16, 17);
             this.labelCounter.TabIndex = 14;
             this.labelCounter.Text = "0";
             // 
@@ -864,7 +875,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(546, 456);
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(550, 637);
             this.numericUpDown_bufferSize.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -876,7 +887,7 @@ namespace simple_live_windows_forms
             0,
             0});
             this.numericUpDown_bufferSize.Name = "numericUpDown_bufferSize";
-            this.numericUpDown_bufferSize.Size = new System.Drawing.Size(55, 20);
+            this.numericUpDown_bufferSize.Size = new System.Drawing.Size(55, 22);
             this.numericUpDown_bufferSize.TabIndex = 15;
             this.numericUpDown_bufferSize.Value = new decimal(new int[] {
             200,
@@ -889,9 +900,9 @@ namespace simple_live_windows_forms
             this.label_bufferSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_bufferSize.AutoSize = true;
-            this.label_bufferSize.Location = new System.Drawing.Point(546, 441);
+            this.label_bufferSize.Location = new System.Drawing.Point(550, 622);
             this.label_bufferSize.Name = "label_bufferSize";
-            this.label_bufferSize.Size = new System.Drawing.Size(56, 13);
+            this.label_bufferSize.Size = new System.Drawing.Size(75, 17);
             this.label_bufferSize.TabIndex = 16;
             this.label_bufferSize.Text = "Buffer size";
             // 
@@ -899,14 +910,14 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_pictureBoxTimeDecimation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(607, 456);
+            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(611, 637);
             this.numericUpDown_pictureBoxTimeDecimation.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDown_pictureBoxTimeDecimation.Name = "numericUpDown_pictureBoxTimeDecimation";
-            this.numericUpDown_pictureBoxTimeDecimation.Size = new System.Drawing.Size(29, 20);
+            this.numericUpDown_pictureBoxTimeDecimation.Size = new System.Drawing.Size(44, 22);
             this.numericUpDown_pictureBoxTimeDecimation.TabIndex = 17;
             this.numericUpDown_pictureBoxTimeDecimation.Value = new decimal(new int[] {
             4,
@@ -919,9 +930,9 @@ namespace simple_live_windows_forms
             this.label_subsample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_subsample.AutoSize = true;
-            this.label_subsample.Location = new System.Drawing.Point(608, 441);
+            this.label_subsample.Location = new System.Drawing.Point(612, 622);
             this.label_subsample.Name = "label_subsample";
-            this.label_subsample.Size = new System.Drawing.Size(33, 13);
+            this.label_subsample.Size = new System.Drawing.Size(43, 17);
             this.label_subsample.TabIndex = 18;
             this.label_subsample.Text = "t sub.";
             // 
@@ -930,9 +941,9 @@ namespace simple_live_windows_forms
             this.button_stopTriger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.button_stopTriger.Enabled = false;
-            this.button_stopTriger.Location = new System.Drawing.Point(819, 483);
+            this.button_stopTriger.Location = new System.Drawing.Point(823, 664);
             this.button_stopTriger.Name = "button_stopTriger";
-            this.button_stopTriger.Size = new System.Drawing.Size(93, 23);
+            this.button_stopTriger.Size = new System.Drawing.Size(93, 36);
             this.button_stopTriger.TabIndex = 19;
             this.button_stopTriger.Text = "Stop triger";
             this.button_stopTriger.UseVisualStyleBackColor = true;
@@ -943,9 +954,9 @@ namespace simple_live_windows_forms
             this.label_fps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(527, 486);
+            this.label_fps.Location = new System.Drawing.Point(529, 674);
             this.label_fps.Name = "label_fps";
-            this.label_fps.Size = new System.Drawing.Size(31, 13);
+            this.label_fps.Size = new System.Drawing.Size(39, 17);
             this.label_fps.TabIndex = 20;
             this.label_fps.Text = "xxfps";
             // 
@@ -954,9 +965,9 @@ namespace simple_live_windows_forms
             this.label_comPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_comPortStatus.AutoSize = true;
-            this.label_comPortStatus.Location = new System.Drawing.Point(662, 441);
+            this.label_comPortStatus.Location = new System.Drawing.Point(666, 622);
             this.label_comPortStatus.Name = "label_comPortStatus";
-            this.label_comPortStatus.Size = new System.Drawing.Size(57, 13);
+            this.label_comPortStatus.Size = new System.Drawing.Size(74, 17);
             this.label_comPortStatus.TabIndex = 22;
             this.label_comPortStatus.Text = "COM state";
             this.label_comPortStatus.Click += new System.EventHandler(this.label_comPortStatus_Click);
@@ -966,9 +977,9 @@ namespace simple_live_windows_forms
             this.label_recivedCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_recivedCommand.AutoSize = true;
-            this.label_recivedCommand.Location = new System.Drawing.Point(662, 461);
+            this.label_recivedCommand.Location = new System.Drawing.Point(666, 642);
             this.label_recivedCommand.Name = "label_recivedCommand";
-            this.label_recivedCommand.Size = new System.Drawing.Size(96, 13);
+            this.label_recivedCommand.Size = new System.Drawing.Size(124, 17);
             this.label_recivedCommand.TabIndex = 23;
             this.label_recivedCommand.Text = "Recived command";
             // 
@@ -976,9 +987,9 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_LED.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_LED.Location = new System.Drawing.Point(672, 491);
+            this.numericUpDown_LED.Location = new System.Drawing.Point(676, 672);
             this.numericUpDown_LED.Name = "numericUpDown_LED";
-            this.numericUpDown_LED.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown_LED.Size = new System.Drawing.Size(47, 22);
             this.numericUpDown_LED.TabIndex = 24;
             this.numericUpDown_LED.Value = new decimal(new int[] {
             100,
@@ -992,9 +1003,9 @@ namespace simple_live_windows_forms
             this.checkBox_LED.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox_LED.AutoSize = true;
-            this.checkBox_LED.Location = new System.Drawing.Point(624, 492);
+            this.checkBox_LED.Location = new System.Drawing.Point(628, 673);
             this.checkBox_LED.Name = "checkBox_LED";
-            this.checkBox_LED.Size = new System.Drawing.Size(47, 17);
+            this.checkBox_LED.Size = new System.Drawing.Size(57, 21);
             this.checkBox_LED.TabIndex = 25;
             this.checkBox_LED.Text = "LED";
             this.checkBox_LED.UseVisualStyleBackColor = true;
@@ -1004,9 +1015,9 @@ namespace simple_live_windows_forms
             // 
             this.button_save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_save.Location = new System.Drawing.Point(726, 474);
+            this.button_save.Location = new System.Drawing.Point(730, 658);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(40, 21);
+            this.button_save.Size = new System.Drawing.Size(50, 24);
             this.button_save.TabIndex = 26;
             this.button_save.Text = "save";
             this.button_save.UseVisualStyleBackColor = true;
@@ -1016,9 +1027,9 @@ namespace simple_live_windows_forms
             // 
             this.button_load.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_load.Location = new System.Drawing.Point(726, 493);
+            this.button_load.Location = new System.Drawing.Point(730, 682);
             this.button_load.Name = "button_load";
-            this.button_load.Size = new System.Drawing.Size(40, 19);
+            this.button_load.Size = new System.Drawing.Size(50, 26);
             this.button_load.TabIndex = 27;
             this.button_load.Text = "load";
             this.button_load.UseVisualStyleBackColor = true;
@@ -1029,9 +1040,9 @@ namespace simple_live_windows_forms
             this.label_pixelClock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_pixelClock.AutoSize = true;
-            this.label_pixelClock.Location = new System.Drawing.Point(469, 502);
+            this.label_pixelClock.Location = new System.Drawing.Point(464, 691);
             this.label_pixelClock.Name = "label_pixelClock";
-            this.label_pixelClock.Size = new System.Drawing.Size(57, 13);
+            this.label_pixelClock.Size = new System.Drawing.Size(69, 17);
             this.label_pixelClock.TabIndex = 28;
             this.label_pixelClock.Text = "xxxMclock";
             // 
@@ -1040,9 +1051,9 @@ namespace simple_live_windows_forms
             this.label_error.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_error.AutoSize = true;
-            this.label_error.Location = new System.Drawing.Point(535, 501);
+            this.label_error.Location = new System.Drawing.Point(539, 691);
             this.label_error.Name = "label_error";
-            this.label_error.Size = new System.Drawing.Size(13, 13);
+            this.label_error.Size = new System.Drawing.Size(16, 17);
             this.label_error.TabIndex = 29;
             this.label_error.Text = "0";
             // 
@@ -1053,7 +1064,7 @@ namespace simple_live_windows_forms
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(868, 2);
+            this.chart1.Location = new System.Drawing.Point(741, 3);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -1061,7 +1072,7 @@ namespace simple_live_windows_forms
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(561, 80);
+            this.chart1.Size = new System.Drawing.Size(780, 118);
             this.chart1.TabIndex = 30;
             this.chart1.Text = "chart1";
             // 
@@ -1072,7 +1083,7 @@ namespace simple_live_windows_forms
             this.chart2.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(868, 88);
+            this.chart2.Location = new System.Drawing.Point(741, 116);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -1080,7 +1091,7 @@ namespace simple_live_windows_forms
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(561, 80);
+            this.chart2.Size = new System.Drawing.Size(780, 118);
             this.chart2.TabIndex = 31;
             this.chart2.Text = "chart2";
             // 
@@ -1091,7 +1102,7 @@ namespace simple_live_windows_forms
             this.chart3.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(868, 161);
+            this.chart3.Location = new System.Drawing.Point(741, 230);
             this.chart3.Name = "chart3";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -1099,7 +1110,7 @@ namespace simple_live_windows_forms
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.chart3.Series.Add(series3);
-            this.chart3.Size = new System.Drawing.Size(561, 80);
+            this.chart3.Size = new System.Drawing.Size(780, 118);
             this.chart3.TabIndex = 32;
             this.chart3.Text = "chart3";
             // 
@@ -1110,7 +1121,7 @@ namespace simple_live_windows_forms
             this.chart4.ChartAreas.Add(chartArea4);
             legend4.Name = "Legend1";
             this.chart4.Legends.Add(legend4);
-            this.chart4.Location = new System.Drawing.Point(868, 247);
+            this.chart4.Location = new System.Drawing.Point(741, 345);
             this.chart4.Name = "chart4";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -1118,7 +1129,7 @@ namespace simple_live_windows_forms
             series4.Legend = "Legend1";
             series4.Name = "Series1";
             this.chart4.Series.Add(series4);
-            this.chart4.Size = new System.Drawing.Size(561, 80);
+            this.chart4.Size = new System.Drawing.Size(780, 118);
             this.chart4.TabIndex = 33;
             this.chart4.Text = "chart4";
             // 
@@ -1129,7 +1140,7 @@ namespace simple_live_windows_forms
             this.chart5.ChartAreas.Add(chartArea5);
             legend5.Name = "Legend1";
             this.chart5.Legends.Add(legend5);
-            this.chart5.Location = new System.Drawing.Point(868, 333);
+            this.chart5.Location = new System.Drawing.Point(741, 460);
             this.chart5.Name = "chart5";
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -1137,13 +1148,13 @@ namespace simple_live_windows_forms
             series5.Legend = "Legend1";
             series5.Name = "Series1";
             this.chart5.Series.Add(series5);
-            this.chart5.Size = new System.Drawing.Size(561, 80);
+            this.chart5.Size = new System.Drawing.Size(780, 118);
             this.chart5.TabIndex = 34;
             this.chart5.Text = "chart5";
             // 
             // button_pluxStart
             // 
-            this.button_pluxStart.Location = new System.Drawing.Point(1346, 443);
+            this.button_pluxStart.Location = new System.Drawing.Point(1350, 624);
             this.button_pluxStart.Name = "button_pluxStart";
             this.button_pluxStart.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStart.TabIndex = 35;
@@ -1153,7 +1164,7 @@ namespace simple_live_windows_forms
             // 
             // button_pluxStop
             // 
-            this.button_pluxStop.Location = new System.Drawing.Point(1346, 470);
+            this.button_pluxStop.Location = new System.Drawing.Point(1350, 651);
             this.button_pluxStop.Name = "button_pluxStop";
             this.button_pluxStop.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStop.TabIndex = 36;
@@ -1164,9 +1175,9 @@ namespace simple_live_windows_forms
             // label_pluxState
             // 
             this.label_pluxState.AutoSize = true;
-            this.label_pluxState.Location = new System.Drawing.Point(1288, 464);
+            this.label_pluxState.Location = new System.Drawing.Point(1276, 645);
             this.label_pluxState.Name = "label_pluxState";
-            this.label_pluxState.Size = new System.Drawing.Size(52, 13);
+            this.label_pluxState.Size = new System.Drawing.Size(68, 17);
             this.label_pluxState.TabIndex = 37;
             this.label_pluxState.Text = "plux state";
             this.label_pluxState.Click += new System.EventHandler(this.label_pluxState_Click);
@@ -1176,9 +1187,9 @@ namespace simple_live_windows_forms
             this.label_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_subsampling.AutoSize = true;
-            this.label_subsampling.Location = new System.Drawing.Point(1214, 466);
+            this.label_subsampling.Location = new System.Drawing.Point(1218, 647);
             this.label_subsampling.Name = "label_subsampling";
-            this.label_subsampling.Size = new System.Drawing.Size(33, 13);
+            this.label_subsampling.Size = new System.Drawing.Size(43, 17);
             this.label_subsampling.TabIndex = 39;
             this.label_subsampling.Text = "t sub.";
             // 
@@ -1186,34 +1197,35 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1208, 482);
+            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1212, 663);
             this.numericUpDown_subsampling.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDown_subsampling.Name = "numericUpDown_subsampling";
-            this.numericUpDown_subsampling.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_subsampling.Size = new System.Drawing.Size(38, 22);
             this.numericUpDown_subsampling.TabIndex = 38;
             this.numericUpDown_subsampling.Value = new decimal(new int[] {
             20,
             0,
             0,
             0});
+            this.numericUpDown_subsampling.ValueChanged += new System.EventHandler(this.numericUpDown_subsampling_ValueChanged);
             // 
             // numericUpDown_red
             // 
-            this.numericUpDown_red.Location = new System.Drawing.Point(1118, 439);
+            this.numericUpDown_red.Location = new System.Drawing.Point(1122, 620);
             this.numericUpDown_red.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numericUpDown_red.Name = "numericUpDown_red";
-            this.numericUpDown_red.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_red.Size = new System.Drawing.Size(50, 22);
             this.numericUpDown_red.TabIndex = 40;
             this.numericUpDown_red.Value = new decimal(new int[] {
-            80,
+            4,
             0,
             0,
             0});
@@ -1222,34 +1234,34 @@ namespace simple_live_windows_forms
             // label_red
             // 
             this.label_red.AutoSize = true;
-            this.label_red.Location = new System.Drawing.Point(1115, 423);
+            this.label_red.Location = new System.Drawing.Point(1119, 604);
             this.label_red.Name = "label_red";
-            this.label_red.Size = new System.Drawing.Size(27, 13);
+            this.label_red.Size = new System.Drawing.Size(34, 17);
             this.label_red.TabIndex = 41;
             this.label_red.Text = "Red";
             // 
             // label_IR
             // 
             this.label_IR.AutoSize = true;
-            this.label_IR.Location = new System.Drawing.Point(1171, 422);
+            this.label_IR.Location = new System.Drawing.Point(1175, 603);
             this.label_IR.Name = "label_IR";
-            this.label_IR.Size = new System.Drawing.Size(18, 13);
+            this.label_IR.Size = new System.Drawing.Size(21, 17);
             this.label_IR.TabIndex = 43;
             this.label_IR.Text = "IR";
             // 
             // numericUpDown_IR
             // 
-            this.numericUpDown_IR.Location = new System.Drawing.Point(1174, 438);
+            this.numericUpDown_IR.Location = new System.Drawing.Point(1178, 619);
             this.numericUpDown_IR.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numericUpDown_IR.Name = "numericUpDown_IR";
-            this.numericUpDown_IR.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_IR.Size = new System.Drawing.Size(50, 22);
             this.numericUpDown_IR.TabIndex = 42;
             this.numericUpDown_IR.Value = new decimal(new int[] {
-            40,
+            2,
             0,
             0,
             0});
@@ -1257,7 +1269,7 @@ namespace simple_live_windows_forms
             // 
             // FormWindow
             // 
-            this.ClientSize = new System.Drawing.Size(1428, 514);
+            this.ClientSize = new System.Drawing.Size(1520, 710);
             this.Controls.Add(this.label_IR);
             this.Controls.Add(this.numericUpDown_IR);
             this.Controls.Add(this.label_red);
@@ -1752,11 +1764,15 @@ namespace simple_live_windows_forms
             button_triger.Enabled = false;
             button_stopTriger.Enabled = true;
             button_load.Enabled = false;
-            button_pluxStart.Enabled = false; 
-            button_pluxStop.Enabled = false;
+            
 
             is_triger = true;
             myStart();
+
+            button_pluxStart.Enabled = false;
+            button_pluxStop.Enabled = false;
+            numericUpDown_red.Enabled = false;
+            numericUpDown_IR.Enabled = false;
         }
         private Label label_bufferSize;
         public NumericUpDown numericUpDown_bufferSize;
@@ -1775,6 +1791,8 @@ namespace simple_live_windows_forms
             button_load.Enabled = true;
             button_pluxStart.Enabled = true;
             button_pluxStop.Enabled = false;
+            numericUpDown_red.Enabled = true;
+            numericUpDown_IR.Enabled = true;
 
             stopTrigerClicked = true;
             stopTrigerClicked2 = true;
@@ -1846,6 +1864,8 @@ namespace simple_live_windows_forms
                         comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
                         checkBox_LED_CheckedChanged(null, EventArgs.Empty);
+
+                        ComTrigerOff();
 
 
                     }
@@ -1990,15 +2010,16 @@ namespace simple_live_windows_forms
 
         private void button_load_Click(object sender, EventArgs e)
         {
+
             string json_loaded = File.ReadAllText("settings.json");
 
             JsonData jsonData_loaded = JsonConvert.DeserializeObject<JsonData>(json_loaded);
 
-            numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
-            numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+            //numericUpDown_frameRate.ValueChanged -= new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            //numericUpDown_exposureTime.ValueChanged -= new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
 
-            numericUpDown_frameRate.Maximum = Decimal.Round(1000 / (jsonData_loaded.exposure_time + exposureSafeMargin));
-            numericUpDown_exposureTime.Maximum = Decimal.Round(1000 / jsonData_loaded.frame_rate - exposureSafeMargin, 1);
+            //numericUpDown_frameRate.Maximum = Decimal.Round(1000 / (jsonData_loaded.exposure_time + exposureSafeMargin));
+            //numericUpDown_exposureTime.Maximum = Decimal.Round(1000 / jsonData_loaded.frame_rate - exposureSafeMargin, 1);
 
 
             numericUpDown_exposureTime.Value = numericUpDown_exposureTime.Minimum;
@@ -2017,8 +2038,8 @@ namespace simple_live_windows_forms
             numericUpDown_IR.Value = jsonData_loaded.IR;
             numericUpDown_subsampling.Value = jsonData_loaded.subsampling;
 
-            numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
-            numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
+            //numericUpDown_frameRate.ValueChanged += new System.EventHandler(this.numericUpDown_frameRate_ValueChanged);
+            //numericUpDown_exposureTime.ValueChanged += new System.EventHandler(this.numericUpDown_exposureTime_ValueChanged);
         }
         public Label label_pixelClock;
         private Label label_frameRateMax;
@@ -2071,11 +2092,14 @@ namespace simple_live_windows_forms
 
                 srcs = new List<PluxDotNet.Source>() { src_ecg, src_resp, src_triger, src_spo2_R_IR };
 
+
                 int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
-                dev.SetParameter(0x05, 0x03, LED_param, 2);
+                dev.SetParameter(0x09, 0x03, LED_param, 2);
+                
 
                 dev.Start(dev.freq, srcs);
 
+                Console.WriteLine("Device opend.start");
 
                 dev.Stop();
 
@@ -2108,22 +2132,26 @@ namespace simple_live_windows_forms
         }
         public void startRecordPlux(string filename)
         {
+
+            Console.WriteLine("Start record plux");
+
             if (dev.running)
             {
                 button_pluxStop_Click(this, EventArgs.Empty);
             }
 
+            Thread.Sleep(150);
+
+
             dev.textfile = new StreamWriter(filename);
             dev.subsample_plot = Convert.ToInt32(numericUpDown_subsampling.Value);
 
-            Thread.Sleep(100);
+
+            Console.WriteLine("StreamWriter txt opened");
 
             dev.record = true;
 
-            if (dev.running == false) 
-            {
-                button_pluxStart_Click(this, EventArgs.Empty);
-            }
+            button_pluxStart_Click(this, EventArgs.Empty);
 
 
         }
@@ -2146,26 +2174,50 @@ namespace simple_live_windows_forms
 
         private void button_pluxStart_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("start clicked");
+            
             button_pluxStart.Enabled = false;
             button_pluxStop.Enabled = true;
+            numericUpDown_red.Enabled = false;
+            numericUpDown_IR.Enabled = false;
 
-            chart1.Series[0].Points.Clear();
-            chart2.Series[0].Points.Clear();
-            chart3.Series[0].Points.Clear();
-            chart4.Series[0].Points.Clear();
-            chart5.Series[0].Points.Clear();
+            this.chart1.BeginInvoke((MethodInvoker)delegate
+            {
+                chart1.Series[0].Points.Clear();
+            });
+            this.chart2.BeginInvoke((MethodInvoker)delegate
+            {
+                chart2.Series[0].Points.Clear();
+            });
+            this.chart3.BeginInvoke((MethodInvoker)delegate
+            {
+                chart3.Series[0].Points.Clear();
+            });
+            this.chart4.BeginInvoke((MethodInvoker)delegate
+            {
+                chart4.Series[0].Points.Clear();
+            });
+            this.chart5.BeginInvoke((MethodInvoker)delegate
+            {
+                chart5.Series[0].Points.Clear();
+            });
+
+
 
             dev.subsample_plot = Convert.ToInt32(numericUpDown_subsampling.Value);
             int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
-            dev.SetParameter(0x05, 0x03, LED_param, 2);
+            dev.SetParameter(0x09, 0x03, LED_param, 2);
             dev.Start(dev.freq, srcs);
 
+            Console.WriteLine("device started");
 
             pluxWorker = new PluxWorker();
             pluxWorker.dev = dev;
             Thread t = new Thread(new ThreadStart(pluxWorker.DoWork));
 
             pluxWorker.dev.running = true;
+
+            Console.WriteLine("pluxworker created");
 
             t.Start();
             Console.WriteLine("Acquisition started");
@@ -2175,6 +2227,8 @@ namespace simple_live_windows_forms
         {
             button_pluxStart.Enabled = true;
             button_pluxStop.Enabled = false;
+            numericUpDown_red.Enabled = true;
+            numericUpDown_IR.Enabled = true;
 
             pluxWorker.dev.running = false;
             dev.record = false;
@@ -2202,13 +2256,23 @@ namespace simple_live_windows_forms
 
         private void update_plux_led()
         {
-            int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value) };
-            dev.SetParameter(0x05, 0x03, LED_param, 2);
+            // int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value) };
+            // dev.SetParameter(0x09, 0x03, LED_param, 2);
         }
 
         private void numericUpDown_IR_ValueChanged(object sender, EventArgs e)
         {
             update_plux_led();
+        }
+
+        private void numericUpDown_subsampling_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

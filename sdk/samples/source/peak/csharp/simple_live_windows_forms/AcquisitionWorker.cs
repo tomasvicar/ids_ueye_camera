@@ -169,7 +169,7 @@ namespace simple_live_windows_forms
 
                     if (ImageReceived != null)
                     {
-                        Console.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
+                        // Console.WriteLine("--- [AcquisitionWorker] Send image Nr. " + (frameCounter + 1));
                         ImageReceived(this, imageCopy, frameCounter);
                     }
                     else

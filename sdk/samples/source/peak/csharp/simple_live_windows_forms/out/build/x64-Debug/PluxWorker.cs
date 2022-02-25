@@ -14,6 +14,7 @@ namespace simple_live_windows_forms
         {
 
             Console.WriteLine("Start loop");
+            dev.to_write = "";
             dev.Loop();
             Console.WriteLine("Close loop");
             dev.Stop();
