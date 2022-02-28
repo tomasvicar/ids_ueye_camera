@@ -128,6 +128,8 @@ namespace simple_live_windows_forms
         SerialPort comPort = null;
         private bool stopTrigerClicked = false;
 
+        //private FormSecondScreen secondScreenForm;
+        private Stopwatch secondScreenForm;
 
         public FormWindow()
         {
@@ -196,6 +198,9 @@ namespace simple_live_windows_forms
                 Console.WriteLine(ex);
                 Console.WriteLine("loading defaults");
             }
+
+
+            updateDot();
 
 
 
@@ -463,6 +468,16 @@ namespace simple_live_windows_forms
             this.label_red = new System.Windows.Forms.Label();
             this.label_IR = new System.Windows.Forms.Label();
             this.numericUpDown_IR = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox_exampleDisplay = new System.Windows.Forms.PictureBox();
+            this.numericUpDown_dotX = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_dotY = new System.Windows.Forms.NumericUpDown();
+            this.button_dotyLeft = new System.Windows.Forms.Button();
+            this.button_dotYRight = new System.Windows.Forms.Button();
+            this.label_dotX = new System.Windows.Forms.Label();
+            this.label_dotY = new System.Windows.Forms.Label();
+            this.label_dotRadius = new System.Windows.Forms.Label();
+            this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_showDot = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -486,6 +501,10 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_red)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_IR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_exampleDisplay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -505,7 +524,7 @@ namespace simple_live_windows_forms
             // 
             this.textBox_dataname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_dataname.Location = new System.Drawing.Point(922, 646);
+            this.textBox_dataname.Location = new System.Drawing.Point(907, 655);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(161, 22);
             this.textBox_dataname.TabIndex = 2;
@@ -595,7 +614,7 @@ namespace simple_live_windows_forms
             // 
             this.button_triger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_triger.Location = new System.Drawing.Point(823, 630);
+            this.button_triger.Location = new System.Drawing.Point(808, 626);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(93, 34);
             this.button_triger.TabIndex = 10;
@@ -941,7 +960,7 @@ namespace simple_live_windows_forms
             this.button_stopTriger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.button_stopTriger.Enabled = false;
-            this.button_stopTriger.Location = new System.Drawing.Point(823, 664);
+            this.button_stopTriger.Location = new System.Drawing.Point(808, 663);
             this.button_stopTriger.Name = "button_stopTriger";
             this.button_stopTriger.Size = new System.Drawing.Size(93, 36);
             this.button_stopTriger.TabIndex = 19;
@@ -1154,7 +1173,7 @@ namespace simple_live_windows_forms
             // 
             // button_pluxStart
             // 
-            this.button_pluxStart.Location = new System.Drawing.Point(1350, 624);
+            this.button_pluxStart.Location = new System.Drawing.Point(1093, 633);
             this.button_pluxStart.Name = "button_pluxStart";
             this.button_pluxStart.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStart.TabIndex = 35;
@@ -1164,7 +1183,7 @@ namespace simple_live_windows_forms
             // 
             // button_pluxStop
             // 
-            this.button_pluxStop.Location = new System.Drawing.Point(1350, 651);
+            this.button_pluxStop.Location = new System.Drawing.Point(1093, 662);
             this.button_pluxStop.Name = "button_pluxStop";
             this.button_pluxStop.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStop.TabIndex = 36;
@@ -1175,7 +1194,7 @@ namespace simple_live_windows_forms
             // label_pluxState
             // 
             this.label_pluxState.AutoSize = true;
-            this.label_pluxState.Location = new System.Drawing.Point(1276, 645);
+            this.label_pluxState.Location = new System.Drawing.Point(1100, 605);
             this.label_pluxState.Name = "label_pluxState";
             this.label_pluxState.Size = new System.Drawing.Size(68, 17);
             this.label_pluxState.TabIndex = 37;
@@ -1187,7 +1206,7 @@ namespace simple_live_windows_forms
             this.label_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_subsampling.AutoSize = true;
-            this.label_subsampling.Location = new System.Drawing.Point(1218, 647);
+            this.label_subsampling.Location = new System.Drawing.Point(1027, 589);
             this.label_subsampling.Name = "label_subsampling";
             this.label_subsampling.Size = new System.Drawing.Size(43, 17);
             this.label_subsampling.TabIndex = 39;
@@ -1197,7 +1216,7 @@ namespace simple_live_windows_forms
             // 
             this.numericUpDown_subsampling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1212, 663);
+            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1030, 605);
             this.numericUpDown_subsampling.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1215,7 +1234,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_red
             // 
-            this.numericUpDown_red.Location = new System.Drawing.Point(1122, 620);
+            this.numericUpDown_red.Location = new System.Drawing.Point(912, 606);
             this.numericUpDown_red.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1234,7 +1253,7 @@ namespace simple_live_windows_forms
             // label_red
             // 
             this.label_red.AutoSize = true;
-            this.label_red.Location = new System.Drawing.Point(1119, 604);
+            this.label_red.Location = new System.Drawing.Point(909, 590);
             this.label_red.Name = "label_red";
             this.label_red.Size = new System.Drawing.Size(34, 17);
             this.label_red.TabIndex = 41;
@@ -1243,7 +1262,7 @@ namespace simple_live_windows_forms
             // label_IR
             // 
             this.label_IR.AutoSize = true;
-            this.label_IR.Location = new System.Drawing.Point(1175, 603);
+            this.label_IR.Location = new System.Drawing.Point(965, 589);
             this.label_IR.Name = "label_IR";
             this.label_IR.Size = new System.Drawing.Size(21, 17);
             this.label_IR.TabIndex = 43;
@@ -1251,7 +1270,7 @@ namespace simple_live_windows_forms
             // 
             // numericUpDown_IR
             // 
-            this.numericUpDown_IR.Location = new System.Drawing.Point(1178, 619);
+            this.numericUpDown_IR.Location = new System.Drawing.Point(968, 605);
             this.numericUpDown_IR.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1267,9 +1286,138 @@ namespace simple_live_windows_forms
             0});
             this.numericUpDown_IR.ValueChanged += new System.EventHandler(this.numericUpDown_IR_ValueChanged);
             // 
+            // pictureBox_exampleDisplay
+            // 
+            this.pictureBox_exampleDisplay.Location = new System.Drawing.Point(1336, 592);
+            this.pictureBox_exampleDisplay.Name = "pictureBox_exampleDisplay";
+            this.pictureBox_exampleDisplay.Size = new System.Drawing.Size(153, 99);
+            this.pictureBox_exampleDisplay.TabIndex = 44;
+            this.pictureBox_exampleDisplay.TabStop = false;
+            this.pictureBox_exampleDisplay.Click += new System.EventHandler(this.pictureBox_exampleDisplay_Click);
+            this.pictureBox_exampleDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_exampleDisplay_Paint);
+            // 
+            // numericUpDown_dotX
+            // 
+            this.numericUpDown_dotX.Location = new System.Drawing.Point(1245, 592);
+            this.numericUpDown_dotX.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_dotX.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_dotX.Name = "numericUpDown_dotX";
+            this.numericUpDown_dotX.Size = new System.Drawing.Size(62, 22);
+            this.numericUpDown_dotX.TabIndex = 45;
+            this.numericUpDown_dotX.ValueChanged += new System.EventHandler(this.numericUpDown_dotX_ValueChanged);
+            // 
+            // numericUpDown_dotY
+            // 
+            this.numericUpDown_dotY.Location = new System.Drawing.Point(1245, 614);
+            this.numericUpDown_dotY.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_dotY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_dotY.Name = "numericUpDown_dotY";
+            this.numericUpDown_dotY.Size = new System.Drawing.Size(63, 22);
+            this.numericUpDown_dotY.TabIndex = 46;
+            this.numericUpDown_dotY.ValueChanged += new System.EventHandler(this.numericUpDown_dotY_ValueChanged);
+            // 
+            // button_dotyLeft
+            // 
+            this.button_dotyLeft.Location = new System.Drawing.Point(1226, 614);
+            this.button_dotyLeft.Name = "button_dotyLeft";
+            this.button_dotyLeft.Size = new System.Drawing.Size(21, 23);
+            this.button_dotyLeft.TabIndex = 47;
+            this.button_dotyLeft.Text = "<";
+            this.button_dotyLeft.UseVisualStyleBackColor = true;
+            this.button_dotyLeft.Click += new System.EventHandler(this.button_dotyLeft_Click);
+            // 
+            // button_dotYRight
+            // 
+            this.button_dotYRight.Location = new System.Drawing.Point(1287, 613);
+            this.button_dotYRight.Name = "button_dotYRight";
+            this.button_dotYRight.Size = new System.Drawing.Size(21, 23);
+            this.button_dotYRight.TabIndex = 48;
+            this.button_dotYRight.Text = ">";
+            this.button_dotYRight.UseVisualStyleBackColor = true;
+            this.button_dotYRight.Click += new System.EventHandler(this.button_dotYRight_Click);
+            // 
+            // label_dotX
+            // 
+            this.label_dotX.AutoSize = true;
+            this.label_dotX.Location = new System.Drawing.Point(1202, 594);
+            this.label_dotX.Name = "label_dotX";
+            this.label_dotX.Size = new System.Drawing.Size(17, 17);
+            this.label_dotX.TabIndex = 49;
+            this.label_dotX.Text = "X";
+            // 
+            // label_dotY
+            // 
+            this.label_dotY.AutoSize = true;
+            this.label_dotY.Location = new System.Drawing.Point(1202, 616);
+            this.label_dotY.Name = "label_dotY";
+            this.label_dotY.Size = new System.Drawing.Size(17, 17);
+            this.label_dotY.TabIndex = 50;
+            this.label_dotY.Text = "Y";
+            // 
+            // label_dotRadius
+            // 
+            this.label_dotRadius.AutoSize = true;
+            this.label_dotRadius.Location = new System.Drawing.Point(1195, 653);
+            this.label_dotRadius.Name = "label_dotRadius";
+            this.label_dotRadius.Size = new System.Drawing.Size(52, 17);
+            this.label_dotRadius.TabIndex = 51;
+            this.label_dotRadius.Text = "Radius";
+            // 
+            // numericUpDown_R
+            // 
+            this.numericUpDown_R.Location = new System.Drawing.Point(1245, 651);
+            this.numericUpDown_R.Name = "numericUpDown_R";
+            this.numericUpDown_R.Size = new System.Drawing.Size(62, 22);
+            this.numericUpDown_R.TabIndex = 52;
+            this.numericUpDown_R.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown_R.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // checkBox_showDot
+            // 
+            this.checkBox_showDot.AutoSize = true;
+            this.checkBox_showDot.Checked = true;
+            this.checkBox_showDot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_showDot.Location = new System.Drawing.Point(1226, 679);
+            this.checkBox_showDot.Name = "checkBox_showDot";
+            this.checkBox_showDot.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_showDot.TabIndex = 53;
+            this.checkBox_showDot.Text = "show";
+            this.checkBox_showDot.UseVisualStyleBackColor = true;
+            this.checkBox_showDot.CheckedChanged += new System.EventHandler(this.checkBOx_showDot_CheckedChanged);
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(1520, 710);
+            this.Controls.Add(this.checkBox_showDot);
+            this.Controls.Add(this.numericUpDown_R);
+            this.Controls.Add(this.label_dotRadius);
+            this.Controls.Add(this.label_dotY);
+            this.Controls.Add(this.label_dotX);
+            this.Controls.Add(this.button_dotYRight);
+            this.Controls.Add(this.button_dotyLeft);
+            this.Controls.Add(this.numericUpDown_dotY);
+            this.Controls.Add(this.numericUpDown_dotX);
+            this.Controls.Add(this.pictureBox_exampleDisplay);
             this.Controls.Add(this.label_IR);
             this.Controls.Add(this.numericUpDown_IR);
             this.Controls.Add(this.label_red);
@@ -1338,6 +1486,10 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_red)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_IR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_exampleDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2274,6 +2426,152 @@ namespace simple_live_windows_forms
         {
 
         }
+
+        private PictureBox pictureBox_exampleDisplay;
+        private Button button_dotyLeft;
+        private Button button_dotYRight;
+
+        private void button_dotyLeft_Click(object sender, EventArgs e)
+        {
+            numericUpDown_dotY.DownButton();
+        }
+
+        private void button_dotYRight_Click(object sender, EventArgs e)
+        {
+            numericUpDown_dotY.UpButton();
+        }
+
+        private Label label_dotX;
+        private Label label_dotY;
+        private Label label_dotRadius;
+
+        private void numericUpDown_dotX_ValueChanged(object sender, EventArgs e)
+        {
+            updateDot();
+        }
+
+        private void numericUpDown_dotY_ValueChanged(object sender, EventArgs e)
+        {
+            updateDot();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            updateDot();
+        }
+
+        private void checkBOx_showDot_CheckedChanged(object sender, EventArgs e)
+        {
+            updateDot();
+        }
+
+        private void updateDot()
+        {
+
+            if (secondScreenForm == null)
+            {
+                //secondScreenForm = new FormSecondScreen();
+                //secondScreenForm.formWindow = this;
+                //secondScreenForm.Show();
+                secondScreenForm = new Stopwatch();
+
+                pictureBox_exampleDisplay.BackColor = Color.Black;
+
+
+                int exampleDisplay_w = pictureBox_exampleDisplay.Size.Width;
+                int exampleDisplay_h = pictureBox_exampleDisplay.Size.Height;
+
+                //int secondScreen_w = secondScreenForm.Bounds.Width;
+                //int secondScreen_h = secondScreenForm.Bounds.Height;
+                int secondScreen_w = 1280;
+                int secondScreen_h = 1024;
+
+                float screen_ratio = (float)secondScreen_w / (float)secondScreen_h;
+
+                int new_exampleDisplay_w = Convert.ToInt32((float)exampleDisplay_h * screen_ratio);
+
+                pictureBox_exampleDisplay.Size = new System.Drawing.Size(new_exampleDisplay_w, exampleDisplay_h);
+
+            }
+
+            //secondScreenForm.pictureBox1.Refresh();
+            pictureBox_exampleDisplay.Refresh();
+
+
+        }
+
+        public NumericUpDown numericUpDown_dotX;
+        public NumericUpDown numericUpDown_dotY;
+        public NumericUpDown numericUpDown_R;
+
+        private void pictureBox_exampleDisplay_Paint(object sender, PaintEventArgs e)
+        {
+
+            int exampleDisplay_w = pictureBox_exampleDisplay.Size.Width;
+            int exampleDisplay_h = pictureBox_exampleDisplay.Size.Height;
+
+            //int secondScreen_w = secondScreenForm.Bounds.Width;
+            //int secondScreen_h = secondScreenForm.Bounds.Height;
+            int secondScreen_w = 1280;
+            int secondScreen_h = 1024;
+
+            float screens_ratio = (float)exampleDisplay_h / (float)secondScreen_h;
+
+
+            int screen_x_center = pictureBox_exampleDisplay.Bounds.Width / 2;
+            int screen_y_center = pictureBox_exampleDisplay.Bounds.Height / 2;
+
+
+            int r = Decimal.ToInt32(this.numericUpDown_R.Value);
+            int x = Decimal.ToInt32(this.numericUpDown_dotX.Value);
+            int y = Decimal.ToInt32(this.numericUpDown_dotY.Value);
+
+            r = (int)Math.Ceiling(r * screens_ratio);
+            x = Convert.ToInt32((float)x * screens_ratio);
+            y = Convert.ToInt32((float)y * screens_ratio);
+
+
+            if (checkBox_showDot.Checked)
+            {
+
+                Rectangle rect = new Rectangle(screen_x_center - r + y, screen_y_center - r + x, r * 2, r * 2);
+
+                e.Graphics.FillEllipse(Brushes.White, rect);
+            }
+        }
+
+        private void pictureBox_exampleDisplay_Click(object sender, EventArgs e)
+        {
+
+            MouseEventArgs me = (MouseEventArgs)e;
+            Point coordinates = me.Location;
+
+
+
+            int exampleDisplay_w = pictureBox_exampleDisplay.Size.Width;
+            int exampleDisplay_h = pictureBox_exampleDisplay.Size.Height;
+
+            //int secondScreen_w = secondScreenForm.Bounds.Width;
+            //int secondScreen_h = secondScreenForm.Bounds.Height;
+            int secondScreen_w = 1280;
+            int secondScreen_h = 1024;
+
+
+            float screens_ratio = (float)exampleDisplay_h / (float)secondScreen_h;
+
+
+            int screen_x_center = pictureBox_exampleDisplay.Bounds.Width / 2;
+            int screen_y_center = pictureBox_exampleDisplay.Bounds.Height / 2;
+
+            int x_click_corected = Convert.ToInt32(((float)coordinates.Y - (float)screen_y_center) / screens_ratio);
+            int y_click_corected = Convert.ToInt32(((float)coordinates.X - (float)screen_x_center) / screens_ratio);
+
+            numericUpDown_dotX.Value = Convert.ToDecimal(x_click_corected);
+            numericUpDown_dotY.Value = Convert.ToDecimal(y_click_corected);
+
+        }
+
+        public CheckBox checkBox_showDot;
     }
 }
 

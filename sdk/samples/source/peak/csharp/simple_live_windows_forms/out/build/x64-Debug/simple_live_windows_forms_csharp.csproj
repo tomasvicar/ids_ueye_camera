@@ -61,6 +61,12 @@
       <Link>FormWindow.Designer.cs</Link>
       <DependentUpon>FormWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSecondScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSecondScreen.Designer.cs">
+      <DependentUpon>FormSecondScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyDevice.cs" />
     <Compile Include="PluxWorker.cs" />
   </ItemGroup>
@@ -99,6 +105,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -128,6 +135,9 @@
       <Link>FormWindow.resx</Link>
       <DependentUpon>FormWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSecondScreen.resx">
+      <DependentUpon>FormSecondScreen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
