@@ -72,7 +72,7 @@ target_link_libraries (${SAMPLE_TARGET_NAME}
 #    set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 #endif ()
 
-
+#remove allbuild a cosi; include in project potøebné soubory; pridat referency na datavisualisation a plux
 #set (CMAKE_BUILD_TYPE "Debug")
 #set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 set (CMAKE_BUILD_TYPE "Release")
