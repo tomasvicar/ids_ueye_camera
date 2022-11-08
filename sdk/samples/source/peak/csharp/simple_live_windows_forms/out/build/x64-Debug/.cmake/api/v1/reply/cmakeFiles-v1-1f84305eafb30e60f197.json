@@ -48,62 +48,6 @@
 			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeCSharpInformation.cmake"
 		},
 		{
-			"isExternal" : true,
-			"path" : "C:/Users/ubmi/Desktop/ids_ueye_camera/ids_ueye_camera/sdk/samples/source/peak/_cmake_scripts/cmake_detect_architecture.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "out/build/x64-Debug/CMakeFiles/3.20.21032501-MSVC_2/CMakeCCompiler.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeCInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Compiler/MSVC-C.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC-C.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Platform/Windows-MSVC.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "out/build/x64-Debug/CMakeFiles/3.20.21032501-MSVC_2/CMakeRCCompiler.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeRCInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "out/build/x64-Debug/arch.c"
-		},
-		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CSharpUtilities.cmake"

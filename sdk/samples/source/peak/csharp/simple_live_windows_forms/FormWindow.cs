@@ -65,7 +65,8 @@ namespace simple_live_windows_forms
         private bool stopTrigerClicked2;
 
         public MyDevice dev = null;
-        public string macAddr = "00:07:80:0F:30:1A";
+        public string macAddr = "00:07:80:0F:30:A4";
+
         public PluxWorker pluxWorker;
         public List<PluxDotNet.Source> srcs;
 
@@ -132,7 +133,7 @@ namespace simple_live_windows_forms
         private Stopwatch secondScreenForm;
 
         //public int num_of_ports = 8;
-        public int num_of_ports = 5;
+        public int num_of_ports = 7;
 
         public FormWindow()
         {
@@ -1120,6 +1121,7 @@ namespace simple_live_windows_forms
             this.chart2.Size = new System.Drawing.Size(780, 86);
             this.chart2.TabIndex = 31;
             this.chart2.Text = "chart2";
+            this.chart2.Click += new System.EventHandler(this.chart2_Click);
             // 
             // chart3
             // 
@@ -2307,15 +2309,15 @@ namespace simple_live_windows_forms
                 srcs = new List<PluxDotNet.Source>() {};
 
 
-                for (int i = 0; i < num_of_ports - 2; i++)
+                for (int i = 0; i < num_of_ports; i++)
                 {
                     srcs.Add(new PluxDotNet.Source());
                     srcs[i].port = i + 1;
                 }
 
-                srcs.Add(new PluxDotNet.Source());
-                srcs[num_of_ports - 2].port = 9;
-                srcs[num_of_ports - 2].chMask = 0x03;
+                //srcs.Add(new PluxDotNet.Source());
+                //srcs[num_of_ports - 2].port = 9;
+                //srcs[num_of_ports - 2].chMask = 0x03;
 
 
                 
@@ -2329,8 +2331,8 @@ namespace simple_live_windows_forms
                 
 
 
-                int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
-                dev.SetParameter(0x09, 0x03, LED_param, 2); // port, index...
+                //int[] LED_param = { Decimal.ToInt32(numericUpDown_red.Value), Decimal.ToInt32(numericUpDown_IR.Value)};
+                //dev.SetParameter(0x09, 0x03, LED_param, 2); // port, index...
                 
 
                 dev.Start(dev.freq, srcs);
@@ -2698,6 +2700,10 @@ namespace simple_live_windows_forms
 
         }
 
+        private void chart2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

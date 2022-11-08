@@ -9,8 +9,8 @@ set (CMAKE_SCRIPTS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../_cmake_scripts" CACHE
 set (SAMPLE_OUPUT_PATH "${CMAKE_BINARY_DIR}/output/bin")
 
 
-include (${CMAKE_SCRIPTS_PATH}/cmake_detect_architecture.cmake)
-detect_target_architecture (ARCH)
+#include (${CMAKE_SCRIPTS_PATH}/cmake_detect_architecture.cmake)
+#detect_target_architecture (ARCH)
 
 include (CSharpUtilities)
 csharp_set_windows_forms_properties (
@@ -73,8 +73,8 @@ target_link_libraries (${SAMPLE_TARGET_NAME}
 #endif ()
 
 #remove allbuild a cosi; include in project potøebné soubory; pridat referency na datavisualisation a plux
+
 #set (CMAKE_BUILD_TYPE "Debug")
-#set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 set (CMAKE_BUILD_TYPE "Release")
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
