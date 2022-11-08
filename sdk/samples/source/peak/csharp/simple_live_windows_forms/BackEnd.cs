@@ -153,7 +153,7 @@ namespace simple_live_windows_forms
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSelector").SetCurrentEntry("ExposureStart");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerMode").SetCurrentEntry("On");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerSource").SetCurrentEntry("Line0");
-                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("FallingEdge");
+                    nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("RisingEdge");
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.FloatNode>("TriggerDelay").SetValue(0.0);
                     nodeMapRemoteDevice.FindNode<peak.core.nodes.IntegerNode>("TriggerDivider").SetValue(1);
 

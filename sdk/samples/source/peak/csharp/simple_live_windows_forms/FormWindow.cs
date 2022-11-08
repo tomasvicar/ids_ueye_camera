@@ -49,13 +49,16 @@ namespace simple_live_windows_forms
     {
         private PictureBox pictureBox;
         private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode;
+        private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode2;
 
         private BackEnd backEnd;
         private BackgroundWorker backgroundWorker1;
         private bool hasError;
 
         public bool is_triger = false;
+        private bool is_recording;
         bool tmp_show = false;
+        public bool first_second = true;
 
         //public double gamma = 1;
         public double blackLevel = 1;
@@ -212,12 +215,12 @@ namespace simple_live_windows_forms
             {
 
 
-                if (is_triger)
+                if (is_recording)
                 {
                     writer.WriteVideoFrame(image);
                 }
 
-                if (is_triger)
+                if (is_recording)
                 {
                     tmp_show = (int.Parse(labelCounter.Text) % numericUpDown_pictureBoxTimeDecimation.Value) == 0;
                     ///tmp_show = (counter % numericUpDown_pictureBoxTimeDecimation.Value) == 0;
@@ -230,8 +233,16 @@ namespace simple_live_windows_forms
 
                 if (tmp_show)
                 {
-                    previousImage = pictureBoxWithInterpolationMode.Image;
-                    pictureBoxWithInterpolationMode.Image = image;
+                    if (first_second)
+                    {
+                        previousImage = pictureBoxWithInterpolationMode.Image;
+                        pictureBoxWithInterpolationMode.Image = image;
+                    }
+                    else {
+                        previousImage = pictureBoxWithInterpolationMode2.Image;
+                        pictureBoxWithInterpolationMode2.Image = image;
+                    }
+                    first_second = !first_second;
                 }
 
                 //pictureBox.BeginInvoke((MethodInvoker)delegate { previousImage = pictureBox.Image; pictureBox.Image = image; if (previousImage != null) { previousImage.Dispose(); } });
@@ -478,6 +489,7 @@ namespace simple_live_windows_forms
             this.label_dotRadius = new System.Windows.Forms.Label();
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.checkBox_showDot = new System.Windows.Forms.CheckBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -505,6 +517,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -512,9 +525,9 @@ namespace simple_live_windows_forms
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Location = new System.Drawing.Point(144, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(735, 613);
+            this.pictureBox.Size = new System.Drawing.Size(424, 301);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
@@ -939,7 +952,7 @@ namespace simple_live_windows_forms
             this.numericUpDown_pictureBoxTimeDecimation.Size = new System.Drawing.Size(44, 22);
             this.numericUpDown_pictureBoxTimeDecimation.TabIndex = 17;
             this.numericUpDown_pictureBoxTimeDecimation.Value = new decimal(new int[] {
-            4,
+            1,
             0,
             0,
             0});
@@ -1405,9 +1418,22 @@ namespace simple_live_windows_forms
             this.checkBox_showDot.UseVisualStyleBackColor = true;
             this.checkBox_showDot.CheckedChanged += new System.EventHandler(this.checkBOx_showDot_CheckedChanged);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Location = new System.Drawing.Point(146, 314);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(424, 300);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 54;
+            this.pictureBox2.TabStop = false;
+            // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(1520, 710);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.checkBox_showDot);
             this.Controls.Add(this.numericUpDown_R);
             this.Controls.Add(this.label_dotRadius);
@@ -1490,6 +1516,7 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1585,6 +1612,19 @@ namespace simple_live_windows_forms
             this.pictureBoxWithInterpolationMode.Anchor = this.pictureBox.Anchor;
 
 
+            this.pictureBox2.Visible = false;
+
+            this.pictureBoxWithInterpolationMode2 = new PictureBoxWithInterpolationMode();
+            pictureBoxWithInterpolationMode2.InterpolationMode = InterpolationMode.NearestNeighbor;
+            this.Controls.Add(this.pictureBoxWithInterpolationMode2);
+            this.pictureBoxWithInterpolationMode2.Location = this.pictureBox2.Location;
+            this.pictureBoxWithInterpolationMode2.Name = this.pictureBox2.Name + "WithInterpolationMode";
+            this.pictureBoxWithInterpolationMode2.Size = this.pictureBox2.Size;
+            this.pictureBoxWithInterpolationMode2.SizeMode = this.pictureBox2.SizeMode;
+            this.pictureBoxWithInterpolationMode2.TabIndex = this.pictureBox2.TabIndex;
+            this.pictureBoxWithInterpolationMode2.TabStop = this.pictureBox2.TabStop;
+            this.pictureBoxWithInterpolationMode2.Anchor = this.pictureBox2.Anchor;
+
 
             chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
             chart2.ChartAreas[0].AxisY.IsStartedFromZero = false;
@@ -1606,8 +1646,9 @@ namespace simple_live_windows_forms
         private void buttonStart_Click(object sender, EventArgs e)
         {
             stopTrigerClicked2 = false;
+            first_second = true;
 
-            is_triger = false;
+
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             button_triger.Enabled = true;
@@ -1615,6 +1656,8 @@ namespace simple_live_windows_forms
             button_load.Enabled = false;
 
 
+            is_triger = true;
+            is_recording = false;
             myStart();
 
 
@@ -1633,7 +1676,7 @@ namespace simple_live_windows_forms
 
 
 
-            if (is_triger)
+            if (is_recording)
             {
 
                 
@@ -1692,7 +1735,10 @@ namespace simple_live_windows_forms
             button_stopTriger.Enabled = false;
             button_load.Enabled = true;
 
-            myStop();
+
+            stopTrigerClicked = true;
+            stopTrigerClicked2 = true;
+            ComTrigerOff();
         }
 
         private void myStop()
@@ -1706,7 +1752,7 @@ namespace simple_live_windows_forms
             backEnd.Stop();
 
 
-            if (is_triger)
+            if (is_recording)
             {
                 writer.Close();
 
@@ -1905,6 +1951,7 @@ namespace simple_live_windows_forms
         private void button_triger_Click(object sender, EventArgs e)
         {
             stopTrigerClicked2 = false;
+            first_second = true;
             if (buttonStart.Enabled == false)
             {
                 myStop();
@@ -1919,6 +1966,7 @@ namespace simple_live_windows_forms
             
 
             is_triger = true;
+            is_recording = true;
             myStart();
 
             button_pluxStart.Enabled = false;
@@ -2572,6 +2620,7 @@ namespace simple_live_windows_forms
         }
 
         public CheckBox checkBox_showDot;
+        private PictureBox pictureBox2;
     }
 }
 
