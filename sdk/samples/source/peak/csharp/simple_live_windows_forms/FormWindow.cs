@@ -50,6 +50,7 @@ namespace simple_live_windows_forms
         private PictureBox pictureBox;
         private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode;
         private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode2;
+        private PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode3;
 
         private BackEnd backEnd;
         private BackgroundWorker backgroundWorker1;
@@ -233,17 +234,33 @@ namespace simple_live_windows_forms
 
                 if (tmp_show)
                 {
-                    if (first_second)
+                    if (checkBox_oneWindow.Checked)
                     {
-                        previousImage = pictureBoxWithInterpolationMode.Image;
-                        pictureBoxWithInterpolationMode.Image = image;
+                        if (Convert.ToBoolean(numericUpDown_wl.Value-1) == first_second)   
+                        {
+                            previousImage = pictureBoxWithInterpolationMode3.Image;
+                            pictureBoxWithInterpolationMode3.Image = image;
+                        }
                     }
-                    else {
-                        previousImage = pictureBoxWithInterpolationMode2.Image;
-                        pictureBoxWithInterpolationMode2.Image = image;
+                    else
+                    {
+                        if (first_second)
+                        {
+                            previousImage = pictureBoxWithInterpolationMode.Image;
+                            pictureBoxWithInterpolationMode.Image = image;
+                        }
+                        else
+                        {
+                            previousImage = pictureBoxWithInterpolationMode2.Image;
+                            pictureBoxWithInterpolationMode2.Image = image;
+                        }
+                        
                     }
                     first_second = !first_second;
                 }
+
+
+
 
                 //pictureBox.BeginInvoke((MethodInvoker)delegate { previousImage = pictureBox.Image; pictureBox.Image = image; if (previousImage != null) { previousImage.Dispose(); } });
 
@@ -399,21 +416,21 @@ namespace simple_live_windows_forms
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.textBox_dataname = new System.Windows.Forms.TextBox();
@@ -490,6 +507,9 @@ namespace simple_live_windows_forms
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.checkBox_showDot = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.checkBox_oneWindow = new System.Windows.Forms.CheckBox();
+            this.numericUpDown_wl = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             this.panel_gain.SuspendLayout();
@@ -518,6 +538,8 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -1092,18 +1114,18 @@ namespace simple_live_windows_forms
             // chart1
             // 
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
             this.chart1.Location = new System.Drawing.Point(741, 3);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
             this.chart1.Size = new System.Drawing.Size(780, 118);
             this.chart1.TabIndex = 30;
             this.chart1.Text = "chart1";
@@ -1111,18 +1133,18 @@ namespace simple_live_windows_forms
             // chart2
             // 
             this.chart2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            chartArea7.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart2.Legends.Add(legend7);
             this.chart2.Location = new System.Drawing.Point(741, 116);
             this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series7.IsVisibleInLegend = false;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chart2.Series.Add(series7);
             this.chart2.Size = new System.Drawing.Size(780, 118);
             this.chart2.TabIndex = 31;
             this.chart2.Text = "chart2";
@@ -1130,18 +1152,18 @@ namespace simple_live_windows_forms
             // chart3
             // 
             this.chart3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea3.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart3.Legends.Add(legend3);
+            chartArea8.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart3.Legends.Add(legend8);
             this.chart3.Location = new System.Drawing.Point(741, 230);
             this.chart3.Name = "chart3";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart3.Series.Add(series3);
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series8.IsVisibleInLegend = false;
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chart3.Series.Add(series8);
             this.chart3.Size = new System.Drawing.Size(780, 118);
             this.chart3.TabIndex = 32;
             this.chart3.Text = "chart3";
@@ -1149,18 +1171,18 @@ namespace simple_live_windows_forms
             // chart4
             // 
             this.chart4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea4.Name = "ChartArea1";
-            this.chart4.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart4.Legends.Add(legend4);
+            chartArea9.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.chart4.Legends.Add(legend9);
             this.chart4.Location = new System.Drawing.Point(741, 345);
             this.chart4.Name = "chart4";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart4.Series.Add(series4);
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series9.IsVisibleInLegend = false;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.chart4.Series.Add(series9);
             this.chart4.Size = new System.Drawing.Size(780, 118);
             this.chart4.TabIndex = 33;
             this.chart4.Text = "chart4";
@@ -1168,18 +1190,18 @@ namespace simple_live_windows_forms
             // chart5
             // 
             this.chart5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea5.Name = "ChartArea1";
-            this.chart5.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart5.Legends.Add(legend5);
+            chartArea10.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            this.chart5.Legends.Add(legend10);
             this.chart5.Location = new System.Drawing.Point(741, 460);
             this.chart5.Name = "chart5";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chart5.Series.Add(series5);
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series10.IsVisibleInLegend = false;
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            this.chart5.Series.Add(series10);
             this.chart5.Size = new System.Drawing.Size(780, 118);
             this.chart5.TabIndex = 34;
             this.chart5.Text = "chart5";
@@ -1429,10 +1451,55 @@ namespace simple_live_windows_forms
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 54;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // checkBox_oneWindow
+            // 
+            this.checkBox_oneWindow.AutoSize = true;
+            this.checkBox_oneWindow.Location = new System.Drawing.Point(803, 594);
+            this.checkBox_oneWindow.Name = "checkBox_oneWindow";
+            this.checkBox_oneWindow.Size = new System.Drawing.Size(74, 21);
+            this.checkBox_oneWindow.TabIndex = 55;
+            this.checkBox_oneWindow.Text = "one_wl";
+            this.checkBox_oneWindow.UseVisualStyleBackColor = true;
+            this.checkBox_oneWindow.CheckedChanged += new System.EventHandler(this.checkBox_oneWindow_CheckedChanged);
+            // 
+            // numericUpDown_wl
+            // 
+            this.numericUpDown_wl.Location = new System.Drawing.Point(741, 592);
+            this.numericUpDown_wl.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_wl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_wl.Name = "numericUpDown_wl";
+            this.numericUpDown_wl.Size = new System.Drawing.Size(39, 22);
+            this.numericUpDown_wl.TabIndex = 56;
+            this.numericUpDown_wl.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(4, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(651, 614);
+            this.pictureBox3.TabIndex = 57;
+            this.pictureBox3.TabStop = false;
             // 
             // FormWindow
             // 
             this.ClientSize = new System.Drawing.Size(1520, 710);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.numericUpDown_wl);
+            this.Controls.Add(this.checkBox_oneWindow);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.checkBox_showDot);
             this.Controls.Add(this.numericUpDown_R);
@@ -1517,6 +1584,8 @@ namespace simple_live_windows_forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1624,6 +1693,21 @@ namespace simple_live_windows_forms
             this.pictureBoxWithInterpolationMode2.TabIndex = this.pictureBox2.TabIndex;
             this.pictureBoxWithInterpolationMode2.TabStop = this.pictureBox2.TabStop;
             this.pictureBoxWithInterpolationMode2.Anchor = this.pictureBox2.Anchor;
+
+
+            this.pictureBox3.Visible = false;
+
+            this.pictureBoxWithInterpolationMode3 = new PictureBoxWithInterpolationMode();
+            pictureBoxWithInterpolationMode3.InterpolationMode = InterpolationMode.NearestNeighbor;
+            this.Controls.Add(this.pictureBoxWithInterpolationMode3);
+            this.pictureBoxWithInterpolationMode3.Location = this.pictureBox3.Location;
+            this.pictureBoxWithInterpolationMode3.Name = this.pictureBox3.Name + "WithInterpolationMode";
+            this.pictureBoxWithInterpolationMode3.Size = this.pictureBox3.Size;
+            this.pictureBoxWithInterpolationMode3.SizeMode = this.pictureBox3.SizeMode;
+            this.pictureBoxWithInterpolationMode3.TabIndex = this.pictureBox3.TabIndex;
+            this.pictureBoxWithInterpolationMode3.TabStop = this.pictureBox3.TabStop;
+            this.pictureBoxWithInterpolationMode3.Anchor = this.pictureBox3.Anchor;
+            this.pictureBoxWithInterpolationMode3.Visible = false;
 
 
             chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
@@ -1748,6 +1832,7 @@ namespace simple_live_windows_forms
             numericUpDown_y.Enabled = true;
             numericUpDown_h.Enabled = true;
             //checkBox_rot180.Enabled = true;
+            ComTrigerOff();
 
             backEnd.Stop();
 
@@ -2621,6 +2706,31 @@ namespace simple_live_windows_forms
 
         public CheckBox checkBox_showDot;
         private PictureBox pictureBox2;
+        private CheckBox checkBox_oneWindow;
+        private NumericUpDown numericUpDown_wl;
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private PictureBox pictureBox3;
+
+        private void checkBox_oneWindow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_oneWindow.Checked)
+            {
+                pictureBoxWithInterpolationMode3.Visible = true;
+                pictureBoxWithInterpolationMode.Visible = false;
+                pictureBoxWithInterpolationMode2.Visible = false;
+            }
+            else
+            {
+                pictureBoxWithInterpolationMode3.Visible = false;
+                pictureBoxWithInterpolationMode.Visible = true;
+                pictureBoxWithInterpolationMode2.Visible = true;
+            }
+        }
     }
 }
 
