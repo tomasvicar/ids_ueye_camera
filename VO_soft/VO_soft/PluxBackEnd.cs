@@ -7,7 +7,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace VO_soft
 {
-    internal class PluxBackEnd
+    public class PluxBackEnd
     {
         public Form1 form1;
         public MyPluxDevice dev = null;
@@ -21,7 +21,7 @@ namespace VO_soft
             this.form1 = form1;
         }
 
-        internal void closePlux()
+        public void closePlux()
         {
             if (dev != null)
             {
@@ -64,9 +64,9 @@ namespace VO_soft
                 dev = new MyPluxDevice(form1.formSettings.textBox_MAC.Text);
                 Dictionary<string, object> props = dev.GetProperties();
 
-                dev.freq = 1000;  // acquisition base frequency of 1000 Hz
+                dev.freq = Decimal.ToInt32(form1.formSettings.numericUpDown_pluxfreq.Value);  // acquisition base frequency of 1000 Hz
                 dev.form1 = form1;
-
+                dev.show_time_range_s = Decimal.ToInt32(form1.formSettings.numericUpDown_pluxShowS.Value);
 
 
                 srcs = new List<PluxDotNet.Source>() { };
@@ -141,7 +141,7 @@ namespace VO_soft
                     }
                 }
             }
-            
+
 
 
 

@@ -96,14 +96,18 @@ namespace VO_soft
                     if (obj.GetType() == typeof(ComboBox))
                     {
                         ComboBox obj_converted = (ComboBox)Convert.ChangeType(obj, typeof(ComboBox));
+                        obj_converted.SelectedIndexChanged -= form1.formSettings.comboBox_SelectedIndexChanged;
                         obj_converted.Text = (string)Convert.ChangeType(_data.ElementAt(i).Value, typeof(string));
+                        obj_converted.SelectedIndexChanged += form1.formSettings.comboBox_SelectedIndexChanged;
                     }
                     if (obj.GetType() == typeof(CheckBox))
                     {
                         CheckBox obj_converted = (CheckBox)Convert.ChangeType(obj, typeof(CheckBox));
                         obj_converted.Enabled = (bool)Convert.ChangeType(_data.ElementAt(i).Value, typeof(bool));
                     }
+
                 }
+
             }
             else{
                 MessageBox.Show("settings.json not found!", "Load error");

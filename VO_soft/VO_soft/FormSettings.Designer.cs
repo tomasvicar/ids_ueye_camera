@@ -66,12 +66,18 @@ namespace VO_soft
             this.numericUpDown_chartOverlap = new System.Windows.Forms.NumericUpDown();
             this.checkBox_display = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.numericUpDown_pluxfreq = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.numericUpDown_pluxShowS = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_chartOverlap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown_x
@@ -422,11 +428,47 @@ namespace VO_soft
             this.label17.TabIndex = 28;
             this.label17.Text = "oxi R + IR create two charts";
             // 
+            // numericUpDown_pluxfreq
+            // 
+            this.numericUpDown_pluxfreq.Location = new System.Drawing.Point(226, 108);
+            this.numericUpDown_pluxfreq.Name = "numericUpDown_pluxfreq";
+            this.numericUpDown_pluxfreq.Size = new System.Drawing.Size(61, 20);
+            this.numericUpDown_pluxfreq.TabIndex = 29;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(223, 92);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(50, 13);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "plux freq.";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(330, 92);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(62, 13);
+            this.label19.TabIndex = 31;
+            this.label19.Text = "plux show s";
+            // 
+            // numericUpDown_pluxShowS
+            // 
+            this.numericUpDown_pluxShowS.Location = new System.Drawing.Point(333, 108);
+            this.numericUpDown_pluxShowS.Name = "numericUpDown_pluxShowS";
+            this.numericUpDown_pluxShowS.Size = new System.Drawing.Size(61, 20);
+            this.numericUpDown_pluxShowS.TabIndex = 32;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 281);
+            this.Controls.Add(this.numericUpDown_pluxShowS);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.numericUpDown_pluxfreq);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.checkBox_display);
             this.Controls.Add(this.numericUpDown_chartOverlap);
@@ -457,6 +499,8 @@ namespace VO_soft
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_chartOverlap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,5 +545,9 @@ namespace VO_soft
         public System.Windows.Forms.NumericUpDown numericUpDown_chartOverlap;
         private System.Windows.Forms.CheckBox checkBox_display;
         private System.Windows.Forms.Label label17;
+        public System.Windows.Forms.Label label18;
+        public System.Windows.Forms.Label label19;
+        public System.Windows.Forms.NumericUpDown numericUpDown_pluxfreq;
+        public System.Windows.Forms.NumericUpDown numericUpDown_pluxShowS;
     }
 }

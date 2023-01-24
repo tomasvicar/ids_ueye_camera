@@ -106,7 +106,7 @@ namespace VO_soft
 
                     //image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format8bppIndexed, iplImg.Data());
                     //image.Palette = colorPalette_grayscale;
-                    image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, iplImg.Data());
+                    image = new Bitmap(width, height, stride, PixelFormat.Format24bppRgb, iplImg.Data());
 
                    
                     imageCopy = new Bitmap(image);

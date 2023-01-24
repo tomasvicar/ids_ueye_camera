@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -76,7 +77,45 @@ namespace VO_soft
             form1.formSettings.numericUpDown_h.Increment = cameraParameters.h_inc;
             form1.formSettings.numericUpDown_h.Value = 800m;
 
+            form1.formSettings.numericUpDown_pluxfreq.Minimum = 1m;
+            form1.formSettings.numericUpDown_pluxfreq.Maximum = 1000m;
+            form1.formSettings.numericUpDown_pluxfreq.Increment = 100m;
+            form1.formSettings.numericUpDown_pluxfreq.Value = 1000m;
 
+            form1.formSettings.numericUpDown_pluxShowS.Minimum = 1m;
+            form1.formSettings.numericUpDown_pluxShowS.Maximum = 60m;
+            form1.formSettings.numericUpDown_pluxShowS.Increment = 1m;
+            form1.formSettings.numericUpDown_pluxShowS.Value = 5m;
+
+            form1.pictureBoxWithInterpolationMode1.InterpolationMode = InterpolationMode.NearestNeighbor;
+            form1.pictureBoxWithInterpolationMode2.InterpolationMode = InterpolationMode.NearestNeighbor;
+            form1.pictureBoxWithInterpolationMode3.InterpolationMode = InterpolationMode.NearestNeighbor;
+
+            form1.pictureBoxWithInterpolationMode1.SizeMode = PictureBoxSizeMode.Zoom;
+            form1.pictureBoxWithInterpolationMode2.SizeMode = PictureBoxSizeMode.Zoom;
+            form1.pictureBoxWithInterpolationMode3.SizeMode = PictureBoxSizeMode.Zoom;
+
+            form1.pictureBoxWithInterpolationMode2.Visible = false;
+            form1.pictureBoxWithInterpolationMode3.Visible = false;
+
+            form1.numericUpDown_subsampling.Minimum = 1m;
+            form1.numericUpDown_subsampling.Maximum = 100m;
+            form1.numericUpDown_subsampling.Value = 10m;
+
+            form1.numericUpDown_subsampling.Value = 10;
+            form1.numericUpDown_pictureBoxTimeDecimation.Value = 1;
+
+            form1.numericUpDown_bufferSize.Minimum = 100;
+            form1.numericUpDown_bufferSize.Maximum = 999999;
+            form1.numericUpDown_bufferSize.Value = 500;
+
+            form1.numericUpDown_IR.Minimum = 1;
+            form1.numericUpDown_IR.Maximum = 20;
+            form1.numericUpDown_IR.Value = 2;
+
+            form1.numericUpDown_red.Minimum = 1;
+            form1.numericUpDown_red.Maximum = 20;
+            form1.numericUpDown_red.Value = 2;
 
             foreach (Control obj in form1.formSettings.panel1.Controls)
             {
@@ -84,7 +123,9 @@ namespace VO_soft
                 {
                     ComboBox obj_converted = (ComboBox)Convert.ChangeType(obj, typeof(ComboBox));
                     obj_converted.Items.AddRange(new object[] { "None", "ECG", "Triger", "Respiration", "Oxi R + IR", "Arterial pressure", "Intracranial pressure", "Other"});
+                    obj_converted.SelectedIndexChanged -= form1.formSettings.comboBox_SelectedIndexChanged;
                     obj_converted.Text = "Other";
+                    obj_converted.SelectedIndexChanged += form1.formSettings.comboBox_SelectedIndexChanged;
                 }
             }
 

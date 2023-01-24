@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -72,9 +73,12 @@ namespace VO_soft
             form1.updatePixelClock();
         }
 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Form1Setter.SetCharts(form1);
+            form1.pluxBackEnd.closePlux();
+            Thread.Sleep(100);
+            form1.label_pluxState_Click(this, EventArgs.Empty);
         }
     }
 }

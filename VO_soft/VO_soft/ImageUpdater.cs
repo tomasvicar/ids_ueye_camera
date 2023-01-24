@@ -9,10 +9,21 @@ namespace VO_soft
 {
     class ImageUpdater
     {
+        private Image previousImage;
 
-        internal static void updateImage(Bitmap image,uint counter, Form1 form1)
+        internal void updateImage(Bitmap image,uint counter, Form1 form1)
         {
-            throw new NotImplementedException();
+
+            previousImage = form1.pictureBoxWithInterpolationMode1.Image;
+            form1.pictureBoxWithInterpolationMode1.Image = image;
+
+            if (previousImage != null)
+            {
+                previousImage.Dispose();
+            }
+
+
+
         }
     }
 }

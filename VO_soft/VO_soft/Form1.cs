@@ -19,10 +19,11 @@ namespace VO_soft
     {
         public CameraParameters cameraParameters;
         public CameraBackEnd cameraBackEnd;
-        private PluxBackEnd pluxBackEnd;
+        public PluxBackEnd pluxBackEnd;
         private bool stopTrigerClicked2;
         internal bool is_triger;
         public FormSettings formSettings;
+        private ImageUpdater imageUpdater;
         private bool stopTrigerClicked;
         private VideoFileWriter videoWriter;
         
@@ -66,7 +67,7 @@ namespace VO_soft
 
 
 
-
+            imageUpdater = new ImageUpdater();
             cameraParameters = new CameraParameters();
             cameraBackEnd = new CameraBackEnd(this);
             pluxBackEnd = new PluxBackEnd(this);
@@ -85,7 +86,7 @@ namespace VO_soft
 
             label_comPortStatus_Click(null, EventArgs.Empty);
 
-            //label_pluxState_Click(this, EventArgs.Empty);
+            label_pluxState_Click(this, EventArgs.Empty);
 
             
 
@@ -154,21 +155,16 @@ namespace VO_soft
 
         private void backEnd_ImageReceived(object sender, Bitmap image, uint counter)
         {
-            ImageUpdater.updateImage(image, counter, this);
+            imageUpdater.updateImage(image, counter, this);
         }
 
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void label_comPortStatus_Click(object sender, EventArgs e)
         {
             cameraBackEnd.connectCom();
         }
 
-        private void label_pluxState_Click(object sender, EventArgs e)
+        public void label_pluxState_Click(object sender, EventArgs e)
         {
             if (pluxBackEnd.openPlux())
             {

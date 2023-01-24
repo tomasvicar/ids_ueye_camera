@@ -34,6 +34,7 @@ namespace VO_soft
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.advancedSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,8 @@ namespace VO_soft
             this.label_pixelClock = new System.Windows.Forms.Label();
             this.label_error = new System.Windows.Forms.Label();
             this.panel_plux = new System.Windows.Forms.Panel();
-            this.advancedSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.pictureBoxWithInterpolationMode3 = new VO_soft.PictureBoxWithInterpolationMode();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
@@ -89,6 +91,8 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxWithInterpolationMode1
@@ -127,7 +131,13 @@ namespace VO_soft
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // advancedSettingsToolStripMenuItem
+            // 
+            this.advancedSettingsToolStripMenuItem.Name = "advancedSettingsToolStripMenuItem";
+            this.advancedSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.advancedSettingsToolStripMenuItem.Text = "advanced settings";
+            this.advancedSettingsToolStripMenuItem.Click += new System.EventHandler(this.advancedSettingsToolStripMenuItem_Click);
             // 
             // actionsToolStripMenuItem
             // 
@@ -504,18 +514,33 @@ namespace VO_soft
             this.panel_plux.Size = new System.Drawing.Size(618, 516);
             this.panel_plux.TabIndex = 41;
             // 
-            // advancedSettingsToolStripMenuItem
+            // pictureBoxWithInterpolationMode2
             // 
-            this.advancedSettingsToolStripMenuItem.Name = "advancedSettingsToolStripMenuItem";
-            this.advancedSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.advancedSettingsToolStripMenuItem.Text = "advanced settings";
-            this.advancedSettingsToolStripMenuItem.Click += new System.EventHandler(this.advancedSettingsToolStripMenuItem_Click);
+            this.pictureBoxWithInterpolationMode2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode2.Location = new System.Drawing.Point(7, 122);
+            this.pictureBoxWithInterpolationMode2.Name = "pictureBoxWithInterpolationMode2";
+            this.pictureBoxWithInterpolationMode2.Size = new System.Drawing.Size(354, 270);
+            this.pictureBoxWithInterpolationMode2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxWithInterpolationMode2.TabIndex = 42;
+            this.pictureBoxWithInterpolationMode2.TabStop = false;
+            // 
+            // pictureBoxWithInterpolationMode3
+            // 
+            this.pictureBoxWithInterpolationMode3.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode3.Location = new System.Drawing.Point(368, 122);
+            this.pictureBoxWithInterpolationMode3.Name = "pictureBoxWithInterpolationMode3";
+            this.pictureBoxWithInterpolationMode3.Size = new System.Drawing.Size(354, 270);
+            this.pictureBoxWithInterpolationMode3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxWithInterpolationMode3.TabIndex = 43;
+            this.pictureBoxWithInterpolationMode3.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.pictureBoxWithInterpolationMode3);
+            this.Controls.Add(this.pictureBoxWithInterpolationMode2);
             this.Controls.Add(this.panel_plux);
             this.Controls.Add(this.label_error);
             this.Controls.Add(this.label_pixelClock);
@@ -575,6 +600,8 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,6 +657,8 @@ namespace VO_soft
         public System.Windows.Forms.Label label_exposureTimeMin;
         public System.Windows.Forms.Label label_exposureTimeMax;
         private System.Windows.Forms.ToolStripMenuItem advancedSettingsToolStripMenuItem;
+        public PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode2;
+        public PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode3;
     }
 }
 
