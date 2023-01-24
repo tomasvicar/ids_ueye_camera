@@ -1,0 +1,1035 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ids_peak_ipl_dotnet</name>
+    </assembly>
+    <members>
+        <member name="T:peak.ipl.ColorCorrectionFactors">
+            <summary>
+            The Factors of the Color Correction Matrix.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.ColorCorrector">
+            <summary>
+            Applies a 3x3 color correction matrix to the data.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.ColorCorrector.SetColorCorrectionFactors(peak.ipl.ColorCorrectionFactors)">
+            <summary>
+            Sets the values of the color correction matrix. 
+             
+            The matrix is row-wise sorted: 
+            <table> 
+             <tr><td>factorRR</td><td>factorGR</td><td>factorBR</td></tr> 
+             <tr><td>factorRG</td><td>factorGG</td><td>factorBG</td></tr> 
+             <tr><td>factorRB</td><td>factorGB</td><td>factorBB</td></tr> 
+            </table>
+            </summary> 
+            <param name="colorCorrectorFactors"> The factors of the color correction matrix.</param> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ColorCorrector.ColorCorrectionFactors">
+            <summary>
+            Returns the factors of the color correction matrix.
+            </summary> 
+            <returns>colorCorrectorFactors The factors of the color correction matrix</returns> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ColorCorrector.IsPixelFormatSupported(peak.ipl.PixelFormatName)">
+            <summary>
+            Returns whether the color corrector supports the given pixel format.
+            </summary> 
+            <returns>Flag whether the given pixel format is supported.</returns> 
+            <param name="pixelFormatName"> The pixel format of interest.</param> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ColorCorrector.ProcessInPlace(peak.ipl.Image)">
+            <summary>
+            Corrects the colors of the given image by applying a 3x3 color correction matrix to the data 
+                   in place i.e. it will change the input image.
+            </summary> 
+            <param name="image"> Image to process.</param> 
+            <throws>ImageFormatNotSupportedException image has unsupported pixel format (e.g. packed pixel format)</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ColorCorrector.Process(peak.ipl.Image)">
+            <summary>
+             Corrects the colors of the given image by applying a 3x3 color correction matrix to the data.
+            </summary> 
+            <param name="inputImage"> Image to process.</param> 
+            <returns>A new created image containing the color corrected pixels</returns> 
+            <throws>ImageFormatNotSupportedException image has unsupported pixel format (e.g. packed pixel format)</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="T:peak.ipl.ConversionMode">
+            <summary>
+            Enum holding the possible conversion modes.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.Endianness">
+            <summary>
+            Enum holding the possible endianness (the byte order).
+            </summary>
+        </member>
+        <member name="T:peak.ipl.GammaCorrector">
+            <summary>
+            Applies gamma correction to the data.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.SetGammaCorrectionValue(System.Single)">
+            <summary>
+            Sets the values of the gamma correction.
+            </summary> 
+            <param name="gammaValue"> The value of the gamma correction.</param> 
+            <throws>InvalidArgument gammaValue is not supported.</throws> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.GammaCorrectionValue">
+            <summary>
+            Returns the value of the gamma correction.
+            </summary> 
+            <returns>gammaValue The value of the gamma correction.</returns> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.GammaCorrectionMin">
+            <summary>
+            Returns the minimum value of the gamma correction.
+            </summary> 
+            <returns>gammaMin The minimum value of the gamma correction.</returns> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.GammaCorrectionMax">
+            <summary>
+            Returns the maximum value of the gamma correction.
+            </summary> 
+            <returns>gammaMax The maximum value of the gamma correction.</returns> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.IsPixelFormatSupported(peak.ipl.PixelFormatName)">
+            <summary>
+            Returns whether the gamma corrector supports the given pixel format.
+            </summary> 
+            <returns>Flag whether the given pixel format is supported.</returns> 
+            <param name="pixelFormatName"> The pixel format of interest.</param> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.ProcessInPlace(peak.ipl.Image)">
+            <summary>
+            Corrects the gammas of the given image in place i.e. it will change the input image.
+            </summary> 
+            <param name="image"> Image to process.</param> 
+            <throws>ImageFormatNotSupportedException image has unsupported pixel format.</throws> 
+            <since>1.2.2</since>
+        </member>
+        <member name="M:peak.ipl.GammaCorrector.Process(peak.ipl.Image)">
+            <summary>
+             Corrects the gammas of the given image.
+            </summary> 
+            <param name="inputImage"> Image to process.</param> 
+            <returns>A new created image containing the gamma corrected pixels.</returns> 
+            <throws>ImageFormatNotSupportedException image has unsupported pixel format.</throws> 
+            <since>1.2.2</since>
+        </member>
+        <member name="T:peak.ipl.Histogram">
+            <summary>
+            Stores the histogram values.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.Histogram.HistogramChannel">
+            <summary>
+            Stores the values of the histogram.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.Histogram.#ctor(peak.ipl.Image)">
+            <summary>
+            Constructor.
+            </summary> 
+            <param name="image"> Image to process.</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.Histogram.PixelFormat">
+            <summary>
+            Returns the pixel format of the histogram.
+            </summary> 
+            <returns>PixelFormat</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Histogram.Channels">
+            <summary>
+            Returns a vector containing the bin list of each channel. 
+             
+            For more details on how to apply the two-step procedure this function requires, see also PEAK_IPL_GetLastError().
+            </summary> 
+            <returns>Channels</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="T:peak.ipl.HotpixelCorrection">
+            <summary>
+            Algorithm for (adaptive) hotpixel detection and correction. 
+             
+            This algorithm corrects hotpixels either manually by correcting a predefined list of pixels or adaptively by 
+            automatically updating the list of pixels to correct. In manual mode, pass a list of hotpixels to Correct(). The 
+            hotpixels can obtained using Detect(), or from a different source, e.g. retrieved directly from the camera from an 
+            initial hotpixel calibration. In adaptive mode, just keep passing new images to CorrectAdaptive(). Hotpixels are then 
+            detected and corrected automatically.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.SetSensitivity(peak.ipl.HotpixelCorrection.SensitivityLevel)">
+            <summary>
+            Sets the sensitivity of the hotpixel detection.
+            </summary> 
+            <param name="sensitivityLevel"> The sensitivity level to set.</param> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.SetSensitivity">
+            <summary>
+            Sets the sensitivity of the hotpixel detection.
+            </summary> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.Sensitivity">
+            <summary>
+            Returns the current sensitivity.
+            </summary> 
+            <returns>SensitivityLevel</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.SetGainFactorPercent(System.UInt32)">
+            <summary>
+            Sets the gain factor in percent.
+            </summary> 
+            <param name="gainFactorPercent"> The gain factor in percent to set.</param> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.SetGainFactorPercent">
+            <summary>
+            Sets the gain factor in percent.
+            </summary> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.GainFactorPercent">
+            <summary>
+            Returns the current gain factor in percent.
+            </summary> 
+            <returns>Gain factor in percent</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.Detect(peak.ipl.Image)">
+            <summary>
+            Detects hotpixels in the given image.
+            </summary> 
+            <param name="inputImage"> The input image.</param> 
+            <returns>List of detected hotpixels</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.Correct(peak.ipl.Image,std.Point2DCollection)">
+            <summary>
+            Corrects the given hotpixels in the given image. 
+             
+            Pass a list of hotpixels, either returned by Detect(), or from a different source (e.g. retrieved directly from 
+            the camera from an initial hotpixel calibration).
+            </summary> 
+            <param name="inputImage"> The input image.</param> 
+            <param name="hotpixels">  The list of hotpixels to be corrected.</param> 
+            <returns>Corrected image</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.HotpixelCorrection.CorrectAdaptive(peak.ipl.Image)">
+            <summary>
+            Corrects the given image adaptively. 
+             
+            For each new passed to this method, first the list of hotpixels is adapted, then all pixels in the adapted 
+            hotpixel list are corrected.
+            </summary> 
+            <param name="inputImage"> The input image.</param> 
+            <returns>Corrected image</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="T:peak.ipl.HotpixelCorrection.SensitivityLevel">
+             <summary>
+             SensitivityLevel parameter for the HotpixelCorrection algorithm. 
+            
+             Higher sensitivity levels mean more hotpixels will be detected and corrected, but can also lead to more 
+             false-positives.
+             </summary>
+        </member>
+        <member name="T:peak.ipl.Image">
+            <summary>
+            Stores the pixel format, width and height of an image and the pointer to the image buffer.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.Image.#ctor">
+            <summary>
+            Creates an empty image, i.e. with size 0x0 and invalid pixel format.
+            </summary> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.1</since>
+        </member>
+        <member name="M:peak.ipl.Image.#ctor(peak.ipl.PixelFormat,System.UInt32,System.UInt32)">
+            <summary>
+            Creates an image with the given pixel format and size.
+            </summary> 
+            <param name="pixelFormat"> The pixel format.</param> 
+            <param name="width">       The width.</param> 
+            <param name="height">      The height.</param> 
+            <throws>OutOfRangeException pixelFormat is valid but width or height is 0.</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.#ctor(peak.ipl.PixelFormat,System.IntPtr,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Creates an image with the given pixel format and size from the given buffer.
+            </summary> 
+            <param name="pixelFormat"> The pixel format.</param> 
+            <param name="buffer">      The buffer.</param> 
+            <param name="bufferSize">  The size of the buffer.</param> 
+            <param name="width">       The width.</param> 
+            <param name="height">      The height.</param> 
+            <remarks>The given buffer does not get copied. This is why the buffer must not be freed before 
+                  the image gets freed.</remarks> 
+            <throws>InvalidArgumentException bufferSize is too small for the specified pixel format and image dimension.</throws> 
+            <throws>OutOfRangeException pixelFormat is valid but width or height is 0.</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.Width">
+            <summary>
+            Returns the width.
+            </summary> 
+            <returns>Width</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.Height">
+            <summary>
+            Returns the height.
+            </summary> 
+            <returns>Height</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.PixelPointer(System.UInt32,System.UInt32)">
+            <summary>
+            Returns the pixel pointer to the given pixel position in dependency of the size of the pixel format.
+            </summary> 
+            <param name="xPos"> The x position.</param> 
+            <param name="yPos"> The y position.</param> 
+            <returns>PixelPointer</returns> 
+            <throws>OutOfRangeException The pixel position is outside the image.</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.ByteCount">
+            <summary>
+            Returns the size of the given image in number of bytes.
+            </summary> 
+            <returns>ByteCount</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.PixelFormat">
+            <summary>
+            Returns the pixel format.
+            </summary> 
+            <returns>Pixel format</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.Data">
+            <summary>
+            Returns the pointer to the first pixel position in dependency on the size of the pixel format.
+            </summary> 
+            <returns>Buffer data.</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.ConvertTo(peak.ipl.PixelFormat,peak.ipl.ConversionMode)">
+            <summary>
+            Returns a new created image containing the data of the current image converted to the given pixel format.
+            </summary> 
+            <param name="outputPixelFormat"> The output pixel format.</param> 
+            <param name="conversionMode">    The conversion mode.</param> 
+            <returns>Converted image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.ConvertTo(peak.ipl.PixelFormat)">
+            <summary>
+            Returns a new created image containing the data of the current image converted to the given pixel format.
+            </summary> 
+            <param name="outputPixelFormat"> The output pixel format.</param> 
+            <returns>Converted image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.ConvertTo(peak.ipl.PixelFormat,System.IntPtr,System.UInt32,peak.ipl.ConversionMode)">
+            <summary>
+            Saves the data of the current image converted to the given pixel format into a destination buffer 
+                   and creates an image from that buffer.
+            </summary> 
+            <param name="outputPixelFormat">     The output pixel format.</param> 
+            <param name="outputImageBuffer">     Pointer to destination buffer.</param> 
+            <param name="outputImageBufferSize"> Size of destination buffer.</param> 
+            <param name="conversionMode">        The conversion mode.</param> 
+            <returns>Converted image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.1</since>
+        </member>
+        <member name="M:peak.ipl.Image.ConvertTo(peak.ipl.PixelFormat,System.IntPtr,System.UInt32)">
+            <summary>
+            Saves the data of the current image converted to the given pixel format into a destination buffer 
+                   and creates an image from that buffer.
+            </summary> 
+            <param name="outputPixelFormat">     The output pixel format.</param> 
+            <param name="outputImageBuffer">     Pointer to destination buffer.</param> 
+            <param name="outputImageBufferSize"> Size of destination buffer.</param> 
+            <returns>Converted image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.1</since>
+        </member>
+        <member name="M:peak.ipl.Image.Clone">
+            <summary>
+            Returns a new created image containing the data of the current image as deep copy.
+            </summary> 
+            <returns>Copied image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.Image.Empty">
+            <summary>
+            Checks whether the image is empty. 
+             
+            An image can be empty if its data have been moved.
+            </summary> 
+            <returns>True if image is empty</returns> 
+            <since>1.0</since>
+        </member>
+        <member name="T:peak.ipl.ImageConverter">
+            <summary>
+            Converts images from one PixelFormat to another.
+            </summary> 
+            <remarks>To speed up processing instances of this class maintain internal memory pools to reuse 
+            memory instead of allocating new memory for each conversion. The memory is freed when the 
+            instance is destroyed.</remarks>
+        </member>
+        <member name="M:peak.ipl.ImageConverter.ConversionMode">
+            <summary>
+            Returns the current conversion mode.
+            </summary> 
+            <returns>The current conversion mode</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageConverter.SetConversionMode(peak.ipl.ConversionMode)">
+            <summary>
+            Set conversion mode.
+            </summary> 
+            <param name="conversionMode"> The conversion mode to set.</param> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageConverter.Convert(peak.ipl.Image,peak.ipl.PixelFormat)">
+            <summary>
+            Converts the input image converted to the given pixel format.
+            </summary> 
+            <param name="inputImage">        The input image.</param> 
+            <param name="outputPixelFormat"> The output pixel format.</param> 
+            <returns>A new created image containing the data of the input image converted to the given pixel format</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageConverter.Convert(peak.ipl.Image,peak.ipl.PixelFormat,System.IntPtr,System.UInt32)">
+            <summary>
+             Saves the data of the current image converted to the given pixel format into a destination buffer 
+                    and creates an image from that buffer.
+            </summary> 
+            <param name="inputImage">            The input image.</param> 
+            <param name="outputPixelFormat">     The output pixel format.</param> 
+            <param name="outputImageBuffer">     Pointer to destination buffer.</param> 
+            <param name="outputImageBufferSize"> Size of destination buffer.</param> 
+            <returns>Converted image</returns> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.1</since>
+        </member>
+        <member name="T:peak.ipl.ImageReader">
+            <summary>
+            Reads an image from a file. 
+             
+            Supported Formats are currently: 
+            JPEG, PNG and BMP
+            </summary>
+        </member>
+        <member name="M:peak.ipl.ImageReader.Read(System.String)">
+            <summary>
+            Returns a new created image which is read from the file with the given file path. 
+             
+            The format is specified by the file ending.
+            </summary> 
+            <param name="filePath"> The path to the file to read.</param> 
+            <throws>ImageFormatNotSupportedException An image format of this file is not supported</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageReader.Read(System.String,peak.ipl.PixelFormat)">
+            <summary>
+            Returns a new created image which is read from the file with the given file path. 
+             
+            The Pixel format to use is specified manually here. The function tries to interpret the file with the given 
+            format. If this is not possible an exception is thrown. Explicit conversion of image formats must be done 
+            manually.
+            </summary> 
+            <param name="filePath">    The path to the file to read.</param> 
+            <param name="pixelFormat"> The Pixel format the retrieved image should have afterwards.</param> 
+            <throws>ImageFormatInterpretationException Can not interpret this file with the given pixel format</throws> 
+            <throws>ImageFormatNotSupportedException   An image format of this file is not supported</throws> 
+            <throws>IOException                        Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException           Arguments passed are invalid</throws> 
+            <throws>Exception                          An internal error has occurred</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if pixelFormat is packed pixel format</since>
+        </member>
+        <member name="T:peak.ipl.ImageTransformer">
+            <summary>
+            Performs transformations like mirror and rotate on images.
+            </summary> 
+            <remarks>To speed up processing instances of this class maintain internal memory pools to reuse 
+            memory instead of allocating new memory for each transformation. The memory is freed when the 
+            instance is destroyed.</remarks>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorUpDown(peak.ipl.Image)">
+            <summary>
+            Mirrors the input image in up-down direction. 
+             
+            If the transformed image is a bayer-format image and the number of rows is even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerGR8)
+            </summary> 
+            <param name="inputImage">           The handle to the created image.</param> 
+            <returns>A new created image containing the data of the input image mirrored in up-down direction</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorLeftRight(peak.ipl.Image)">
+            <summary>
+            Mirrors the input image in left-right direction. 
+             
+            If the transformed image is a bayer-format image and the number of columns is even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerGB8)
+            </summary> 
+            <param name="inputImage">           The handle to the created image.</param> 
+            <returns>A new created image containing the data of the input image mirrored in left-right direction</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorUpDownLeftRight(peak.ipl.Image)">
+            <summary>
+            Mirrors the input image in up-down and left-right direction. 
+             
+            If the transformed image is a bayer-format image and the number of rows or columns are even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerRG8)
+            </summary> 
+            <param name="inputImage">           The handle to the created image.</param> 
+            <returns>A new created image containing the data of the input image mirrored in up-down and left-right direction</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if inputImage has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorUpDownInPlace(peak.ipl.Image)">
+            <summary>
+            Mirrors the given image in up-down direction in place i.e. it will change the input image itself. 
+             
+            If the transformed image is a bayer-format image and the number of rows is even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerGR8)
+            </summary> 
+            <param name="image">           The handle to the image to mirror</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorLeftRightInPlace(peak.ipl.Image)">
+            <summary>
+            Mirrors the given image in left-right direction in place i.e. it will change the input image itself. 
+             
+            If the transformed image is a bayer-format image and the number of columns is even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerGB8)
+            </summary> 
+            <param name="image">           The handle to the image to mirror</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.MirrorUpDownLeftRightInPlace(peak.ipl.Image)">
+            <summary>
+            Mirrors the given image in up-down and left-right direction in place i.e. it will change the input 
+                    image itself. 
+             
+            If the transformed image is a bayer-format image and the number of rows or columns are even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerRG8)
+            </summary> 
+            <param name="image">           The handle to the image to mirror</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.Rotate(peak.ipl.Image,peak.ipl.ImageTransformer.RotationAngle)">
+            <summary>
+            Rotate the input image with the given rotationAngle 
+             
+            If the transformed image is a bayer-format image and the number of rows or columns are even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerRG8)
+            </summary> 
+            <param name="inputImage">           The handle to the created image.</param> 
+            <param name="rotationAngle">        The rotation angle.</param> 
+            <returns>A new created image containing the data of the input image rotated with the given rotationAngle</returns> 
+            <throws>ImageFormatNotSupportedException inputImage has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.2</since>
+        </member>
+        <member name="M:peak.ipl.ImageTransformer.RotateInPlace(peak.ipl.Image,peak.ipl.ImageTransformer.RotationAngle)">
+            <summary>
+            Rotate the input image with the given rotationAngle 
+             
+            If the transformed image is a bayer-format image and the number of rows or columns are even, 
+            the format will change. (e.g. BayerBG8 -&gt; BayerRG8)
+            </summary> 
+            <param name="image">           The handle to the created image.</param> 
+            <param name="rotationAngle">        The rotation angle.</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <throws>Exception An internal error has occurred.</throws> 
+            <since>1.2</since>
+        </member>
+        <member name="T:peak.ipl.ImageTransformer.RotationAngle">
+             <summary>
+             Angle parameter for the Rotation algorithm. 
+            
+             The enum holding the possible rotation angles and the rotation direction.
+             </summary>
+        </member>
+        <member name="T:peak.ipl.ImageWriter">
+            <summary>
+            Writes an image to a file. 
+             
+            Supported Formats are currently: 
+            JPEG, PNG and BMP and a simple RAW format
+            </summary>
+        </member>
+        <member name="T:peak.ipl.ImageWriter.PNGParameter">
+            <summary>
+            Parameter for the PNG write e.g. compression quality.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.ImageWriter.JPEGParameter">
+            <summary>
+            Parameter for the JPEG write e.g. compression quality.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsBMP(System.String,peak.ipl.Image)">
+            <summary>
+            Writes the specified image to the filesystem as BMP image. 
+             
+            Not all image formats can be written to a BMP file. 
+            Currently supported for: 
+            Mono8, Mono10, Mono12, RGB8, RGB10, BGR8, BGR10, RGBa8, BGRa8 
+            Written as Mono: 
+            BayerGR8, BayerRG8, BayerGB8, BayerBG8, BayerGR10, BayerRG10, BayerGB10, BayerBG10, BayerGR12, BayerRG12, 
+            BayerGB12, BayerBG12 
+            For all other formats an exception is thrown.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if imageToSave has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsPNG(System.String,peak.ipl.Image,peak.ipl.ImageWriter.PNGParameter)">
+            <summary>
+            Writes the specified image to the filesystem as PNG image 
+             
+            Not all image formats can be written to a PNG file. 
+            Currently supported for: 
+            Mono8, Mono10, Mono12, RGB8, RGB10, RGB12, RGBa8, RGBa10, RGBa12 
+            Written as Mono: 
+            BayerGR8, BayerRG8, BayerGB8, BayerBG8, BayerGR10, BayerRG10, BayerGB10, BayerBG10, BayerGR12, BayerRG12, 
+            BayerGB12, BayerBG12 
+            Written as RGB: 
+            BGR8, BGR10, BGR12, BGRa8, BGRa10, RGBa12 
+            For all other formats an exception is thrown.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <param name="parameter">   The parameter for the PNG image e.g. compression.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsPNG(System.String,peak.ipl.Image)">
+            <summary>
+            Writes the specified image to the filesystem as PNG image 
+             
+            Not all image formats can be written to a PNG file. 
+            Currently supported for: 
+            Mono8, Mono10, Mono12, RGB8, RGB10, RGB12, RGBa8, RGBa10, RGBa12 
+            Written as Mono: 
+            BayerGR8, BayerRG8, BayerGB8, BayerBG8, BayerGR10, BayerRG10, BayerGB10, BayerBG10, BayerGR12, BayerRG12, 
+            BayerGB12, BayerBG12 
+            Written as RGB: 
+            BGR8, BGR10, BGR12, BGRa8, BGRa10, RGBa12 
+            For all other formats an exception is thrown.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsJPG(System.String,peak.ipl.Image,peak.ipl.ImageWriter.JPEGParameter)">
+            <summary>
+            Writes the specified image to the filesystem as JPEG image 
+             
+            Not all image formats can be written to a JPEG file. 
+            Currently supported for: 
+            Mono8, RGB8, BGR8, RGBa8, BGRa8 
+            Written as Mono: BayerGR8, BayerRG8, BayerGB8, BayerBG8 
+            For all other formats an exception is thrown.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <param name="parameter">   The parameter for the JPEG image e.g. compression.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsJPG(System.String,peak.ipl.Image)">
+            <summary>
+            Writes the specified image to the filesystem as JPEG image 
+             
+            Not all image formats can be written to a JPEG file. 
+            Currently supported for: 
+            Mono8, RGB8, BGR8, RGBa8, BGRa8 
+            Written as Mono: BayerGR8, BayerRG8, BayerGB8, BayerBG8 
+            For all other formats an exception is thrown.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.WriteAsRAW(System.String,peak.ipl.Image)">
+            <summary>
+            Writes the specified image to the filesystem as a raw binary image. 
+             
+            This is supported for all non-packed pixel formats.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if imageToSave has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.ImageWriter.Write(System.String,peak.ipl.Image)">
+            <summary>
+             Writes the specified image to the filesystem. The type is specified by the given file ending in file 
+                    name.
+            </summary> 
+            <param name="filePath">    The path of the file to store the image to.</param> 
+            <param name="imageToSave"> The image to save.</param> 
+            <throws>ImageFormatNotSupportedException A file type is not supported for this image pixel format</throws> 
+            <throws>IOException                      Errors during file access e.g. no permissions on this file</throws> 
+            <throws>InvalidArgumentException         Arguments passed are invalid</throws> 
+            <throws>Exception                        An internal error has occurred</throws> 
+            <since>1.0</since>
+        </member>
+        <member name="T:peak.ipl.Orientation">
+            <summary>
+            Enum holding the possible orientation.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.PixelColumn">
+            <summary>
+            Represents the values of a vertical line of pixels in an image.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.PixelFormat">
+            <summary>
+            Represents a pixel format and its specific properties.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.Name">
+            <summary>
+            Returns the name of the pixel format as String.
+            </summary> 
+            <returns>Name</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.PixelFormatName">
+            <summary>
+            Returns the name of the pixel format as enum value.
+            </summary> 
+            <returns>PixelFormatName</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.NumSignificantBitsPerChannel">
+            <summary>
+             Returns the number of significant bits per pixel per channel of the given pixel format.
+            </summary> 
+            <returns>Number of significant bits per pixel per channel.</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.NumStorageBitsPerChannel">
+            <summary>
+             Returns the number of storage bits per pixel per channel of the given pixel format.
+            </summary> 
+            <returns>Number of storage bits per pixel per channel.</returns> 
+             
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.NumChannels">
+            <summary>
+             Returns the number of channels of the given pixel format.
+            </summary> 
+            <returns>Number of channels.</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.MaximumValuePerChannel">
+            <summary>
+            Returns the maximum value of one pixel channel of the given pixel format.
+            </summary> 
+            <returns>Maximum value of one pixel channel.</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.NumSignificantBitsPerPixel">
+            <summary>
+            Returns the number of significant bits per pixel of the given pixel format.
+            </summary> 
+            <returns>NumSignificantBits</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.NumStorageBitsPerPixel">
+            <summary>
+            Returns the number of storage bits per pixel of the given pixel format. 
+             
+            returns NumStorageBits
+            </summary> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.Endianness">
+            <summary>
+             Returns the endianness of the given pixel format.
+            </summary> 
+            <returns>Endianness.</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelFormat.CalculateStorageSizeOfPixels(System.UInt64)">
+            <summary>
+             Returns the storage size of the given number of pixels of the given pixel format in bytes.
+            </summary> 
+            <param name="numPixels">   The number of pixels.</param> 
+            <returns>CalculateStorageSizeOfPixels</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="T:peak.ipl.PixelFormatName">
+            <summary>
+            Enum holding the possible pixel format names.
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerRG10g40IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerGB10g40IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerGR10g40IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerBG10g40IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerRG12g24IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerGB12g24IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerGR12g24IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.BayerBG12g24IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.Mono10g40IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:peak.ipl.PixelFormatName.Mono12g24IDS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:peak.ipl.PixelLine">
+            <summary>
+            Represents the values of a horizontal or vertical line of pixels in an image.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.PixelLine.Channel">
+            <summary>
+            Represents the values of the pixel line.
+            </summary>
+        </member>
+        <member name="M:peak.ipl.PixelLine.#ctor(peak.ipl.Image,peak.ipl.Orientation,System.UInt32)">
+            <summary>
+             Constructor.
+            </summary> 
+            <param name="image"> The image to process.</param> 
+            <param name="orientation"> The orientation of the pixel line.</param> 
+            <param name="offset"> Y offset if orientation = peak::ipl::Orientation::Horizontal; X offset if orientation = peak::ipl::Orientation::Vertical</param> 
+            <throws>ImageFormatNotSupportedException image has packed pixel format</throws> 
+            <since>1.0</since> 
+            <since>1.2 Will throw ImageFormatNotSupportedException if image has packed pixel format</since>
+        </member>
+        <member name="M:peak.ipl.PixelLine.PixelFormatName">
+            <summary>
+             Returns the pixel format of the given pixel line.
+            </summary> 
+            <returns>PixelFormatName</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelLine.Orientation">
+            <summary>
+             Returns the orientation of the given pixel line.
+            </summary> 
+            <returns>Orientation</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelLine.Offset">
+            <summary>
+             Returns the offset of the given pixel line. 
+            (Vertical: Left - Horizontal: Top).
+            </summary> 
+            <returns>Offset</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="M:peak.ipl.PixelLine.Channels">
+            <summary>
+             Returns the number of the given pixel line's channels.
+            </summary> 
+            <returns>Channels</returns> 
+            <since>1.0</since> 
+            <throws>Exception An internal error has occurred.</throws>
+        </member>
+        <member name="T:peak.ipl.PixelRow">
+            <summary>
+            Represents the values of a horizontal line of pixels in an image.
+            </summary>
+        </member>
+        <member name="T:peak.ipl.Point2D">
+            <summary>
+            2D position in an image.
+            </summary>
+        </member>
+        <member name="T:std.HistogramChannelCollection.HistogramChannelCollectionEnumerator">
+            Note that the IEnumerator documentation requires an InvalidOperationException to be thrown
+            whenever the collection is modified. This has been done for changes in the size of the
+            collection but not when one of the elements of the collection is modified as it is a bit
+            tricky to detect unmanaged code that modifies the collection under our feet.
+        </member>
+        <member name="T:std.PixelLineChannelCollection.PixelLineChannelCollectionEnumerator">
+            Note that the IEnumerator documentation requires an InvalidOperationException to be thrown
+            whenever the collection is modified. This has been done for changes in the size of the
+            collection but not when one of the elements of the collection is modified as it is a bit
+            tricky to detect unmanaged code that modifies the collection under our feet.
+        </member>
+        <member name="T:std.Point2DCollection.Point2DCollectionEnumerator">
+            Note that the IEnumerator documentation requires an InvalidOperationException to be thrown
+            whenever the collection is modified. This has been done for changes in the size of the
+            collection but not when one of the elements of the collection is modified as it is a bit
+            tricky to detect unmanaged code that modifies the collection under our feet.
+        </member>
+        <member name="T:std.UIntCollection.UIntCollectionEnumerator">
+            Note that the IEnumerator documentation requires an InvalidOperationException to be thrown
+            whenever the collection is modified. This has been done for changes in the size of the
+            collection but not when one of the elements of the collection is modified as it is a bit
+            tricky to detect unmanaged code that modifies the collection under our feet.
+        </member>
+        <member name="T:std.ULongCollection.ULongCollectionEnumerator">
+            Note that the IEnumerator documentation requires an InvalidOperationException to be thrown
+            whenever the collection is modified. This has been done for changes in the size of the
+            collection but not when one of the elements of the collection is modified as it is a bit
+            tricky to detect unmanaged code that modifies the collection under our feet.
+        </member>
+    </members>
+</doc>

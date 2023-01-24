@@ -2,9 +2,4 @@ add reference:
 
 "C:\Program Files\IDS\ids_peak\sdk\samples\bin\x86_64\ids_peak_dotnet.dll"
 
-- to samo o sobě nestačí, něco je blbě
-
-
-pomohlo pustit spustit přes cmake - otevřít složku (nakopírovat celé sdk a otevřít jeden sample); 
-vygenerovat CMakeSettings.json (nevím jak, nějakým spuštěním? - rolovátko x64-Debug a vybrat manage configuration) a přepsat "generator": "Visual Studio 16 2019 Win64",
-- takto funguje :)
+- prekopírovat vsechny  .dll a .xml z funkcní ukázky k .exe tvého programu
