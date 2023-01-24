@@ -172,6 +172,33 @@ namespace VO_soft
             form1.cameraParameters.gain_inc = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("Gain").Increment());
 
             form1.cameraParameters.acquisitionFrameRate_max = Convert.ToDecimal(100);
+
+            //var tmp2 = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormatList").CurrentEntry().Value();
+            //var tmp = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").CurrentEntry().Value();
+            //var tmp3 = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat");
+
+
+            //foreach (int i in Enum.GetValues(typeof(peak.ipl.PixelFormatName)))
+            //{
+            //    //var xxx = i.ToString();
+            //    //var ii = Enum.Parse(typeof(peak.ipl.PixelFormatName), xxx);
+            //    try
+            //    {
+            //        nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry((long)i);
+            //        Console.WriteLine(i.ToString());
+            //    }
+            //    catch (Exception e)
+            //    { 
+
+            //    }
+
+            //}
+
+            //nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry((long)17301505);  ///Mono8
+            //nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry((long)17825797); ///Mono12
+            //var tmp2 = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").CurrentEntry().Value();
+
+
         }
 
         public decimal getC()
