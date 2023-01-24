@@ -197,7 +197,7 @@ namespace VO_soft
             // 
             // textBox_MAC
             // 
-            this.textBox_MAC.Location = new System.Drawing.Point(39, 107);
+            this.textBox_MAC.Location = new System.Drawing.Point(11, 108);
             this.textBox_MAC.Name = "textBox_MAC";
             this.textBox_MAC.Size = new System.Drawing.Size(144, 20);
             this.textBox_MAC.TabIndex = 22;
@@ -206,7 +206,7 @@ namespace VO_soft
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(40, 90);
+            this.label9.Location = new System.Drawing.Point(12, 92);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 21;
@@ -430,7 +430,7 @@ namespace VO_soft
             // 
             // numericUpDown_pluxfreq
             // 
-            this.numericUpDown_pluxfreq.Location = new System.Drawing.Point(226, 108);
+            this.numericUpDown_pluxfreq.Location = new System.Drawing.Point(266, 108);
             this.numericUpDown_pluxfreq.Name = "numericUpDown_pluxfreq";
             this.numericUpDown_pluxfreq.Size = new System.Drawing.Size(61, 20);
             this.numericUpDown_pluxfreq.TabIndex = 29;
@@ -438,7 +438,7 @@ namespace VO_soft
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(223, 92);
+            this.label18.Location = new System.Drawing.Point(268, 92);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(50, 13);
             this.label18.TabIndex = 30;

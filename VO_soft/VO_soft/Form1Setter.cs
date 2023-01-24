@@ -117,6 +117,12 @@ namespace VO_soft
             form1.numericUpDown_red.Maximum = 20;
             form1.numericUpDown_red.Value = 2;
 
+
+            //form1.formSettings.numericUpDown_bits.Minimum = 8;
+            //form1.formSettings.numericUpDown_bits.Maximum = 12;
+            //form1.formSettings.numericUpDown_bits.Increment = 4;
+            //form1.formSettings.numericUpDown_bits.Value = 12;
+
             foreach (Control obj in form1.formSettings.panel1.Controls)
             {
                 if (obj.GetType() == typeof(ComboBox))

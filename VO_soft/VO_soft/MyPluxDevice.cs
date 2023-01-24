@@ -63,8 +63,6 @@ namespace VO_soft
                 float remove = ((float)show_time_range_s / (float)subsample_plot) * (float)freq;
 
 
-
-
                 for (int i = 1; i <= data.Length; i++)
                 {
                     var d = Convert.ToDecimal(data[i - 1]);
@@ -169,7 +167,6 @@ namespace VO_soft
 
 
                     }
-
 
                 }
 

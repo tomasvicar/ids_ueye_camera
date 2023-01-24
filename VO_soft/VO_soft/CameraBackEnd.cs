@@ -82,7 +82,10 @@ namespace VO_soft
 
             cameraAcquisitionWorker.SetDataStream(dataStream);
             cameraAcquisitionWorker.SetNodemapRemoteDevice(nodeMap);
-            cameraAcquisitionWorker.SetFormWindow(form1);
+            //cameraAcquisitionWorker.SetFormWindow(form1);
+            var subsample = Decimal.ToInt32(form1.numericUpDown_pictureBoxTimeDecimation.Value);
+            //var bits = Decimal.ToInt32(form1.formSettings.numericUpDown_bits.Value);
+            cameraAcquisitionWorker.SetAquisitionsettings(form1.is_triger, subsample, form1.filename);
 
             cameraAcquisitionThread.Start();
 
@@ -316,24 +319,30 @@ namespace VO_soft
 
         internal object getPixelClock(decimal fps, decimal heght)
         {
-            decimal pc_orig = ((fps * heght) / form1.cameraParameters.c) * 1.3m;
+            //decimal pc_orig = ((fps * heght) / cameraSetter.getC()) * 1.3m;
 
-            decimal[] allowed_values = { 470m, 237m, 118m, 59m, 30m, 0m };
-            decimal maxValue = form1.cameraParameters.deviceClockFrequency_max;
-            decimal previousValue = form1.cameraParameters.deviceClockFrequency_max;
+            ////decimal[] allowed_values = { 470m, 237m, 118m, 59m, 30m, 0m };
+            //decimal[] allowed_values = { 118m, 59m, 30m, 0m }; /// is it just this?
+            //decimal maxValue = form1.cameraParameters.deviceClockFrequency_max;
+            //decimal previousValue = form1.cameraParameters.deviceClockFrequency_max;
 
-            foreach (decimal value in allowed_values)
-            {
-                decimal value_m = value * 1000000m;
+            //foreach (decimal value in allowed_values)
+            //{
+            //    decimal value_m = value * 1000000m;
 
-                if (value_m < pc_orig)
-                {
-                    return previousValue / 1000000m;
-                }
+            //    if (value_m < pc_orig)
+            //    {
+            //        return previousValue / 1000000m;
+            //    }
 
-                previousValue = value_m;
-            }
-            return maxValue / 1000000m;
+            //    previousValue = value_m;
+            //}
+            //return maxValue / 1000000m;
+            
+            return 99m;
+            //return 180m;
+
+
         }
 
         public void CloseDevice()

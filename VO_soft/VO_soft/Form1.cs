@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -26,7 +27,9 @@ namespace VO_soft
         private ImageUpdater imageUpdater;
         private bool stopTrigerClicked;
         private VideoFileWriter videoWriter;
-        
+        private Stopwatch sw = new Stopwatch();
+        public string filename;
+
         public Chart chart1;
         public Chart chart2;
         public Chart chart3;
@@ -103,12 +106,22 @@ namespace VO_soft
         {
             if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout") & stopTrigerClicked)
             {
+
                 buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
                 stopTrigerClicked = false;
             }
             else
             {
-                MessageBox.Show(messageText, messageTitle);
+                if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout"))
+                {
+                    Console.WriteLine(messageTitle + messageText);
+                }
+                else
+                {
+                    MessageBox.Show(messageText, messageTitle);
+                }
+
+
             }
         }
 
@@ -119,7 +132,7 @@ namespace VO_soft
 
             if (is_triger)
             {
-                videoWriter.Close();
+                //videoWriter.Close();
 
                 button_pluxStop_Click(this, EventArgs.Empty);
             }
@@ -127,6 +140,8 @@ namespace VO_soft
 
         private void backEnd_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
         {
+
+
             if (labelCounter.InvokeRequired)
             {
                 labelCounter.BeginInvoke((MethodInvoker)delegate { labelCounter.Text = frameCounter.ToString(); });
@@ -147,6 +162,37 @@ namespace VO_soft
                         if (errorCounter != 0)
                         {
                             label_error.ForeColor = Color.Red;
+                        }
+                    }
+                });
+            }
+
+            if (labelCounter.InvokeRequired)
+            {
+                labelCounter.BeginInvoke((MethodInvoker)delegate
+                {
+                    if (((int.Parse(labelCounter.Text) % 40) == 10) & (int.Parse(labelCounter.Text) > 10))
+                    {
+                        if (sw.IsRunning)
+                        {
+
+                            TimeSpan ts = sw.Elapsed;
+                            sw.Restart();
+
+                            label_fps.Text = Math.Round(40.0 / ts.TotalSeconds).ToString() + "fps";
+
+                            if (Convert.ToDecimal(Math.Round(40.0 / ts.TotalSeconds)) != Math.Round(numericUpDown_frameRate.Value))
+                            {
+                                label_fps.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                label_fps.ForeColor = Color.Black;
+                            }
+                        }
+                        else
+                        {
+                            sw.Start();
                         }
                     }
                 });
@@ -290,30 +336,33 @@ namespace VO_soft
             {
 
 
+                var time = DateTime.Now;
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
+                var tmp = textBox_dataname.Text + '_' + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
 
-                var path = textBox_dataname.Text;
+
+                var path = Path.Combine(textBox_dataname.Text, tmp);
+
 
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
-                videoWriter = new VideoFileWriter();
+                //videoWriter = new VideoFileWriter();
 
-                var time = DateTime.Now;
-                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
+                
 
-                var filename = Path.Combine(path, textBox_dataname.Text + '_' + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".avi");
+                filename = Path.Combine(path, tmp);
 
                 // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
-                videoWriter.Open(filename, Decimal.ToInt32(formSettings.numericUpDown_w.Value), Decimal.ToInt32(formSettings.numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
+                // videoWriter.Open(filename, Decimal.ToInt32(formSettings.numericUpDown_w.Value), Decimal.ToInt32(formSettings.numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
 
-                pluxBackEnd.startRecordPlux(filename.Replace(".avi", ".txt"));
-                cameraBackEnd.Start();
-
+                pluxBackEnd.startRecordPlux(filename + ".txt");
             }
+            cameraBackEnd.Start();
         }
 
         private void button_stopTriger_Click(object sender, EventArgs e)

@@ -74,34 +74,42 @@ namespace VO_soft
 
                 chart_count = 0;
                 use_oxi = false;
-                foreach (Control obj in form1.formSettings.panel1.Controls)
+
+
+                List<ComboBox> comboBoxes = new List<ComboBox>();
+                comboBoxes.Add(form1.formSettings.comboBox1);
+                comboBoxes.Add(form1.formSettings.comboBox2);
+                comboBoxes.Add(form1.formSettings.comboBox3);
+                comboBoxes.Add(form1.formSettings.comboBox4);
+                comboBoxes.Add(form1.formSettings.comboBox5);
+                comboBoxes.Add(form1.formSettings.comboBox6);
+                comboBoxes.Add(form1.formSettings.comboBox7);
+                comboBoxes.Add(form1.formSettings.comboBox8);
+
+                foreach (ComboBox obj_converted in comboBoxes)
                 {
-                    if (obj.GetType() == typeof(ComboBox))
+
+                    if (obj_converted.Text == "None")
                     {
-                        ComboBox obj_converted = (ComboBox)Convert.ChangeType(obj, typeof(ComboBox));
-
-                        if (obj_converted.Text == "None")
-                        {
-                            continue;
-                        }
-                        else if (obj_converted.Text == "Oxi R + IR")
-                        {
-                            PluxDotNet.Source src_spo2_R_IR = new PluxDotNet.Source();
-                            src_spo2_R_IR.port = 9;
-                            src_spo2_R_IR.chMask = 0x03;
-                            srcs.Add(src_spo2_R_IR);
-                            use_oxi = true;
-                            chart_count++;
-                        }
-                        else
-                        {
-                            src = new PluxDotNet.Source();
-                            src.port = chart_count +1 ;
-                            srcs.Add(src);
-                        }
-                        chart_count++;
-
+                        continue;
                     }
+                    else if (obj_converted.Text == "Oxi R + IR")
+                    {
+                        PluxDotNet.Source src_spo2_R_IR = new PluxDotNet.Source();
+                        src_spo2_R_IR.port = 9;
+                        src_spo2_R_IR.chMask = 0x03;
+                        srcs.Add(src_spo2_R_IR);
+                        use_oxi = true;
+                        chart_count++;
+                    }
+                    else
+                    {
+                        src = new PluxDotNet.Source();
+                        src.port = chart_count +1 ;
+                        srcs.Add(src);
+                    }
+                    chart_count++;
+
                 }
 
                 if (use_oxi)
@@ -127,7 +135,7 @@ namespace VO_soft
         internal void startPlux()
         {
 
-            foreach (Control obj in form1.formSettings.panel1.Controls)
+            foreach (Control obj in form1.panel_plux.Controls)
             {
                 if (obj.GetType() == typeof(Chart))
                 {

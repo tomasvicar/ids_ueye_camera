@@ -33,6 +33,12 @@ namespace VO_soft
                     to_save.Add(obj);
             }
 
+            foreach (Control obj in formSettings.Controls)
+            {
+                if (obj.GetType() == typeof(ComboBox))
+                    to_save.Add(obj);
+            }
+
             return to_save;
         }
 

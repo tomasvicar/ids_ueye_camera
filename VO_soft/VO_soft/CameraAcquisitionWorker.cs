@@ -37,14 +37,16 @@ namespace VO_soft
         private Int32 stride;
         private Bitmap image;
         private Bitmap imageCopy;
-        private Form1 form1;
         private peak.ipl.ImageTransformer m_imageTransformerIPL;
 
         private bool running;
         public uint frameCounter;
         private uint errorCounter;
         private bool triger_first_time;
-
+        private bool is_triger;
+        private int show_subsampling;
+        private string filename;
+        //private int bits;
 
         public CameraAcquisitionWorker()
         {
@@ -65,7 +67,7 @@ namespace VO_soft
 
                 triger_first_time = false;
 
-                if (form1.is_triger)
+                if (is_triger)
                 {
                     ComTrigerOn(this, EventArgs.Empty);
                     Thread.Sleep(100);
@@ -94,6 +96,14 @@ namespace VO_soft
                         buffer = dataStream.WaitForFinishedBuffer(1200);
                     }
                     iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(), buffer.Size(), buffer.Width(), buffer.Height());
+
+
+
+                    //peak.ipl.ImageWriter.WriteAsBMP(filename + "_" + frameCounter.ToString() + ".bmp", iplImg);
+                    peak.ipl.ImageWriter.WriteAsPNG(filename + "_" + frameCounter.ToString() + ".png", iplImg);
+                    //peak.ipl.ImageWriter.WriteAsRAW(filename + "_" + frameCounter.ToString() + ".raw", iplImg);
+                   
+
 
                     iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.RGB8);
 
@@ -138,6 +148,14 @@ namespace VO_soft
             running = false;
         }
 
+        public void SetAquisitionsettings(bool is_triger, int show_subsampling, string filename)
+        {
+            this.is_triger = is_triger;
+            this.show_subsampling = show_subsampling;
+            this.filename = filename;
+
+        }
+
 
         public void SetDataStream(DataStream dataStream)
         {
@@ -149,10 +167,6 @@ namespace VO_soft
             this.nodeMap = nodeMap;
         }
 
-        public void SetFormWindow(Form1 form1)
-        {
-            this.form1 = form1;
-        }
 
 
         public static ColorPalette GetGrayScalePalette()
