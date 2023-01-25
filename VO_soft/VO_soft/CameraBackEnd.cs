@@ -339,8 +339,8 @@ namespace VO_soft
             //}
             //return maxValue / 1000000m;
             
-            return 99m;
-            //return 180m;
+            //return 99m;
+            return 118m;
 
 
         }

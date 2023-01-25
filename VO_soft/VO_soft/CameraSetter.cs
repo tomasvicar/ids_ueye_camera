@@ -23,8 +23,12 @@ namespace VO_soft
             nodeMap.FindNode<peak.core.nodes.EnumerationNode>("GainSelector").SetCurrentEntry("All");
             nodeMap.FindNode<peak.core.nodes.FloatNode>("Gain").SetValue(decimal.ToDouble(form1.numericUpDown_gain.Value));
 
-            nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono12");
-            //nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
+            if (form1.formSettings.numericUpDown_bits.Value == 10)
+                nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono10");
+            else if (form1.formSettings.numericUpDown_bits.Value == 8)
+                nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
+            else
+                throw new Exception("incorect number of bits");
 
             nodeMap.FindNode<peak.core.nodes.FloatNode>("BlackLevel").SetValue(1);
 
@@ -40,12 +44,15 @@ namespace VO_soft
 
 
 
-            nodeMap.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(form1.numericUpDown_frameRate.Minimum));
-            //var pc = Convert.ToDouble(form1.label_pixelClock.Text.Replace("Mclock", "")) * 1000000;
-            //nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(pc);
-            var dcf = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value());
+            //nodeMap.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(form1.numericUpDown_frameRate.Minimum));
 
-            nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(form1.numericUpDown_exposureTime.Value) * 1000);
+            var pc = Convert.ToDouble(form1.label_pixelClock.Text.Replace("Mclock", "")) * 1000000;
+            nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(pc);
+
+
+            //var dcf = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value());
+
+            //nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(form1.numericUpDown_exposureTime.Value) * 1000);
 
 
             if (isTrigger)
@@ -102,7 +109,7 @@ namespace VO_soft
             if (paramName == "DeviceClockFrequency")
             {
 
-                //nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(Convert.ToDouble(form1.label_pixelClock.Text.Replace("Mclock", "")) * 1000000);
+                nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(Convert.ToDouble(form1.label_pixelClock.Text.Replace("Mclock", "")) * 1000000);
 
 
             }
@@ -110,9 +117,13 @@ namespace VO_soft
 
         internal void getParams()
         {
+            if (form1.formSettings.numericUpDown_bits.Value == 10)
+                nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono10");
+            else if (form1.formSettings.numericUpDown_bits.Value == 8)
+                nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
+            else
+                throw new Exception("incorect number of bits");
 
-            nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono12");
-            //nodeMap.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").SetCurrentEntry("Mono8");
 
 
             form1.cameraParameters.x_min = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.IntegerNode>("OffsetX").Minimum());
@@ -134,22 +145,25 @@ namespace VO_soft
             form1.cameraParameters.h_inc = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.IntegerNode>("Height").Increment());
 
 
-            //nodeMap.FindNode<peak.core.nodes.IntegerNode>("OffsetX").SetValue(0);
-            //nodeMap.FindNode<peak.core.nodes.IntegerNode>("OffsetY").SetValue(0);
-            //nodeMap.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(form1.cameraParameters.w_min));
-            //nodeMap.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(form1.cameraParameters.h_min));
+            nodeMap.FindNode<peak.core.nodes.IntegerNode>("OffsetX").SetValue(0);
+            nodeMap.FindNode<peak.core.nodes.IntegerNode>("OffsetY").SetValue(0);
+            nodeMap.FindNode<peak.core.nodes.IntegerNode>("Width").SetValue(decimal.ToInt64(form1.cameraParameters.w_min));
+            nodeMap.FindNode<peak.core.nodes.IntegerNode>("Height").SetValue(decimal.ToInt64(form1.cameraParameters.h_min));
 
 
             form1.cameraParameters.deviceClockFrequency_min = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Minimum());
             form1.cameraParameters.deviceClockFrequency_max = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Maximum());
             form1.cameraParameters.deviceClockFrequency_inc = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Increment());
 
-            var value = nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceLinkThroughputLimit").Value();
+            //var value = nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceLinkThroughputLimit").Value();
+            //var deviceLinkThroughputLimitMax = nodeMap.FindNode<peak.core.nodes.IntegerNode>("DeviceLinkThroughputLimit").Maximum();
+            //double value = nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceLinkAcquisitionFrameRateLimit").Value();
 
             //nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(decimal.ToDouble(form1.cameraParameters.deviceClockFrequency_max));
-            //nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue((float)decimal.ToDouble(180 * 1000000));
+            //nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue((float)decimal.ToDouble(118 * 1000000));
+            nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue((float)decimal.ToDouble(118m * 1000000m));
 
-
+            //var dcf = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value());
 
 
             form1.cameraParameters.exposureTime_min = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").Minimum());
@@ -177,7 +191,7 @@ namespace VO_soft
             //var tmp = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat").CurrentEntry().Value();
             //var tmp3 = nodeMapRemoteDevice.FindNode<peak.core.nodes.EnumerationNode>("PixelFormat");
 
-
+            //peak.ipl.PixelFormatName
             //foreach (int i in Enum.GetValues(typeof(peak.ipl.PixelFormatName)))
             //{
             //    //var xxx = i.ToString();

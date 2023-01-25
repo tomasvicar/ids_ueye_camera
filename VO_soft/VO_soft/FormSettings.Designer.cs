@@ -70,6 +70,8 @@ namespace VO_soft
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.numericUpDown_pluxShowS = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_bits = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -78,6 +80,7 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_chartOverlap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bits)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown_x
@@ -460,11 +463,34 @@ namespace VO_soft
             this.numericUpDown_pluxShowS.Size = new System.Drawing.Size(61, 20);
             this.numericUpDown_pluxShowS.TabIndex = 32;
             // 
+            // numericUpDown_bits
+            // 
+            this.numericUpDown_bits.Location = new System.Drawing.Point(205, 109);
+            this.numericUpDown_bits.Name = "numericUpDown_bits";
+            this.numericUpDown_bits.Size = new System.Drawing.Size(53, 20);
+            this.numericUpDown_bits.TabIndex = 33;
+            this.numericUpDown_bits.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(214, 92);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(23, 13);
+            this.label20.TabIndex = 34;
+            this.label20.Text = "bits";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 281);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.numericUpDown_bits);
             this.Controls.Add(this.numericUpDown_pluxShowS);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
@@ -501,6 +527,7 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_chartOverlap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bits)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,5 +576,7 @@ namespace VO_soft
         public System.Windows.Forms.Label label19;
         public System.Windows.Forms.NumericUpDown numericUpDown_pluxfreq;
         public System.Windows.Forms.NumericUpDown numericUpDown_pluxShowS;
+        private System.Windows.Forms.Label label20;
+        public System.Windows.Forms.NumericUpDown numericUpDown_bits;
     }
 }

@@ -95,41 +95,42 @@ namespace VO_soft
                     {
                         buffer = dataStream.WaitForFinishedBuffer(1200);
                     }
+
+
                     iplImg = new peak.ipl.Image((peak.ipl.PixelFormatName)buffer.PixelFormat(), buffer.BasePtr(), buffer.Size(), buffer.Width(), buffer.Height());
 
-
-
-                    //peak.ipl.ImageWriter.WriteAsBMP(filename + "_" + frameCounter.ToString() + ".bmp", iplImg);
-                    peak.ipl.ImageWriter.WriteAsPNG(filename + "_" + frameCounter.ToString() + ".png", iplImg);
+                    peak.ipl.ImageWriter.WriteAsBMP(filename + "_" + frameCounter.ToString() + ".bmp", iplImg);
+                    //peak.ipl.ImageWriter.WriteAsPNG(filename + "_" + frameCounter.ToString() + ".png", iplImg);
                     //peak.ipl.ImageWriter.WriteAsRAW(filename + "_" + frameCounter.ToString() + ".raw", iplImg);
-                   
 
 
-                    iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.RGB8);
+                    if (frameCounter % show_subsampling == 0)
+                    {
+                        
 
-                    width = Convert.ToInt32(iplImg.Width());
-                    height = Convert.ToInt32(iplImg.Height());
-                    stride = Convert.ToInt32(iplImg.PixelFormat().CalculateStorageSizeOfPixels(iplImg.Width()));
+                        iplImg = iplImg.ConvertTo(peak.ipl.PixelFormatName.RGB8,peak.ipl.ConversionMode.Fast);
+
+                        width = Convert.ToInt32(iplImg.Width());
+                        height = Convert.ToInt32(iplImg.Height());
+                        stride = Convert.ToInt32(iplImg.PixelFormat().CalculateStorageSizeOfPixels(iplImg.Width()));
+
+
+                        //image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format8bppIndexed, iplImg.Data());
+                        //image.Palette = colorPalette_grayscale;
+                        image = new Bitmap(width, height, stride, PixelFormat.Format24bppRgb, iplImg.Data());
+
+
+                        imageCopy = new Bitmap(image);
+                        //imageCopy.Palette = colorPalette_grayscale;
+
+
+                        image.Dispose();
+                        
+                        ImageReceived(this, imageCopy, frameCounter);
+                    }
 
                     dataStream.QueueBuffer(buffer);
-
-
-                    //image = new Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format8bppIndexed, iplImg.Data());
-                    //image.Palette = colorPalette_grayscale;
-                    image = new Bitmap(width, height, stride, PixelFormat.Format24bppRgb, iplImg.Data());
-
-                   
-                    imageCopy = new Bitmap(image);
-                    //imageCopy.Palette = colorPalette_grayscale;
-
-
-                    image.Dispose();
                     iplImg.Dispose();
-
-                    
-                    ImageReceived(this, imageCopy, frameCounter);
-                 
-
                     frameCounter++;
                 }
                 catch (Exception e)
