@@ -78,11 +78,11 @@ namespace VO_soft
             File.WriteAllText(filename, json);
         }
 
-        internal static void Load(Form1 form1)
+        internal static void Load(Form1 form1, string filename)
         {
-            if (File.Exists("settings.json"))
+            if (File.Exists(filename))
             {
-                string json_loaded = File.ReadAllText("settings.json");
+                string json_loaded = File.ReadAllText(filename);
                 Dictionary<string, object> _data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json_loaded);
                 ArrayList to_save = SaverLoaderSettings.get_objects_to_save(form1, form1.formSettings);
 

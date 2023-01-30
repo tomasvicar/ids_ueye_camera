@@ -93,6 +93,8 @@ namespace VO_soft
             this.numericUpDown_dotX = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
+            this.saveSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -146,7 +148,9 @@ namespace VO_soft
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadSettingsToolStripMenuItem,
-            this.saveSettingsToolStripMenuItem});
+            this.saveSettingsToolStripMenuItem,
+            this.saveSettingsAsToolStripMenuItem,
+            this.loadSettingsAsToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -154,14 +158,14 @@ namespace VO_soft
             // loadSettingsToolStripMenuItem
             // 
             this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
-            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadSettingsToolStripMenuItem.Text = "load settings";
             this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsToolStripMenuItem_Click);
             // 
             // saveSettingsToolStripMenuItem
             // 
             this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveSettingsToolStripMenuItem.Text = "save settings";
             this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToolStripMenuItem_Click);
             // 
@@ -667,6 +671,20 @@ namespace VO_soft
             this.numericUpDown_R.TabIndex = 56;
             this.numericUpDown_R.ValueChanged += new System.EventHandler(this.numericUpDown_R_ValueChanged);
             // 
+            // saveSettingsAsToolStripMenuItem
+            // 
+            this.saveSettingsAsToolStripMenuItem.Name = "saveSettingsAsToolStripMenuItem";
+            this.saveSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveSettingsAsToolStripMenuItem.Text = "save settings as";
+            this.saveSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsAsToolStripMenuItem_Click);
+            // 
+            // loadSettingsAsToolStripMenuItem
+            // 
+            this.loadSettingsAsToolStripMenuItem.Name = "loadSettingsAsToolStripMenuItem";
+            this.loadSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadSettingsAsToolStripMenuItem.Text = "load settings as";
+            this.loadSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsAsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -823,6 +841,8 @@ namespace VO_soft
         public System.Windows.Forms.PictureBox pictureBox_secondScreen;
         public System.Windows.Forms.ToolStripMenuItem advancedSettingsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveSettingsAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadSettingsAsToolStripMenuItem;
     }
 }
 

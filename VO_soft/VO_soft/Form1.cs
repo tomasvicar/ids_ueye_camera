@@ -240,7 +240,7 @@ namespace VO_soft
 
         private void loadSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaverLoaderSettings.Load(this);
+            SaverLoaderSettings.Load(this, "settings.json");
         }
 
         private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -593,6 +593,35 @@ namespace VO_soft
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void saveSettingsAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog mySaveFileDialog = new SaveFileDialog();
+            mySaveFileDialog.FileName = "settings.json";
+            mySaveFileDialog.InitialDirectory = ".";
+            mySaveFileDialog.Filter = "JSON|*.json";
+            if (!(mySaveFileDialog.ShowDialog() == DialogResult.OK))
+            {
+                return;
+            }
+
+
+            SaverLoaderSettings.Save(this, mySaveFileDialog.FileName);
+        }
+
+        private void loadSettingsAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog myOpenFileDialog = new OpenFileDialog();
+            myOpenFileDialog.FileName = "settings.json";
+            myOpenFileDialog.InitialDirectory = ".";
+            myOpenFileDialog.Filter = "JSON|*.json";
+            if (!(myOpenFileDialog.ShowDialog() == DialogResult.OK))
+            {
+                return;
+            }
+
+            SaverLoaderSettings.Load(this, myOpenFileDialog.FileName);
         }
     }
 }
