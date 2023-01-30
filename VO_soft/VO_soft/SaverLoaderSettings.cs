@@ -69,7 +69,7 @@ namespace VO_soft
                 if (obj.GetType() == typeof(CheckBox))
                 {
                     CheckBox obj_converted = (CheckBox)Convert.ChangeType(obj, typeof(CheckBox));
-                    _data.Add(obj_converted.Name, obj_converted.Enabled);
+                    _data.Add(obj_converted.Name, obj_converted.Checked);
                 }
             }
 
@@ -92,7 +92,12 @@ namespace VO_soft
                     if (obj.GetType() == typeof(NumericUpDown))
                     {
                         NumericUpDown obj_converted = (NumericUpDown)Convert.ChangeType(obj, typeof(NumericUpDown));
+                        var name = obj_converted.Name;
+                        if (name == "numericUpDown_LED")
+                            obj_converted.ValueChanged -= form1.numericUpDown_LED_ValueChanged;
                         obj_converted.Value = (decimal)Convert.ChangeType(_data.ElementAt(i).Value, typeof(decimal));
+                        if (name == "numericUpDown_LED")
+                            obj_converted.ValueChanged += form1.numericUpDown_LED_ValueChanged;
                     }
                     if (obj.GetType() == typeof(TextBox))
                     {
@@ -109,7 +114,12 @@ namespace VO_soft
                     if (obj.GetType() == typeof(CheckBox))
                     {
                         CheckBox obj_converted = (CheckBox)Convert.ChangeType(obj, typeof(CheckBox));
-                        obj_converted.Enabled = (bool)Convert.ChangeType(_data.ElementAt(i).Value, typeof(bool));
+                        var name = obj_converted.Name;
+                        if (name == "checkBox_LED")
+                            obj_converted.CheckedChanged -= form1.checkBox_LED_CheckedChanged;
+                        obj_converted.Checked = (bool)Convert.ChangeType(_data.ElementAt(i).Value, typeof(bool));
+                        if (name == "checkBox_LED")
+                            obj_converted.CheckedChanged += form1.checkBox_LED_CheckedChanged;
                     }
 
                 }

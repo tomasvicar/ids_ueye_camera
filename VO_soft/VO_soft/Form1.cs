@@ -99,6 +99,7 @@ namespace VO_soft
             formSettings.checkBox_visible_led_CheckedChanged(null, EventArgs.Empty);
             formSettings.checkBox_visible_two_wl_CheckedChanged(null, EventArgs.Empty);
             formSettings.checkBox_display_CheckedChanged(null, EventArgs.Empty);
+            checkBox_LED_CheckedChanged(null, EventArgs.Empty);
 
 
 
@@ -477,12 +478,12 @@ namespace VO_soft
             }
         }
 
-        private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
+        public void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
             cameraBackEnd.comLedUpdate();
         }
 
-        private void numericUpDown_LED_ValueChanged(object sender, EventArgs e)
+        public void numericUpDown_LED_ValueChanged(object sender, EventArgs e)
         {
             cameraBackEnd.comLedUpdate();
         }
