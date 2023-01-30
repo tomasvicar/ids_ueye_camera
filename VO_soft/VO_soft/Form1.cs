@@ -25,7 +25,7 @@ namespace VO_soft
         internal bool is_triger;
         public bool is_recording;
         public FormSettings formSettings;
-        private FormAbout formAbout;
+        public FormAbout formAbout;
         public SecondScreenUpdater secondScreenUpdater;
         private ImageUpdater imageUpdater;
         private bool stopTrigerClicked;
@@ -397,7 +397,7 @@ namespace VO_soft
                 // videoWriter.Open(filename, Decimal.ToInt32(formSettings.numericUpDown_w.Value), Decimal.ToInt32(formSettings.numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
 
                 SaverLoaderSettings.Save(this, filename + "_settings.json");
-                
+
                 pluxBackEnd.startRecordPlux(filename + ".txt");
             }
             cameraBackEnd.Start();

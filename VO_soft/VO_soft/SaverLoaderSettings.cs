@@ -72,7 +72,7 @@ namespace VO_soft
                     _data.Add(obj_converted.Name, obj_converted.Checked);
                 }
             }
-
+            _data.Add("version", form1.formAbout.label_version.Text);
 
             string json = JsonConvert.SerializeObject(_data);
             File.WriteAllText(filename, json);
@@ -131,6 +131,7 @@ namespace VO_soft
             }
 
         }
+
     }
 
 
