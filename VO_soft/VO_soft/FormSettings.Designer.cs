@@ -187,6 +187,7 @@ namespace VO_soft
             this.checkBox_visible_led.TabIndex = 11;
             this.checkBox_visible_led.Text = "LED visible";
             this.checkBox_visible_led.UseVisualStyleBackColor = true;
+            this.checkBox_visible_led.CheckedChanged += new System.EventHandler(this.checkBox_visible_led_CheckedChanged);
             // 
             // checkBox_visible_two_wl
             // 
@@ -197,6 +198,7 @@ namespace VO_soft
             this.checkBox_visible_two_wl.TabIndex = 18;
             this.checkBox_visible_two_wl.Text = "2 wl";
             this.checkBox_visible_two_wl.UseVisualStyleBackColor = true;
+            this.checkBox_visible_two_wl.CheckedChanged += new System.EventHandler(this.checkBox_visible_two_wl_CheckedChanged);
             // 
             // textBox_MAC
             // 
@@ -421,11 +423,12 @@ namespace VO_soft
             this.checkBox_display.TabIndex = 27;
             this.checkBox_display.Text = "display";
             this.checkBox_display.UseVisualStyleBackColor = true;
+            this.checkBox_display.CheckedChanged += new System.EventHandler(this.checkBox_display_CheckedChanged);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(202, 252);
+            this.label17.Location = new System.Drawing.Point(148, 252);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(139, 13);
             this.label17.TabIndex = 28;
@@ -570,7 +573,6 @@ namespace VO_soft
         public System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.NumericUpDown numericUpDown_chartOverlap;
-        private System.Windows.Forms.CheckBox checkBox_display;
         private System.Windows.Forms.Label label17;
         public System.Windows.Forms.Label label18;
         public System.Windows.Forms.Label label19;
@@ -578,5 +580,6 @@ namespace VO_soft
         public System.Windows.Forms.NumericUpDown numericUpDown_pluxShowS;
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.NumericUpDown numericUpDown_bits;
+        public System.Windows.Forms.CheckBox checkBox_display;
     }
 }

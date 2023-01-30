@@ -43,7 +43,7 @@ namespace VO_soft
         }
 
 
-        internal static void Save(Form1 form1)
+        internal static void Save(Form1 form1, string filename)
         {
             ArrayList to_save = SaverLoaderSettings.get_objects_to_save(form1, form1.formSettings);
             Dictionary<string, object> _data = new Dictionary<string, object>();
@@ -75,7 +75,7 @@ namespace VO_soft
 
 
             string json = JsonConvert.SerializeObject(_data);
-            File.WriteAllText("settings.json", json);
+            File.WriteAllText(filename, json);
         }
 
         internal static void Load(Form1 form1)

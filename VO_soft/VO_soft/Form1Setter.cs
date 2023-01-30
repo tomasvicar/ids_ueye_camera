@@ -18,6 +18,16 @@ namespace VO_soft
             form1.numericUpDown_gain.Value = 1.0m;
 
 
+            form1.numericUpDown_gain2xfps.DecimalPlaces = 1;
+            form1.numericUpDown_gain2xfps.Maximum = cameraParameters.gain_max;
+            form1.numericUpDown_gain2xfps.Minimum = cameraParameters.gain_min;
+            form1.numericUpDown_gain2xfps.Increment = 0.1m;
+            form1.numericUpDown_gain2xfps.Value = 1.0m;
+
+            form1.numericUpDown_wl_to_show.Maximum = 1;
+            form1.numericUpDown_wl_to_show.Minimum = 0;
+
+
             cameraParameters.exposureSafeMargin = 0.5m;
             cameraParameters.frameRateHardMax = Decimal.Floor(cameraParameters.acquisitionFrameRate_max);
 
@@ -102,8 +112,14 @@ namespace VO_soft
             form1.numericUpDown_subsampling.Maximum = 100m;
             form1.numericUpDown_subsampling.Value = 10m;
 
-            form1.numericUpDown_subsampling.Value = 10;
-            form1.numericUpDown_pictureBoxTimeDecimation.Value = 1;
+            form1.numericUpDown_pictureBoxTimeDecimation.Minimum = 1m;
+            form1.numericUpDown_pictureBoxTimeDecimation.Maximum = 100m;
+            form1.numericUpDown_pictureBoxTimeDecimation.Value = 3m;
+
+            form1.numericUpDown_pictureBoxTimeDecimation_play.Minimum = 1m;
+            form1.numericUpDown_pictureBoxTimeDecimation_play.Maximum = 100m;
+            form1.numericUpDown_pictureBoxTimeDecimation_play.Value = 3m;
+
 
             form1.numericUpDown_bufferSize.Minimum = 100;
             form1.numericUpDown_bufferSize.Maximum = 999999;
@@ -121,7 +137,9 @@ namespace VO_soft
             form1.formSettings.numericUpDown_bits.Minimum = 8;
             form1.formSettings.numericUpDown_bits.Maximum = 10;
             form1.formSettings.numericUpDown_bits.Increment = 2;
-            form1.formSettings.numericUpDown_bits.Value = 10;
+            form1.formSettings.numericUpDown_bits.Value = 8;
+
+            form1.checkBox_exposurTimeMax.Checked = true;
 
             foreach (Control obj in form1.formSettings.panel1.Controls)
             {
@@ -135,6 +153,15 @@ namespace VO_soft
                 }
             }
 
+            form1.numericLeftRight_dotY.NumericUpDown.ValueChanged += form1.numericLeftRight_dotY_ValueChanged;
+
+            form1.numericUpDown_dotX.Minimum = -1000;
+            form1.numericUpDown_dotX.Maximum = 1000;
+
+            form1.numericLeftRight_dotY.NumericUpDown.Minimum = -1000;
+            form1.numericLeftRight_dotY.NumericUpDown.Maximum = 1000;
+
+            form1.numericUpDown_R.Value = 12;
 
         }
 
@@ -220,6 +247,7 @@ namespace VO_soft
                 chart.TabIndex = 30;
                 chart.Text = "chart0";
                 form1.panel_plux.Controls.Add(chart);
+                chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
 
                 chart.Series[0].Points.AddXY(0, 1);
                 chart.Series[0].Points.AddXY(1, 2);

@@ -44,7 +44,7 @@ namespace VO_soft
 
 
 
-            //nodeMap.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(form1.numericUpDown_frameRate.Minimum));
+            nodeMap.FindNode<peak.core.nodes.FloatNode>("AcquisitionFrameRate").SetValue(decimal.ToDouble(form1.numericUpDown_frameRate.Minimum));
 
             var pc = Convert.ToDouble(form1.label_pixelClock.Text.Replace("Mclock", "")) * 1000000;
             nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").SetValue(pc);
@@ -52,7 +52,7 @@ namespace VO_soft
 
             //var dcf = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value());
 
-            //nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(form1.numericUpDown_exposureTime.Value) * 1000);
+            nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(form1.numericUpDown_exposureTime.Value) * 1000);
 
 
             if (isTrigger)

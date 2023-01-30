@@ -23,7 +23,10 @@ namespace VO_soft
         public PluxBackEnd pluxBackEnd;
         private bool stopTrigerClicked2;
         internal bool is_triger;
+        public bool is_recording;
         public FormSettings formSettings;
+        private FormAbout formAbout;
+        public SecondScreenUpdater secondScreenUpdater;
         private ImageUpdater imageUpdater;
         private bool stopTrigerClicked;
         private VideoFileWriter videoWriter;
@@ -38,18 +41,19 @@ namespace VO_soft
         public Chart chart6;
         public Chart chart7;
         public Chart chart8;
+        internal FormSecondScreen secondScreenForm;
 
         public Form1()
         {
             #if (DEBUG == false)
-                path = "logs";
+                var path = "logs";
 
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
-                time = DateTime.Now;
+                var time = DateTime.Now;
                 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("cs-CZ");
 
                 filename = Path.Combine(path, "log" + "_" + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_") + ".txt");
@@ -67,7 +71,8 @@ namespace VO_soft
             this.Show();
 
             formSettings = new FormSettings(this);
-
+            formAbout = new FormAbout();
+            secondScreenUpdater = new SecondScreenUpdater(this);
 
 
             imageUpdater = new ImageUpdater();
@@ -91,7 +96,12 @@ namespace VO_soft
 
             label_pluxState_Click(this, EventArgs.Empty);
 
-            
+            formSettings.checkBox_visible_led_CheckedChanged(null, EventArgs.Empty);
+            formSettings.checkBox_visible_two_wl_CheckedChanged(null, EventArgs.Empty);
+            formSettings.checkBox_display_CheckedChanged(null, EventArgs.Empty);
+
+
+
 
 
 
@@ -212,6 +222,10 @@ namespace VO_soft
 
         public void label_pluxState_Click(object sender, EventArgs e)
         {
+            label_pluxState.Text = "Connecting";
+            label_pluxState.ForeColor = System.Drawing.Color.Gray;
+            label_pluxState.Refresh();
+
             if (pluxBackEnd.openPlux())
             {
                 label_pluxState.Text = "connected";
@@ -231,7 +245,7 @@ namespace VO_soft
 
         private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaverLoaderSettings.Save(this);
+            SaverLoaderSettings.Save(this, "settings.json");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -293,10 +307,16 @@ namespace VO_soft
 
         private void button_triger_Click(object sender, EventArgs e)
         {
+
+            is_triger = true;
+            is_recording = true;
+
             stopTrigerClicked2 = false;
             if (buttonStart.Enabled == false)
             {
+                cameraBackEnd.ComTrigerOff();
                 myStop();
+                Thread.Sleep(500);
             }
 
 
@@ -305,8 +325,17 @@ namespace VO_soft
             button_triger.Enabled = false;
             button_stopTriger.Enabled = true;
 
+            if (formSettings.checkBox_visible_two_wl.Checked)
+            {
+                if (checkBox_2xfps.Checked)
+                {
+                    numericUpDown_frameRate.Value = numericUpDown_frameRate.Value * 2;
+                    numericUpDown_gain.Value = numericUpDown_gain2xfps.Value;
+                }
+            }
 
-            is_triger = true;
+
+           
             myStart();
 
             button_pluxStart.Enabled = false;
@@ -319,7 +348,10 @@ namespace VO_soft
         {
             stopTrigerClicked2 = false;
 
-            is_triger = false;
+            is_triger = true;
+            is_recording = false;
+
+
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             button_triger.Enabled = true;
@@ -331,6 +363,9 @@ namespace VO_soft
         private void myStart()
         {
             stopTrigerClicked = false;
+
+            //formSettings.checkBox_visible_two_wl_CheckedChanged(null, EventArgs.Empty);
+
 
             if (is_triger)
             {
@@ -360,6 +395,8 @@ namespace VO_soft
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.Raw);
                 // videoWriter.Open(filename, Decimal.ToInt32(formSettings.numericUpDown_w.Value), Decimal.ToInt32(formSettings.numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.FFV1);
 
+                SaverLoaderSettings.Save(this, filename + "_settings.json");
+                
                 pluxBackEnd.startRecordPlux(filename + ".txt");
             }
             cameraBackEnd.Start();
@@ -372,6 +409,7 @@ namespace VO_soft
             buttonStop.Enabled = false;
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
+
             button_pluxStart.Enabled = true;
             button_pluxStop.Enabled = false;
             numericUpDown_red.Enabled = true;
@@ -389,7 +427,9 @@ namespace VO_soft
             button_triger.Enabled = true;
             button_stopTriger.Enabled = false;
 
-            myStop();
+            stopTrigerClicked = true;
+            stopTrigerClicked2 = true;
+            cameraBackEnd.ComTrigerOff();
         }
 
         public void button_pluxStop_Click(object sender, EventArgs e)
@@ -459,6 +499,100 @@ namespace VO_soft
         private void advancedSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formSettings.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formAbout.ShowDialog();
+        }
+
+        public void checkBox_show_1_wl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_visible_two_wl.Checked == false)
+            {
+                pictureBoxWithInterpolationMode1.Visible = true;
+                pictureBoxWithInterpolationMode2.Visible = false;
+                pictureBoxWithInterpolationMode3.Visible = false;
+            }
+            else if (checkBox_show_1_wl.Checked)
+            {
+                pictureBoxWithInterpolationMode1.Visible = true;
+                pictureBoxWithInterpolationMode2.Visible = false;
+                pictureBoxWithInterpolationMode3.Visible = false;
+            }
+            else 
+            {
+                pictureBoxWithInterpolationMode1.Visible = false;
+                pictureBoxWithInterpolationMode2.Visible = true;
+                pictureBoxWithInterpolationMode3.Visible = true;
+            }
+        }
+
+        private void checkBox_showDot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_display.Checked)
+                secondScreenUpdater.updateDot();
+        }
+
+        private void numericUpDown_dotX_ValueChanged(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_display.Checked)
+                secondScreenUpdater.updateDot();
+        }
+
+        public void numericLeftRight_dotY_ValueChanged(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_display.Checked)
+                secondScreenUpdater.updateDot();
+        }
+
+
+        private void numericUpDown_R_ValueChanged(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_display.Checked)
+                secondScreenUpdater.updateDot();
+        }
+
+        private void pictureBox_secondScreen_Click(object sender, EventArgs e)
+        {
+            if (formSettings.checkBox_display.Checked)
+                secondScreenUpdater.updateDot();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Up))
+            {
+                numericUpDown_dotX.Value = numericUpDown_dotX.Value + numericUpDown_dotX.Increment;
+                return true;
+            }
+            if (keyData == (Keys.Down))
+            {
+                numericUpDown_dotX.Value = numericUpDown_dotX.Value - numericUpDown_dotX.Increment;
+                return true;
+            }
+            if (keyData == (Keys.Left))
+            {
+                numericLeftRight_dotY.NumericUpDown.Value = numericLeftRight_dotY.NumericUpDown.Value - numericLeftRight_dotY.NumericUpDown.Increment;
+                return true;
+            }
+            if (keyData == (Keys.Right))
+            {
+                numericLeftRight_dotY.NumericUpDown.Value = numericLeftRight_dotY.NumericUpDown.Value + numericLeftRight_dotY.NumericUpDown.Increment;
+                return true;
+            }
+            if (keyData == (Keys.Subtract))
+            {
+                numericUpDown_R.Value = numericUpDown_R.Value - numericUpDown_R.Increment;
+                return true;
+            }
+
+            if (keyData == (Keys.Add))
+            {
+                numericUpDown_R.Value = numericUpDown_R.Value + numericUpDown_R.Increment;
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

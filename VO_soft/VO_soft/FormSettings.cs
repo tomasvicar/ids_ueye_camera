@@ -80,5 +80,65 @@ namespace VO_soft
             Thread.Sleep(100);
             form1.label_pluxState_Click(this, EventArgs.Empty);
         }
+
+        public void checkBox_visible_led_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_visible_led.Checked)
+            {
+                form1.checkBox_LED.Visible = true;
+                form1.numericUpDown_LED.Visible = true;
+            }
+            else 
+            {
+                form1.checkBox_LED.Visible = false;
+                form1.numericUpDown_LED.Visible = false;
+            }
+        }
+
+        public void checkBox_visible_two_wl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_visible_two_wl.Checked)
+            {
+                form1.checkBox_show_1_wl.Visible = true;
+                form1.numericUpDown_wl_to_show.Visible = true;
+                form1.checkBox_2xfps.Visible = true;
+                form1.numericUpDown_gain2xfps.Visible = true;
+                form1.checkBox_sum2frames.Visible = true;
+
+            }
+            else
+            {
+                form1.checkBox_show_1_wl.Visible = false;
+                form1.numericUpDown_wl_to_show.Visible = false;
+                form1.checkBox_2xfps.Visible = false;
+                form1.numericUpDown_gain2xfps.Visible = false;
+                form1.checkBox_sum2frames.Visible = false;
+            }
+            form1.checkBox_show_1_wl_CheckedChanged(null, EventArgs.Empty);
+        }
+
+        public void checkBox_display_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_display.Checked)
+            {
+                form1.checkBox_showDot.Visible = true;
+                form1.numericUpDown_dotX.Visible = true;
+                form1.numericLeftRight_dotY.Visible = true;
+                form1.label10.Visible = true;
+                form1.numericUpDown_R.Visible = true;
+                form1.pictureBox_secondScreen.Visible = true;
+                form1.secondScreenUpdater.updateDot();
+            }
+            else
+            {
+                form1.checkBox_showDot.Visible = false;
+                form1.numericUpDown_dotX.Visible = false;
+                form1.numericLeftRight_dotY.Visible = false;
+                form1.label10.Visible = false;
+                form1.numericUpDown_R.Visible = false;
+                form1.pictureBox_secondScreen.Visible = false;
+                form1.secondScreenUpdater.Close();
+            }
+        }
     }
 }

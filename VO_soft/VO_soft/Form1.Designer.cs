@@ -30,8 +30,6 @@ namespace VO_soft
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.pictureBoxWithInterpolationMode1 = new VO_soft.PictureBoxWithInterpolationMode();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +37,7 @@ namespace VO_soft
             this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown_gain = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown_frameRate = new System.Windows.Forms.NumericUpDown();
@@ -78,9 +77,22 @@ namespace VO_soft
             this.label_pixelClock = new System.Windows.Forms.Label();
             this.label_error = new System.Windows.Forms.Label();
             this.panel_plux = new System.Windows.Forms.Panel();
-            this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown_pictureBoxTimeDecimation_play = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_show_1_wl = new System.Windows.Forms.CheckBox();
+            this.numericUpDown_wl_to_show = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_2xfps = new System.Windows.Forms.CheckBox();
+            this.numericUpDown_gain2xfps = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_sum2frames = new System.Windows.Forms.CheckBox();
+            this.pictureBox_secondScreen = new System.Windows.Forms.PictureBox();
+            this.checkBox_showDot = new System.Windows.Forms.CheckBox();
             this.pictureBoxWithInterpolationMode3 = new VO_soft.PictureBoxWithInterpolationMode();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).BeginInit();
+            this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.pictureBoxWithInterpolationMode1 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.numericLeftRight_dotY = new VO_soft.NumericLeftRight();
+            this.numericUpDown_dotX = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -91,33 +103,24 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation_play)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl_to_show)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain2xfps)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_secondScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBoxWithInterpolationMode1
-            // 
-            this.pictureBoxWithInterpolationMode1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-            this.pictureBoxWithInterpolationMode1.Location = new System.Drawing.Point(0, 27);
-            this.pictureBoxWithInterpolationMode1.Name = "pictureBoxWithInterpolationMode1";
-            this.pictureBoxWithInterpolationMode1.Size = new System.Drawing.Size(733, 492);
-            this.pictureBoxWithInterpolationMode1.TabIndex = 0;
-            this.pictureBoxWithInterpolationMode1.TabStop = false;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 609);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1370, 22);
-            this.statusStrip.TabIndex = 1;
-            this.statusStrip.Text = "statusStrip1";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.actionsToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1370, 24);
@@ -135,7 +138,7 @@ namespace VO_soft
             // advancedSettingsToolStripMenuItem
             // 
             this.advancedSettingsToolStripMenuItem.Name = "advancedSettingsToolStripMenuItem";
-            this.advancedSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.advancedSettingsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.advancedSettingsToolStripMenuItem.Text = "advanced settings";
             this.advancedSettingsToolStripMenuItem.Click += new System.EventHandler(this.advancedSettingsToolStripMenuItem_Click);
             // 
@@ -167,6 +170,13 @@ namespace VO_soft
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // numericUpDown_gain
             // 
@@ -275,7 +285,7 @@ namespace VO_soft
             // 
             // numericUpDown_IR
             // 
-            this.numericUpDown_IR.Location = new System.Drawing.Point(839, 586);
+            this.numericUpDown_IR.Location = new System.Drawing.Point(1108, 565);
             this.numericUpDown_IR.Name = "numericUpDown_IR";
             this.numericUpDown_IR.Size = new System.Drawing.Size(45, 20);
             this.numericUpDown_IR.TabIndex = 15;
@@ -283,7 +293,7 @@ namespace VO_soft
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(845, 572);
+            this.label4.Location = new System.Drawing.Point(1114, 551);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 13);
             this.label4.TabIndex = 16;
@@ -291,7 +301,7 @@ namespace VO_soft
             // 
             // numericUpDown_red
             // 
-            this.numericUpDown_red.Location = new System.Drawing.Point(890, 586);
+            this.numericUpDown_red.Location = new System.Drawing.Point(1108, 608);
             this.numericUpDown_red.Name = "numericUpDown_red";
             this.numericUpDown_red.Size = new System.Drawing.Size(45, 20);
             this.numericUpDown_red.TabIndex = 17;
@@ -299,7 +309,7 @@ namespace VO_soft
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(894, 571);
+            this.label5.Location = new System.Drawing.Point(1112, 593);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 18;
@@ -307,7 +317,7 @@ namespace VO_soft
             // 
             // button_pluxStart
             // 
-            this.button_pluxStart.Location = new System.Drawing.Point(1027, 560);
+            this.button_pluxStart.Location = new System.Drawing.Point(1223, 574);
             this.button_pluxStart.Name = "button_pluxStart";
             this.button_pluxStart.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStart.TabIndex = 19;
@@ -317,7 +327,7 @@ namespace VO_soft
             // 
             // button_pluxStop
             // 
-            this.button_pluxStop.Location = new System.Drawing.Point(1027, 583);
+            this.button_pluxStop.Location = new System.Drawing.Point(1223, 597);
             this.button_pluxStop.Name = "button_pluxStop";
             this.button_pluxStop.Size = new System.Drawing.Size(75, 23);
             this.button_pluxStop.TabIndex = 20;
@@ -328,7 +338,7 @@ namespace VO_soft
             // label_pluxState
             // 
             this.label_pluxState.AutoSize = true;
-            this.label_pluxState.Location = new System.Drawing.Point(873, 549);
+            this.label_pluxState.Location = new System.Drawing.Point(1241, 551);
             this.label_pluxState.Name = "label_pluxState";
             this.label_pluxState.Size = new System.Drawing.Size(27, 13);
             this.label_pluxState.TabIndex = 21;
@@ -338,7 +348,7 @@ namespace VO_soft
             // checkBox_LED
             // 
             this.checkBox_LED.AutoSize = true;
-            this.checkBox_LED.Location = new System.Drawing.Point(1126, 550);
+            this.checkBox_LED.Location = new System.Drawing.Point(1311, 558);
             this.checkBox_LED.Name = "checkBox_LED";
             this.checkBox_LED.Size = new System.Drawing.Size(47, 17);
             this.checkBox_LED.TabIndex = 22;
@@ -348,7 +358,7 @@ namespace VO_soft
             // 
             // numericUpDown_LED
             // 
-            this.numericUpDown_LED.Location = new System.Drawing.Point(1125, 569);
+            this.numericUpDown_LED.Location = new System.Drawing.Point(1310, 577);
             this.numericUpDown_LED.Name = "numericUpDown_LED";
             this.numericUpDown_LED.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown_LED.TabIndex = 23;
@@ -366,7 +376,7 @@ namespace VO_soft
             // 
             // numericUpDown_pictureBoxTimeDecimation
             // 
-            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(324, 543);
+            this.numericUpDown_pictureBoxTimeDecimation.Location = new System.Drawing.Point(712, 565);
             this.numericUpDown_pictureBoxTimeDecimation.Name = "numericUpDown_pictureBoxTimeDecimation";
             this.numericUpDown_pictureBoxTimeDecimation.Size = new System.Drawing.Size(43, 20);
             this.numericUpDown_pictureBoxTimeDecimation.TabIndex = 25;
@@ -374,15 +384,15 @@ namespace VO_soft
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(321, 527);
+            this.label6.Location = new System.Drawing.Point(709, 549);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.Size = new System.Drawing.Size(66, 13);
             this.label6.TabIndex = 26;
-            this.label6.Text = "t sub.";
+            this.label6.Text = "t sub. record";
             // 
             // numericUpDown_bufferSize
             // 
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(324, 585);
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(981, 603);
             this.numericUpDown_bufferSize.Name = "numericUpDown_bufferSize";
             this.numericUpDown_bufferSize.Size = new System.Drawing.Size(52, 20);
             this.numericUpDown_bufferSize.TabIndex = 27;
@@ -390,7 +400,7 @@ namespace VO_soft
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(321, 569);
+            this.label7.Location = new System.Drawing.Point(978, 587);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 13);
             this.label7.TabIndex = 28;
@@ -418,7 +428,7 @@ namespace VO_soft
             // 
             // button_stopTriger
             // 
-            this.button_stopTriger.Location = new System.Drawing.Point(480, 581);
+            this.button_stopTriger.Location = new System.Drawing.Point(783, 600);
             this.button_stopTriger.Name = "button_stopTriger";
             this.button_stopTriger.Size = new System.Drawing.Size(75, 23);
             this.button_stopTriger.TabIndex = 32;
@@ -428,7 +438,7 @@ namespace VO_soft
             // 
             // button_triger
             // 
-            this.button_triger.Location = new System.Drawing.Point(480, 558);
+            this.button_triger.Location = new System.Drawing.Point(783, 577);
             this.button_triger.Name = "button_triger";
             this.button_triger.Size = new System.Drawing.Size(75, 23);
             this.button_triger.TabIndex = 31;
@@ -438,7 +448,7 @@ namespace VO_soft
             // 
             // textBox_dataname
             // 
-            this.textBox_dataname.Location = new System.Drawing.Point(480, 533);
+            this.textBox_dataname.Location = new System.Drawing.Point(783, 555);
             this.textBox_dataname.Name = "textBox_dataname";
             this.textBox_dataname.Size = new System.Drawing.Size(217, 20);
             this.textBox_dataname.TabIndex = 33;
@@ -447,7 +457,7 @@ namespace VO_soft
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(966, 568);
+            this.label8.Location = new System.Drawing.Point(1160, 554);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(33, 13);
             this.label8.TabIndex = 35;
@@ -455,7 +465,7 @@ namespace VO_soft
             // 
             // numericUpDown_subsampling
             // 
-            this.numericUpDown_subsampling.Location = new System.Drawing.Point(969, 584);
+            this.numericUpDown_subsampling.Location = new System.Drawing.Point(1163, 570);
             this.numericUpDown_subsampling.Name = "numericUpDown_subsampling";
             this.numericUpDown_subsampling.Size = new System.Drawing.Size(43, 20);
             this.numericUpDown_subsampling.TabIndex = 34;
@@ -474,7 +484,7 @@ namespace VO_soft
             // labelCounter
             // 
             this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(562, 560);
+            this.labelCounter.Location = new System.Drawing.Point(865, 579);
             this.labelCounter.Name = "labelCounter";
             this.labelCounter.Size = new System.Drawing.Size(22, 13);
             this.labelCounter.TabIndex = 37;
@@ -483,7 +493,7 @@ namespace VO_soft
             // label_fps
             // 
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(624, 560);
+            this.label_fps.Location = new System.Drawing.Point(927, 579);
             this.label_fps.Name = "label_fps";
             this.label_fps.Size = new System.Drawing.Size(31, 13);
             this.label_fps.TabIndex = 38;
@@ -492,7 +502,7 @@ namespace VO_soft
             // label_pixelClock
             // 
             this.label_pixelClock.AutoSize = true;
-            this.label_pixelClock.Location = new System.Drawing.Point(561, 589);
+            this.label_pixelClock.Location = new System.Drawing.Point(864, 608);
             this.label_pixelClock.Name = "label_pixelClock";
             this.label_pixelClock.Size = new System.Drawing.Size(57, 13);
             this.label_pixelClock.TabIndex = 39;
@@ -501,7 +511,7 @@ namespace VO_soft
             // label_error
             // 
             this.label_error.AutoSize = true;
-            this.label_error.Location = new System.Drawing.Point(624, 589);
+            this.label_error.Location = new System.Drawing.Point(927, 608);
             this.label_error.Name = "label_error";
             this.label_error.Size = new System.Drawing.Size(12, 13);
             this.label_error.TabIndex = 40;
@@ -514,15 +524,87 @@ namespace VO_soft
             this.panel_plux.Size = new System.Drawing.Size(618, 516);
             this.panel_plux.TabIndex = 41;
             // 
-            // pictureBoxWithInterpolationMode2
+            // label9
             // 
-            this.pictureBoxWithInterpolationMode2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-            this.pictureBoxWithInterpolationMode2.Location = new System.Drawing.Point(7, 122);
-            this.pictureBoxWithInterpolationMode2.Name = "pictureBoxWithInterpolationMode2";
-            this.pictureBoxWithInterpolationMode2.Size = new System.Drawing.Size(354, 270);
-            this.pictureBoxWithInterpolationMode2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxWithInterpolationMode2.TabIndex = 42;
-            this.pictureBoxWithInterpolationMode2.TabStop = false;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(709, 592);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 44;
+            this.label9.Text = "t sub. play";
+            // 
+            // numericUpDown_pictureBoxTimeDecimation_play
+            // 
+            this.numericUpDown_pictureBoxTimeDecimation_play.Location = new System.Drawing.Point(712, 608);
+            this.numericUpDown_pictureBoxTimeDecimation_play.Name = "numericUpDown_pictureBoxTimeDecimation_play";
+            this.numericUpDown_pictureBoxTimeDecimation_play.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDown_pictureBoxTimeDecimation_play.TabIndex = 45;
+            // 
+            // checkBox_show_1_wl
+            // 
+            this.checkBox_show_1_wl.AutoSize = true;
+            this.checkBox_show_1_wl.Location = new System.Drawing.Point(304, 525);
+            this.checkBox_show_1_wl.Name = "checkBox_show_1_wl";
+            this.checkBox_show_1_wl.Size = new System.Drawing.Size(73, 17);
+            this.checkBox_show_1_wl.TabIndex = 46;
+            this.checkBox_show_1_wl.Text = "show 1 wl";
+            this.checkBox_show_1_wl.UseVisualStyleBackColor = true;
+            this.checkBox_show_1_wl.CheckedChanged += new System.EventHandler(this.checkBox_show_1_wl_CheckedChanged);
+            // 
+            // numericUpDown_wl_to_show
+            // 
+            this.numericUpDown_wl_to_show.Location = new System.Drawing.Point(304, 541);
+            this.numericUpDown_wl_to_show.Name = "numericUpDown_wl_to_show";
+            this.numericUpDown_wl_to_show.Size = new System.Drawing.Size(57, 20);
+            this.numericUpDown_wl_to_show.TabIndex = 47;
+            // 
+            // checkBox_2xfps
+            // 
+            this.checkBox_2xfps.AutoSize = true;
+            this.checkBox_2xfps.Location = new System.Drawing.Point(304, 572);
+            this.checkBox_2xfps.Name = "checkBox_2xfps";
+            this.checkBox_2xfps.Size = new System.Drawing.Size(77, 17);
+            this.checkBox_2xfps.TabIndex = 48;
+            this.checkBox_2xfps.Text = "2xfps gain:";
+            this.checkBox_2xfps.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown_gain2xfps
+            // 
+            this.numericUpDown_gain2xfps.Location = new System.Drawing.Point(304, 587);
+            this.numericUpDown_gain2xfps.Name = "numericUpDown_gain2xfps";
+            this.numericUpDown_gain2xfps.Size = new System.Drawing.Size(57, 20);
+            this.numericUpDown_gain2xfps.TabIndex = 49;
+            // 
+            // checkBox_sum2frames
+            // 
+            this.checkBox_sum2frames.AutoSize = true;
+            this.checkBox_sum2frames.Location = new System.Drawing.Point(304, 614);
+            this.checkBox_sum2frames.Name = "checkBox_sum2frames";
+            this.checkBox_sum2frames.Size = new System.Drawing.Size(82, 17);
+            this.checkBox_sum2frames.TabIndex = 50;
+            this.checkBox_sum2frames.Text = "show sum 2";
+            this.checkBox_sum2frames.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_secondScreen
+            // 
+            this.pictureBox_secondScreen.Location = new System.Drawing.Point(590, 525);
+            this.pictureBox_secondScreen.Name = "pictureBox_secondScreen";
+            this.pictureBox_secondScreen.Size = new System.Drawing.Size(88, 103);
+            this.pictureBox_secondScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_secondScreen.TabIndex = 51;
+            this.pictureBox_secondScreen.TabStop = false;
+            this.pictureBox_secondScreen.Click += new System.EventHandler(this.pictureBox_secondScreen_Click);
+            // 
+            // checkBox_showDot
+            // 
+            this.checkBox_showDot.AutoSize = true;
+            this.checkBox_showDot.Location = new System.Drawing.Point(507, 525);
+            this.checkBox_showDot.Name = "checkBox_showDot";
+            this.checkBox_showDot.Size = new System.Drawing.Size(77, 17);
+            this.checkBox_showDot.TabIndex = 52;
+            this.checkBox_showDot.Text = "show point";
+            this.checkBox_showDot.UseVisualStyleBackColor = true;
+            this.checkBox_showDot.CheckedChanged += new System.EventHandler(this.checkBox_showDot_CheckedChanged);
             // 
             // pictureBoxWithInterpolationMode3
             // 
@@ -534,11 +616,75 @@ namespace VO_soft
             this.pictureBoxWithInterpolationMode3.TabIndex = 43;
             this.pictureBoxWithInterpolationMode3.TabStop = false;
             // 
+            // pictureBoxWithInterpolationMode2
+            // 
+            this.pictureBoxWithInterpolationMode2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode2.Location = new System.Drawing.Point(7, 122);
+            this.pictureBoxWithInterpolationMode2.Name = "pictureBoxWithInterpolationMode2";
+            this.pictureBoxWithInterpolationMode2.Size = new System.Drawing.Size(354, 270);
+            this.pictureBoxWithInterpolationMode2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxWithInterpolationMode2.TabIndex = 42;
+            this.pictureBoxWithInterpolationMode2.TabStop = false;
+            // 
+            // pictureBoxWithInterpolationMode1
+            // 
+            this.pictureBoxWithInterpolationMode1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode1.Location = new System.Drawing.Point(0, 27);
+            this.pictureBoxWithInterpolationMode1.Name = "pictureBoxWithInterpolationMode1";
+            this.pictureBoxWithInterpolationMode1.Size = new System.Drawing.Size(733, 492);
+            this.pictureBoxWithInterpolationMode1.TabIndex = 0;
+            this.pictureBoxWithInterpolationMode1.TabStop = false;
+            // 
+            // numericLeftRight_dotY
+            // 
+            this.numericLeftRight_dotY.Location = new System.Drawing.Point(509, 565);
+            this.numericLeftRight_dotY.Name = "numericLeftRight_dotY";
+            this.numericLeftRight_dotY.Size = new System.Drawing.Size(61, 26);
+            this.numericLeftRight_dotY.TabIndex = 53;
+            // 
+            // numericUpDown_dotX
+            // 
+            this.numericUpDown_dotX.Location = new System.Drawing.Point(525, 544);
+            this.numericUpDown_dotX.Name = "numericUpDown_dotX";
+            this.numericUpDown_dotX.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDown_dotX.TabIndex = 54;
+            this.numericUpDown_dotX.ValueChanged += new System.EventHandler(this.numericUpDown_dotX_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(519, 594);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 55;
+            this.label10.Text = "radius";
+            // 
+            // numericUpDown_R
+            // 
+            this.numericUpDown_R.Location = new System.Drawing.Point(519, 608);
+            this.numericUpDown_R.Name = "numericUpDown_R";
+            this.numericUpDown_R.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDown_R.TabIndex = 56;
+            this.numericUpDown_R.ValueChanged += new System.EventHandler(this.numericUpDown_R_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.numericUpDown_R);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.numericUpDown_dotX);
+            this.Controls.Add(this.numericLeftRight_dotY);
+            this.Controls.Add(this.checkBox_showDot);
+            this.Controls.Add(this.pictureBox_secondScreen);
+            this.Controls.Add(this.checkBox_sum2frames);
+            this.Controls.Add(this.numericUpDown_gain2xfps);
+            this.Controls.Add(this.checkBox_2xfps);
+            this.Controls.Add(this.numericUpDown_wl_to_show);
+            this.Controls.Add(this.checkBox_show_1_wl);
+            this.Controls.Add(this.numericUpDown_pictureBoxTimeDecimation_play);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.pictureBoxWithInterpolationMode3);
             this.Controls.Add(this.pictureBoxWithInterpolationMode2);
             this.Controls.Add(this.panel_plux);
@@ -580,7 +726,6 @@ namespace VO_soft
             this.Controls.Add(this.numericUpDown_frameRate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown_gain);
-            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBoxWithInterpolationMode1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -588,7 +733,6 @@ namespace VO_soft
             this.Name = "Form1";
             this.Text = "VO software";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).EndInit();
@@ -600,8 +744,15 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bufferSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_subsampling)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pictureBoxTimeDecimation_play)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl_to_show)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain2xfps)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_secondScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -639,7 +790,6 @@ namespace VO_soft
         public System.Windows.Forms.Label label_error;
         public System.Windows.Forms.Panel panel_plux;
         public PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode1;
-        public System.Windows.Forms.StatusStrip statusStrip;
         public System.Windows.Forms.MenuStrip menuStrip1;
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
@@ -656,9 +806,23 @@ namespace VO_soft
         public System.Windows.Forms.Label label_frameRateMax;
         public System.Windows.Forms.Label label_exposureTimeMin;
         public System.Windows.Forms.Label label_exposureTimeMax;
-        private System.Windows.Forms.ToolStripMenuItem advancedSettingsToolStripMenuItem;
         public PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode2;
         public PictureBoxWithInterpolationMode pictureBoxWithInterpolationMode3;
+        public System.Windows.Forms.Label label9;
+        public System.Windows.Forms.NumericUpDown numericUpDown_pictureBoxTimeDecimation_play;
+        public System.Windows.Forms.CheckBox checkBox_show_1_wl;
+        public System.Windows.Forms.NumericUpDown numericUpDown_wl_to_show;
+        public System.Windows.Forms.CheckBox checkBox_2xfps;
+        public System.Windows.Forms.NumericUpDown numericUpDown_gain2xfps;
+        public System.Windows.Forms.CheckBox checkBox_sum2frames;
+        public System.Windows.Forms.CheckBox checkBox_showDot;
+        public NumericLeftRight numericLeftRight_dotY;
+        public System.Windows.Forms.NumericUpDown numericUpDown_dotX;
+        public System.Windows.Forms.Label label10;
+        public System.Windows.Forms.NumericUpDown numericUpDown_R;
+        public System.Windows.Forms.PictureBox pictureBox_secondScreen;
+        public System.Windows.Forms.ToolStripMenuItem advancedSettingsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

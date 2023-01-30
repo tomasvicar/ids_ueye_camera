@@ -83,9 +83,20 @@ namespace VO_soft
             cameraAcquisitionWorker.SetDataStream(dataStream);
             cameraAcquisitionWorker.SetNodemapRemoteDevice(nodeMap);
             //cameraAcquisitionWorker.SetFormWindow(form1);
-            var subsample = Decimal.ToInt32(form1.numericUpDown_pictureBoxTimeDecimation.Value);
-            //var bits = Decimal.ToInt32(form1.formSettings.numericUpDown_bits.Value);
-            cameraAcquisitionWorker.SetAquisitionsettings(form1.is_triger, subsample, form1.filename);
+
+            var is_triger = form1.is_triger;
+            var is_recording = form1.is_recording;
+            var subsample = 1;
+            if (is_triger)
+                subsample = Decimal.ToInt32(form1.numericUpDown_pictureBoxTimeDecimation.Value);
+            else
+                subsample = Decimal.ToInt32(form1.numericUpDown_pictureBoxTimeDecimation_play.Value);
+
+            var fps = Decimal.ToInt32(form1.numericUpDown_frameRate.Value);
+            var width = Decimal.ToInt32(form1.formSettings.numericUpDown_w.Value);
+            var height = Decimal.ToInt32(form1.formSettings.numericUpDown_h.Value);
+            var bits = Decimal.ToInt32(form1.formSettings.numericUpDown_bits.Value);
+            cameraAcquisitionWorker.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename, fps, width, height, bits);
 
             cameraAcquisitionThread.Start();
 
@@ -150,6 +161,7 @@ namespace VO_soft
         {
             form1.label_comPortStatus.Text = "Connecting";
             form1.label_comPortStatus.ForeColor = System.Drawing.Color.Gray;
+            form1.label_comPortStatus.Refresh();
 
             var ArrayComPortsNames = SerialPort.GetPortNames();
 
