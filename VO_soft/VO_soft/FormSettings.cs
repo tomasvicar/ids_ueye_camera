@@ -104,6 +104,7 @@ namespace VO_soft
                 form1.checkBox_2xfps.Visible = true;
                 form1.numericUpDown_gain2xfps.Visible = true;
                 form1.checkBox_sum2frames.Visible = true;
+                form1.checkBox_one_wl_stable.Visible = true;
 
             }
             else
@@ -113,6 +114,8 @@ namespace VO_soft
                 form1.checkBox_2xfps.Visible = false;
                 form1.numericUpDown_gain2xfps.Visible = false;
                 form1.checkBox_sum2frames.Visible = false;
+                form1.checkBox_one_wl_stable.Visible = false;
+                form1.checkBox_one_wl_stable.Checked = false;
             }
             form1.checkBox_show_1_wl_CheckedChanged(null, EventArgs.Empty);
         }

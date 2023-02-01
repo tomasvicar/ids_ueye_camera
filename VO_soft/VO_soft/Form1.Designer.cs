@@ -36,6 +36,8 @@ namespace VO_soft
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown_gain = new System.Windows.Forms.NumericUpDown();
@@ -93,8 +95,7 @@ namespace VO_soft
             this.numericUpDown_dotX = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
-            this.saveSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadSettingsAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox_one_wl_stable = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -158,16 +159,30 @@ namespace VO_soft
             // loadSettingsToolStripMenuItem
             // 
             this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
-            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.loadSettingsToolStripMenuItem.Text = "load settings";
             this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsToolStripMenuItem_Click);
             // 
             // saveSettingsToolStripMenuItem
             // 
             this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveSettingsToolStripMenuItem.Text = "save settings";
             this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToolStripMenuItem_Click);
+            // 
+            // saveSettingsAsToolStripMenuItem
+            // 
+            this.saveSettingsAsToolStripMenuItem.Name = "saveSettingsAsToolStripMenuItem";
+            this.saveSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveSettingsAsToolStripMenuItem.Text = "save settings as";
+            this.saveSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsAsToolStripMenuItem_Click);
+            // 
+            // loadSettingsAsToolStripMenuItem
+            // 
+            this.loadSettingsAsToolStripMenuItem.Name = "loadSettingsAsToolStripMenuItem";
+            this.loadSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.loadSettingsAsToolStripMenuItem.Text = "load settings as";
+            this.loadSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsAsToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -344,9 +359,9 @@ namespace VO_soft
             this.label_pluxState.AutoSize = true;
             this.label_pluxState.Location = new System.Drawing.Point(1241, 551);
             this.label_pluxState.Name = "label_pluxState";
-            this.label_pluxState.Size = new System.Drawing.Size(27, 13);
+            this.label_pluxState.Size = new System.Drawing.Size(22, 13);
             this.label_pluxState.TabIndex = 21;
-            this.label_pluxState.Text = "N/A";
+            this.label_pluxState.Text = "NA";
             this.label_pluxState.Click += new System.EventHandler(this.label_pluxState_Click);
             // 
             // checkBox_LED
@@ -373,9 +388,9 @@ namespace VO_soft
             this.label_comPortStatus.AutoSize = true;
             this.label_comPortStatus.Location = new System.Drawing.Point(236, 533);
             this.label_comPortStatus.Name = "label_comPortStatus";
-            this.label_comPortStatus.Size = new System.Drawing.Size(27, 13);
+            this.label_comPortStatus.Size = new System.Drawing.Size(22, 13);
             this.label_comPortStatus.TabIndex = 24;
-            this.label_comPortStatus.Text = "N/A";
+            this.label_comPortStatus.Text = "NA";
             this.label_comPortStatus.Click += new System.EventHandler(this.label_comPortStatus_Click);
             // 
             // numericUpDown_pictureBoxTimeDecimation
@@ -547,7 +562,7 @@ namespace VO_soft
             // checkBox_show_1_wl
             // 
             this.checkBox_show_1_wl.AutoSize = true;
-            this.checkBox_show_1_wl.Location = new System.Drawing.Point(304, 525);
+            this.checkBox_show_1_wl.Location = new System.Drawing.Point(304, 521);
             this.checkBox_show_1_wl.Name = "checkBox_show_1_wl";
             this.checkBox_show_1_wl.Size = new System.Drawing.Size(73, 17);
             this.checkBox_show_1_wl.TabIndex = 46;
@@ -557,7 +572,7 @@ namespace VO_soft
             // 
             // numericUpDown_wl_to_show
             // 
-            this.numericUpDown_wl_to_show.Location = new System.Drawing.Point(304, 541);
+            this.numericUpDown_wl_to_show.Location = new System.Drawing.Point(304, 536);
             this.numericUpDown_wl_to_show.Name = "numericUpDown_wl_to_show";
             this.numericUpDown_wl_to_show.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown_wl_to_show.TabIndex = 47;
@@ -565,7 +580,7 @@ namespace VO_soft
             // checkBox_2xfps
             // 
             this.checkBox_2xfps.AutoSize = true;
-            this.checkBox_2xfps.Location = new System.Drawing.Point(304, 572);
+            this.checkBox_2xfps.Location = new System.Drawing.Point(304, 559);
             this.checkBox_2xfps.Name = "checkBox_2xfps";
             this.checkBox_2xfps.Size = new System.Drawing.Size(77, 17);
             this.checkBox_2xfps.TabIndex = 48;
@@ -574,7 +589,7 @@ namespace VO_soft
             // 
             // numericUpDown_gain2xfps
             // 
-            this.numericUpDown_gain2xfps.Location = new System.Drawing.Point(304, 587);
+            this.numericUpDown_gain2xfps.Location = new System.Drawing.Point(304, 574);
             this.numericUpDown_gain2xfps.Name = "numericUpDown_gain2xfps";
             this.numericUpDown_gain2xfps.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown_gain2xfps.TabIndex = 49;
@@ -582,7 +597,7 @@ namespace VO_soft
             // checkBox_sum2frames
             // 
             this.checkBox_sum2frames.AutoSize = true;
-            this.checkBox_sum2frames.Location = new System.Drawing.Point(304, 614);
+            this.checkBox_sum2frames.Location = new System.Drawing.Point(304, 597);
             this.checkBox_sum2frames.Name = "checkBox_sum2frames";
             this.checkBox_sum2frames.Size = new System.Drawing.Size(82, 17);
             this.checkBox_sum2frames.TabIndex = 50;
@@ -671,25 +686,23 @@ namespace VO_soft
             this.numericUpDown_R.TabIndex = 56;
             this.numericUpDown_R.ValueChanged += new System.EventHandler(this.numericUpDown_R_ValueChanged);
             // 
-            // saveSettingsAsToolStripMenuItem
+            // checkBox_one_wl_stable
             // 
-            this.saveSettingsAsToolStripMenuItem.Name = "saveSettingsAsToolStripMenuItem";
-            this.saveSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveSettingsAsToolStripMenuItem.Text = "save settings as";
-            this.saveSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsAsToolStripMenuItem_Click);
-            // 
-            // loadSettingsAsToolStripMenuItem
-            // 
-            this.loadSettingsAsToolStripMenuItem.Name = "loadSettingsAsToolStripMenuItem";
-            this.loadSettingsAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadSettingsAsToolStripMenuItem.Text = "load settings as";
-            this.loadSettingsAsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsAsToolStripMenuItem_Click);
+            this.checkBox_one_wl_stable.AutoSize = true;
+            this.checkBox_one_wl_stable.Location = new System.Drawing.Point(304, 613);
+            this.checkBox_one_wl_stable.Name = "checkBox_one_wl_stable";
+            this.checkBox_one_wl_stable.Size = new System.Drawing.Size(88, 17);
+            this.checkBox_one_wl_stable.TabIndex = 57;
+            this.checkBox_one_wl_stable.Text = "one wl stable";
+            this.checkBox_one_wl_stable.UseVisualStyleBackColor = true;
+            this.checkBox_one_wl_stable.CheckedChanged += new System.EventHandler(this.checkBox_one_wl_stable_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.checkBox_one_wl_stable);
             this.Controls.Add(this.numericUpDown_R);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.numericUpDown_dotX);
@@ -843,6 +856,7 @@ namespace VO_soft
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveSettingsAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSettingsAsToolStripMenuItem;
+        public System.Windows.Forms.CheckBox checkBox_one_wl_stable;
     }
 }
 

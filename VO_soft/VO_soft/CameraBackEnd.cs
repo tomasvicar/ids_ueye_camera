@@ -23,6 +23,7 @@ namespace VO_soft
         public delegate void ComTrigerOnEventHandler(object sender, EventArgs args);
         public event ComTrigerOnEventHandler ComTrigerOn;
 
+
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
         public event MessageBoxTriggerEventHandler MessageBoxTrigger;
@@ -64,7 +65,6 @@ namespace VO_soft
             cameraAcquisitionWorker.MessageBoxTrigger += cameraAcquisitionWorker_MessageBoxTrigger;
             cameraAcquisitionWorker.ComTrigerOn += cameraAcquisitionWorker_ComTrigerOn;
 
-
             var dataStreams = device.DataStreams();
             dataStream = dataStreams[0].OpenDataStream();
 
@@ -96,7 +96,8 @@ namespace VO_soft
             var width = Decimal.ToInt32(form1.formSettings.numericUpDown_w.Value);
             var height = Decimal.ToInt32(form1.formSettings.numericUpDown_h.Value);
             var bits = Decimal.ToInt32(form1.formSettings.numericUpDown_bits.Value);
-            cameraAcquisitionWorker.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename, fps, width, height, bits);
+            var one_wl_stable = form1.checkBox_one_wl_stable.Checked;
+            cameraAcquisitionWorker.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename, fps, width, height, bits, one_wl_stable);
 
             cameraAcquisitionThread.Start();
 
@@ -379,10 +380,21 @@ namespace VO_soft
         }
 
 
+        public void ComTrigerS_execute()
+        {
+            comPort.WriteLine("son");
+        }
+
+        public void ComTrigerSoff_execute()
+        {
+            comPort.WriteLine("soff");
+        }
+
         private void cameraAcquisitionWorker_ComTrigerOn(object sender, EventArgs args)
         {
             ComTrigerOn(sender, args);
         }
+
 
         private void cameraAcquisitionWorker_MessageBoxTrigger(object sender, string messageTitle, string messageText)
         {

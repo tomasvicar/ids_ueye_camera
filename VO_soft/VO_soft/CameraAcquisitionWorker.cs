@@ -23,6 +23,7 @@ namespace VO_soft
         public delegate void ComTrigerOnEventHandler(object sender, EventArgs args);
         public event ComTrigerOnEventHandler ComTrigerOn;
 
+
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
         public event MessageBoxTriggerEventHandler MessageBoxTrigger;
@@ -50,6 +51,7 @@ namespace VO_soft
         private string filename;
         private int fps;
         private VideoWriter videoWriter;
+        private bool one_wl_stable;
 
         //private int bits;
 
@@ -66,6 +68,8 @@ namespace VO_soft
             running = false;
             try
             {
+
+                Thread.Sleep(1000);
                 nodeMap.FindNode<peak.core.nodes.IntegerNode>("TLParamsLocked").SetValue(1);
                 dataStream.StartAcquisition();
                 nodeMap.FindNode<peak.core.nodes.CommandNode>("AcquisitionStart").Execute();
@@ -84,9 +88,10 @@ namespace VO_soft
 
                 if (is_triger)
                 {
+                    Thread.Sleep(150);
                     ComTrigerOn(this, EventArgs.Empty);
-                    Thread.Sleep(100);
                     triger_first_time = true;
+                    
                 }
 
             }
@@ -172,7 +177,7 @@ namespace VO_soft
                 videoWriter.closeVideo();
         }
 
-        public void SetAquisitionsettings(bool is_triger, bool is_recording, int show_subsampling, string filename, int fps, int width, int height, int bits)
+        public void SetAquisitionsettings(bool is_triger, bool is_recording, int show_subsampling, string filename, int fps, int width, int height, int bits, bool one_wl_stable)
         {
             this.is_triger = is_triger;
             this.is_recording = is_recording;
@@ -182,6 +187,7 @@ namespace VO_soft
             this.width = width;
             this.height = height;
             this.bits = bits;
+            this.one_wl_stable = one_wl_stable;
         }
 
 

@@ -29,7 +29,7 @@ namespace VO_soft
         public SecondScreenUpdater secondScreenUpdater;
         private ImageUpdater imageUpdater;
         private bool stopTrigerClicked;
-        private VideoFileWriter videoWriter;
+        //private VideoFileWriter videoWriter;
         private Stopwatch sw = new Stopwatch();
         public string filename;
 
@@ -113,6 +113,7 @@ namespace VO_soft
             cameraBackEnd.ComTrigerOn_execute();
         }
 
+
         private void backEnd_MessageBoxTrigger(object sender, string messageTitle, string messageText)
         {
             if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout") & stopTrigerClicked)
@@ -141,7 +142,7 @@ namespace VO_soft
             cameraBackEnd.Stop();
 
 
-            if (is_triger)
+            if (is_recording)
             {
                 //videoWriter.Close();
 
@@ -309,17 +310,28 @@ namespace VO_soft
         private void button_triger_Click(object sender, EventArgs e)
         {
 
+            //if (formSettings.checkBox_visible_two_wl.Checked)
+            //    cameraBackEnd.ComTrigerSoff_execute();
+
+
+            
+            stopTrigerClicked2 = false;
+
+            //if (buttonStart.Enabled == false)
+            //{
+            //    cameraBackEnd.ComTrigerOff();
+            //    myStop();
+            //    Thread.Sleep(500);
+            //}
+
+            //Thread.Sleep(1000);
+            cameraBackEnd.ComTrigerOff();
+            myStop();
+            Thread.Sleep(500);
+
+
             is_triger = true;
             is_recording = true;
-
-            stopTrigerClicked2 = false;
-            if (buttonStart.Enabled == false)
-            {
-                cameraBackEnd.ComTrigerOff();
-                myStop();
-                Thread.Sleep(500);
-            }
-
 
             buttonStart.Enabled = false;
             buttonStop.Enabled = false;
@@ -347,6 +359,10 @@ namespace VO_soft
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            if (formSettings.checkBox_visible_two_wl.Checked)
+                if (checkBox_one_wl_stable.Checked)
+                    cameraBackEnd.ComTrigerS_execute();
+
             stopTrigerClicked2 = false;
 
             is_triger = true;
@@ -368,7 +384,7 @@ namespace VO_soft
             //formSettings.checkBox_visible_two_wl_CheckedChanged(null, EventArgs.Empty);
 
 
-            if (is_triger)
+            if (is_recording)
             {
 
 
@@ -401,6 +417,10 @@ namespace VO_soft
                 pluxBackEnd.startRecordPlux(filename + ".txt");
             }
             cameraBackEnd.Start();
+
+            checkBox_one_wl_stable.CheckedChanged -= checkBox_one_wl_stable_CheckedChanged;
+            checkBox_one_wl_stable.Checked = false;
+            checkBox_one_wl_stable.CheckedChanged += checkBox_one_wl_stable_CheckedChanged;
         }
 
         private void button_stopTriger_Click(object sender, EventArgs e)
@@ -623,6 +643,22 @@ namespace VO_soft
             }
 
             SaverLoaderSettings.Load(this, myOpenFileDialog.FileName);
+        }
+
+        private void checkBox_one_wl_stable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (label_comPortStatus.Text != "NA")
+            {
+                if (checkBox_one_wl_stable.Checked)
+                {
+                    cameraBackEnd.ComTrigerS_execute();
+                }
+                else
+                {
+                    cameraBackEnd.ComTrigerSoff_execute();
+                }
+            }
+
         }
     }
 }

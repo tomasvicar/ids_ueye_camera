@@ -41,10 +41,10 @@ namespace VO_soft
             if (dev.running)
             {
                 form1.button_pluxStop_Click(this, EventArgs.Empty);
+                
             }
 
             Thread.Sleep(150);
-
 
             dev.textfile = new StreamWriter(filename);
             dev.subsample_plot = Convert.ToInt32(form1.numericUpDown_subsampling.Value);
@@ -55,6 +55,8 @@ namespace VO_soft
             dev.record = true;
 
             form1.button_pluxStart_Click(this, EventArgs.Empty);
+
+            //Thread.Sleep(2000);
         }
 
         internal bool openPlux()
