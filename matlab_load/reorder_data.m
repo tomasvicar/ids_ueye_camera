@@ -9,7 +9,7 @@ outptu_folder_name= '../Sada_02';
 
 
 
-for folder_num = 1:length(folder_names)
+for folder_num = 23:length(folder_names)
     
     folder_name = folder_names{folder_num};
     
@@ -23,9 +23,11 @@ for folder_num = 1:length(folder_names)
     L_fundus_name = fundus_names{L_fundus_name};
     L_fundus_name = [fudus_dir '\' L_fundus_name ];
 
-    R_fundus_name = cellfun(@(x) pac_number == get1(split(x,'_')) && contains(x,'_P_'), fundus_names);
-    R_fundus_name = fundus_names{R_fundus_name};
-    R_fundus_name = [fudus_dir '\' R_fundus_name ];
+    if ~(strcmp(folder_name,'Gacr_02_020_001_dual_m') || strcmp(folder_name,'Gacr_02_020_002_dual_m'))
+        R_fundus_name = cellfun(@(x) pac_number == get1(split(x,'_')) && contains(x,'_P_'), fundus_names);
+        R_fundus_name = fundus_names{R_fundus_name};
+        R_fundus_name = [fudus_dir '\' R_fundus_name ];
+    end
 
 
     video_name = subdir([folder_name '\*.avi']);
