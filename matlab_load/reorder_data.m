@@ -9,7 +9,7 @@ outptu_folder_name= '../Sada_02';
 
 
 
-for folder_num = 23:length(folder_names)
+for folder_num = 1:length(folder_names)
     
     folder_name = folder_names{folder_num};
     
