@@ -54,9 +54,9 @@ for folder_num = 1:length(folder_names)
     end
 
     
-    copyfile(video_name, [goal_dir '/' folder_name,'_dual_m' '.avi'])
-    copyfile(signals_name, [goal_dir '/' folder_name,'_dual_m' '.txt'])
-    copyfile(settigs_name, [goal_dir '/' folder_name,'_dual_m' '.json'])
+    copyfile(video_name, [goal_dir '/' folder_name '.avi'])
+    copyfile(signals_name, [goal_dir '/' folder_name '.txt'])
+    copyfile(settigs_name, [goal_dir '/' folder_name '.json'])
 
 
 
