@@ -146,7 +146,7 @@ namespace VO_soft
                 if (obj.GetType() == typeof(ComboBox))
                 {
                     ComboBox obj_converted = (ComboBox)Convert.ChangeType(obj, typeof(ComboBox));
-                    obj_converted.Items.AddRange(new object[] { "None", "ECG", "Triger", "Respiration", "Oxi R + IR", "Arterial pressure", "Intracranial pressure", "Other"});
+                    obj_converted.Items.AddRange(new object[] { "None", "ECG", "Triger", "Respiration", "Oxi R + IR", "ABP", "ICP", "VBP", "BVP", "EOG", "Other"});
                     obj_converted.SelectedIndexChanged -= form1.formSettings.comboBox_SelectedIndexChanged;
                     obj_converted.Text = "Other";
                     obj_converted.SelectedIndexChanged += form1.formSettings.comboBox_SelectedIndexChanged;

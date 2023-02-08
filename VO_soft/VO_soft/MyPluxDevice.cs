@@ -19,7 +19,6 @@ namespace VO_soft
         public int subsample_write = 10;
         internal int chart_count;
         internal int freq;
-        private Chart chart;
 
         public MyPluxDevice(string path) : base(path)
         {

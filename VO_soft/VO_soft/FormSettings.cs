@@ -143,5 +143,21 @@ namespace VO_soft
                 form1.secondScreenUpdater.Close();
             }
         }
+
+        private void button_select_save_path_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog myFolderBrowserDialog = new FolderBrowserDialog();
+            if (!(myFolderBrowserDialog.ShowDialog() == DialogResult.OK))
+            {
+                return;
+            }
+
+            textBox_save_path.Text = myFolderBrowserDialog.SelectedPath;
+        }
+
+        private void FormSettings_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

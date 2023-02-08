@@ -72,6 +72,8 @@ namespace VO_soft
             this.numericUpDown_pluxShowS = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_bits = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
+            this.textBox_save_path = new System.Windows.Forms.TextBox();
+            this.button_select_save_path = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -487,11 +489,31 @@ namespace VO_soft
             this.label20.TabIndex = 34;
             this.label20.Text = "bits";
             // 
+            // textBox_save_path
+            // 
+            this.textBox_save_path.Location = new System.Drawing.Point(11, 293);
+            this.textBox_save_path.Name = "textBox_save_path";
+            this.textBox_save_path.Size = new System.Drawing.Size(368, 20);
+            this.textBox_save_path.TabIndex = 35;
+            this.textBox_save_path.Text = ".";
+            // 
+            // button_select_save_path
+            // 
+            this.button_select_save_path.Location = new System.Drawing.Point(386, 293);
+            this.button_select_save_path.Name = "button_select_save_path";
+            this.button_select_save_path.Size = new System.Drawing.Size(25, 23);
+            this.button_select_save_path.TabIndex = 36;
+            this.button_select_save_path.Text = "...";
+            this.button_select_save_path.UseVisualStyleBackColor = true;
+            this.button_select_save_path.Click += new System.EventHandler(this.button_select_save_path_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 281);
+            this.ClientSize = new System.Drawing.Size(417, 348);
+            this.Controls.Add(this.button_select_save_path);
+            this.Controls.Add(this.textBox_save_path);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.numericUpDown_bits);
             this.Controls.Add(this.numericUpDown_pluxShowS);
@@ -521,6 +543,7 @@ namespace VO_soft
             this.Controls.Add(this.numericUpDown_x);
             this.Name = "FormSettings";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.FormSettings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).EndInit();
@@ -581,5 +604,7 @@ namespace VO_soft
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.NumericUpDown numericUpDown_bits;
         public System.Windows.Forms.CheckBox checkBox_display;
+        public System.Windows.Forms.TextBox textBox_save_path;
+        public System.Windows.Forms.Button button_select_save_path;
     }
 }

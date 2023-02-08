@@ -393,7 +393,7 @@ namespace VO_soft
                 var tmp = textBox_dataname.Text + '_' + time.ToString().Replace(".", "_").Replace(":", "_").Replace(" ", "_");
 
 
-                var path = Path.Combine(textBox_dataname.Text, tmp);
+                var path = Path.Combine(formSettings.textBox_save_path.Text, textBox_dataname.Text, tmp);
 
 
                 if (!Directory.Exists(path))
