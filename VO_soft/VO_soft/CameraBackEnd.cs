@@ -108,11 +108,16 @@ namespace VO_soft
         public void Stop()
         {
             isActive = false;
-            cameraAcquisitionWorker.Stop();
 
-            if (cameraAcquisitionThread.IsAlive)
+            if (cameraAcquisitionWorker != null)
+                cameraAcquisitionWorker.Stop();
+
+            if (cameraAcquisitionThread != null)
             {
-                cameraAcquisitionThread.Join();
+                if (cameraAcquisitionThread.IsAlive)
+                {
+                    cameraAcquisitionThread.Join();
+                }
             }
 
             if (device != null)
