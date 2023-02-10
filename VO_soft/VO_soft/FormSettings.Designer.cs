@@ -74,6 +74,8 @@ namespace VO_soft
             this.label20 = new System.Windows.Forms.Label();
             this.textBox_save_path = new System.Windows.Forms.TextBox();
             this.button_select_save_path = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.comboBox_pixelClock = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -507,11 +509,32 @@ namespace VO_soft
             this.button_select_save_path.UseVisualStyleBackColor = true;
             this.button_select_save_path.Click += new System.EventHandler(this.button_select_save_path_Click);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(14, 327);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(60, 13);
+            this.label21.TabIndex = 37;
+            this.label21.Text = "pixel clock:";
+            // 
+            // comboBox_pixelClock
+            // 
+            this.comboBox_pixelClock.FormattingEnabled = true;
+            this.comboBox_pixelClock.Location = new System.Drawing.Point(83, 327);
+            this.comboBox_pixelClock.Name = "comboBox_pixelClock";
+            this.comboBox_pixelClock.Size = new System.Drawing.Size(86, 21);
+            this.comboBox_pixelClock.TabIndex = 38;
+            this.comboBox_pixelClock.Text = "118";
+            this.comboBox_pixelClock.SelectedIndexChanged += new System.EventHandler(this.comboBox_pixelClock_SelectedIndexChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 348);
+            this.ClientSize = new System.Drawing.Size(417, 380);
+            this.Controls.Add(this.comboBox_pixelClock);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.button_select_save_path);
             this.Controls.Add(this.textBox_save_path);
             this.Controls.Add(this.label20);
@@ -606,5 +629,7 @@ namespace VO_soft
         public System.Windows.Forms.CheckBox checkBox_display;
         public System.Windows.Forms.TextBox textBox_save_path;
         public System.Windows.Forms.Button button_select_save_path;
+        private System.Windows.Forms.Label label21;
+        public System.Windows.Forms.ComboBox comboBox_pixelClock;
     }
 }

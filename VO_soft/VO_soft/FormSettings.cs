@@ -159,5 +159,10 @@ namespace VO_soft
         {
 
         }
+
+        private void comboBox_pixelClock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            form1.updatePixelClock();
+        }
     }
 }
