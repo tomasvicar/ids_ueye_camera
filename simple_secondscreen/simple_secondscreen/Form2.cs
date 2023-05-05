@@ -37,7 +37,7 @@ namespace simple_secondscreen
 
             //pictureBox1.Image = image1;
 
-            timer.Interval = Convert.ToInt32(1000 / 12.5); // Set the interval to the desired frequency (in milliseconds)
+            timer.Interval = Convert.ToInt32(1000 / 12); // Set the interval to the desired frequency (in milliseconds)
             timer.Tick += Timer_Tick;
             timer.Start();
 
@@ -65,13 +65,13 @@ namespace simple_secondscreen
             }
 
 
-            //Pen pen = new Pen(Color.White, 3);
+            Pen pen = new Pen(Color.Red, 3);
 
-            //// Create rectangle for ellipse.
-            //Rectangle rect = new Rectangle(700, 500, 200, 200);
+            // Create rectangle for ellipse.
+            Rectangle rect = new Rectangle(700, 500, 20, 20);
 
-            //// Draw ellipse to screen.
-            //e.Graphics.FillEllipse(Brushes.White, rect);
+            // Draw ellipse to screen.
+            e.Graphics.FillEllipse(Brushes.Red, rect);
 
         }
     }
