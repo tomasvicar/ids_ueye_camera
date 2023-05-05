@@ -13,6 +13,7 @@ namespace simple_secondscreen
     public partial class Form1 : Form
     {
         Form f2;
+        Form f3;
 
         public Form1()
         {
@@ -29,13 +30,34 @@ namespace simple_secondscreen
         {
 
 
-            f2 = new Form2();
-            f2.Show();
+            f3 = new Form3();
+            f3.Show();
         }
 
         private void button_close_Click(object sender, EventArgs e)
         {
-            f2.Close();
+            if (f2 != null)
+            {
+                if (!f2.IsDisposed)
+                {
+                    f2.Close();
+                }
+            }
+
+            if (f3 != null)
+            {
+                if (!f3.IsDisposed)
+                {
+                    f3.Close();
+                }
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            f2 = new Form2();
+            f2.Show();
         }
     }
 }
