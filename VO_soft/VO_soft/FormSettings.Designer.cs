@@ -74,6 +74,20 @@ namespace VO_soft
             this.label20 = new System.Windows.Forms.Label();
             this.textBox_save_path = new System.Windows.Forms.TextBox();
             this.button_select_save_path = new System.Windows.Forms.Button();
+            this.checkBox_flicker = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.numericUpDown_bg_r = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_bg_g = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_bg_b = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_point_b = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_point_g = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_point_r = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numericUpDown_flicker_len = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numericUpDown_freq = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -83,6 +97,15 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bits)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_r)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_g)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_b)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_b)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_g)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_r)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_flicker_len)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_freq)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown_x
@@ -507,11 +530,206 @@ namespace VO_soft
             this.button_select_save_path.UseVisualStyleBackColor = true;
             this.button_select_save_path.Click += new System.EventHandler(this.button_select_save_path_Click);
             // 
+            // checkBox_flicker
+            // 
+            this.checkBox_flicker.AutoSize = true;
+            this.checkBox_flicker.Location = new System.Drawing.Point(5, 340);
+            this.checkBox_flicker.Name = "checkBox_flicker";
+            this.checkBox_flicker.Size = new System.Drawing.Size(96, 17);
+            this.checkBox_flicker.TabIndex = 37;
+            this.checkBox_flicker.Text = "show flickering";
+            this.checkBox_flicker.UseVisualStyleBackColor = true;
+            this.checkBox_flicker.CheckedChanged += new System.EventHandler(this.checkBox_flicker_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.numericUpDown_freq);
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Controls.Add(this.numericUpDown_flicker_len);
+            this.panel2.Controls.Add(this.label23);
+            this.panel2.Controls.Add(this.numericUpDown_point_b);
+            this.panel2.Controls.Add(this.numericUpDown_point_g);
+            this.panel2.Controls.Add(this.numericUpDown_point_r);
+            this.panel2.Controls.Add(this.label22);
+            this.panel2.Controls.Add(this.numericUpDown_bg_b);
+            this.panel2.Controls.Add(this.numericUpDown_bg_g);
+            this.panel2.Controls.Add(this.numericUpDown_bg_r);
+            this.panel2.Controls.Add(this.label21);
+            this.panel2.Location = new System.Drawing.Point(5, 354);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(500, 49);
+            this.panel2.TabIndex = 38;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(12, 3);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(45, 13);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "color bg";
+            // 
+            // numericUpDown_bg_r
+            // 
+            this.numericUpDown_bg_r.Location = new System.Drawing.Point(7, 20);
+            this.numericUpDown_bg_r.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_bg_r.Name = "numericUpDown_bg_r";
+            this.numericUpDown_bg_r.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_bg_r.TabIndex = 1;
+            // 
+            // numericUpDown_bg_g
+            // 
+            this.numericUpDown_bg_g.Location = new System.Drawing.Point(42, 20);
+            this.numericUpDown_bg_g.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_bg_g.Name = "numericUpDown_bg_g";
+            this.numericUpDown_bg_g.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_bg_g.TabIndex = 2;
+            this.numericUpDown_bg_g.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_bg_b
+            // 
+            this.numericUpDown_bg_b.Location = new System.Drawing.Point(78, 20);
+            this.numericUpDown_bg_b.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_bg_b.Name = "numericUpDown_bg_b";
+            this.numericUpDown_bg_b.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_bg_b.TabIndex = 3;
+            this.numericUpDown_bg_b.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_point_b
+            // 
+            this.numericUpDown_point_b.Location = new System.Drawing.Point(193, 20);
+            this.numericUpDown_point_b.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_point_b.Name = "numericUpDown_point_b";
+            this.numericUpDown_point_b.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_point_b.TabIndex = 7;
+            // 
+            // numericUpDown_point_g
+            // 
+            this.numericUpDown_point_g.Location = new System.Drawing.Point(157, 20);
+            this.numericUpDown_point_g.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_point_g.Name = "numericUpDown_point_g";
+            this.numericUpDown_point_g.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_point_g.TabIndex = 6;
+            // 
+            // numericUpDown_point_r
+            // 
+            this.numericUpDown_point_r.Location = new System.Drawing.Point(122, 20);
+            this.numericUpDown_point_r.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_point_r.Name = "numericUpDown_point_r";
+            this.numericUpDown_point_r.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown_point_r.TabIndex = 5;
+            this.numericUpDown_point_r.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(127, 3);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(56, 13);
+            this.label22.TabIndex = 4;
+            this.label22.Text = "color point";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(248, 3);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(36, 13);
+            this.label23.TabIndex = 8;
+            this.label23.Text = "length";
+            // 
+            // numericUpDown_flicker_len
+            // 
+            this.numericUpDown_flicker_len.Location = new System.Drawing.Point(246, 20);
+            this.numericUpDown_flicker_len.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_flicker_len.Name = "numericUpDown_flicker_len";
+            this.numericUpDown_flicker_len.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown_flicker_len.TabIndex = 9;
+            this.numericUpDown_flicker_len.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(315, 3);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(28, 13);
+            this.label24.TabIndex = 10;
+            this.label24.Text = "freq.";
+            // 
+            // numericUpDown_freq
+            // 
+            this.numericUpDown_freq.DecimalPlaces = 1;
+            this.numericUpDown_freq.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.numericUpDown_freq.Location = new System.Drawing.Point(318, 20);
+            this.numericUpDown_freq.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_freq.Name = "numericUpDown_freq";
+            this.numericUpDown_freq.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown_freq.TabIndex = 11;
+            this.numericUpDown_freq.Value = new decimal(new int[] {
+            125,
+            0,
+            0,
+            65536});
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 348);
+            this.ClientSize = new System.Drawing.Size(517, 404);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.checkBox_flicker);
             this.Controls.Add(this.button_select_save_path);
             this.Controls.Add(this.textBox_save_path);
             this.Controls.Add(this.label20);
@@ -554,6 +772,16 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxfreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pluxShowS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bits)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_r)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_g)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_b)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_b)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_g)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_point_r)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_flicker_len)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_freq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,5 +834,19 @@ namespace VO_soft
         public System.Windows.Forms.CheckBox checkBox_display;
         public System.Windows.Forms.TextBox textBox_save_path;
         public System.Windows.Forms.Button button_select_save_path;
+        private System.Windows.Forms.CheckBox checkBox_flicker;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        public System.Windows.Forms.NumericUpDown numericUpDown_point_b;
+        public System.Windows.Forms.NumericUpDown numericUpDown_point_g;
+        public System.Windows.Forms.NumericUpDown numericUpDown_point_r;
+        public System.Windows.Forms.NumericUpDown numericUpDown_bg_b;
+        public System.Windows.Forms.NumericUpDown numericUpDown_bg_g;
+        public System.Windows.Forms.NumericUpDown numericUpDown_bg_r;
+        public System.Windows.Forms.NumericUpDown numericUpDown_freq;
+        public System.Windows.Forms.NumericUpDown numericUpDown_flicker_len;
     }
 }

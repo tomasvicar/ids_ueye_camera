@@ -159,5 +159,17 @@ namespace VO_soft
         {
 
         }
+
+        private void checkBox_flicker_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_flicker.Checked)
+            {
+                form1.button_flicker.Visible = true;
+            }
+            else 
+            {
+                form1.button_flicker.Visible = false;
+            }
+        }
     }
 }

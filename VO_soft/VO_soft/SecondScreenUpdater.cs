@@ -13,10 +13,22 @@ namespace VO_soft
         private Form1 form1;
         private bool isClosed;
 
+        private Timer timer = new Timer();
+        private Timer stopFlickeringTimer = new Timer();
+        private bool isBlack = true;
+
         public SecondScreenUpdater(Form1 form1)
         {
             this.form1 = form1;
             isClosed = true;
+
+            timer.Interval = 1000; 
+            timer.Tick += Timer_Tick;
+
+
+            stopFlickeringTimer.Interval = 10000; // Set the interval to 10 seconds
+            stopFlickeringTimer.Tick += StopFlickeringTimer_Tick;
+
         }
 
         public void createSecondScreen()
@@ -100,13 +112,30 @@ namespace VO_soft
             if (form1.checkBox_showDot.Checked)
             {
 
+
+                if (isBlack)
+                {
+                    form1.secondScreenForm.pictureBox1.BackColor = Color.Black;
+                    e.Graphics.Clear(Color.Black);
+                }
+                else
+                {
+                    Color color = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_bg_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_b.Value));
+                    form1.secondScreenForm.pictureBox1.BackColor = color;
+                    e.Graphics.Clear(color);
+                }
+
+
+
                 //Rectangle rect = new Rectangle( (screen_x_center - r + y) - 32, screen_y_center - r + x, r * 2, r * 2);
                 //var tmp = screen_x_center - r + y;
                 var tmp = form1.pictureBox_secondScreen.Bounds.Width - (form1.pictureBox_secondScreen.Bounds.Width - (screen_x_center - r + y)) * 1.734;
                 Rectangle rect = new Rectangle((int)tmp, screen_y_center - r + x, r * 2, r * 2);
 
-
-                e.Graphics.FillEllipse(Brushes.White, rect);
+                Color color_point = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_point_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_b.Value));
+                SolidBrush brush = new SolidBrush(color_point);
+                e.Graphics.FillEllipse(brush, rect);
+                brush.Dispose();
             }
         }
 
@@ -126,12 +155,62 @@ namespace VO_soft
 
             if (form1.checkBox_showDot.Checked)
             {
+                if (isBlack)
+                {
+                    form1.secondScreenForm.pictureBox1.BackColor = Color.Black;
+                    e.Graphics.Clear(Color.Black);
+                }
+                else
+                {
+                    Color color = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_bg_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_b.Value));
+                    form1.secondScreenForm.pictureBox1.BackColor = color;
+                    e.Graphics.Clear(color);
+                }
 
                 Rectangle rect = new Rectangle(screen_x_center - r + y, screen_y_center - r - x, r, r);
-                e.Graphics.FillEllipse(Brushes.White, rect);
+                
+
+                Color color_point = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_point_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_b.Value));
+                SolidBrush brush = new SolidBrush(color_point);
+                e.Graphics.FillEllipse(brush, rect);
+                brush.Dispose();
             }
 
+
+
         }
+
+
+        public void flickering_start()
+        {
+            timer.Interval = Convert.ToInt32(1000 / form1.formSettings.numericUpDown_freq.Value);
+            timer.Start();
+            stopFlickeringTimer.Interval = Convert.ToInt32(1000 * form1.formSettings.numericUpDown_flicker_len.Value);
+            stopFlickeringTimer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            isBlack = !isBlack; // Toggle the color
+            form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
+            form1.pictureBox_secondScreen.Invalidate();
+        }
+        public void flickering_stop()
+        {
+            timer.Stop();
+            isBlack = true; // Set the background color to black
+            form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
+            form1.pictureBox_secondScreen.Invalidate();
+        }
+
+        private void StopFlickeringTimer_Tick(object sender, EventArgs e)
+        {
+            flickering_stop();
+            stopFlickeringTimer.Stop();
+            form1.button_flicker.Enabled = true;
+        }
+
+
 
         internal void Close()
         {

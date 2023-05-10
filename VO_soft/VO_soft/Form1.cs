@@ -660,5 +660,11 @@ namespace VO_soft
             }
 
         }
+
+        private void button_flicker_Click(object sender, EventArgs e)
+        {
+            secondScreenUpdater.flickering_start();
+            button_flicker.Enabled = false;
+        }
     }
 }

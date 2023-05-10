@@ -96,6 +96,7 @@ namespace VO_soft
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.checkBox_one_wl_stable = new System.Windows.Forms.CheckBox();
+            this.button_flicker = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -697,11 +698,23 @@ namespace VO_soft
             this.checkBox_one_wl_stable.UseVisualStyleBackColor = true;
             this.checkBox_one_wl_stable.CheckedChanged += new System.EventHandler(this.checkBox_one_wl_stable_CheckedChanged);
             // 
+            // button_flicker
+            // 
+            this.button_flicker.Location = new System.Drawing.Point(679, 525);
+            this.button_flicker.Name = "button_flicker";
+            this.button_flicker.Size = new System.Drawing.Size(53, 23);
+            this.button_flicker.TabIndex = 58;
+            this.button_flicker.Text = "flicker";
+            this.button_flicker.UseVisualStyleBackColor = true;
+            this.button_flicker.Visible = false;
+            this.button_flicker.Click += new System.EventHandler(this.button_flicker_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.button_flicker);
             this.Controls.Add(this.checkBox_one_wl_stable);
             this.Controls.Add(this.numericUpDown_R);
             this.Controls.Add(this.label10);
@@ -857,6 +870,7 @@ namespace VO_soft
         private System.Windows.Forms.ToolStripMenuItem saveSettingsAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSettingsAsToolStripMenuItem;
         public System.Windows.Forms.CheckBox checkBox_one_wl_stable;
+        public System.Windows.Forms.Button button_flicker;
     }
 }
 
