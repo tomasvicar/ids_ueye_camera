@@ -57,7 +57,7 @@ namespace VO_soft
             this.label_version.Name = "label_version";
             this.label_version.Size = new System.Drawing.Size(22, 13);
             this.label_version.TabIndex = 1;
-            this.label_version.Text = "2.0";
+            this.label_version.Text = "2.1";
             // 
             // label2
             // 

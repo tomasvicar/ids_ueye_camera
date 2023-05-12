@@ -201,6 +201,10 @@ namespace VO_soft
             this.nodeMap = nodeMap;
         }
 
+        public void SetShow_subsampling(int show_subsampling)
+        {
+            this.show_subsampling = show_subsampling;
+        }
 
 
         public static ColorPalette GetGrayScalePalette()

@@ -335,6 +335,11 @@ namespace VO_soft
             }
         }
 
+        public void SetShow_subsampling(int show_subsampling)
+        {
+            cameraAcquisitionWorker.SetShow_subsampling(show_subsampling);
+        }
+
         internal object getPixelClock(decimal fps, decimal heght)
         {
             //decimal pc_orig = ((fps * heght) / cameraSetter.getC()) * 1.3m;
@@ -356,7 +361,7 @@ namespace VO_soft
             //    previousValue = value_m;
             //}
             //return maxValue / 1000000m;
-            
+
             //return 99m;
             return Decimal.Parse(form1.formSettings.comboBox_pixelClock.Text);
 
@@ -439,7 +444,15 @@ namespace VO_soft
             }
             else
             {
-                comPort.WriteLine("loff");
+                try
+                {
+                    comPort.WriteLine("loff");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("arduino is not coonected");
+                    Console.WriteLine(ex.ToString());
+                }
             }
         }
     }

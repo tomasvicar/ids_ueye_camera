@@ -33,6 +33,9 @@ namespace VO_soft
         private Stopwatch sw = new Stopwatch();
         public string filename;
 
+        public List<String> ficker_start = new List<String>();
+        public List<String> ficker_end = new List<String>();
+
         public Chart chart1;
         public Chart chart2;
         public Chart chart3;
@@ -312,9 +315,10 @@ namespace VO_soft
 
             //if (formSettings.checkBox_visible_two_wl.Checked)
             //    cameraBackEnd.ComTrigerSoff_execute();
+            ficker_start = new List<String>();
+            ficker_end = new List<String>();
 
 
-            
             stopTrigerClicked2 = false;
 
             //if (buttonStart.Enabled == false)
@@ -425,6 +429,13 @@ namespace VO_soft
 
         private void button_stopTriger_Click(object sender, EventArgs e)
         {
+
+            Dictionary<string, object> _data = new Dictionary<string, object>();
+            _data.Add("flicker_start", ficker_start);
+            _data.Add("flicker_end", ficker_end);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(_data);
+            File.WriteAllText(filename + "_flicker.json", json);
+
 
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
@@ -666,5 +677,6 @@ namespace VO_soft
             secondScreenUpdater.flickering_start();
             button_flicker.Enabled = false;
         }
+
     }
 }

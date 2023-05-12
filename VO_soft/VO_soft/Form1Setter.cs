@@ -154,9 +154,9 @@ namespace VO_soft
             }
 
             form1.formSettings.comboBox_pixelClock.SelectedIndexChanged -= form1.formSettings.comboBox_SelectedIndexChanged;
-            form1.formSettings.comboBox_pixelClock.Items.AddRange(new object[] { "59", "118", "237", "474"});
+            form1.formSettings.comboBox_pixelClock.Items.AddRange(new object[] { "59", "118", "237", "474" });
             form1.formSettings.comboBox_pixelClock.Text = "118";
-            
+            form1.formSettings.comboBox_pixelClock.SelectedIndexChanged += form1.formSettings.comboBox_SelectedIndexChanged;
 
 
             form1.numericLeftRight_dotY.NumericUpDown.ValueChanged += form1.numericLeftRight_dotY_ValueChanged;

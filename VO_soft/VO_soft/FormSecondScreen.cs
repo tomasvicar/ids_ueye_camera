@@ -29,10 +29,5 @@ namespace VO_soft
             TopMost = true;
         }
 
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

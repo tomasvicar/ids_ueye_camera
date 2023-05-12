@@ -183,17 +183,33 @@ namespace VO_soft
 
         public void flickering_start()
         {
+            form1.cameraBackEnd.SetShow_subsampling(30);
+            form1.pluxBackEnd.dev.subsample_plot = 100;
+
             timer.Interval = Convert.ToInt32(1000 / form1.formSettings.numericUpDown_freq.Value);
             timer.Start();
             stopFlickeringTimer.Interval = Convert.ToInt32(1000 * form1.formSettings.numericUpDown_flicker_len.Value);
-            stopFlickeringTimer.Start();
-        }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
             isBlack = !isBlack; // Toggle the color
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
+            stopFlickeringTimer.Start();
+            form1.ficker_start.Add(DateTime.Now.ToString("HH:mm:ss.ffff")); 
+        }
+
+        //private async void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            //await Task.Run(() =>
+            //{
+            //    isBlack = !isBlack; // Toggle the color
+            //    form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
+            //    //form1.pictureBox_secondScreen.Invalidate();
+            //});
+
+            isBlack = !isBlack; // Toggle the color
+            form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
+                                                             //form1.pictureBox_secondScreen.Invalidate();
         }
         public void flickering_stop()
         {
@@ -201,6 +217,10 @@ namespace VO_soft
             isBlack = true; // Set the background color to black
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
+            form1.ficker_end.Add(DateTime.Now.ToString("HH:mm:ss.ffff"));
+
+            form1.cameraBackEnd.SetShow_subsampling((int)form1.numericUpDown_pictureBoxTimeDecimation.Value);
+            form1.pluxBackEnd.dev.subsample_plot = (int)form1.numericUpDown_subsampling.Value;
         }
 
         private void StopFlickeringTimer_Tick(object sender, EventArgs e)

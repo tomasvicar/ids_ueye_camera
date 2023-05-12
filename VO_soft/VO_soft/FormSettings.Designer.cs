@@ -88,6 +88,8 @@ namespace VO_soft
             this.numericUpDown_bg_g = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_bg_r = new System.Windows.Forms.NumericUpDown();
             this.label21 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.comboBox_pixelClock = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -533,7 +535,7 @@ namespace VO_soft
             // checkBox_flicker
             // 
             this.checkBox_flicker.AutoSize = true;
-            this.checkBox_flicker.Location = new System.Drawing.Point(5, 340);
+            this.checkBox_flicker.Location = new System.Drawing.Point(5, 390);
             this.checkBox_flicker.Name = "checkBox_flicker";
             this.checkBox_flicker.Size = new System.Drawing.Size(96, 17);
             this.checkBox_flicker.TabIndex = 37;
@@ -555,7 +557,7 @@ namespace VO_soft
             this.panel2.Controls.Add(this.numericUpDown_bg_g);
             this.panel2.Controls.Add(this.numericUpDown_bg_r);
             this.panel2.Controls.Add(this.label21);
-            this.panel2.Location = new System.Drawing.Point(5, 354);
+            this.panel2.Location = new System.Drawing.Point(5, 404);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(500, 49);
             this.panel2.TabIndex = 38;
@@ -724,11 +726,32 @@ namespace VO_soft
             this.label21.TabIndex = 0;
             this.label21.Text = "color bg";
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(8, 342);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(60, 13);
+            this.label25.TabIndex = 39;
+            this.label25.Text = "pixel clock:";
+            // 
+            // comboBox_pixelClock
+            // 
+            this.comboBox_pixelClock.FormattingEnabled = true;
+            this.comboBox_pixelClock.Location = new System.Drawing.Point(67, 339);
+            this.comboBox_pixelClock.Name = "comboBox_pixelClock";
+            this.comboBox_pixelClock.Size = new System.Drawing.Size(98, 21);
+            this.comboBox_pixelClock.TabIndex = 40;
+            this.comboBox_pixelClock.Text = "118";
+            this.comboBox_pixelClock.SelectedIndexChanged += new System.EventHandler(this.comboBox_pixelClock_SelectedIndexChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 404);
+            this.ClientSize = new System.Drawing.Size(533, 466);
+            this.Controls.Add(this.comboBox_pixelClock);
+            this.Controls.Add(this.label25);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.checkBox_flicker);
             this.Controls.Add(this.button_select_save_path);
@@ -849,6 +872,7 @@ namespace VO_soft
         public System.Windows.Forms.NumericUpDown numericUpDown_bg_r;
         public System.Windows.Forms.NumericUpDown numericUpDown_freq;
         public System.Windows.Forms.NumericUpDown numericUpDown_flicker_len;
+        private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ComboBox comboBox_pixelClock;
     }
 }
