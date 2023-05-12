@@ -53,7 +53,7 @@ namespace VO_soft
             //var dcf = Convert.ToDecimal(nodeMap.FindNode<peak.core.nodes.FloatNode>("DeviceClockFrequency").Value());
 
             nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(form1.numericUpDown_exposureTime.Value) * 1000);
-
+            //nodeMap.FindNode<peak.core.nodes.FloatNode>("ExposureTime").SetValue(decimal.ToDouble(1.0m) * 1000);
 
             if (isTrigger)
             {
@@ -65,6 +65,7 @@ namespace VO_soft
                 nodeMap.FindNode<peak.core.nodes.EnumerationNode>("TriggerActivation").SetCurrentEntry("RisingEdge");
                 nodeMap.FindNode<peak.core.nodes.FloatNode>("TriggerDelay").SetValue(0.0);
                 nodeMap.FindNode<peak.core.nodes.IntegerNode>("TriggerDivider").SetValue(1);
+                                
 
             }
             else

@@ -160,16 +160,27 @@ namespace VO_soft
 
         }
 
+
         private void checkBox_flicker_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox_flicker.Checked)
             {
                 form1.button_flicker.Visible = true;
             }
-            else 
+            else
             {
                 form1.button_flicker.Visible = false;
             }
+
+        }
+        private void comboBox_pixelClock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            form1.updatePixelClock();
+        }
+
+        private void numericUpDown_freq_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -358,7 +358,7 @@ namespace VO_soft
             //return maxValue / 1000000m;
             
             //return 99m;
-            return 118m;
+            return Decimal.Parse(form1.formSettings.comboBox_pixelClock.Text);
 
 
         }
