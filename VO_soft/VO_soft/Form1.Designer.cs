@@ -97,6 +97,7 @@ namespace VO_soft
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.checkBox_one_wl_stable = new System.Windows.Forms.CheckBox();
             this.button_flicker = new System.Windows.Forms.Button();
+            this.label_flicker_freq = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -607,7 +608,7 @@ namespace VO_soft
             // 
             // pictureBox_secondScreen
             // 
-            this.pictureBox_secondScreen.Location = new System.Drawing.Point(590, 525);
+            this.pictureBox_secondScreen.Location = new System.Drawing.Point(572, 525);
             this.pictureBox_secondScreen.Name = "pictureBox_secondScreen";
             this.pictureBox_secondScreen.Size = new System.Drawing.Size(88, 103);
             this.pictureBox_secondScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -618,7 +619,7 @@ namespace VO_soft
             // checkBox_showDot
             // 
             this.checkBox_showDot.AutoSize = true;
-            this.checkBox_showDot.Location = new System.Drawing.Point(507, 525);
+            this.checkBox_showDot.Location = new System.Drawing.Point(489, 525);
             this.checkBox_showDot.Name = "checkBox_showDot";
             this.checkBox_showDot.Size = new System.Drawing.Size(77, 17);
             this.checkBox_showDot.TabIndex = 52;
@@ -657,14 +658,14 @@ namespace VO_soft
             // 
             // numericLeftRight_dotY
             // 
-            this.numericLeftRight_dotY.Location = new System.Drawing.Point(509, 565);
+            this.numericLeftRight_dotY.Location = new System.Drawing.Point(491, 565);
             this.numericLeftRight_dotY.Name = "numericLeftRight_dotY";
             this.numericLeftRight_dotY.Size = new System.Drawing.Size(61, 26);
             this.numericLeftRight_dotY.TabIndex = 53;
             // 
             // numericUpDown_dotX
             // 
-            this.numericUpDown_dotX.Location = new System.Drawing.Point(525, 544);
+            this.numericUpDown_dotX.Location = new System.Drawing.Point(507, 544);
             this.numericUpDown_dotX.Name = "numericUpDown_dotX";
             this.numericUpDown_dotX.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown_dotX.TabIndex = 54;
@@ -673,7 +674,7 @@ namespace VO_soft
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(519, 594);
+            this.label10.Location = new System.Drawing.Point(501, 594);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 13);
             this.label10.TabIndex = 55;
@@ -681,7 +682,7 @@ namespace VO_soft
             // 
             // numericUpDown_R
             // 
-            this.numericUpDown_R.Location = new System.Drawing.Point(519, 608);
+            this.numericUpDown_R.Location = new System.Drawing.Point(501, 608);
             this.numericUpDown_R.Name = "numericUpDown_R";
             this.numericUpDown_R.Size = new System.Drawing.Size(48, 20);
             this.numericUpDown_R.TabIndex = 56;
@@ -700,7 +701,7 @@ namespace VO_soft
             // 
             // button_flicker
             // 
-            this.button_flicker.Location = new System.Drawing.Point(679, 525);
+            this.button_flicker.Location = new System.Drawing.Point(661, 525);
             this.button_flicker.Name = "button_flicker";
             this.button_flicker.Size = new System.Drawing.Size(53, 23);
             this.button_flicker.TabIndex = 58;
@@ -709,11 +710,21 @@ namespace VO_soft
             this.button_flicker.Visible = false;
             this.button_flicker.Click += new System.EventHandler(this.button_flicker_Click);
             // 
+            // label_flicker_freq
+            // 
+            this.label_flicker_freq.AutoSize = true;
+            this.label_flicker_freq.Location = new System.Drawing.Point(667, 555);
+            this.label_flicker_freq.Name = "label_flicker_freq";
+            this.label_flicker_freq.Size = new System.Drawing.Size(28, 13);
+            this.label_flicker_freq.TabIndex = 59;
+            this.label_flicker_freq.Text = "freq.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.label_flicker_freq);
             this.Controls.Add(this.button_flicker);
             this.Controls.Add(this.checkBox_one_wl_stable);
             this.Controls.Add(this.numericUpDown_R);
@@ -871,6 +882,7 @@ namespace VO_soft
         private System.Windows.Forms.ToolStripMenuItem loadSettingsAsToolStripMenuItem;
         public System.Windows.Forms.CheckBox checkBox_one_wl_stable;
         public System.Windows.Forms.Button button_flicker;
+        public System.Windows.Forms.Label label_flicker_freq;
     }
 }
 

@@ -337,7 +337,7 @@ namespace VO_soft
 
         public void SetShow_subsampling(int show_subsampling)
         {
-            cameraAcquisitionWorker.SetShow_subsampling(show_subsampling);
+            //cameraAcquisitionWorker.SetShow_subsampling(show_subsampling);
         }
 
         internal object getPixelClock(decimal fps, decimal heght)

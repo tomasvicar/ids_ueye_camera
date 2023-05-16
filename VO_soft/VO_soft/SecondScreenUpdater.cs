@@ -16,6 +16,10 @@ namespace VO_soft
         private Timer timer = new Timer();
         private Timer stopFlickeringTimer = new Timer();
         private bool isBlack = true;
+        private int tick_counter;
+        private DateTime time_start;
+        private int interval;
+        private int interval_fast;
 
         public SecondScreenUpdater(Form1 form1)
         {
@@ -186,7 +190,20 @@ namespace VO_soft
             form1.cameraBackEnd.SetShow_subsampling(30);
             form1.pluxBackEnd.dev.subsample_plot = 100;
 
-            timer.Interval = Convert.ToInt32(1000 / form1.formSettings.numericUpDown_freq.Value);
+
+            interval = Convert.ToInt32(1000m / (form1.formSettings.numericUpDown_freq.Value * 2m));
+            timer.Interval = interval;
+
+
+            double period = 0;
+            while (period < ((double)interval / 1000.0))
+            {
+                period = period + (1.0 / 30.0);
+            }
+            period = period - (1.0 / 30.0);
+            interval_fast = Convert.ToInt32(period * 1000 /2);
+
+
             timer.Start();
             stopFlickeringTimer.Interval = Convert.ToInt32(1000 * form1.formSettings.numericUpDown_flicker_len.Value);
 
@@ -194,22 +211,42 @@ namespace VO_soft
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
             stopFlickeringTimer.Start();
-            form1.ficker_start.Add(DateTime.Now.ToString("HH:mm:ss.ffff")); 
+            form1.ficker_start.Add(DateTime.Now.ToString("HH:mm:ss.ffff"));
+
+            tick_counter = 0;
+            time_start = DateTime.Now;
+
         }
 
         //private async void Timer_Tick(object sender, EventArgs e)
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //await Task.Run(() =>
-            //{
-            //    isBlack = !isBlack; // Toggle the color
-            //    form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
-            //    //form1.pictureBox_secondScreen.Invalidate();
-            //});
+            tick_counter++;
+            double freq = 1.0 / (double)((DateTime.Now - time_start).TotalSeconds / ((double)tick_counter / 2.0));
+            if (tick_counter % (1000 / interval) == 0)
+            {
+                form1.label_flicker_freq.Invoke(new Action(() => form1.label_flicker_freq.Text = freq.ToString("#.##")));
+            }
 
             isBlack = !isBlack; // Toggle the color
-            form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
-                                                             //form1.pictureBox_secondScreen.Invalidate();
+            form1.secondScreenForm.pictureBox1.Invalidate();
+
+            form1.secondScreenForm.pictureBox1.Invoke(new Action(() => form1.secondScreenForm.pictureBox1.Invalidate()));
+
+
+            if (isBlack)
+            {
+                if (freq < ((1000.0 / (double)interval) / 2.0))
+                {
+                    timer.Interval = interval_fast;
+                }
+                else
+                {
+                    timer.Interval = interval;
+                }
+            }
+
+
         }
         public void flickering_stop()
         {
