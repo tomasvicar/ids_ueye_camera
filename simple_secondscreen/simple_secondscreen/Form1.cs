@@ -59,5 +59,10 @@ namespace simple_secondscreen
             f2 = new Form2();
             f2.Show();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
