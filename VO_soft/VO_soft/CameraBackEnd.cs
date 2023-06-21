@@ -338,6 +338,7 @@ namespace VO_soft
         public void SetShow_subsampling(int show_subsampling)
         {
             //cameraAcquisitionWorker.SetShow_subsampling(show_subsampling);
+
         }
 
         internal object getPixelClock(decimal fps, decimal heght)
@@ -398,6 +399,17 @@ namespace VO_soft
         public void ComTrigerSoff_execute()
         {
             comPort.WriteLine("soff");
+        }
+
+        public void ComTrigerBon_execute()
+        {
+            comPort.WriteLine("bon");
+            Console.WriteLine("bon");
+        }
+        public void ComTrigerBoff_execute()
+        {
+            comPort.WriteLine("boff");
+            Console.WriteLine("boff");
         }
 
         private void cameraAcquisitionWorker_ComTrigerOn(object sender, EventArgs args)

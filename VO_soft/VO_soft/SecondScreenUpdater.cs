@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Accord.Video.FFMPEG;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AxWMPLib;
+using PluxDotNet.Event;
+using System.Reflection;
 
 namespace VO_soft
 {
@@ -13,21 +17,20 @@ namespace VO_soft
         private Form1 form1;
         private bool isClosed;
 
-        private Timer timer = new Timer();
         private Timer stopFlickeringTimer = new Timer();
         private bool isBlack = true;
         private int tick_counter;
         private DateTime time_start;
         private int interval;
         private int interval_fast;
+        private AxWindowsMediaPlayer player;
+        private Form_videoplayer form_videoplayer;
 
         public SecondScreenUpdater(Form1 form1)
         {
             this.form1 = form1;
             isClosed = true;
 
-            timer.Interval = 1000; 
-            timer.Tick += Timer_Tick;
 
 
             stopFlickeringTimer.Interval = 10000; // Set the interval to 10 seconds
@@ -187,74 +190,58 @@ namespace VO_soft
 
         public void flickering_start()
         {
-            form1.cameraBackEnd.SetShow_subsampling(30);
-            form1.pluxBackEnd.dev.subsample_plot = 100;
+            form1.cameraBackEnd.SetShow_subsampling(900000);
+            form1.pluxBackEnd.dev.subsample_plot = 1000000;
 
-
-            interval = Convert.ToInt32(1000m / (form1.formSettings.numericUpDown_freq.Value * 2m));
-            timer.Interval = interval;
-
-
-            double period = 0;
-            while (period < ((double)interval / 1000.0))
-            {
-                period = period + (1.0 / 30.0);
-            }
-            period = period - (1.0 / 30.0);
-            interval_fast = Convert.ToInt32(period * 1000 /2);
-
-
-            timer.Start();
-            stopFlickeringTimer.Interval = Convert.ToInt32(1000 * form1.formSettings.numericUpDown_flicker_len.Value);
-
-            isBlack = !isBlack; // Toggle the color
+            isBlack = false; // Set the background color to black
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
+
+            create_video();
+            
+
+
+            Close();
+
+            
+
+            interval = Convert.ToInt32(1000m / (form1.formSettings.numericUpDown_freq.Value * 2m));
+
+            stopFlickeringTimer.Interval = Convert.ToInt32(1000 * form1.formSettings.numericUpDown_flicker_len.Value);
             stopFlickeringTimer.Start();
             form1.ficker_start.Add(DateTime.Now.ToString("HH:mm:ss.ffff"));
 
-            tick_counter = 0;
+
+            //player.URL = @"C:\Users\vicar\Desktop\VO_soft_2\flickering_test\ids_ueye_camera\simple_secondscreen\simple_secondscr
+
+
+            form_videoplayer = new Form_videoplayer();
+            form_videoplayer.Show();
+
             time_start = DateTime.Now;
+            form1.cameraBackEnd.ComTrigerBoff_execute();
 
         }
 
-        //private async void Timer_Tick(object sender, EventArgs e)
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            tick_counter++;
-            double freq = 1.0 / (double)((DateTime.Now - time_start).TotalSeconds / ((double)tick_counter / 2.0));
-            if (tick_counter % (1000 / interval) == 0)
-            {
-                form1.label_flicker_freq.Invoke(new Action(() => form1.label_flicker_freq.Text = freq.ToString("#.##")));
-            }
 
-            isBlack = !isBlack; // Toggle the color
-            form1.secondScreenForm.pictureBox1.Invalidate();
-
-            form1.secondScreenForm.pictureBox1.Invoke(new Action(() => form1.secondScreenForm.pictureBox1.Invalidate()));
-
-
-            if (isBlack)
-            {
-                if (freq < ((1000.0 / (double)interval) / 2.0))
-                {
-                    timer.Interval = interval_fast;
-                }
-                else
-                {
-                    timer.Interval = interval;
-                }
-            }
-
-
-        }
         public void flickering_stop()
         {
-            timer.Stop();
+            if (form_videoplayer != null)
+            {
+                if (!form_videoplayer.IsDisposed)
+                {
+                    form_videoplayer.Close();
+                }
+            }
+
             isBlack = true; // Set the background color to black
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
+
+            updateDot();
+
             form1.ficker_end.Add(DateTime.Now.ToString("HH:mm:ss.ffff"));
+            form1.cameraBackEnd.ComTrigerBon_execute();
 
             form1.cameraBackEnd.SetShow_subsampling((int)form1.numericUpDown_pictureBoxTimeDecimation.Value);
             form1.pluxBackEnd.dev.subsample_plot = (int)form1.numericUpDown_subsampling.Value;
@@ -265,7 +252,80 @@ namespace VO_soft
             flickering_stop();
             stopFlickeringTimer.Stop();
             form1.button_flicker.Enabled = true;
+
         }
+
+        public void create_video()
+        {
+
+            // Create a new video file.
+            using (VideoFileWriter vFWriter = new VideoFileWriter())
+            {
+                int screen_x_center = form1.secondScreenForm.Bounds.Width / 2;
+                int screen_y_center = form1.secondScreenForm.Bounds.Height / 2;
+
+                int r = Decimal.ToInt32(form1.numericUpDown_R.Value);
+                int x = Decimal.ToInt32(form1.numericUpDown_dotX.Value);
+                int y = Decimal.ToInt32(form1.numericLeftRight_dotY.NumericUpDown.Value);
+
+
+
+                int sizex = form1.secondScreenForm.Bounds.Width;
+                int sizey = form1.secondScreenForm.Bounds.Height;
+                float fps = 60;
+                // Create new video file
+                vFWriter.Open(@".\flicker.avi", sizex, sizey, (Accord.Math.Rational)fps);
+
+
+                Color color_point = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_point_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_point_b.Value));
+                Color color = Color.FromArgb((int)Math.Round(form1.formSettings.numericUpDown_bg_r.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_g.Value), (int)Math.Round(form1.formSettings.numericUpDown_bg_b.Value));
+
+
+                Bitmap blackBmp = new Bitmap(sizex, sizey);
+                using (Graphics g = Graphics.FromImage(blackBmp))
+                {
+                    g.Clear(Color.Black);
+                    using (Brush brush = new SolidBrush(Color.Red))
+                    {
+                        g.FillEllipse(brush, screen_x_center - r + y, screen_y_center - r - x, r, r);
+                    }
+                }
+                Bitmap lightBmp = new Bitmap(sizex, sizey);
+                using (Graphics g = Graphics.FromImage(lightBmp))
+                {
+                    g.Clear(color);
+                    using (Brush brush = new SolidBrush(Color.Red))
+                    {
+                        g.FillEllipse(brush, screen_x_center - r + y, screen_y_center - r - x, r, r);
+                    }
+                }
+
+
+                // Create a new bitmap for each frame
+                for (int i = 0; i < fps * (float)form1.formSettings.numericUpDown_flicker_len.Value; i++)
+                {
+                    float blinkFrequency = (float)form1.formSettings.numericUpDown_freq.Value;
+                    float blinkPeriod = 1 / blinkFrequency;
+                    float videoPeriod = 1 / fps;
+                    float timeModulo = (i * videoPeriod) % blinkPeriod;
+                    if (timeModulo < (blinkPeriod / 2))
+                    {
+                        vFWriter.WriteVideoFrame(blackBmp);
+                    }
+                    else 
+                    {
+                        vFWriter.WriteVideoFrame(lightBmp);
+                    }
+
+                }
+                // Close the video file.
+                vFWriter.Close();
+
+            }
+        }
+
+
+
 
 
 
@@ -276,7 +336,7 @@ namespace VO_soft
 
             if (!isClosed)
             {
-                form1.pictureBox_secondScreen.Paint -= pictureBox_exampleDisplay_Paint;
+                //form1.pictureBox_secondScreen.Paint -= pictureBox_exampleDisplay_Paint;
                 form1.secondScreenForm.Paint -= pictureBox1_Paint;
                 form1.secondScreenForm.Close();
                 form1.secondScreenForm.Dispose();

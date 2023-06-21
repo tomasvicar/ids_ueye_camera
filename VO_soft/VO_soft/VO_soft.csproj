@@ -99,6 +99,10 @@
     <Reference Include="Accord.Video.FFMPEG.x64, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=AMD64">
       <HintPath>..\packages\Accord.Video.FFMPEG.x64.3.8.0\lib\net46\Accord.Video.FFMPEG.x64.dll</HintPath>
     </Reference>
+    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WMPLib.1.0.0\lib\AxInterop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ids_peak_dotnet, Version=1.5.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ids_dlls_3_2\ids_peak_dotnet.dll</HintPath>
@@ -106,6 +110,10 @@
     <Reference Include="ids_peak_ipl_dotnet, Version=1.6.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ids_dlls_3_2\ids_peak_ipl_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WMPLib.1.0.0\lib\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -140,6 +148,12 @@
     </Compile>
     <Compile Include="CameraParameters.cs" />
     <Compile Include="Form1Setter.cs" />
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +171,12 @@
     </Compile>
     <Compile Include="FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_videoplayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_videoplayer.Designer.cs">
+      <DependentUpon>Form_videoplayer.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageUpdater.cs" />
     <Compile Include="MyPluxDevice.cs" />
@@ -191,6 +211,9 @@
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_videoplayer.resx">
+      <DependentUpon>Form_videoplayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NumericLeftRight.resx">
       <DependentUpon>NumericLeftRight.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +242,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="for_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />

@@ -45,6 +45,7 @@ namespace VO_soft
         public Chart chart7;
         public Chart chart8;
         internal FormSecondScreen secondScreenForm;
+        private Form4 form4;
 
         public Form1()
         {
@@ -678,5 +679,11 @@ namespace VO_soft
             button_flicker.Enabled = false;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            form4 = new Form4(this);
+            form4.Show();
+        }
     }
 }
