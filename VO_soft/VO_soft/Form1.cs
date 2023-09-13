@@ -678,12 +678,5 @@ namespace VO_soft
             secondScreenUpdater.flickering_start();
             button_flicker.Enabled = false;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            form4 = new Form4(this);
-            form4.Show();
-        }
     }
 }

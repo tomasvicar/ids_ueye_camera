@@ -197,7 +197,7 @@ namespace VO_soft
             form1.secondScreenForm.pictureBox1.Invalidate(); // Force the PictureBox to redraw
             form1.pictureBox_secondScreen.Invalidate();
 
-            create_video();
+            //create_video();
             
 
 
@@ -272,7 +272,7 @@ namespace VO_soft
 
                 int sizex = form1.secondScreenForm.Bounds.Width;
                 int sizey = form1.secondScreenForm.Bounds.Height;
-                float fps = 60;
+                float fps = 120;
                 // Create new video file
                 vFWriter.Open(@".\flicker.avi", sizex, sizey, (Accord.Math.Rational)fps);
 

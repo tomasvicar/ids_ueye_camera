@@ -90,6 +90,7 @@ namespace VO_soft
             this.label21 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.comboBox_pixelClock = new System.Windows.Forms.ComboBox();
+            this.button_create_video = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -545,6 +546,7 @@ namespace VO_soft
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button_create_video);
             this.panel2.Controls.Add(this.numericUpDown_freq);
             this.panel2.Controls.Add(this.label24);
             this.panel2.Controls.Add(this.numericUpDown_flicker_len);
@@ -745,6 +747,16 @@ namespace VO_soft
             this.comboBox_pixelClock.Text = "118";
             this.comboBox_pixelClock.SelectedIndexChanged += new System.EventHandler(this.comboBox_pixelClock_SelectedIndexChanged);
             // 
+            // button_create_video
+            // 
+            this.button_create_video.Location = new System.Drawing.Point(390, 17);
+            this.button_create_video.Name = "button_create_video";
+            this.button_create_video.Size = new System.Drawing.Size(93, 23);
+            this.button_create_video.TabIndex = 12;
+            this.button_create_video.Text = "create video";
+            this.button_create_video.UseVisualStyleBackColor = true;
+            this.button_create_video.Click += new System.EventHandler(this.button_create_video_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,5 +886,6 @@ namespace VO_soft
         public System.Windows.Forms.NumericUpDown numericUpDown_flicker_len;
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ComboBox comboBox_pixelClock;
+        private System.Windows.Forms.Button button_create_video;
     }
 }

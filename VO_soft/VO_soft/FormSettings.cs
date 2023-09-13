@@ -88,7 +88,7 @@ namespace VO_soft
                 form1.checkBox_LED.Visible = true;
                 form1.numericUpDown_LED.Visible = true;
             }
-            else 
+            else
             {
                 form1.checkBox_LED.Visible = false;
                 form1.numericUpDown_LED.Visible = false;
@@ -181,6 +181,15 @@ namespace VO_soft
         private void numericUpDown_freq_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private async void button_create_video_Click(object sender, EventArgs e)
+        {
+            button_create_video.Text = "creating...";
+            button_create_video.Enabled = false;  // disable button to prevent multiple clicks
+            await Task.Run(() => form1.secondScreenUpdater.create_video());
+            button_create_video.Text = "create video";
+            button_create_video.Enabled = true;   // enable button again
         }
     }
 }
