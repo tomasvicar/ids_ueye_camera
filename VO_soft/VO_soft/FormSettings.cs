@@ -166,10 +166,13 @@ namespace VO_soft
             if (checkBox_flicker.Checked)
             {
                 form1.button_flicker.Visible = true;
+                form1.label_flicker_freq.Visible = true;
+                checkBox_display.Checked = true;
             }
             else
             {
                 form1.button_flicker.Visible = false;
+                form1.label_flicker_freq.Visible = false;
             }
 
         }

@@ -33,6 +33,12 @@ namespace VO_soft
                     to_save.Add(obj);
             }
 
+            foreach (Control obj in formSettings.panel2.Controls)
+            {
+                if (obj.GetType() == typeof(NumericUpDown))
+                    to_save.Add(obj);
+            }
+
             foreach (Control obj in formSettings.Controls)
             {
                 if (obj.GetType() == typeof(ComboBox))

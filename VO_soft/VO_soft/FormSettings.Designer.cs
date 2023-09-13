@@ -859,7 +859,6 @@ namespace VO_soft
         public System.Windows.Forms.TextBox textBox_save_path;
         public System.Windows.Forms.Button button_select_save_path;
         private System.Windows.Forms.CheckBox checkBox_flicker;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label24;
@@ -874,5 +873,6 @@ namespace VO_soft
         public System.Windows.Forms.NumericUpDown numericUpDown_flicker_len;
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ComboBox comboBox_pixelClock;
+        public System.Windows.Forms.Panel panel2;
     }
 }

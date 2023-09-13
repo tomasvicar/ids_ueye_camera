@@ -88,16 +88,16 @@ namespace VO_soft
             this.checkBox_sum2frames = new System.Windows.Forms.CheckBox();
             this.pictureBox_secondScreen = new System.Windows.Forms.PictureBox();
             this.checkBox_showDot = new System.Windows.Forms.CheckBox();
-            this.pictureBoxWithInterpolationMode3 = new VO_soft.PictureBoxWithInterpolationMode();
-            this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
-            this.pictureBoxWithInterpolationMode1 = new VO_soft.PictureBoxWithInterpolationMode();
-            this.numericLeftRight_dotY = new VO_soft.NumericLeftRight();
             this.numericUpDown_dotX = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown_R = new System.Windows.Forms.NumericUpDown();
             this.checkBox_one_wl_stable = new System.Windows.Forms.CheckBox();
             this.button_flicker = new System.Windows.Forms.Button();
             this.label_flicker_freq = new System.Windows.Forms.Label();
+            this.numericLeftRight_dotY = new VO_soft.NumericLeftRight();
+            this.pictureBoxWithInterpolationMode3 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.pictureBoxWithInterpolationMode1 = new VO_soft.PictureBoxWithInterpolationMode();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -112,11 +112,11 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl_to_show)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain2xfps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_secondScreen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -627,42 +627,6 @@ namespace VO_soft
             this.checkBox_showDot.UseVisualStyleBackColor = true;
             this.checkBox_showDot.CheckedChanged += new System.EventHandler(this.checkBox_showDot_CheckedChanged);
             // 
-            // pictureBoxWithInterpolationMode3
-            // 
-            this.pictureBoxWithInterpolationMode3.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-            this.pictureBoxWithInterpolationMode3.Location = new System.Drawing.Point(368, 122);
-            this.pictureBoxWithInterpolationMode3.Name = "pictureBoxWithInterpolationMode3";
-            this.pictureBoxWithInterpolationMode3.Size = new System.Drawing.Size(354, 270);
-            this.pictureBoxWithInterpolationMode3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxWithInterpolationMode3.TabIndex = 43;
-            this.pictureBoxWithInterpolationMode3.TabStop = false;
-            // 
-            // pictureBoxWithInterpolationMode2
-            // 
-            this.pictureBoxWithInterpolationMode2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-            this.pictureBoxWithInterpolationMode2.Location = new System.Drawing.Point(7, 122);
-            this.pictureBoxWithInterpolationMode2.Name = "pictureBoxWithInterpolationMode2";
-            this.pictureBoxWithInterpolationMode2.Size = new System.Drawing.Size(354, 270);
-            this.pictureBoxWithInterpolationMode2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxWithInterpolationMode2.TabIndex = 42;
-            this.pictureBoxWithInterpolationMode2.TabStop = false;
-            // 
-            // pictureBoxWithInterpolationMode1
-            // 
-            this.pictureBoxWithInterpolationMode1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-            this.pictureBoxWithInterpolationMode1.Location = new System.Drawing.Point(0, 27);
-            this.pictureBoxWithInterpolationMode1.Name = "pictureBoxWithInterpolationMode1";
-            this.pictureBoxWithInterpolationMode1.Size = new System.Drawing.Size(733, 492);
-            this.pictureBoxWithInterpolationMode1.TabIndex = 0;
-            this.pictureBoxWithInterpolationMode1.TabStop = false;
-            // 
-            // numericLeftRight_dotY
-            // 
-            this.numericLeftRight_dotY.Location = new System.Drawing.Point(491, 565);
-            this.numericLeftRight_dotY.Name = "numericLeftRight_dotY";
-            this.numericLeftRight_dotY.Size = new System.Drawing.Size(61, 26);
-            this.numericLeftRight_dotY.TabIndex = 53;
-            // 
             // numericUpDown_dotX
             // 
             this.numericUpDown_dotX.Location = new System.Drawing.Point(507, 544);
@@ -718,6 +682,43 @@ namespace VO_soft
             this.label_flicker_freq.Size = new System.Drawing.Size(28, 13);
             this.label_flicker_freq.TabIndex = 59;
             this.label_flicker_freq.Text = "freq.";
+            this.label_flicker_freq.Visible = false;
+            // 
+            // numericLeftRight_dotY
+            // 
+            this.numericLeftRight_dotY.Location = new System.Drawing.Point(491, 565);
+            this.numericLeftRight_dotY.Name = "numericLeftRight_dotY";
+            this.numericLeftRight_dotY.Size = new System.Drawing.Size(61, 26);
+            this.numericLeftRight_dotY.TabIndex = 53;
+            // 
+            // pictureBoxWithInterpolationMode3
+            // 
+            this.pictureBoxWithInterpolationMode3.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode3.Location = new System.Drawing.Point(368, 122);
+            this.pictureBoxWithInterpolationMode3.Name = "pictureBoxWithInterpolationMode3";
+            this.pictureBoxWithInterpolationMode3.Size = new System.Drawing.Size(354, 270);
+            this.pictureBoxWithInterpolationMode3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxWithInterpolationMode3.TabIndex = 43;
+            this.pictureBoxWithInterpolationMode3.TabStop = false;
+            // 
+            // pictureBoxWithInterpolationMode2
+            // 
+            this.pictureBoxWithInterpolationMode2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode2.Location = new System.Drawing.Point(7, 122);
+            this.pictureBoxWithInterpolationMode2.Name = "pictureBoxWithInterpolationMode2";
+            this.pictureBoxWithInterpolationMode2.Size = new System.Drawing.Size(354, 270);
+            this.pictureBoxWithInterpolationMode2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxWithInterpolationMode2.TabIndex = 42;
+            this.pictureBoxWithInterpolationMode2.TabStop = false;
+            // 
+            // pictureBoxWithInterpolationMode1
+            // 
+            this.pictureBoxWithInterpolationMode1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            this.pictureBoxWithInterpolationMode1.Location = new System.Drawing.Point(0, 27);
+            this.pictureBoxWithInterpolationMode1.Name = "pictureBoxWithInterpolationMode1";
+            this.pictureBoxWithInterpolationMode1.Size = new System.Drawing.Size(733, 492);
+            this.pictureBoxWithInterpolationMode1.TabIndex = 0;
+            this.pictureBoxWithInterpolationMode1.TabStop = false;
             // 
             // Form1
             // 
@@ -803,11 +804,11 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wl_to_show)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain2xfps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_secondScreen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWithInterpolationMode1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dotX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
