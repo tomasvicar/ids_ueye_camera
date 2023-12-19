@@ -1,5 +1,0 @@
-add reference:
-
-"C:\Program Files\IDS\ids_peak\sdk\samples\bin\x86_64\ids_peak_dotnet.dll"
-
-- prekopírovat vsechny  .dll a .xml z funkcní ukázky k .exe tvého programu

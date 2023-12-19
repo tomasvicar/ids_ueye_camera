@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ids_peak_dotnet">
+      <HintPath>ids_dlls_3_2\ids_peak_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="ids_peak_ipl_dotnet">
+      <HintPath>ids_dlls_3_2\ids_peak_ipl_dotnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

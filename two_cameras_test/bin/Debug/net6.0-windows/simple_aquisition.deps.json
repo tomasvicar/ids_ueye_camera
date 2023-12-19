@@ -1,0 +1,53 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "simple_aquisition/1.0.0": {
+        "dependencies": {
+          "ids_peak_dotnet": "1.5.0.0",
+          "ids_peak_ipl_dotnet": "1.6.0.0"
+        },
+        "runtime": {
+          "simple_aquisition.dll": {}
+        }
+      },
+      "ids_peak_dotnet/1.5.0.0": {
+        "runtime": {
+          "ids_peak_dotnet.dll": {
+            "assemblyVersion": "1.5.0.0",
+            "fileVersion": "1.5.0.0"
+          }
+        }
+      },
+      "ids_peak_ipl_dotnet/1.6.0.0": {
+        "runtime": {
+          "ids_peak_ipl_dotnet.dll": {
+            "assemblyVersion": "1.6.0.0",
+            "fileVersion": "1.6.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "simple_aquisition/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ids_peak_dotnet/1.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ids_peak_ipl_dotnet/1.6.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
