@@ -116,6 +116,7 @@ namespace VO_soft
                 form1.checkBox_sum2frames.Visible = false;
                 form1.checkBox_one_wl_stable.Visible = false;
                 form1.checkBox_one_wl_stable.Checked = false;
+
             }
             form1.checkBox_show_1_wl_CheckedChanged(null, EventArgs.Empty);
         }

@@ -400,6 +400,26 @@ namespace VO_soft
             comPort.WriteLine("soff");
         }
 
+        public void ComTrigerX_execute()
+        {
+            comPort.WriteLine("xon");
+        }
+
+        public void ComTrigerXoff_execute()
+        {
+            comPort.WriteLine("xoff");
+        }
+
+        public void ComTrigerB_execute()
+        {
+            comPort.WriteLine("bon");
+        }
+
+        public void ComTrigerBoff_execute()
+        {
+            comPort.WriteLine("boff");
+        }
+
         private void cameraAcquisitionWorker_ComTrigerOn(object sender, EventArgs args)
         {
             ComTrigerOn(sender, args);

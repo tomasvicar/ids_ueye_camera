@@ -151,6 +151,8 @@ namespace VO_soft
 
                 button_pluxStop_Click(this, EventArgs.Empty);
             }
+
+            cameraBackEnd.ComTrigerXoff_execute();
         }
 
         private void backEnd_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
@@ -383,7 +385,10 @@ namespace VO_soft
 
         private void myStart()
         {
+            cameraBackEnd.ComTrigerX_execute();
+
             stopTrigerClicked = false;
+            
 
             //formSettings.checkBox_visible_two_wl_CheckedChanged(null, EventArgs.Empty);
 
@@ -422,9 +427,11 @@ namespace VO_soft
             }
             cameraBackEnd.Start();
 
-            checkBox_one_wl_stable.CheckedChanged -= checkBox_one_wl_stable_CheckedChanged;
-            checkBox_one_wl_stable.Checked = false;
-            checkBox_one_wl_stable.CheckedChanged += checkBox_one_wl_stable_CheckedChanged;
+
+            /// for 2wls is required?
+            //checkBox_one_wl_stable.CheckedChanged -= checkBox_one_wl_stable_CheckedChanged;
+            //checkBox_one_wl_stable.Checked = false;
+            //checkBox_one_wl_stable.CheckedChanged += checkBox_one_wl_stable_CheckedChanged;
         }
 
         private void button_stopTriger_Click(object sender, EventArgs e)
