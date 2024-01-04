@@ -87,6 +87,36 @@ namespace VO_soft
             form1.formSettings.numericUpDown_h.Increment = cameraParameters.h_inc;
             form1.formSettings.numericUpDown_h.Value = 800m;
 
+
+            form1.formSettings.label_xSumMax2.Text = cameraParameters.w_max.ToString();
+            form1.formSettings.label_ySumMax2.Text = cameraParameters.h_max.ToString();
+
+            form1.formSettings.numericUpDown_x2.Minimum = cameraParameters.x_min;
+            form1.formSettings.numericUpDown_x2.Maximum = cameraParameters.x_max;
+            form1.formSettings.numericUpDown_x2.Increment = cameraParameters.x_inc;
+            form1.formSettings.numericUpDown_x2.Value = 420m;
+
+
+            form1.formSettings.numericUpDown_w2.Minimum = cameraParameters.w_min;
+            form1.formSettings.numericUpDown_w2.Maximum = cameraParameters.w_max;
+            form1.formSettings.numericUpDown_w2.Increment = cameraParameters.w_inc;
+            form1.formSettings.numericUpDown_w2.Value = 1096;
+
+
+
+            form1.formSettings.numericUpDown_y2.Minimum = cameraParameters.y_min;
+            form1.formSettings.numericUpDown_y2.Maximum = cameraParameters.y_max;
+            form1.formSettings.numericUpDown_y2.Increment = cameraParameters.y_inc;
+            form1.formSettings.numericUpDown_y2.Value = 208m;
+
+
+            form1.formSettings.numericUpDown_h2.Minimum = cameraParameters.h_min;
+            form1.formSettings.numericUpDown_h2.Maximum = cameraParameters.h_max;
+            form1.formSettings.numericUpDown_h2.Increment = cameraParameters.h_inc;
+            form1.formSettings.numericUpDown_h2.Value = 800m;
+
+
+
             form1.formSettings.numericUpDown_pluxfreq.Minimum = 1m;
             form1.formSettings.numericUpDown_pluxfreq.Maximum = 1000m;
             form1.formSettings.numericUpDown_pluxfreq.Increment = 100m;

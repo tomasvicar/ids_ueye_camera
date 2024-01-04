@@ -46,6 +46,7 @@ namespace VO_soft
 
         }
 
+
         private Bitmap showImgpictureBox(Bitmap image, uint counter, Form1 form1, PictureBoxWithInterpolationMode pictureBox, Bitmap previousImageBitmap)
         {
             Image previousImage = (Image)pictureBox.Image;

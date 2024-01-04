@@ -90,6 +90,17 @@ namespace VO_soft
             this.label21 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.comboBox_pixelClock = new System.Windows.Forms.ComboBox();
+            this.label_ySumMax2 = new System.Windows.Forms.Label();
+            this.label_xSumMax2 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.numericUpDown_h2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_y2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_w2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_x2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h)).BeginInit();
@@ -108,6 +119,10 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_b)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_g)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_r)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x2)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown_x
@@ -745,11 +760,117 @@ namespace VO_soft
             this.comboBox_pixelClock.Text = "118";
             this.comboBox_pixelClock.SelectedIndexChanged += new System.EventHandler(this.comboBox_pixelClock_SelectedIndexChanged);
             // 
+            // label_ySumMax2
+            // 
+            this.label_ySumMax2.AutoSize = true;
+            this.label_ySumMax2.Location = new System.Drawing.Point(576, 52);
+            this.label_ySumMax2.Name = "label_ySumMax2";
+            this.label_ySumMax2.Size = new System.Drawing.Size(27, 13);
+            this.label_ySumMax2.TabIndex = 51;
+            this.label_ySumMax2.Text = "xxxx";
+            // 
+            // label_xSumMax2
+            // 
+            this.label_xSumMax2.AutoSize = true;
+            this.label_xSumMax2.Location = new System.Drawing.Point(576, 26);
+            this.label_xSumMax2.Name = "label_xSumMax2";
+            this.label_xSumMax2.Size = new System.Drawing.Size(27, 13);
+            this.label_xSumMax2.TabIndex = 50;
+            this.label_xSumMax2.Text = "xxxx";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(568, 10);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(48, 13);
+            this.label28.TabIndex = 49;
+            this.label28.Text = "sum max";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(483, 51);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(13, 13);
+            this.label29.TabIndex = 48;
+            this.label29.Text = "h";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(483, 25);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(15, 13);
+            this.label30.TabIndex = 47;
+            this.label30.Text = "w";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(397, 51);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(12, 13);
+            this.label31.TabIndex = 46;
+            this.label31.Text = "y";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(397, 25);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(12, 13);
+            this.label32.TabIndex = 45;
+            this.label32.Text = "x";
+            // 
+            // numericUpDown_h2
+            // 
+            this.numericUpDown_h2.Location = new System.Drawing.Point(502, 49);
+            this.numericUpDown_h2.Name = "numericUpDown_h2";
+            this.numericUpDown_h2.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown_h2.TabIndex = 44;
+            this.numericUpDown_h2.ValueChanged += new System.EventHandler(this.numericUpDown_h2_ValueChanged);
+            // 
+            // numericUpDown_y2
+            // 
+            this.numericUpDown_y2.Location = new System.Drawing.Point(415, 49);
+            this.numericUpDown_y2.Name = "numericUpDown_y2";
+            this.numericUpDown_y2.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown_y2.TabIndex = 43;
+            this.numericUpDown_y2.ValueChanged += new System.EventHandler(this.numericUpDown_y2_ValueChanged);
+            // 
+            // numericUpDown_w2
+            // 
+            this.numericUpDown_w2.Location = new System.Drawing.Point(502, 23);
+            this.numericUpDown_w2.Name = "numericUpDown_w2";
+            this.numericUpDown_w2.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown_w2.TabIndex = 42;
+            this.numericUpDown_w2.ValueChanged += new System.EventHandler(this.numericUpDown_w2_ValueChanged);
+            // 
+            // numericUpDown_x2
+            // 
+            this.numericUpDown_x2.Location = new System.Drawing.Point(415, 23);
+            this.numericUpDown_x2.Name = "numericUpDown_x2";
+            this.numericUpDown_x2.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown_x2.TabIndex = 41;
+            this.numericUpDown_x2.ValueChanged += new System.EventHandler(this.numericUpDown_x2_ValueChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 466);
+            this.ClientSize = new System.Drawing.Size(695, 471);
+            this.Controls.Add(this.label_ySumMax2);
+            this.Controls.Add(this.label_xSumMax2);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.label31);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.numericUpDown_h2);
+            this.Controls.Add(this.numericUpDown_y2);
+            this.Controls.Add(this.numericUpDown_w2);
+            this.Controls.Add(this.numericUpDown_x2);
             this.Controls.Add(this.comboBox_pixelClock);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.panel2);
@@ -806,6 +927,10 @@ namespace VO_soft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_b)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_g)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bg_r)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_h2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_y2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_w2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_x2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -874,5 +999,16 @@ namespace VO_soft
         private System.Windows.Forms.Label label25;
         public System.Windows.Forms.ComboBox comboBox_pixelClock;
         public System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Label label_ySumMax2;
+        public System.Windows.Forms.Label label_xSumMax2;
+        public System.Windows.Forms.Label label28;
+        public System.Windows.Forms.Label label29;
+        public System.Windows.Forms.Label label30;
+        public System.Windows.Forms.Label label31;
+        public System.Windows.Forms.Label label32;
+        public System.Windows.Forms.NumericUpDown numericUpDown_h2;
+        public System.Windows.Forms.NumericUpDown numericUpDown_y2;
+        public System.Windows.Forms.NumericUpDown numericUpDown_w2;
+        public System.Windows.Forms.NumericUpDown numericUpDown_x2;
     }
 }

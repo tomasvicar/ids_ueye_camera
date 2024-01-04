@@ -11,10 +11,13 @@ namespace VO_soft
     {
         private NodeMap nodeMap;
         Form1 form1;
-        public CameraSetter(NodeMap nodeMap, Form1 form1)
+        private int camNum;
+
+        public CameraSetter(NodeMap nodeMap, Form1 form1, int camNum)
         {
             this.nodeMap = nodeMap;
             this.form1 = form1;
+            this.camNum = camNum;
         }
 
 

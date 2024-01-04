@@ -21,13 +21,6 @@ namespace VO_soft
             InitializeComponent();
         }
 
-        private void numericUpDown_x_ValueChanged(object sender, EventArgs e)
-        {
-            numericUpDown_x.ValueChanged -= new System.EventHandler(this.numericUpDown_x_ValueChanged);
-            numericUpDown_x.Value = numericUpDown_x.Value - (numericUpDown_x.Value % numericUpDown_x.Increment);
-            numericUpDown_x.ValueChanged += new System.EventHandler(this.numericUpDown_x_ValueChanged);
-            positionCheck();
-        }
 
         private void positionCheck()
         {
@@ -47,6 +40,15 @@ namespace VO_soft
             }
 
         }
+
+        private void numericUpDown_x_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_x.ValueChanged -= new System.EventHandler(this.numericUpDown_x_ValueChanged);
+            numericUpDown_x.Value = numericUpDown_x.Value - (numericUpDown_x.Value % numericUpDown_x.Increment);
+            numericUpDown_x.ValueChanged += new System.EventHandler(this.numericUpDown_x_ValueChanged);
+            positionCheck();
+        }
+
 
         private void numericUpDown_y_ValueChanged(object sender, EventArgs e)
         {
@@ -72,6 +74,63 @@ namespace VO_soft
             positionCheck();
             form1.updatePixelClock();
         }
+
+
+
+        private void positionCheck2()
+        {
+            form1.buttonStart.Enabled = true;
+            label_xSumMax2.Enabled = true;
+            label_ySumMax2.Enabled = true;
+
+            if ((numericUpDown_x2.Value + numericUpDown_w2.Value) > Convert.ToDecimal(label_xSumMax2.Text))
+            {
+                form1.buttonStart.Enabled = false;
+                label_xSumMax2.Enabled = false;
+            }
+            if ((numericUpDown_y2.Value + numericUpDown_h2.Value) > Convert.ToDecimal(label_ySumMax2.Text))
+            {
+                form1.buttonStart.Enabled = false;
+                label_ySumMax2.Enabled = false;
+            }
+
+        }
+
+        private void numericUpDown_x2_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_x2.ValueChanged -= new System.EventHandler(this.numericUpDown_x2_ValueChanged);
+            numericUpDown_x2.Value = numericUpDown_x2.Value - (numericUpDown_x2.Value % numericUpDown_x2.Increment);
+            numericUpDown_x2.ValueChanged += new System.EventHandler(this.numericUpDown_x2_ValueChanged);
+            positionCheck2();
+        }
+
+
+        private void numericUpDown_y2_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_y2.ValueChanged -= new System.EventHandler(this.numericUpDown_y2_ValueChanged);
+            numericUpDown_y2.Value = numericUpDown_y2.Value - (numericUpDown_y2.Value % numericUpDown_y2.Increment);
+            numericUpDown_y2.ValueChanged += new System.EventHandler(this.numericUpDown_y2_ValueChanged);
+            positionCheck2();
+        }
+
+        private void numericUpDown_w2_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_w2.ValueChanged -= new System.EventHandler(this.numericUpDown_w2_ValueChanged);
+            numericUpDown_w2.Value = numericUpDown_w2.Value - (numericUpDown_w2.Value % numericUpDown_w2.Increment);
+            numericUpDown_w2.ValueChanged += new System.EventHandler(this.numericUpDown_w2_ValueChanged);
+            positionCheck2();
+        }
+
+        private void numericUpDown_h2_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown_h2.ValueChanged -= new System.EventHandler(this.numericUpDown_h2_ValueChanged);
+            numericUpDown_h2.Value = numericUpDown_h2.Value - (numericUpDown_h2.Value % numericUpDown_h2.Increment);
+            numericUpDown_h2.ValueChanged += new System.EventHandler(this.numericUpDown_h2_ValueChanged);
+            positionCheck2();
+            form1.updatePixelClock();
+        }
+
+
 
         public void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {

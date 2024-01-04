@@ -31,6 +31,7 @@ namespace VO_soft
         private bool stopTrigerClicked;
         //private VideoFileWriter videoWriter;
         private Stopwatch sw = new Stopwatch();
+        private Stopwatch sw2 = new Stopwatch();
         public string filename;
 
         public List<String> ficker_start = new List<String>();
@@ -45,6 +46,7 @@ namespace VO_soft
         public Chart chart7;
         public Chart chart8;
         internal FormSecondScreen secondScreenForm;
+        private int stopTrigerCouter;
 
         public Form1()
         {
@@ -93,6 +95,12 @@ namespace VO_soft
             cameraBackEnd.MessageBoxTrigger += backEnd_MessageBoxTrigger;
             cameraBackEnd.ComTrigerOn += backEnd_ComTrigerOn;
 
+            cameraBackEnd.ImageReceived2 += backEnd_ImageReceived2;
+            cameraBackEnd.CountersUpdated2 += backEnd_CountersUpdated2;
+            cameraBackEnd.MessageBoxTrigger2 += backEnd_MessageBoxTrigger2;
+
+
+
             Thread.Sleep(1000);
 
             label_comPortStatus_Click(null, EventArgs.Empty);
@@ -122,8 +130,12 @@ namespace VO_soft
             if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout") & stopTrigerClicked)
             {
 
-                buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
-                stopTrigerClicked = false;
+                stopTrigerCouter++;
+                if (stopTrigerCouter == 2)
+                {
+                    buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
+                    stopTrigerClicked = false;
+                }
             }
             else
             {
@@ -139,6 +151,33 @@ namespace VO_soft
 
             }
         }
+
+        private void backEnd_MessageBoxTrigger2(object sender, string messageTitle, string messageText)
+        {
+            if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout") & stopTrigerClicked)
+            {
+                stopTrigerCouter++;
+                if (stopTrigerCouter == 2)
+                {
+                    buttonStop.BeginInvoke((MethodInvoker)delegate { myStop(); });
+                    stopTrigerClicked = false;
+                }
+            }
+            else
+            {
+                if (messageText.Contains("Error-Text: Wait for event data timed out! Timeout"))
+                {
+                    Console.WriteLine(messageTitle + messageText);
+                }
+                else
+                {
+                    MessageBox.Show(messageText, messageTitle);
+                }
+
+
+            }
+        }
+
 
         private void myStop()
         {
@@ -216,9 +255,77 @@ namespace VO_soft
             }
         }
 
+        private void backEnd_CountersUpdated2(object sender, uint frameCounter, uint errorCounter)
+        {
+
+
+            if (labelCounter2.InvokeRequired)
+            {
+                labelCounter2.BeginInvoke((MethodInvoker)delegate { labelCounter2.Text = frameCounter.ToString(); });
+            }
+
+            if (labelCounter2.InvokeRequired)
+            {
+                labelCounter2.BeginInvoke((MethodInvoker)delegate {
+
+                    if (errorCounter == 0)
+                    {
+                        label_error2.ForeColor = Color.Black;
+                    }
+
+                    if (!stopTrigerClicked2)
+                    {
+                        label_error.Text = errorCounter.ToString();
+                        if (errorCounter != 0)
+                        {
+                            label_error2.ForeColor = Color.Red;
+                        }
+                    }
+                });
+            }
+
+            if (labelCounter2.InvokeRequired)
+            {
+                labelCounter2.BeginInvoke((MethodInvoker)delegate
+                {
+                    if (((int.Parse(labelCounter2.Text) % 40) == 10) & (int.Parse(labelCounter2.Text) > 10))
+                    {
+                        if (sw2.IsRunning)
+                        {
+
+                            TimeSpan ts = sw2.Elapsed;
+                            sw2.Restart();
+
+                            label_fps2.Text = Math.Round(40.0 / ts.TotalSeconds).ToString() + "fps";
+
+                            if (Convert.ToDecimal(Math.Round(40.0 / ts.TotalSeconds)) != Math.Round(numericUpDown_frameRate.Value))
+                            {
+                                label_fps2.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                label_fps2.ForeColor = Color.Black;
+                            }
+                        }
+                        else
+                        {
+                            sw2.Start();
+                        }
+                    }
+                });
+            }
+        }
+
+
+
         private void backEnd_ImageReceived(object sender, Bitmap image, uint counter)
         {
-            imageUpdater.updateImage(image, counter, this);
+            imageUpdater.updateImage(image, 0, this);
+        }
+
+        private void backEnd_ImageReceived2(object sender, Bitmap image, uint counter)
+        {
+            imageUpdater.updateImage(image, 1, this);
         }
 
 
@@ -385,8 +492,11 @@ namespace VO_soft
 
         private void myStart()
         {
+
+
             cameraBackEnd.ComTrigerX_execute();
 
+            stopTrigerCouter = 0;
             stopTrigerClicked = false;
             
 
@@ -415,6 +525,7 @@ namespace VO_soft
                 
 
                 filename = Path.Combine(path, tmp);
+
 
                 // http://accord-framework.net/docs/html/T_Accord_Video_FFMPEG_VideoCodec.htm
                 //writer.Open("test.avi", Decimal.ToInt32(numericUpDown_w.Value), Decimal.ToInt32(numericUpDown_h.Value), Decimal.ToInt32(numericUpDown_frameRate.Value), VideoCodec.MPEG4); 

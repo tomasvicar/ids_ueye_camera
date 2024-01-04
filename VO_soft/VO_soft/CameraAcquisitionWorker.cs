@@ -108,7 +108,7 @@ namespace VO_soft
                 {
                     if (triger_first_time)
                     {
-                        buffer = dataStream.WaitForFinishedBuffer(5000);
+                        buffer = dataStream.WaitForFinishedBuffer(10000);
                         triger_first_time = false;
                     }
                     else

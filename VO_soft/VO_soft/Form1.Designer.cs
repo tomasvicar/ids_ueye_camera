@@ -98,6 +98,9 @@ namespace VO_soft
             this.pictureBoxWithInterpolationMode3 = new VO_soft.PictureBoxWithInterpolationMode();
             this.pictureBoxWithInterpolationMode2 = new VO_soft.PictureBoxWithInterpolationMode();
             this.pictureBoxWithInterpolationMode1 = new VO_soft.PictureBoxWithInterpolationMode();
+            this.labelCounter2 = new System.Windows.Forms.Label();
+            this.label_fps2 = new System.Windows.Forms.Label();
+            this.label_error2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_frameRate)).BeginInit();
@@ -413,7 +416,7 @@ namespace VO_soft
             // 
             // numericUpDown_bufferSize
             // 
-            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(981, 603);
+            this.numericUpDown_bufferSize.Location = new System.Drawing.Point(1023, 603);
             this.numericUpDown_bufferSize.Name = "numericUpDown_bufferSize";
             this.numericUpDown_bufferSize.Size = new System.Drawing.Size(52, 20);
             this.numericUpDown_bufferSize.TabIndex = 27;
@@ -421,7 +424,7 @@ namespace VO_soft
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(978, 587);
+            this.label7.Location = new System.Drawing.Point(1020, 587);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 13);
             this.label7.TabIndex = 28;
@@ -514,7 +517,7 @@ namespace VO_soft
             // label_fps
             // 
             this.label_fps.AutoSize = true;
-            this.label_fps.Location = new System.Drawing.Point(927, 579);
+            this.label_fps.Location = new System.Drawing.Point(940, 579);
             this.label_fps.Name = "label_fps";
             this.label_fps.Size = new System.Drawing.Size(31, 13);
             this.label_fps.TabIndex = 38;
@@ -720,11 +723,41 @@ namespace VO_soft
             this.pictureBoxWithInterpolationMode1.TabIndex = 0;
             this.pictureBoxWithInterpolationMode1.TabStop = false;
             // 
+            // labelCounter2
+            // 
+            this.labelCounter2.AutoSize = true;
+            this.labelCounter2.Location = new System.Drawing.Point(899, 579);
+            this.labelCounter2.Name = "labelCounter2";
+            this.labelCounter2.Size = new System.Drawing.Size(22, 13);
+            this.labelCounter2.TabIndex = 60;
+            this.labelCounter2.Text = "xxx";
+            // 
+            // label_fps2
+            // 
+            this.label_fps2.AutoSize = true;
+            this.label_fps2.Location = new System.Drawing.Point(977, 579);
+            this.label_fps2.Name = "label_fps2";
+            this.label_fps2.Size = new System.Drawing.Size(31, 13);
+            this.label_fps2.TabIndex = 61;
+            this.label_fps2.Text = "xxfps";
+            // 
+            // label_error2
+            // 
+            this.label_error2.AutoSize = true;
+            this.label_error2.Location = new System.Drawing.Point(959, 608);
+            this.label_error2.Name = "label_error2";
+            this.label_error2.Size = new System.Drawing.Size(12, 13);
+            this.label_error2.TabIndex = 62;
+            this.label_error2.Text = "x";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 631);
+            this.Controls.Add(this.label_error2);
+            this.Controls.Add(this.label_fps2);
+            this.Controls.Add(this.labelCounter2);
             this.Controls.Add(this.label_flicker_freq);
             this.Controls.Add(this.button_flicker);
             this.Controls.Add(this.checkBox_one_wl_stable);
@@ -884,6 +917,9 @@ namespace VO_soft
         public System.Windows.Forms.CheckBox checkBox_one_wl_stable;
         public System.Windows.Forms.Button button_flicker;
         public System.Windows.Forms.Label label_flicker_freq;
+        public System.Windows.Forms.Label labelCounter2;
+        public System.Windows.Forms.Label label_fps2;
+        public System.Windows.Forms.Label label_error2;
     }
 }
 

@@ -15,34 +15,52 @@ namespace VO_soft
         // Event which is raised if a new image was received
         public delegate void ImageReceivedEventHandler(object sender, Bitmap image, uint counter);
         public event ImageReceivedEventHandler ImageReceived;
+        public delegate void ImageReceivedEventHandler2(object sender, Bitmap image, uint counter);
+        public event ImageReceivedEventHandler2 ImageReceived2;
 
         // Event which is raised if the counters has changed
         public delegate void CountersUpdatedEventHandler(object sender, uint frameCounter, uint errorCounter);
         public event CountersUpdatedEventHandler CountersUpdated;
+        public delegate void CountersUpdatedEventHandler2(object sender, uint frameCounter, uint errorCounter);
+        public event CountersUpdatedEventHandler2 CountersUpdated2;
 
         public delegate void ComTrigerOnEventHandler(object sender, EventArgs args);
         public event ComTrigerOnEventHandler ComTrigerOn;
+        public delegate void ComTrigerOnEventHandler2(object sender, EventArgs args);
+        public event ComTrigerOnEventHandler2 ComTrigerOn2;
 
 
         // Event which is raised if an Error or Exception has occurred
         public delegate void MessageBoxTriggerEventHandler(object sender, String messageTitle, String messageText);
         public event MessageBoxTriggerEventHandler MessageBoxTrigger;
+        public delegate void MessageBoxTriggerEventHandler2(object sender, String messageTitle, String messageText);
+        public event MessageBoxTriggerEventHandler2 MessageBoxTrigger2;
+
 
 
         //private AcquisitionWorker acquisitionWorker;
         private CameraAcquisitionWorker cameraAcquisitionWorker;
         private Thread cameraAcquisitionThread;
+        private CameraAcquisitionWorker cameraAcquisitionWorker2;
+        private Thread cameraAcquisitionThread2;
 
         private Device device;
+        private Device device2;
         private DataStream dataStream;
+        private DataStream dataStream2;
         private NodeMap nodeMap;
+        private NodeMap nodeMap2;
         private peak.core.Buffer buffer;
+        private peak.core.Buffer buffer2;
         private Form1 form1;
         private CameraSetter cameraSetter;
+        private CameraSetter cameraSetter2;
 
         private bool isActive;
         private bool isOpen;
+
         private SerialPort comPort;
+        private int num_of_com_trigers;
 
         public CameraBackEnd(Form1 form1)
         {
@@ -57,32 +75,55 @@ namespace VO_soft
         {
 
             cameraAcquisitionWorker = new CameraAcquisitionWorker();
-
             cameraAcquisitionThread = new Thread(new ThreadStart(cameraAcquisitionWorker.Start));
-
             cameraAcquisitionWorker.ImageReceived += cameraAcquisitionWorker_ImageReceived;
             cameraAcquisitionWorker.CountersUpdated += cameraAcquisitionWorker_CountersUpdated;
             cameraAcquisitionWorker.MessageBoxTrigger += cameraAcquisitionWorker_MessageBoxTrigger;
             cameraAcquisitionWorker.ComTrigerOn += cameraAcquisitionWorker_ComTrigerOn;
 
+
+            cameraAcquisitionWorker2 = new CameraAcquisitionWorker();
+            cameraAcquisitionThread2 = new Thread(new ThreadStart(cameraAcquisitionWorker2.Start));
+            cameraAcquisitionWorker2.ImageReceived += cameraAcquisitionWorker_ImageReceived2;
+            cameraAcquisitionWorker2.CountersUpdated += cameraAcquisitionWorker_CountersUpdated2;
+            cameraAcquisitionWorker2.MessageBoxTrigger += cameraAcquisitionWorker_MessageBoxTrigger2;
+            cameraAcquisitionWorker2.ComTrigerOn += cameraAcquisitionWorker_ComTrigerOn2;
+
             var dataStreams = device.DataStreams();
             dataStream = dataStreams[0].OpenDataStream();
 
-            
+            var dataStreams2 = device2.DataStreams();
+            dataStream2 = dataStreams2[0].OpenDataStream();
+
+
             cameraSetter.SetStart(form1.is_triger);
+            cameraSetter2.SetStart(form1.is_triger);
 
             UInt32 payloadSize = Convert.ToUInt32(nodeMap.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
             UInt32 bufferCountMax = decimal.ToUInt32(form1.numericUpDown_bufferSize.Value);
-
             for (var bufferCount = 0; bufferCount < bufferCountMax; ++bufferCount)
             {
                 buffer = dataStream.AllocAndAnnounceBuffer(payloadSize, IntPtr.Zero);
                 dataStream.QueueBuffer(buffer);
             }
 
+            UInt32 payloadSize2 = Convert.ToUInt32(nodeMap2.FindNode<peak.core.nodes.IntegerNode>("PayloadSize").Value());
+            UInt32 bufferCountMax2 = decimal.ToUInt32(form1.numericUpDown_bufferSize.Value);
+            for (var bufferCount = 0; bufferCount < bufferCountMax2; ++bufferCount)
+            {
+                buffer2 = dataStream2.AllocAndAnnounceBuffer(payloadSize2, IntPtr.Zero);
+                dataStream2.QueueBuffer(buffer2);
+            }
+
+
             cameraAcquisitionWorker.SetDataStream(dataStream);
             cameraAcquisitionWorker.SetNodemapRemoteDevice(nodeMap);
             //cameraAcquisitionWorker.SetFormWindow(form1);
+
+            cameraAcquisitionWorker2.SetDataStream(dataStream2);
+            cameraAcquisitionWorker2.SetNodemapRemoteDevice(nodeMap2);
+            //cameraAcquisitionWorker.SetFormWindow(form1);
+
 
             var is_triger = form1.is_triger;
             var is_recording = form1.is_recording;
@@ -97,11 +138,14 @@ namespace VO_soft
             var height = Decimal.ToInt32(form1.formSettings.numericUpDown_h.Value);
             var bits = Decimal.ToInt32(form1.formSettings.numericUpDown_bits.Value);
             var one_wl_stable = form1.checkBox_one_wl_stable.Checked;
-            cameraAcquisitionWorker.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename, fps, width, height, bits, one_wl_stable);
+            cameraAcquisitionWorker.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename + "_cam1", fps, width, height, bits, one_wl_stable);
+            cameraAcquisitionWorker2.SetAquisitionsettings(is_triger, is_recording, subsample, form1.filename + "_cam2", fps, width, height, bits, one_wl_stable);
 
             cameraAcquisitionThread.Start();
+            cameraAcquisitionThread2.Start();
 
             isActive = true;
+            num_of_com_trigers = 0;
 
         }
 
@@ -111,13 +155,18 @@ namespace VO_soft
 
             if (cameraAcquisitionWorker != null)
                 cameraAcquisitionWorker.Stop();
+            if (cameraAcquisitionWorker2 != null)
+                cameraAcquisitionWorker2.Stop();
 
             if (cameraAcquisitionThread != null)
             {
                 if (cameraAcquisitionThread.IsAlive)
-                {
                     cameraAcquisitionThread.Join();
-                }
+            }
+            if (cameraAcquisitionThread2 != null)
+            {
+                if (cameraAcquisitionThread2.IsAlive)
+                    cameraAcquisitionThread2.Join();
             }
 
             if (device != null)
@@ -133,6 +182,20 @@ namespace VO_soft
                     MessageBoxTrigger(this, "Exception", e.Message);
                 }
             }
+            if (device2 != null)
+            {
+                try
+                {
+                    nodeMap2.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").Execute();
+                    nodeMap2.FindNode<peak.core.nodes.CommandNode>("AcquisitionStop").WaitUntilDone();
+                    nodeMap2.FindNode<peak.core.nodes.IntegerNode>("TLParamsLocked").SetValue(0);
+                }
+                catch (Exception e)
+                {
+                    MessageBoxTrigger(this, "Exception", e.Message);
+                }
+            }
+
 
 
             if (dataStream != null)
@@ -158,6 +221,28 @@ namespace VO_soft
                 }
             }
 
+            if (dataStream2 != null)
+            {
+                try
+                {
+                    dataStream2.KillWait();
+                    dataStream2.StopAcquisition(peak.core.AcquisitionStopMode.Default);
+                    dataStream2.Flush(peak.core.DataStreamFlushMode.DiscardAll);
+
+                    foreach (var buffer in dataStream2.AnnouncedBuffers())
+                    {
+                        dataStream2.RevokeBuffer(buffer);
+                    }
+
+                    dataStream2.Dispose();
+                    cameraAcquisitionWorker2.SetDataStream(null);
+
+                }
+                catch (Exception e)
+                {
+                    MessageBoxTrigger(this, "Exception", e.Message);
+                }
+            }
 
 
 
@@ -307,14 +392,22 @@ namespace VO_soft
 
                 var deviceCount = deviceManager.Devices().Count();
 
+                var isOneFound = false;
                 for (var i = 0; i < deviceCount; ++i)
                 {
                     if (deviceManager.Devices()[i].IsOpenable())
                     {
-                        device = deviceManager.Devices()[i].OpenDevice(peak.core.DeviceAccessType.Control);
-
-                        // Stop after the first opened device
-                        break;
+                        if (!isOneFound)
+                        {
+                            device = deviceManager.Devices()[i].OpenDevice(peak.core.DeviceAccessType.Control);
+                            isOneFound = true;
+                        }
+                        else
+                        {
+                            device2 = deviceManager.Devices()[i].OpenDevice(peak.core.DeviceAccessType.Control);
+                            break;
+                        }
+                        
                     }
                     else if (i == (deviceCount - 1))
                     {
@@ -322,9 +415,15 @@ namespace VO_soft
                     }
                 }
 
+
+
                 nodeMap = device.RemoteDevice().NodeMaps()[0];
-                cameraSetter = new CameraSetter(nodeMap, form1);
+                cameraSetter = new CameraSetter(nodeMap, form1, 1);
                 cameraSetter.initSet();
+
+                nodeMap2 = device2.RemoteDevice().NodeMaps()[0];
+                cameraSetter2 = new CameraSetter(nodeMap2, form1, 2);
+                cameraSetter2.initSet();
 
                 isOpen = true;
 
@@ -377,12 +476,14 @@ namespace VO_soft
         public void adjustParam(string paramName)
         {
             cameraSetter.adjustSet(paramName);
+            cameraSetter2.adjustSet(paramName);
 
         }
 
         public void getParams()
         {
             cameraSetter.getParams();
+            cameraSetter2.getParams();
         }
         public void ComTrigerOn_execute()
         {
@@ -422,7 +523,15 @@ namespace VO_soft
 
         private void cameraAcquisitionWorker_ComTrigerOn(object sender, EventArgs args)
         {
-            ComTrigerOn(sender, args);
+            num_of_com_trigers++;
+            if (num_of_com_trigers == 2)
+                ComTrigerOn(sender, args);
+        }
+        private void cameraAcquisitionWorker_ComTrigerOn2(object sender, EventArgs args)
+        {
+            num_of_com_trigers++;
+            if (num_of_com_trigers == 2)
+                ComTrigerOn(sender, args);
         }
 
 
@@ -430,16 +539,32 @@ namespace VO_soft
         {
             MessageBoxTrigger(sender, messageTitle, messageText);
         }
+        private void cameraAcquisitionWorker_MessageBoxTrigger2(object sender, string messageTitle, string messageText)
+        {
+            MessageBoxTrigger2(sender, messageTitle, messageText);
+        }
 
         private void cameraAcquisitionWorker_ImageReceived(object sender, System.Drawing.Bitmap image, uint counter)
         {
             ImageReceived(sender, image, counter);
+        }
+        private void cameraAcquisitionWorker_ImageReceived2(object sender, System.Drawing.Bitmap image, uint counter)
+        {
+            ImageReceived2(sender, image, counter);
         }
 
         private void cameraAcquisitionWorker_CountersUpdated(object sender, uint frameCounter, uint errorCounter)
         {
             CountersUpdated(sender, frameCounter, errorCounter);
         }
+        private void cameraAcquisitionWorker_CountersUpdated2(object sender, uint frameCounter, uint errorCounter)
+        {
+            CountersUpdated2(sender, frameCounter, errorCounter);
+        }
+
+
+
+
 
 
         public bool IsActive()
